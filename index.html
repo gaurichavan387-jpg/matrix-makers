@@ -3,110 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+    <title>Orthogonal Trajectories Visualizer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            line-height: 1.6;
+            background-color: #f5f7fa;
             color: #333;
+            line-height: 1.6;
         }
-        
-        header {
-            background: #4CAF50;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        
-        nav {
-            background: #333;
-            padding: 0.5rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            display: inline-block;
-        }
-        
-        nav a:hover {
-            background: #555;
-        }
-        
+
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 20px;
         }
-        
-        .hero {
+
+        header {
             text-align: center;
-            padding: 3rem 0;
-            background: #f4f4f4;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: #4CAF50;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
             color: white;
-            padding: 10px 20px;
-            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .sidebar {
+            flex: 0 0 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        h3 {
+            color: #3498db;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .example-list {
+            list-style-type: none;
+            margin-left: 15px;
+        }
+
+        .example-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .example-list li:before {
+            content: "•";
+            color: #3498db;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            margin-top: 1rem;
+            font-size: 1rem;
         }
-        
-        footer {
-            background: #333;
+
+        button {
+            background-color: #3498db;
             color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .graph-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 500px;
+            margin-bottom: 25px;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            margin-bottom: 25px;
+            padding-left: 50px;
+            position: relative;
+        }
+
+        .step:before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #3498db;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .formula {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .highlight {
+            background-color: #e8f4fc;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        footer {
             text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
+            padding: 25px;
+            margin-top: 30px;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 1;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
-    
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    
-    <main class="container">
-        <section class="hero" id="home">
-            <h2>Hello, World!</h2>
-            <p>This is my first website created with HTML</p>
-            <a href="#about" class="btn">Learn More</a>
-        </section>
+    <div class="container">
+        <header>
+            <h1>Orthogonal Trajectories Visualizer</h1>
+            <p class="subtitle">Explore curves that intersect families of curves at right angles, with interactive examples and visualizations</p>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="main-content">
+                <div class="card">
+                    <h2>What Are Orthogonal Trajectories?</h2>
+                    <p>In mathematics, an <span class="highlight">orthogonal trajectory</span> is a curve that intersects each curve of a given family of curves at right angles (orthogonally).</p>
+                    <p>If one family of curves is given by <span class="highlight">F(x, y, c) = 0</span>, where <span class="highlight">c</span> is a constant parameter, then the orthogonal trajectories are found by solving the differential equation obtained from the condition that the product of their slopes at the intersection point is -1.</p>
+                    
+                    <div class="formula">
+                        If the original family has slope m₁ = dy/dx,<br>
+                        then orthogonal trajectories have slope m₂ = -1/m₁
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Interactive Visualization</h2>
+                    <p>Adjust the parameters below to see different families of curves and their orthogonal trajectories.</p>
+                    
+                    <div class="graph-container" id="graph"></div>
+                    
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="curveFamily">Select Curve Family:</label>
+                            <select id="curveFamily">
+                                <option value="parabolas">Parabolas (y = cx²)</option>
+                                <option value="circles">Concentric Circles (x² + y² = c)</option>
+                                <option value="hyperbolas">Hyperbolas (xy = c)</option>
+                                <option value="lines">Lines Through Origin (y = cx)</option>
+                                <option value="exponentials">Exponential Curves (y = ce^x)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="curveCount">Number of Curves:</label>
+                            <input type="range" id="curveCount" min="3" max="12" value="6">
+                            <span id="curveCountValue">6</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="showTrajectories">Show Orthogonal Trajectories:</label>
+                            <select id="showTrajectories">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <button id="updateGraph">Update Graph</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="card">
+                    <h2>Method to Find Orthogonal Trajectories</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <h3>Step 1</h3>
+                            <p>Start with the equation of the family of curves: <span class="highlight">F(x, y, c) = 0</span></p>
+                        </div>
+                        <div class="step">
+                            <h3>Step 2</h3>
+                            <p>Differentiate to eliminate the constant <span class="highlight">c</span> and obtain a differential equation: <span class="highlight">dy/dx = f(x, y)</span></p>
+                        </div>
+                        <div class="step">
+                            <h3>Step 3</h3>
+                            <p>Replace <span class="highlight">dy/dx</span> with <span class="highlight">-dx/dy</span> to get the differential equation for orthogonal trajectories</p>
+                        </div>
+                        <div class="step">
+                            <h3>Step 4</h3>
+                            <p>Solve the new differential equation to find the orthogonal trajectories</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Real-World Applications</h2>
+                    <ul class="example-list">
+                        <li><strong>Electrostatics:</strong> Electric field lines and equipotential surfaces are orthogonal trajectories</li>
+                        <li><strong>Fluid Dynamics:</strong> Streamlines and equipotential lines in fluid flow</li>
+                        <li><strong>Heat Transfer:</strong> Isotherms and heat flow lines</li>
+                        <li><strong>Cartography:</strong> Mapping geographical coordinates</li>
+                        <li><strong>Optics:</strong> Light rays and wavefronts in geometric optics</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2>Quick Example</h2>
+                    <p>For the family of circles centered at the origin: <span class="highlight">x² + y² = c²</span></p>
+                    <p>Differentiating gives: <span class="highlight">2x + 2y(dy/dx) = 0</span></p>
+                    <p>So <span class="highlight">dy/dx = -x/y</span></p>
+                    <p>For orthogonal trajectories: <span class="highlight">dy/dx = y/x</span></p>
+                    <p>Solving gives: <span class="highlight">y = kx</span> (lines through origin)</p>
+                    <p>Thus, lines through the origin are orthogonal to circles centered at the origin.</p>
+                </div>
+            </div>
+        </div>
         
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </section>
+        <footer>
+            <p>Orthogonal Trajectories Visualizer | Created for Mathematics Education</p>
+            <p>Use the interactive graph to explore different curve families and their orthogonal trajectories</p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize the graph
+        document.addEventListener('DOMContentLoaded', function() {
+            updateGraph();
+            
+            // Set up event listeners
+            document.getElementById('updateGraph').addEventListener('click', updateGraph);
+            document.getElementById('curveCount').addEventListener('input', function() {
+                document.getElementById('curveCountValue').textContent = this.value;
+            });
+            
+            // Update graph when curve family changes
+            document.getElementById('curveFamily').addEventListener('change', updateGraph);
+            document.getElementById('showTrajectories').addEventListener('change', updateGraph);
+            document.getElementById('curveCount').addEventListener('change', updateGraph);
+        });
         
-        <section id="services">
-            <h2>Our Services</h2>
-            <ul>
-                <li>Web Design</li>
-                <li>Web Development</li>
-                <li>SEO Optimization</li>
-            </ul>
-        </section>
-    </main>
-    
-    <footer id="contact">
-        <p>Contact: email@example.com</p>
-        <p>&copy; 2024 My Website. All rights reserved.</p>
-    </footer>
+        function updateGraph() {
+            const curveFamily = document.getElementById('curveFamily').value;
+            const curveCount = parseInt(document.getElementById('curveCount').value);
+            const showTrajectories = document.getElementById('showTrajectories').value === 'true';
+            
+            // Generate data based on selected curve family
+            const { curveData, trajectoryData } = generateCurveData(curveFamily, curveCount);
+            
+            // Prepare data for Plotly
+            const data = [...curveData];
+            if (showTrajectories) {
+                data.push(...trajectoryData);
+            }
+            
+            // Layout configuration
+            const layout = {
+                title: `Family of ${getCurveFamilyName(curveFamily)} and Orthogonal Trajectories`,
+                xaxis: {
+                    title: 'x-axis',
+                    range: [-5, 5],
+                    gridcolor: '#f0f0f0',
+                    zerolinecolor: '#d0d0d0'
+                },
+                yaxis: {
+                    title: 'y-axis',
+                    range: [-5, 5],
+                    gridcolor: '#f0f0f0',
+                    zerolinecolor: '#d0d0d0',
+                    scaleanchor: 'x',
+                    scaleratio: 1
+                },
+                plot_bgcolor: 'white',
+                paper_bgcolor: 'white',
+                showlegend: true,
+                legend: {
+                    x: 0.02,
+                    y: 0.98,
+                    bgcolor: 'rgba(255, 255, 255, 0.8)'
+                }
+            };
+            
+            // Plot the graph
+            Plotly.newPlot('graph', data, layout, {responsive: true});
+        }
+        
+        function generateCurveData(curveFamily, curveCount) {
+            const curveData = [];
+            const trajectoryData = [];
+            
+            // Generate parameter values
+            const parameters = [];
+            for (let i = 1; i <= curveCount; i++) {
+                parameters.push(i * 0.8);
+            }
+            
+            // Generate x values
+            const xValues = [];
+            for (let x = -5; x <= 5; x += 0.1) {
+                xValues.push(x);
+            }
+            
+            // Generate data based on selected curve family
+            switch(curveFamily) {
+                case 'parabolas':
+                    // y = c*x²
+                    parameters.forEach(c => {
+                        const yValues = xValues.map(x => c * x * x);
+                        curveData.push({
+                            x: xValues,
+                            y: yValues,
+                            mode: 'lines',
+                            name: `y = ${c.toFixed(1)}x²`,
+                            line: {color: '#3498db', width: 2}
+                        });
+                        
+                        // Orthogonal trajectories: x² + y²/2 = k (approximately)
+                        if (c > 0) {
+                            const t = 2/c;
+                            const trajYValues = xValues.map(x => Math.sqrt(t - x*x));
+                            trajectoryData.push({
+                                x: xValues,
+                                y: trajYValues,
+                                mode: 'lines',
+                                name: `Orthogonal to y = ${c.toFixed(1)}x²`,
+                                line: {color: '#e74c3c', width: 2, dash: 'dash'}
+                            });
+                        }
+                    });
+                    break;
+                    
+                case 'circles':
+                    // x² + y² = c
+                    parameters.forEach(c => {
+                        // Generate points for the circle
+                        const circleX = [];
+                        const circleY = [];
+                        for (let theta = 0; theta <= 2*Math.PI; theta += 0.1) {
+                            circleX.push(Math.sqrt(c) * Math.cos(theta));
+                            circleY.push(Math.sqrt(c) * Math.sin(theta));
+                        }
+                        
+                        curveData.push({
+                            x: circleX,
+                            y: circleY,
+                            mode: 'lines',
+                            name: `x² + y² = ${c.toFixed(1)}`,
+                            line: {color: '#3498db', width: 2}
+                        });
+                        
+                        // Orthogonal trajectories: lines through origin y = kx
+                        for (let k = -2; k <= 2; k += 0.8) {
+                            const lineX = [-5, 5];
+                            const lineY = [k * -5, k * 5];
+                            trajectoryData.push({
+                                x: lineX,
+                                y: lineY,
+                                mode: 'lines',
+                                name: `y = ${k.toFixed(1)}x`,
+                                line: {color: '#e74c3c', width: 2, dash: 'dash'},
+                                showlegend: k === -2 || k === 0 || k === 2
+                            });
+                        }
+                    });
+                    break;
+                    
+                case 'hyperbolas':
+                    // xy = c
+                    parameters.forEach(c => {
+                        const xPos = xValues.filter(x => x !== 0);
+                        const yValues = xPos.map(x => c / x);
+                        
+                        curveData.push({
+                            x: xPos,
+                            y: yValues,
+                            mode: 'lines',
+                            name: `xy = ${c.toFixed(1)}`,
+                            line: {color: '#3498db', width: 2}
+                        });
+                        
+                        // Orthogonal trajectories: also hyperbolas but rotated
+                        const trajYValues = xPos.map(x => -c / x);
+                        trajectoryData.push({
+                            x: xPos,
+                            y: trajYValues,
+                            mode: 'lines',
+                            name: `Orthogonal to xy = ${c.toFixed(1)}`,
+                            line: {color: '#e74c3c', width: 2, dash: 'dash'}
+                        });
+                    });
+                    break;
+                    
+                case 'lines':
+                    // y = cx
+                    parameters.forEach(c => {
+                        const yValues = xValues.map(x => c * x);
+                        
+                        curveData.push({
+                            x: xValues,
+                            y: yValues,
+                            mode: 'lines',
+                            name: `y = ${c.toFixed(1)}x`,
+                            line: {color: '#3498db', width: 2}
+                        });
+                        
+                        // Orthogonal trajectories: circles centered at origin
+                        const r = Math.abs(c) * 2;
+                        const circleX = [];
+                        const circleY = [];
+                        for (let theta = 0; theta <= 2*Math.PI; theta += 0.1) {
+                            circleX.push(r * Math.cos(theta));
+                            circleY.push(r * Math.sin(theta));
+                        }
+                        
+                        trajectoryData.push({
+                            x: circleX,
+                            y: circleY,
+                            mode: 'lines',
+                            name: `Orthogonal to y = ${c.toFixed(1)}x`,
+                            line: {color: '#e74c3c', width: 2, dash: 'dash'}
+                        });
+                    });
+                    break;
+                    
+                case 'exponentials':
+                    // y = c*e^x
+                    parameters.forEach(c => {
+                        const yValues = xValues.map(x => c * Math.exp(x/2)); // scaled for better visualization
+                        
+                        curveData.push({
+                            x: xValues,
+                            y: yValues,
+                            mode: 'lines',
+                            name: `y = ${c.toFixed(1)}e^(x/2)`,
+                            line: {color: '#3498db', width: 2}
+                        });
+                        
+                        // Approximate orthogonal trajectories: y = k*e^(-x)
+                        const trajYValues = xValues.map(x => (1/c) * Math.exp(-x/2));
+                        trajectoryData.push({
+                            x: xValues,
+                            y: trajYValues,
+                            mode: 'lines',
+                            name: `Orthogonal to y = ${c.toFixed(1)}e^(x/2)`,
+                            line: {color: '#e74c3c', width: 2, dash: 'dash'}
+                        });
+                    });
+                    break;
+            }
+            
+            return { curveData, trajectoryData };
+        }
+        
+        function getCurveFamilyName(curveFamily) {
+            switch(curveFamily) {
+                case 'parabolas': return 'Parabolas';
+                case 'circles': return 'Circles';
+                case 'hyperbolas': return 'Hyperbolas';
+                case 'lines': return 'Lines';
+                case 'exponentials': return 'Exponential Curves';
+                default: return 'Curves';
+            }
+        }
+    </script>
 </body>
 </html>
