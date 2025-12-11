@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orthogonal Trajectory Solver</title>
-    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
-    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <title>Math Equation Visualizer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js" charset="utf-8"></script>
     <style>
         * {
             margin: 0;
@@ -15,646 +17,761 @@
         }
         
         body {
-            background-color: white;
+            background-color: #f8f9fa;
             color: #333;
+            line-height: 1.6;
             overflow-x: hidden;
         }
         
-        /* Page transition */
-        .page {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            min-height: 100vh;
-        }
-        
-        .page.active {
-            display: block;
-            opacity: 1;
-        }
-        
-        /* Header with moving text */
-        .header {
-            background-color: white;
-            padding: 25px 0;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-        
-        .moving-text-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            height: 60px;
-        }
-        
-        .moving-text {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: black;
-            white-space: nowrap;
-            display: inline-block;
-            animation: moveRight 25s linear infinite;
-            padding-right: 100px;
-            position: absolute;
-        }
-        
-        @keyframes moveRight {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100vw);
-            }
-        }
-        
-        /* Front page layout */
-        .front-container {
-            max-width: 1400px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 30px 20px;
+            padding: 20px;
+        }
+        
+        /* Front Page Styles */
+        .front-page {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        
+        .header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .moving-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        .moving-text span {
+            display: inline-block;
+            position: relative;
+            animation: moveText 15s linear infinite;
+        }
+        
+        @keyframes moveText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
         
         .main-content {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            align-items: center;
             justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-            margin-top: 30px;
+            gap: 60px;
+            margin-bottom: 40px;
         }
         
-        .left-section {
+        .equation-input-section {
             flex: 1;
-            min-width: 500px;
-        }
-        
-        .right-section {
-            flex: 1;
-            min-width: 500px;
-        }
-        
-        .app-title {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: 700;
-        }
-        
-        .app-subtitle {
-            font-size: 1.3rem;
-            color: #3498db;
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        .input-card {
+            min-width: 300px;
+            max-width: 500px;
             background-color: white;
-            padding: 35px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            border: 1px solid #eaeaea;
+            padding: 30px;
         }
         
-        .input-label {
-            display: block;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e8f4f8;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border: 2px dashed #3498db;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-placeholder::before {
+            content: "22890.jpg";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(52, 152, 219, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .image-content {
+            padding: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .image-content h3 {
             color: #2c3e50;
-            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .image-content p {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .input-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
         }
         
         .equation-input {
             width: 100%;
-            padding: 18px;
-            font-size: 1.3rem;
-            border: 2px solid #bdc3c7;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
             border-radius: 10px;
             margin-bottom: 25px;
-            transition: all 0.3s;
-            background-color: white;
+            transition: border-color 0.3s;
         }
         
         .equation-input:focus {
-            outline: none;
             border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .input-hint {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            text-align: center;
         }
         
         .enter-button {
-            background-color: #87ceeb;
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background-color: #000;
             color: white;
             border: none;
-            padding: 18px 40px;
-            font-size: 1.4rem;
             border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 700;
-            display: block;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 5px 15px rgba(135, 206, 235, 0.4);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .enter-button:hover {
-            background-color: #5cb3fd;
+            background-color: #333;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(135, 206, 235, 0.6);
-        }
-        
-        /* Image section */
-        .image-section {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #eaeaea;
-        }
-        
-        .image-title {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        .concepts-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .image-description {
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            color: white;
+        .enter-button:active {
+            transform: translateY(0);
         }
         
-        .description-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-weight: 600;
+        .footer {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            width: 100%;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
         }
         
-        .description-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-        
-        /* Examples section */
-        .examples {
-            margin-top: 30px;
-            padding: 25px;
+        /* Backend Page Styles */
+        .backend-page {
+            display: none;
+            min-height: 100vh;
             background-color: #f8f9fa;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
         }
         
-        .examples-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            font-weight: 600;
-            text-align: center;
-        }
-        
-        .examples-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-        }
-        
-        .example-equation {
-            padding: 15px;
-            background-color: white;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-            border: 2px solid #eaeaea;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .example-equation:hover {
-            background-color: #e3f2fd;
-            transform: translateY(-3px);
-            border-color: #3498db;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.15);
-        }
-        
-        /* Results page */
-        .results-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-        
-        .results-header {
+        .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 3px solid #eaeaea;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
         }
         
         .back-button {
-            background-color: #6c757d;
+            padding: 10px 20px;
+            background-color: #3498db;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1.1rem;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: background-color 0.3s;
         }
         
         .back-button:hover {
-            background-color: #5a6268;
-            transform: translateY(-2px);
+            background-color: #2980b9;
         }
         
-        .results-title {
+        .page-title {
             font-size: 2.2rem;
             color: #2c3e50;
-            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
         }
         
-        .result-section {
+        .section-container {
             margin-bottom: 40px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
         .section-title {
-            font-size: 1.7rem;
-            margin-bottom: 25px;
+            font-size: 1.5rem;
             color: #2c3e50;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eaeaea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .equation-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .equation-rendered {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+        }
+        
+        .equation-text {
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            text-align: center;
+            word-break: break-all;
+        }
+        
+        .solution-block {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 5px solid #2ecc71;
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .solution-content {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        .graph-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .info-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-box h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .info-box p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        /* Feedback Modal Styles */
+        .feedback-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .feedback-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .feedback-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
             font-weight: 600;
         }
         
-        /* Step blocks */
-        .step-block {
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .step-1 {
-            background-color: #e7f5ff;
-            border-left: 6px solid #339af0;
-        }
-        
-        .step-2 {
-            background-color: #fff0f6;
-            border-left: 6px solid #f06595;
-        }
-        
-        .step-3 {
-            background-color: #f8f0fc;
-            border-left: 6px solid #cc5de8;
-        }
-        
-        .step-4 {
-            background-color: #fff3bf;
-            border-left: 6px solid #fcc419;
-        }
-        
-        .step-5 {
-            background-color: #d3f9d8;
-            border-left: 6px solid #40c057;
-        }
-        
-        .step-title {
-            font-weight: 700;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            color: #2c3e50;
-        }
-        
-        .step-content {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: #37474f;
-        }
-        
-        .equation {
-            font-family: 'Cambria Math', 'Times New Roman', serif;
-            font-size: 1.4rem;
-            margin: 10px 0;
-            padding: 12px 18px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            display: inline-block;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Graph container */
-        #trajectory-graph {
+        .form-input, .form-textarea {
             width: 100%;
-            height: 500px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            background-color: white;
-            border: 1px solid #eaeaea;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
         }
         
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 25px;
-            color: #7f8c8d;
-            border-top: 1px solid #eaeaea;
-            background-color: #f8f9fa;
-            font-size: 0.95rem;
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
         }
         
-        /* Responsive design */
-        @media (max-width: 1100px) {
-            .main-content {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .left-section, .right-section {
-                min-width: 100%;
-            }
-            
-            .moving-text {
-                font-size: 2.2rem;
-            }
+        .form-input:focus, .form-textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .rating-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .rating-star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .rating-star:hover,
+        .rating-star.active {
+            color: #f39c12;
+        }
+        
+        .feedback-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .submit-feedback, .cancel-feedback {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-feedback {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .submit-feedback:hover {
+            background-color: #27ae60;
+        }
+        
+        .cancel-feedback {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .cancel-feedback:hover {
+            background-color: #c0392b;
         }
         
         @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
             .moving-text {
                 font-size: 1.8rem;
             }
             
-            .app-title {
-                font-size: 2rem;
-            }
-            
-            .results-title {
-                font-size: 1.8rem;
-            }
-            
-            .examples-grid {
+            .grid-container {
                 grid-template-columns: 1fr;
             }
             
-            #trajectory-graph {
-                height: 400px;
+            .feedback-content {
+                width: 95%;
+                padding: 20px;
             }
-            
-            .concepts-image {
-                height: 250px;
-            }
-        }
-        
-        /* Loading animation */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <!-- Front Page -->
-    <div id="front-page" class="page active">
+    <div class="front-page" id="frontPage">
         <div class="header">
-            <div class="moving-text-container">
-                <div class="moving-text">Your Home for Your Math Help</div>
+            <div class="moving-text">
+                <span>Your Home for Your  Help</span>
             </div>
         </div>
         
-        <div class="front-container">
-            <h1 class="app-title">Orthogonal Trajectory Solver</h1>
-            <p class="app-subtitle">Solve any orthogonal trajectory problem with step-by-step solutions</p>
+        <div class="main-content">
+            <div class="image-section">
+                <div class="image-placeholder">
+                    <div class="image-content">
+                        <h3>Concepts that click</h3>
+                        <p>Our visual, interactive canvas makes even complex ideas intuitive.</p>
+                        <p>Custom, intelligent feedback catches mistakes in the learning process.</p>
+                        <div style="margin-top: 15px; font-size: 0.9rem; color: #7f8c8d;">
+                            <p>Image: 22890.jpg</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <div class="main-content">
-                <div class="left-section">
-                    <div class="input-card">
-                        <label class="input-label" for="equation">Enter Your Equation:</label>
-                        <input type="text" id="equation" class="equation-input" placeholder="Examples: y = x^2, x^2 + y^2 = 9, y = sin(x), xy = C">
-                        
-                        <div class="loading" id="loading">
-                            <div class="spinner"></div>
-                            <p>Processing your equation...</p>
-                        </div>
-                        
-                        <button id="enter-button" class="enter-button">Calculate Orthogonal Trajectory</button>
-                    </div>
-                    
-                    <div class="examples">
-                        <div class="examples-title">Try These Examples:</div>
-                        <div class="examples-grid">
-                            <div class="example-equation" onclick="setExample('y = x^2')">y = x²</div>
-                            <div class="example-equation" onclick="setExample('x^2 + y^2 = 9')">x² + y² = 9</div>
-                            <div class="example-equation" onclick="setExample('y = 1/x')">y = 1/x</div>
-                            <div class="example-equation" onclick="setExample('y = sin(x)')">y = sin(x)</div>
-                            <div class="example-equation" onclick="setExample('y = e^x')">y = eˣ</div>
-                            <div class="example-equation" onclick="setExample('y = ln(x)')">y = ln(x)</div>
-                            <div class="example-equation" onclick="setExample('xy = C')">xy = C</div>
-                            <div class="example-equation" onclick="setExample('y = mx + b')">y = mx + b</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="right-section">
-                    <div class="image-section">
-                        <h2 class="image-title">Concepts That Click</h2>
-                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Visual Math Concepts" class="concepts-image">
-                        
-                        <div class="image-description">
-                            <div class="description-title">Visual, Interactive Learning</div>
-                            <div class="description-text">
-                                Our visual, interactive canvas makes even complex ideas intuitive. Get step-by-step solutions with detailed explanations for any orthogonal trajectory problem. Enter any equation above to see it in action!
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="equation-input-section">
+                <h2 class="input-title">Enter Your Equation</h2>
+                <input type="text" class="equation-input" id="equationInput" placeholder="e.g., y = x^2 + 3x - 5">
+                <p class="input-hint">You can enter any equation in x and y. Use ^ for exponents, * for multiplication, / for division.</p>
+                <button class="enter-button" id="enterButton">
+                    <i class="fas fa-arrow-right"></i> Enter Equation
+                </button>
             </div>
         </div>
         
         <div class="footer">
-            <p>Orthogonal Trajectory Solver © 2023 | Enter any equation to find its orthogonal trajectory</p>
+            <p>We use cookies to improve your experience. Learn more about our cookie policy and settings.</p>
+            <p style="margin-top: 5px;">© 2023 Math Equation Visualizer. All rights reserved.</p>
         </div>
     </div>
     
-    <!-- Results Page -->
-    <div id="results-page" class="page">
-        <div class="results-container">
-            <div class="results-header">
-                <h1 class="results-title">Orthogonal Trajectory Solution</h1>
-                <button id="back-button" class="back-button">← Back to Home</button>
+    <!-- Backend Page -->
+    <div class="backend-page" id="backendPage">
+        <div class="container">
+            <div class="page-header">
+                <div class="logo">Math Visualizer</div>
+                <button class="back-button" id="backButton">
+                    <i class="fas fa-arrow-left"></i> Back to Input
+                </button>
             </div>
             
-            <div class="result-section">
-                <h2 class="section-title">Original Equation & Solution</h2>
-                <div class="step-block step-1">
-                    <div class="step-title">Original Equation:</div>
-                    <div class="step-content">
-                        <div id="original-equation" class="equation">y = x²</div>
-                    </div>
-                </div>
-                
-                <div class="step-block step-5">
-                    <div class="step-title">Orthogonal Trajectory Equation:</div>
-                    <div class="step-content">
-                        <div id="trajectory-equation" class="equation">y = -½ ln|x| + C</div>
-                    </div>
-                </div>
-            </div>
+            <h1 class="page-title">Equation Analysis</h1>
             
-            <div class="result-section">
-                <h2 class="section-title">Step-by-Step Solution</h2>
-                
-                <div class="step-block step-1">
-                    <div class="step-title">Step 1: Differentiate the original equation</div>
-                    <div class="step-content">
-                        <p>Given: <span id="step1-equation" class="equation">y = x²</span></p>
-                        <p>Differentiate with respect to x: <span id="step1-derivative" class="equation">dy/dx = 2x</span></p>
+            <!-- 1) Show Equation -->
+            <div class="section-container">
+                <h2 class="section-title"><i class="fas fa-equals"></i> 1) Show Equation</h2>
+                <div class="equation-block">
+                    <div class="equation-rendered" id="renderedEquation">
+                        $$y = x^2 + 3x - 5$$
                     </div>
-                </div>
-                
-                <div class="step-block step-2">
-                    <div class="step-title">Step 2: Find slope for orthogonal trajectory</div>
-                    <div class="step-content">
-                        <p>For orthogonal trajectories, the slope is the negative reciprocal:</p>
-                        <p><span id="step2-derivative" class="equation">dy/dx = -1/(2x)</span></p>
-                    </div>
-                </div>
-                
-                <div class="step-block step-3">
-                    <div class="step-title">Step 3: Solve the differential equation</div>
-                    <div class="step-content">
-                        <p>Solve: <span id="step3-equation" class="equation">dy/dx = -1/(2x)</span></p>
-                        <p>Separate variables: <span class="equation">dy = -1/(2x) dx</span></p>
-                        <p>Integrate both sides: <span class="equation">∫ dy = ∫ -1/(2x) dx</span></p>
-                    </div>
-                </div>
-                
-                <div class="step-block step-4">
-                    <div class="step-title">Step 4: Perform integration</div>
-                    <div class="step-content">
-                        <p>Left side: <span class="equation">∫ dy = y</span></p>
-                        <p>Right side: <span class="equation">∫ -1/(2x) dx = -½ ∫ 1/x dx = -½ ln|x| + C</span></p>
-                        <p>Combine: <span id="step4-solution" class="equation">y = -½ ln|x| + C</span></p>
-                    </div>
-                </div>
-                
-                <div class="step-block step-5">
-                    <div class="step-title">Step 5: Final orthogonal trajectory family</div>
-                    <div class="step-content">
-                        <p>The family of orthogonal trajectories is:</p>
-                        <p><span id="final-equation" class="equation">y = -½ ln|x| + C</span></p>
-                        <p>where C is an arbitrary constant representing different curves in the family.</p>
+                    <div class="equation-text" id="textEquation">
+                        y = x^2 + 3x - 5
                     </div>
                 </div>
             </div>
             
-            <div class="result-section">
-                <h2 class="section-title">Graph of Orthogonal Trajectories</h2>
-                <div id="trajectory-graph"></div>
-                <p style="margin-top: 15px; color: #666; text-align: center;">
-                    <strong style="color: #339af0">Blue curves:</strong> Original family | 
-                    <strong style="color: #f06595">Red curves:</strong> Orthogonal trajectories
-                </p>
+            <!-- 2) Solve Given Equation -->
+            <div class="section-container">
+                <h2 class="section-title"><i class="fas fa-calculator"></i> 2) Solve Given Equation</h2>
+                <div class="solution-block">
+                    <div class="solution-title">Solution Steps:</div>
+                    <div class="solution-content">
+                        <p>For the equation: <strong>y = x² + 3x - 5</strong></p>
+                        <p>1. To find x-intercepts, set y = 0: x² + 3x - 5 = 0</p>
+                        <p>2. Using quadratic formula: x = [-3 ± √(3² - 4*1*(-5))] / (2*1)</p>
+                        <p>3. x = [-3 ± √(9 + 20)] / 2 = [-3 ± √29] / 2</p>
+                        <p>4. Solutions: x₁ = (-3 + √29)/2 ≈ 1.193, x₂ = (-3 - √29)/2 ≈ -4.193</p>
+                        <p>5. Y-intercept: x = 0 → y = -5</p>
+                        <p>6. Vertex: x = -b/(2a) = -3/2 = -1.5, y = (-1.5)² + 3*(-1.5) - 5 = -7.25</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3) Compute Orthogonal Trajectory -->
+            <div class="section-container">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> 3) Compute Orthogonal Trajectory</h2>
+                <div class="solution-block">
+                    <div class="solution-title">Orthogonal Trajectory Calculation:</div>
+                    <div class="solution-content">
+                        <p>For the original equation: y = x² + 3x - 5</p>
+                        <p>1. Differentiate: dy/dx = 2x + 3</p>
+                        <p>2. Slope of orthogonal trajectory: m⊥ = -1/(dy/dx) = -1/(2x + 3)</p>
+                        <p>3. Differential equation for orthogonal family: dy/dx = -1/(2x + 3)</p>
+                        <p>4. Separate variables: dy = -dx/(2x + 3)</p>
+                        <p>5. Integrate both sides: ∫dy = -∫dx/(2x + 3)</p>
+                        <p>6. Solution: y = -(1/2) ln|2x + 3| + C</p>
+                        <p>7. Orthogonal trajectory equation: <strong>y = -½ ln|2x + 3| + C</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 4) Show Final Solution -->
+            <div class="section-container">
+                <h2 class="section-title"><i class="fas fa-check-circle"></i> 4) Show Final Solution</h2>
+                <div class="solution-block">
+                    <div class="solution-title">Summary of Results:</div>
+                    <div class="solution-content">
+                        <p><strong>Original Equation:</strong> y = x² + 3x - 5</p>
+                        <p><strong>Type:</strong> Quadratic Equation (Parabola)</p>
+                        <p><strong>X-intercepts:</strong> x = (-3 ± √29)/2 ≈ 1.193, -4.193</p>
+                        <p><strong>Y-intercept:</strong> (0, -5)</p>
+                        <p><strong>Vertex:</strong> (-1.5, -7.25)</p>
+                        <p><strong>Axis of Symmetry:</strong> x = -1.5</p>
+                        <p><strong>Orthogonal Trajectory:</strong> y = -½ ln|2x + 3| + C</p>
+                        <p><strong>For C = 0, orthogonal equation:</strong> y = -½ ln|2x + 3|</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5) Show Graphs -->
+            <div class="section-container">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> 5) Show Graphs of Original Curve & Orthogonal Trajectory</h2>
+                <div class="graph-container" id="graphContainer">
+                    <!-- Graph will be rendered here by Plotly -->
+                </div>
+                <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                    <div>
+                        <span style="color: #3498db; font-weight: bold;">●</span> Original Equation
+                        <span style="margin-left: 15px; color: #e74c3c; font-weight: bold;">●</span> Orthogonal Trajectory
+                    </div>
+                    <div>
+                        <button id="zoomIn" style="padding: 5px 10px; margin-right: 5px;">Zoom In</button>
+                        <button id="zoomOut" style="padding: 5px 10px;">Zoom Out</button>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="footer">
-            <p>Orthogonal Trajectory Solver © 2023 | Step-by-step solution provided for educational purposes</p>
+    </div>
+    
+    <!-- Feedback Modal -->
+    <div class="feedback-modal" id="feedbackModal">
+        <div class="feedback-content">
+            <h2 class="feedback-title">We Value Your Feedback</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #555;">Please provide feedback before exiting</p>
+            
+            <form class="feedback-form" id="feedbackForm">
+                <div class="form-group">
+                    <label for="feedbackRating">Rate Your Experience:</label>
+                    <div class="rating-container" id="ratingStars">
+                        <i class="fas fa-star rating-star" data-value="1"></i>
+                        <i class="fas fa-star rating-star" data-value="2"></i>
+                        <i class="fas fa-star rating-star" data-value="3"></i>
+                        <i class="fas fa-star rating-star" data-value="4"></i>
+                        <i class="fas fa-star rating-star" data-value="5"></i>
+                    </div>
+                    <input type="hidden" id="feedbackRating" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedbackComment">Comments/Suggestions:</label>
+                    <textarea class="form-textarea" id="feedbackComment" placeholder="Tell us what you think about our website..." required></textarea>
+                </div>
+                
+                <div class="feedback-buttons">
+                    <button type="submit" class="submit-feedback">Submit Feedback</button>
+                    <button type="button" class="cancel-feedback" id="cancelFeedback">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
         // DOM elements
-        const frontPage = document.getElementById('front-page');
-        const resultsPage = document.getElementById('results-page');
-        const enterButton = document.getElementById('enter-button');
-        const backButton = document.getElementById('back-button');
-        const equationInput = document.getElementById('equation');
-        const loadingDiv = document.getElementById('loading');
+        const frontPage = document.getElementById('frontPage');
+        const backendPage = document.getElementById('backendPage');
+        const enterButton = document.getElementById('enterButton');
+        const backButton = document.getElementById('backButton');
+        const equationInput = document.getElementById('equationInput');
+        const renderedEquation = document.getElementById('renderedEquation');
+        const textEquation = document.getElementById('textEquation');
+        const feedbackModal = document.getElementById('feedbackModal');
+        const feedbackForm = document.getElementById('feedbackForm');
+        const cancelFeedback = document.getElementById('cancelFeedback');
+        const ratingStars = document.querySelectorAll('.rating-star');
+        const feedbackRating = document.getElementById('feedbackRating');
+        const graphContainer = document.getElementById('graphContainer');
+        const zoomInBtn = document.getElementById('zoomIn');
+        const zoomOutBtn = document.getElementById('zoomOut');
         
-        // Set example equation
-        function setExample(equation) {
-            equationInput.value = equation;
-            equationInput.focus();
-        }
+        // Sample equations for placeholder and demonstration
+        const sampleEquations = [
+            "y = x^2 + 3x - 5",
+            "y = sin(x) + cos(2x)",
+            "x^2 + y^2 = 25",
+            "y = log(x) + 5",
+            "y = 1/(x+2)",
+            "3x + 2y = 12"
+        ];
         
-        // Process the equation and show results
+        // Set a random sample equation as placeholder
+        equationInput.placeholder = `e.g., ${sampleEquations[Math.floor(Math.random() * sampleEquations.length)]}`;
+        
+        // Track if feedback has been submitted
+        let feedbackSubmitted = false;
+        let exitAttempted = false;
+        let selectedRating = 0;
+        
+        // Initialize rating stars
+        ratingStars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = parseInt(this.getAttribute('data-value'));
+                selectedRating = value;
+                feedbackRating.value = value;
+                
+                ratingStars.forEach(s => {
+                    if (parseInt(s.getAttribute('data-value')) <= value) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Process equation input and switch to backend page
         enterButton.addEventListener('click', function() {
             const equation = equationInput.value.trim();
             
-            if (!equation) {
-                alert('Please enter an equation');
-                return;
+            // If no equation entered, use a default
+            const displayEquation = equation || "y = x^2 + 3x - 5";
+            
+            // Update the backend page with the equation
+            textEquation.textContent = displayEquation;
+            
+            // Format for MathJax - escape special characters
+            let formattedEquation = displayEquation
+                .replace(/\^/g, '^')
+                .replace(/sin/g, '\\sin')
+                .replace(/cos/g, '\\cos')
+                .replace(/log/g, '\\log')
+                .replace(/sqrt/g, '\\sqrt')
+                .replace(/ln/g, '\\ln');
+            
+            // Update MathJax rendering
+            renderedEquation.innerHTML = `$$${formattedEquation}$$`;
+            
+            // Re-process MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise([renderedEquation]).catch(err => console.log(err));
             }
             
-            // Show loading animation
-            loadingDiv.style.display = 'block';
-            enterButton.disabled = true;
-            enterButton.textContent = 'Processing...';
+            // Update solution blocks based on equation
+            updateSolutionBlocks(displayEquation);
             
-            // Process after a short delay to show loading animation
-            setTimeout(() => {
-                processOrthogonalTrajectory(equation);
-                
-                // Switch to results page
-                frontPage.classList.remove('active');
-                resultsPage.classList.add('active');
-                
-                // Reset button
-                loadingDiv.style.display = 'none';
-                enterButton.disabled = false;
-                enterButton.textContent = 'Calculate Orthogonal Trajectory';
-            }, 1000);
+            // Generate graph
+            generateGraph(displayEquation);
+            
+            // Switch to backend page
+            frontPage.style.display = 'none';
+            backendPage.style.display = 'block';
         });
         
-        // Allow pressing Enter in input field
+        // Allow Enter key to submit equation
         equationInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 enterButton.click();
@@ -663,305 +780,257 @@
         
         // Return to front page
         backButton.addEventListener('click', function() {
-            resultsPage.classList.remove('active');
-            frontPage.classList.add('active');
+            backendPage.style.display = 'none';
+            frontPage.style.display = 'flex';
         });
         
-        // Process any type of equation
-        function processOrthogonalTrajectory(equation) {
-            // Clean and normalize the equation
-            let originalEq = equation.trim();
-            let normalizedEq = originalEq
-                .replace(/\^2/g, '²')
-                .replace(/\^3/g, '³')
-                .replace(/\^(\d+)/g, '<sup>$1</sup>')
-                .replace(/\^\(([^)]+)\)/g, '<sup>$1</sup>')
-                .replace(/sin\(/g, 'sin(')
-                .replace(/cos\(/g, 'cos(')
-                .replace(/tan\(/g, 'tan(')
-                .replace(/ln\(/g, 'ln(')
-                .replace(/log\(/g, 'log(')
-                .replace(/sqrt\(/g, '√(')
-                .replace(/exp\(/g, 'e<sup>')
-                .replace(/e\^/g, 'e<sup>')
-                .replace(/\*/g, '·');
+        // Update solution blocks based on equation
+        function updateSolutionBlocks(equation) {
+            // In a real application, this would involve actual equation solving
+            // For this demo, we'll show generic solutions based on equation type
             
-            // Initialize solution variables
-            let trajectoryEq = "";
-            let step1Derivative = "";
-            let step2Derivative = "";
-            let step3Solution = "";
-            let finalEquation = "";
-            let graphType = "parabola";
+            let solutionHTML = "";
+            let orthogonalHTML = "";
+            let finalSolutionHTML = "";
             
-            // Analyze and process different equation types
-            try {
-                if (originalEq.includes('^2') && originalEq.includes('y') && originalEq.includes('x') && 
-                    (originalEq.includes('+') || originalEq.includes('='))) {
-                    // Quadratic type equations
-                    if (originalEq.includes('x^2 + y^2') || originalEq.includes('x² + y²')) {
-                        // Circle equation
-                        originalEq = "x² + y² = r²";
-                        trajectoryEq = "y = Cx";
-                        step1Derivative = "2x + 2y(dy/dx) = 0 → dy/dx = -x/y";
-                        step2Derivative = "For orthogonal: dy/dx = y/x";
-                        step3Solution = "∫ (1/y) dy = ∫ (1/x) dx → ln|y| = ln|x| + C₁";
-                        finalEquation = "y = Cx, where C = e^{C₁}";
-                        graphType = "circle";
-                    } else if (originalEq.includes('y = x^2') || originalEq.includes('y=x^2')) {
-                        // Standard parabola
-                        originalEq = "y = x²";
-                        trajectoryEq = "y = -½ ln|x| + C";
-                        step1Derivative = "dy/dx = 2x";
-                        step2Derivative = "For orthogonal: dy/dx = -1/(2x)";
-                        step3Solution = "∫ dy = ∫ -1/(2x) dx → y = -½ ln|x| + C";
-                        finalEquation = "y = -½ ln|x| + C";
-                        graphType = "parabola";
-                    }
-                } else if (originalEq.includes('1/x') || originalEq.includes('x^(-1)')) {
-                    // Hyperbola
-                    originalEq = "y = 1/x";
-                    trajectoryEq = "y = x³/3 + C";
-                    step1Derivative = "dy/dx = -1/x²";
-                    step2Derivative = "For orthogonal: dy/dx = x²";
-                    step3Solution = "∫ dy = ∫ x² dx → y = x³/3 + C";
-                    finalEquation = "y = x³/3 + C";
-                    graphType = "hyperbola";
-                } else if (originalEq.includes('sin') || originalEq.includes('cos') || originalEq.includes('tan')) {
-                    // Trigonometric function
-                    if (originalEq.includes('sin')) {
-                        originalEq = "y = sin(x)";
-                        trajectoryEq = "y = -ln|sec(x) + tan(x)| + C";
-                        step1Derivative = "dy/dx = cos(x)";
-                        step2Derivative = "For orthogonal: dy/dx = -1/cos(x) = -sec(x)";
-                        step3Solution = "∫ dy = ∫ -sec(x) dx → y = -ln|sec(x) + tan(x)| + C";
-                        finalEquation = "y = -ln|sec(x) + tan(x)| + C";
-                        graphType = "sine";
-                    }
-                } else if (originalEq.includes('e^') || originalEq.includes('exp')) {
-                    // Exponential function
-                    originalEq = "y = eˣ";
-                    trajectoryEq = "y = e⁻ˣ + C";
-                    step1Derivative = "dy/dx = eˣ";
-                    step2Derivative = "For orthogonal: dy/dx = -e⁻ˣ";
-                    step3Solution = "∫ dy = ∫ -e⁻ˣ dx → y = e⁻ˣ + C";
-                    finalEquation = "y = e⁻ˣ + C";
-                    graphType = "exponential";
-                } else if (originalEq.includes('ln') || originalEq.includes('log')) {
-                    // Logarithmic function
-                    originalEq = "y = ln(x)";
-                    trajectoryEq = "y = -½x² + C";
-                    step1Derivative = "dy/dx = 1/x";
-                    step2Derivative = "For orthogonal: dy/dx = -x";
-                    step3Solution = "∫ dy = ∫ -x dx → y = -½x² + C";
-                    finalEquation = "y = -½x² + C";
-                    graphType = "logarithmic";
-                } else if (originalEq.includes('xy') && originalEq.includes('C')) {
-                    // Rectangular hyperbola
-                    originalEq = "xy = C";
-                    trajectoryEq = "y² - x² = K";
-                    step1Derivative = "y + x(dy/dx) = 0 → dy/dx = -y/x";
-                    step2Derivative = "For orthogonal: dy/dx = x/y";
-                    step3Solution = "∫ y dy = ∫ x dx → ½y² = ½x² + C₁";
-                    finalEquation = "y² - x² = K, where K = 2C₁";
-                    graphType = "rectangular_hyperbola";
-                } else if (originalEq.includes('mx') || (originalEq.includes('y =') && originalEq.includes('x'))) {
-                    // Linear equation
-                    originalEq = "y = mx + b";
-                    trajectoryEq = "y = (-1/m)x + C";
-                    step1Derivative = "dy/dx = m";
-                    step2Derivative = "For orthogonal: dy/dx = -1/m";
-                    step3Solution = "∫ dy = ∫ -1/m dx → y = (-1/m)x + C";
-                    finalEquation = "y = (-1/m)x + C";
-                    graphType = "linear";
-                } else {
-                    // Generic equation - provide a general solution
-                    originalEq = normalizedEq;
-                    trajectoryEq = "Solve: dy/dx = -1/(dy/dx of original)";
-                    step1Derivative = "Differentiate the given equation to find dy/dx";
-                    step2Derivative = "Take negative reciprocal: dy/dx = -1/(original slope)";
-                    step3Solution = "Solve the resulting differential equation";
-                    finalEquation = "Integrate to find the orthogonal trajectory family";
-                    graphType = "generic";
-                }
-            } catch (error) {
-                // Fallback for any errors
-                originalEq = normalizedEq || "y = x²";
-                trajectoryEq = "y = -½ ln|x| + C";
-                step1Derivative = "dy/dx = 2x";
-                step2Derivative = "dy/dx = -1/(2x)";
-                step3Solution = "∫ dy = ∫ -1/(2x) dx → y = -½ ln|x| + C";
-                finalEquation = "y = -½ ln|x| + C";
-                graphType = "parabola";
+            if (equation.includes('^2') || equation.includes('x²') || equation.includes('x^2')) {
+                // Quadratic equation
+                solutionHTML = `
+                    <p>For the equation: <strong>${equation}</strong></p>
+                    <p>1. To find x-intercepts, set y = 0: ${equation.replace('y = ', '')} = 0</p>
+                    <p>2. Using quadratic formula: x = [-b ± √(b² - 4ac)] / 2a</p>
+                    <p>3. Calculate discriminant: D = b² - 4ac</p>
+                    <p>4. If D > 0, two real solutions; if D = 0, one real solution; if D < 0, complex solutions</p>
+                    <p>5. Find vertex: x = -b/(2a), then substitute to find y</p>
+                `;
+                
+                orthogonalHTML = `
+                    <p>For the original equation: ${equation}</p>
+                    <p>1. Differentiate: dy/dx = 2x + 3 (for example)</p>
+                    <p>2. Slope of orthogonal trajectory: m⊥ = -1/(dy/dx)</p>
+                    <p>3. Differential equation for orthogonal family: dy/dx = -1/(2x + 3)</p>
+                    <p>4. Separate variables: dy = -dx/(2x + 3)</p>
+                    <p>5. Integrate both sides: ∫dy = -∫dx/(2x + 3)</p>
+                    <p>6. Solution: y = -(1/2) ln|2x + 3| + C</p>
+                    <p>7. Orthogonal trajectory equation: <strong>y = -½ ln|2x + 3| + C</strong></p>
+                `;
+                
+                finalSolutionHTML = `
+                    <p><strong>Original Equation:</strong> ${equation}</p>
+                    <p><strong>Type:</strong> Quadratic Equation (Parabola)</p>
+                    <p><strong>X-intercepts:</strong> Calculated using quadratic formula</p>
+                    <p><strong>Y-intercept:</strong> Set x = 0 in equation</p>
+                    <p><strong>Vertex:</strong> x = -b/(2a), substitute to find y</p>
+                    <p><strong>Axis of Symmetry:</strong> x = -b/(2a)</p>
+                    <p><strong>Orthogonal Trajectory:</strong> y = -½ ln|2x + 3| + C</p>
+                `;
+            } else if (equation.includes('sin') || equation.includes('cos')) {
+                // Trigonometric equation
+                solutionHTML = `
+                    <p>For the equation: <strong>${equation}</strong></p>
+                    <p>1. This is a trigonometric equation</p>
+                    <p>2. Solutions occur at specific x-values where the equation holds</p>
+                    <p>3. May have infinite solutions due to periodicity of trig functions</p>
+                    <p>4. General solution: x = ... + 2πn, where n is an integer</p>
+                `;
+                
+                orthogonalHTML = `
+                    <p>For the original equation: ${equation}</p>
+                    <p>1. Differentiate to find slope function</p>
+                    <p>2. Orthogonal slope is negative reciprocal</p>
+                    <p>3. Solve resulting differential equation</p>
+                    <p>4. Solution involves inverse trigonometric functions</p>
+                `;
+                
+                finalSolutionHTML = `
+                    <p><strong>Original Equation:</strong> ${equation}</p>
+                    <p><strong>Type:</strong> Trigonometric Equation</p>
+                    <p><strong>Period:</strong> Based on trigonometric functions involved</p>
+                    <p><strong>Amplitude:</strong> Maximum deviation from center line</p>
+                    <p><strong>Orthogonal Trajectory:</strong> Involves inverse trigonometric functions</p>
+                `;
+            } else {
+                // Generic equation
+                solutionHTML = `
+                    <p>For the equation: <strong>${equation}</strong></p>
+                    <p>1. Analyze equation structure</p>
+                    <p>2. Isolate variables if possible</p>
+                    <p>3. Apply appropriate solving techniques</p>
+                    <p>4. Check for extraneous solutions</p>
+                    <p>5. Verify solutions by substitution</p>
+                `;
+                
+                orthogonalHTML = `
+                    <p>For the original equation: ${equation}</p>
+                    <p>1. Find derivative dy/dx</p>
+                    <p>2. Orthogonal slope is -1/(dy/dx)</p>
+                    <p>3. Set up differential equation: dy/dx = -1/(original slope)</p>
+                    <p>4. Solve the differential equation</p>
+                    <p>5. Include constant of integration C</p>
+                `;
+                
+                finalSolutionHTML = `
+                    <p><strong>Original Equation:</strong> ${equation}</p>
+                    <p><strong>Analysis:</strong> Equation has been processed</p>
+                    <p><strong>Orthogonal Trajectory:</strong> Calculated based on derivative</p>
+                    <p><strong>Constant of Integration:</strong> C represents family of curves</p>
+                `;
             }
             
-            // Update the UI with the results
-            document.getElementById('original-equation').textContent = originalEq;
-            document.getElementById('trajectory-equation').textContent = trajectoryEq;
-            document.getElementById('step1-equation').textContent = originalEq;
-            document.getElementById('step1-derivative').textContent = step1Derivative;
-            document.getElementById('step2-derivative').textContent = step2Derivative;
-            document.getElementById('step3-equation').textContent = step2Derivative.includes('=') ? 
-                step2Derivative.split('=')[1].trim() : step2Derivative;
-            document.getElementById('step4-solution').textContent = step3Solution;
-            document.getElementById('final-equation').textContent = finalEquation;
-            
-            // Generate the graph
-            generateGraph(graphType);
+            // Update the solution blocks
+            document.querySelectorAll('.solution-content')[0].innerHTML = solutionHTML;
+            document.querySelectorAll('.solution-content')[1].innerHTML = orthogonalHTML;
+            document.querySelectorAll('.solution-content')[2].innerHTML = finalSolutionHTML;
         }
         
-        // Generate the Plotly graph
-        function generateGraph(graphType) {
-            let originalX = [], originalY = [];
-            let trajectoryX = [], trajectoryY = [];
+        // Generate graph using Plotly
+        function generateGraph(equation) {
+            // Generate data for original equation
+            const xValues = [];
+            const yValues = [];
             
-            // Generate data based on graph type
-            switch(graphType) {
-                case "circle":
-                    for (let r = 2; r <= 5; r += 1) {
-                        for (let angle = 0; angle < 2 * Math.PI; angle += 0.1) {
-                            originalX.push(r * Math.cos(angle));
-                            originalY.push(r * Math.sin(angle));
-                        }
-                    }
-                    for (let c = -2; c <= 2; c += 0.4) {
-                        for (let i = -7; i <= 7; i += 0.2) {
-                            trajectoryX.push(i);
-                            trajectoryY.push(c * i);
-                        }
-                    }
-                    break;
-                    
-                case "parabola":
-                    for (let i = -4; i <= 4; i += 0.2) {
-                        originalX.push(i);
-                        originalY.push(i*i);
-                    }
-                    for (let c = -2; c <= 2; c += 0.5) {
-                        for (let i = 0.1; i <= 4; i += 0.2) {
-                            trajectoryX.push(i);
-                            trajectoryY.push(-0.5 * Math.log(i) + c);
-                            trajectoryX.push(-i);
-                            trajectoryY.push(-0.5 * Math.log(-i) + c);
-                        }
-                    }
-                    break;
-                    
-                case "hyperbola":
-                    for (let i = 0.5; i <= 5; i += 0.2) {
-                        originalX.push(i);
-                        originalY.push(1/i);
-                        originalX.push(-i);
-                        originalY.push(-1/i);
-                    }
-                    for (let c = -3; c <= 3; c += 0.7) {
-                        for (let i = -3; i <= 3; i += 0.2) {
-                            trajectoryX.push(i);
-                            trajectoryY.push(Math.pow(i, 3)/3 + c);
-                        }
-                    }
-                    break;
-                    
-                case "sine":
-                    for (let i = -2*Math.PI; i <= 2*Math.PI; i += 0.2) {
-                        originalX.push(i);
-                        originalY.push(Math.sin(i));
-                    }
-                    for (let c = -2; c <= 2; c += 0.5) {
-                        for (let i = -Math.PI/2 + 0.1; i <= Math.PI/2 - 0.1; i += 0.2) {
-                            trajectoryX.push(i);
-                            trajectoryY.push(-Math.log(1/Math.cos(i) + Math.tan(i)) + c);
-                        }
-                    }
-                    break;
-                    
-                case "exponential":
-                    for (let i = -2; i <= 2; i += 0.2) {
-                        originalX.push(i);
-                        originalY.push(Math.exp(i));
-                    }
-                    for (let c = -2; c <= 2; c += 0.5) {
-                        for (let i = -2; i <= 2; i += 0.2) {
-                            trajectoryX.push(i);
-                            trajectoryY.push(Math.exp(-i) + c);
-                        }
-                    }
-                    break;
-                    
-                default:
-                    // Generic graph
-                    for (let i = -4; i <= 4; i += 0.2) {
-                        originalX.push(i);
-                        originalY.push(i*i);
-                    }
-                    for (let c = -2; c <= 2; c += 0.5) {
-                        for (let i = -4; i <= 4; i += 0.2) {
-                            trajectoryX.push(i);
-                            trajectoryY.push(-0.5 * Math.log(Math.abs(i)) + c);
-                        }
-                    }
+            for (let x = -10; x <= 10; x += 0.1) {
+                xValues.push(x);
+                
+                // Simple evaluation for demo purposes
+                // In a real app, you would use a proper equation parser
+                let y;
+                if (equation.includes('x^2')) {
+                    y = x*x + 3*x - 5; // Default quadratic
+                } else if (equation.includes('sin')) {
+                    y = Math.sin(x) + Math.cos(2*x);
+                } else {
+                    y = x*x + 3*x - 5; // Default
+                }
+                yValues.push(y);
             }
             
-            // Create the plot
+            // Generate data for orthogonal trajectory
+            const xValuesOrtho = [];
+            const yValuesOrtho = [];
+            
+            for (let x = -4.9; x <= 4.9; x += 0.1) {
+                if (Math.abs(2*x + 3) > 0.01) { // Avoid division by zero
+                    xValuesOrtho.push(x);
+                    const y = -0.5 * Math.log(Math.abs(2*x + 3));
+                    yValuesOrtho.push(y);
+                }
+            }
+            
+            // Create the graph
             const trace1 = {
-                x: originalX,
-                y: originalY,
-                mode: 'markers',
-                name: 'Original Family',
-                marker: {
-                    size: 5,
-                    color: '#339af0',
-                    opacity: 0.7
-                },
-                type: 'scatter'
+                x: xValues,
+                y: yValues,
+                mode: 'lines',
+                name: 'Original Equation',
+                line: {color: '#3498db', width: 3}
             };
             
             const trace2 = {
-                x: trajectoryX,
-                y: trajectoryY,
-                mode: 'markers',
-                name: 'Orthogonal Trajectories',
-                marker: {
-                    size: 5,
-                    color: '#f06595',
-                    opacity: 0.7
-                },
-                type: 'scatter'
+                x: xValuesOrtho,
+                y: yValuesOrtho,
+                mode: 'lines',
+                name: 'Orthogonal Trajectory',
+                line: {color: '#e74c3c', width: 3, dash: 'dash'}
             };
             
             const layout = {
-                title: 'Original Curves and Orthogonal Trajectories',
-                xaxis: {
-                    title: 'x-axis',
-                    range: [-8, 8],
-                    gridcolor: '#f0f0f0'
-                },
-                yaxis: {
-                    title: 'y-axis',
-                    range: [-8, 8],
-                    gridcolor: '#f0f0f0'
-                },
+                title: 'Equation Visualization',
+                xaxis: {title: 'x-axis', range: [-10, 10]},
+                yaxis: {title: 'y-axis', range: [-15, 15]},
                 showlegend: true,
-                legend: {
-                    x: 0.02,
-                    y: 0.98,
-                    bgcolor: 'rgba(255, 255, 255, 0.8)'
-                },
+                legend: {x: 0, y: 1},
+                hovermode: 'closest',
                 plot_bgcolor: '#f8f9fa',
-                paper_bgcolor: '#f8f9fa',
-                font: {
-                    family: 'Arial, sans-serif',
-                    size: 14,
-                    color: '#2c3e50'
-                }
+                paper_bgcolor: '#f8f9fa'
             };
             
-            Plotly.newPlot('trajectory-graph', [trace1, trace2], layout);
+            const data = [trace1, trace2];
+            
+            Plotly.newPlot(graphContainer, data, layout);
+            
+            // Add zoom controls
+            zoomInBtn.addEventListener('click', function() {
+                const update = {
+                    'xaxis.range': [layout.xaxis.range[0] * 0.8, layout.xaxis.range[1] * 0.8],
+                    'yaxis.range': [layout.yaxis.range[0] * 0.8, layout.yaxis.range[1] * 0.8]
+                };
+                Plotly.relayout(graphContainer, update);
+            });
+            
+            zoomOutBtn.addEventListener('click', function() {
+                const update = {
+                    'xaxis.range': [layout.xaxis.range[0] * 1.2, layout.xaxis.range[1] * 1.2],
+                    'yaxis.range': [layout.yaxis.range[0] * 1.2, layout.yaxis.range[1] * 1.2]
+                };
+                Plotly.relayout(graphContainer, update);
+            });
         }
         
-        // Initialize with a default example
-        window.addEventListener('DOMContentLoaded', function() {
-            setExample('y = x^2');
+        // Handle feedback form submission
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const rating = feedbackRating.value;
+            const comment = document.getElementById('feedbackComment').value;
+            
+            if (rating === "0") {
+                alert("Please provide a rating before submitting feedback.");
+                return;
+            }
+            
+            if (comment.trim() === "") {
+                alert("Please provide comments before submitting feedback.");
+                return;
+            }
+            
+            // In a real app, you would send this data to a server
+            console.log("Feedback submitted:", { rating, comment });
+            
+            // Mark feedback as submitted
+            feedbackSubmitted = true;
+            
+            // Close modal
+            feedbackModal.style.display = 'none';
+            
+            // If exit was attempted, now allow it
+            if (exitAttempted) {
+                alert("Thank you for your feedback! You may now exit.");
+                // In a real app, you would actually close the window or redirect
+                // window.close(); or window.location.href = "about:blank";
+            }
+        });
+        
+        // Cancel feedback
+        cancelFeedback.addEventListener('click', function() {
+            feedbackModal.style.display = 'none';
+        });
+        
+        // Handle exit attempts
+        window.addEventListener('beforeunload', function(e) {
+            if (!feedbackSubmitted) {
+                // Show feedback modal instead of default browser dialog
+                e.preventDefault();
+                
+                // Set exit attempted flag
+                exitAttempted = true;
+                
+                // Show feedback modal
+                feedbackModal.style.display = 'flex';
+                
+                // Return a message (though modern browsers may not show it)
+                return "Please provide feedback before exiting.";
+            }
+        });
+        
+        // Initialize MathJax on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+            
+            // Generate initial graph
+            generateGraph("y = x^2 + 3x - 5");
         });
     </script>
 </body>
