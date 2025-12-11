@@ -36,29 +36,21 @@
         
         /* Header with moving text */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px 0;
-            margin-bottom: 40px;
+            background-color: #f8f9fa;
+            padding: 15px 0;
+            border-bottom: 2px solid #dee2e6;
+            margin-bottom: 30px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .moving-text-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
         }
         
         .moving-text {
-            font-size: 3rem;
-            font-weight: 800;
-            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: black;
             white-space: nowrap;
-            display: inline-block;
-            animation: moveRight 25s linear infinite;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            padding-right: 100px;
+            animation: moveRight 20s linear infinite;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         
         @keyframes moveRight {
@@ -72,203 +64,93 @@
         
         /* Front page layout */
         .front-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         
-        .app-title {
-            font-size: 2.8rem;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 700;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin-bottom: 40px;
-            text-align: center;
-            max-width: 800px;
-        }
-        
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100%;
-        }
-        
         .input-section {
-            flex: 1;
-            min-width: 500px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 600px;
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
         }
         
         .input-label {
             display: block;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #495057;
             font-weight: 600;
         }
         
         .equation-input {
             width: 100%;
-            padding: 20px;
-            font-size: 1.3rem;
-            border: 2px solid #bdc3c7;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            transition: all 0.3s;
-            background-color: white;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
         }
         
         .equation-input:focus {
             outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-            transform: translateY(-2px);
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
         
         .enter-button {
-            background: linear-gradient(135deg, #87ceeb 0%, #5cb3fd 100%);
+            background-color: #87ceeb;
             color: white;
             border: none;
-            padding: 18px 40px;
-            font-size: 1.4rem;
-            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 1.3rem;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 700;
+            font-weight: 600;
             display: block;
-            margin: 30px auto;
-            width: 250px;
-            box-shadow: 0 5px 15px rgba(91, 179, 253, 0.3);
-            letter-spacing: 1px;
+            margin: 0 auto;
+            width: 200px;
         }
         
         .enter-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(91, 179, 253, 0.4);
-            background: linear-gradient(135deg, #5cb3fd 0%, #87ceeb 100%);
-        }
-        
-        .enter-button:active {
+            background-color: #5cb3fd;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* Image collage section */
-        .image-section {
-            flex: 1;
-            min-width: 500px;
-            background-color: #f8f9fa;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .image-section-title {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 600;
-        }
-        
+        /* Image collage */
         .image-collage {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-        
-        .collage-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            height: 180px;
-        }
-        
-        .collage-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
         }
         
         .collage-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .image-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            font-size: 1rem;
-            text-align: center;
-        }
-        
-        /* Examples section */
-        .examples {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .examples-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #1565c0;
-            font-weight: 600;
-            text-align: center;
-        }
-        
-        .examples-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .example-equation {
-            padding: 15px;
-            background-color: white;
+            width: 300px;
+            height: 200px;
             border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-            border: 2px solid transparent;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
         
-        .example-equation:hover {
-            background-color: #e3f2fd;
-            transform: translateY(-3px);
-            border-color: #2196f3;
-            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+        .collage-image:hover {
+            transform: scale(1.03);
         }
         
         /* Results page */
         .results-container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -276,200 +158,154 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 3px solid #e0e0e0;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #dee2e6;
         }
         
         .back-button {
-            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            background-color: #6c757d;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+            transition: background-color 0.3s;
         }
         
         .back-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(108, 117, 125, 0.4);
+            background-color: #5a6268;
         }
         
         .results-title {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2rem;
+            color: #343a40;
         }
         
         .result-section {
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: #2c3e50;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #495057;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
         }
         
         /* Step blocks */
         .step-block {
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .step-block:hover {
-            transform: translateY(-5px);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
         }
         
         .step-1 {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-left: 8px solid #2196f3;
+            background-color: #e7f5ff;
+            border-left: 5px solid #339af0;
         }
         
         .step-2 {
-            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
-            border-left: 8px solid #e91e63;
+            background-color: #fff0f6;
+            border-left: 5px solid #f06595;
         }
         
         .step-3 {
-            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-            border-left: 8px solid #9c27b0;
+            background-color: #f8f0fc;
+            border-left: 5px solid #cc5de8;
         }
         
         .step-4 {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            border-left: 8px solid #ff9800;
+            background-color: #fff3bf;
+            border-left: 5px solid #fcc419;
         }
         
         .step-title {
-            font-weight: 700;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
         }
         
         .step-content {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #37474f;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
         
         .equation {
-            font-family: 'Cambria Math', 'Times New Roman', serif;
-            font-size: 1.5rem;
-            margin: 15px 0;
-            padding: 15px 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
+            font-family: 'Cambria Math', serif;
+            font-size: 1.3rem;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
             display: inline-block;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         /* Graph container */
         #trajectory-graph {
             width: 100%;
-            height: 550px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             background-color: white;
-            border: 1px solid #e0e0e0;
         }
         
-        /* Footer */
-        .footer {
+        /* Example equations */
+        .examples {
+            margin-top: 30px;
             text-align: center;
-            margin-top: 60px;
-            padding: 25px;
-            color: #7f8c8d;
-            border-top: 1px solid #e0e0e0;
-            background-color: #f8f9fa;
-            border-radius: 15px;
+        }
+        
+        .examples p {
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        
+        .example-equation {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 8px 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .example-equation:hover {
+            background-color: #dee2e6;
         }
         
         /* Responsive design */
-        @media (max-width: 1100px) {
-            .main-content {
+        @media (max-width: 768px) {
+            .moving-text {
+                font-size: 1.8rem;
+            }
+            
+            .image-collage {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .input-section, .image-section {
-                min-width: 100%;
-            }
-            
-            .moving-text {
-                font-size: 2.5rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .moving-text {
-                font-size: 2rem;
-            }
-            
-            .app-title {
-                font-size: 2.2rem;
-            }
-            
-            .results-title {
-                font-size: 2rem;
-            }
-            
-            .image-collage {
-                grid-template-columns: 1fr;
-            }
-            
-            .examples-grid {
-                grid-template-columns: 1fr;
+            .collage-image {
+                width: 100%;
+                max-width: 300px;
             }
             
             #trajectory-graph {
                 height: 400px;
             }
-            
-            .equation-input, .enter-button {
-                width: 100%;
-            }
         }
         
-        /* Loading animation */
-        .loading {
-            display: none;
+        /* Footer */
+        .footer {
             text-align: center;
+            margin-top: 40px;
             padding: 20px;
-        }
-        
-        .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
         }
     </style>
 </head>
@@ -477,68 +313,34 @@
     <!-- Front Page -->
     <div id="front-page" class="page active">
         <div class="header">
-            <div class="moving-text-container">
-                <div class="moving-text">Your Home for Your Math Help</div>
-            </div>
+            <div class="moving-text">Your Home for Your Math Help</div>
         </div>
         
         <div class="front-container">
-            <h1 class="app-title">Orthogonal Trajectory Solver</h1>
-            <p class="subtitle">Enter any mathematical equation to find its orthogonal trajectory with step-by-step solutions and interactive visualizations.</p>
-            
-            <div class="main-content">
-                <div class="input-section">
-                    <label class="input-label" for="equation">Enter Your Equation:</label>
-                    <input type="text" id="equation" class="equation-input" placeholder="Examples: y = x^2, x^2 + y^2 = 9, y = sin(x), y' = x/y">
-                    
-                    <div class="loading" id="loading">
-                        <div class="spinner"></div>
-                        <p>Calculating orthogonal trajectory...</p>
-                    </div>
-                    
-                    <button id="enter-button" class="enter-button">Calculate Trajectory</button>
-                    
-                    <div class="examples">
-                        <div class="examples-title">Try These Examples:</div>
-                        <div class="examples-grid">
-                            <div class="example-equation" onclick="setExample('y = x^2')">y = x²</div>
-                            <div class="example-equation" onclick="setExample('x^2 + y^2 = 9')">x² + y² = 9</div>
-                            <div class="example-equation" onclick="setExample('y = 1/x')">y = 1/x</div>
-                            <div class="example-equation" onclick="setExample('y = sin(x)')">y = sin(x)</div>
-                            <div class="example-equation" onclick="setExample('y = e^x')">y = eˣ</div>
-                            <div class="example-equation" onclick="setExample('y = ln(x)')">y = ln(x)</div>
-                            <div class="example-equation" onclick="setExample('xy = C')">xy = C</div>
-                            <div class="example-equation" onclick="setExample('y = mx + b')">y = mx + b</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="input-section">
+                <label class="input-label" for="equation">Enter your equation (e.g., y = x^2, x^2 + y^2 = r^2):</label>
+                <input type="text" id="equation" class="equation-input" placeholder="y = x^2 or x^2 + y^2 = 9">
                 
-                <div class="image-section">
-                    <h2 class="image-section-title">Visual Mathematics Gallery</h2>
-                    <div class="image-collage">
-                        <div class="collage-item">
-                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Graph Image" class="collage-image">
-                            <div class="image-caption">Orthogonal Trajectories</div>
-                        </div>
-                        <div class="collage-item">
-                            <img src="https://images.unsplash.com/photo-1596496181871-9681eacf4529?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Equation Image" class="collage-image">
-                            <div class="image-caption">Mathematical Equations</div>
-                        </div>
-                        <div class="collage-item">
-                            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Code Image" class="collage-image">
-                            <div class="image-caption">Computational Math</div>
-                        </div>
-                        <div class="collage-item">
-                            <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Geometry Image" class="collage-image">
-                            <div class="image-caption">Geometric Analysis</div>
-                        </div>
-                    </div>
+                <button id="enter-button" class="enter-button">Calculate</button>
+                
+                <div class="examples">
+                    <p>Try these examples:</p>
+                    <div class="example-equation" onclick="setExample('y = x^2')">y = x²</div>
+                    <div class="example-equation" onclick="setExample('x^2 + y^2 = 9')">x² + y² = 9</div>
+                    <div class="example-equation" onclick="setExample('y = 1/x')">y = 1/x</div>
+                    <div class="example-equation" onclick="setExample('y = sin(x)')">y = sin(x)</div>
                 </div>
+            </div>
+            
+            <div class="image-collage">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Graph Image" class="collage-image">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Equation Image" class="collage-image">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w-600&q=80" alt="Code Image" class="collage-image">
             </div>
         </div>
         
         <div class="footer">
-            <p>Orthogonal Trajectory Solver © 2023 | Enter any equation to find its orthogonal trajectory with detailed step-by-step solutions</p>
+            Orthogonal Trajectory Solver &copy; 2023 | Enter any equation to find its orthogonal trajectory
         </div>
     </div>
     
@@ -547,7 +349,7 @@
         <div class="results-container">
             <div class="results-header">
                 <h1 class="results-title">Orthogonal Trajectory Solution</h1>
-                <button id="back-button" class="back-button">← Back to Home</button>
+                <button id="back-button" class="back-button">Back to Home</button>
             </div>
             
             <div class="result-section">
@@ -581,7 +383,7 @@
                 <div class="step-block step-2">
                     <div class="step-title">Step 2: Find the negative reciprocal for orthogonal trajectory</div>
                     <div class="step-content">
-                        <p>For orthogonal trajectories, the slope is the negative reciprocal of the original slope:</p>
+                        <p>For orthogonal trajectories, the slope is the negative reciprocal:</p>
                         <p><span id="step2-derivative" class="equation">dy/dx = -1/(2x)</span></p>
                     </div>
                 </div>
@@ -608,14 +410,11 @@
             <div class="result-section">
                 <h2 class="section-title">Graph of Orthogonal Trajectories</h2>
                 <div id="trajectory-graph"></div>
-                <p style="margin-top: 20px; color: #666; text-align: center;">
-                    <strong>Blue curves:</strong> Original family | <strong>Red curves:</strong> Orthogonal trajectories
-                </p>
             </div>
         </div>
         
         <div class="footer">
-            <p>Orthogonal Trajectory Solver © 2023 | Detailed step-by-step solution provided for educational purposes</p>
+            Orthogonal Trajectory Solver &copy; 2023 | Step-by-step solution provided
         </div>
     </div>
 
@@ -626,12 +425,10 @@
         const enterButton = document.getElementById('enter-button');
         const backButton = document.getElementById('back-button');
         const equationInput = document.getElementById('equation');
-        const loadingDiv = document.getElementById('loading');
         
         // Example equations
         function setExample(equation) {
             equationInput.value = equation;
-            equationInput.focus();
         }
         
         // Process the equation and show results
@@ -643,187 +440,63 @@
                 return;
             }
             
-            // Show loading animation
-            loadingDiv.style.display = 'block';
-            enterButton.disabled = true;
+            // Process the equation (in a real application, this would involve actual symbolic math)
+            processOrthogonalTrajectory(equation);
             
-            // Process after a short delay to show loading animation
-            setTimeout(() => {
-                processOrthogonalTrajectory(equation);
-                
-                // Switch to results page
-                frontPage.classList.remove('active');
-                resultsPage.classList.add('active');
-                
-                // Hide loading animation
-                loadingDiv.style.display = 'none';
-                enterButton.disabled = false;
-            }, 800);
-        });
-        
-        // Allow pressing Enter in input field
-        equationInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                enterButton.click();
-            }
+            // Switch to results page
+            frontPage.classList.remove('active');
+            resultsPage.classList.add('active');
         });
         
         // Return to front page
         backButton.addEventListener('click', function() {
             resultsPage.classList.remove('active');
             frontPage.classList.add('active');
-            equationInput.value = '';
         });
         
         // Process the equation and generate results
         function processOrthogonalTrajectory(equation) {
-            // Clean and normalize the equation
-            let normalizedEq = equation
-                .replace(/\^/g, '^')
-                .replace(/sin\(/g, 'sin(')
-                .replace(/cos\(/g, 'cos(')
-                .replace(/ln\(/g, 'ln(')
-                .replace(/e\^/g, 'exp(')
-                .replace(/exp\(x\)/g, 'e^x')
-                .trim();
-            
-            let originalEquation = normalizedEq;
+            // Parse equation to extract information
+            let originalEquation = equation;
             let trajectoryEquation = "";
             let step1Derivative = "";
             let step2Derivative = "";
             let step3Solution = "";
             let finalEquation = "";
-            let graphType = "";
             
-            // Analyze equation type and process accordingly
-            if (normalizedEq.includes('x^2 + y^2') || normalizedEq.includes('x² + y²') || 
-                normalizedEq.match(/x\s*\^\s*2\s*\+\s*y\s*\^\s*2/)) {
+            // Handle different equation forms
+            if (equation.includes('x^2 + y^2') || equation.includes('x² + y²')) {
                 // Circle equation
                 originalEquation = "x² + y² = r²";
-                trajectoryEquation = "y = Cx or x² + y² = k";
+                trajectoryEquation = "x² + y² = C";
                 step1Derivative = "2x + 2y(dy/dx) = 0 → dy/dx = -x/y";
-                step2Derivative = "For orthogonal trajectory: dy/dx = y/x";
-                step3Solution = "∫ (1/y) dy = ∫ (1/x) dx → ln|y| = ln|x| + C₁";
-                finalEquation = "y = Cx, where C = e^{C₁}";
-                graphType = "circle";
-                
-            } else if (normalizedEq.includes('y = x^2') || normalizedEq.includes('y = x²') || 
-                      normalizedEq.match(/y\s*=\s*x\s*\^\s*2/)) {
-                // Parabola
-                originalEquation = "y = x²";
-                trajectoryEquation = "y² = -½x² + C";
-                step1Derivative = "dy/dx = 2x";
-                step2Derivative = "For orthogonal trajectory: dy/dx = -1/(2x)";
-                step3Solution = "∫ dy = ∫ -1/(2x) dx → y = -½ ln|x| + C";
-                finalEquation = "y = -½ ln|x| + C";
-                graphType = "parabola";
-                
-            } else if (normalizedEq.includes('y = 1/x') || normalizedEq.includes('y = x^(-1)') || 
-                      normalizedEq.match(/y\s*=\s*1\s*\/\s*x/)) {
+                step2Derivative = "dy/dx = y/x";
+                step3Solution = "∫ (1/y) dy = ∫ (1/x) dx → ln|y| = ln|x| + C";
+                finalEquation = "y = Cx";
+            } else if (equation.includes('y = 1/x') || equation.includes('y=1/x')) {
                 // Hyperbola
                 originalEquation = "y = 1/x";
                 trajectoryEquation = "y² = x² + C";
                 step1Derivative = "dy/dx = -1/x²";
-                step2Derivative = "For orthogonal trajectory: dy/dx = x²";
+                step2Derivative = "dy/dx = x²";
                 step3Solution = "∫ dy = ∫ x² dx → y = x³/3 + C";
                 finalEquation = "y = x³/3 + C";
-                graphType = "hyperbola";
-                
-            } else if (normalizedEq.includes('y = sin(x)') || normalizedEq.includes('y = sin x')) {
+            } else if (equation.includes('y = sin(x)') || equation.includes('y=sin(x)')) {
                 // Sine function
                 originalEquation = "y = sin(x)";
-                trajectoryEquation = "y = -ln|csc(x) + cot(x)| + C";
+                trajectoryEquation = "y² = -2cos(x) + C";
                 step1Derivative = "dy/dx = cos(x)";
-                step2Derivative = "For orthogonal trajectory: dy/dx = -1/cos(x) = -sec(x)";
-                step3Solution = "∫ dy = ∫ -sec(x) dx → y = -ln|sec(x) + tan(x)| + C";
-                finalEquation = "y = -ln|csc(x) + cot(x)| + C";
-                graphType = "sine";
-                
-            } else if (normalizedEq.includes('y = e^x') || normalizedEq.includes('y = exp(x)')) {
-                // Exponential function
-                originalEquation = "y = eˣ";
-                trajectoryEquation = "y² = -2e⁻ˣ + C";
-                step1Derivative = "dy/dx = eˣ";
-                step2Derivative = "For orthogonal trajectory: dy/dx = -e⁻ˣ";
-                step3Solution = "∫ dy = ∫ -e⁻ˣ dx → y = e⁻ˣ + C";
-                finalEquation = "y = e⁻ˣ + C";
-                graphType = "exponential";
-                
-            } else if (normalizedEq.includes('y = ln(x)') || normalizedEq.includes('y = log(x)')) {
-                // Logarithmic function
-                originalEquation = "y = ln(x)";
-                trajectoryEquation = "y = -½x² + C";
-                step1Derivative = "dy/dx = 1/x";
-                step2Derivative = "For orthogonal trajectory: dy/dx = -x";
-                step3Solution = "∫ dy = ∫ -x dx → y = -½x² + C";
-                finalEquation = "y = -½x² + C";
-                graphType = "logarithmic";
-                
-            } else if (normalizedEq.includes('xy = C') || normalizedEq.includes('x*y = C')) {
-                // Rectangular hyperbola
-                originalEquation = "xy = C";
-                trajectoryEquation = "y² - x² = K";
-                step1Derivative = "y + x(dy/dx) = 0 → dy/dx = -y/x";
-                step2Derivative = "For orthogonal trajectory: dy/dx = x/y";
-                step3Solution = "∫ y dy = ∫ x dx → ½y² = ½x² + C₁";
-                finalEquation = "y² - x² = K, where K = 2C₁";
-                graphType = "rectangular_hyperbola";
-                
-            } else if (normalizedEq.includes('y = mx + b') || normalizedEq.includes('y = mx+c')) {
-                // Linear equation
-                originalEquation = "y = mx + b";
-                trajectoryEquation = "y = (-1/m)x + C";
-                step1Derivative = "dy/dx = m";
-                step2Derivative = "For orthogonal trajectory: dy/dx = -1/m";
-                step3Solution = "∫ dy = ∫ -1/m dx → y = (-1/m)x + C";
-                finalEquation = "y = (-1/m)x + C";
-                graphType = "linear";
-                
+                step2Derivative = "dy/dx = -1/cos(x)";
+                step3Solution = "∫ dy = ∫ -sec(x) dx → y = -ln|sec(x)+tan(x)| + C";
+                finalEquation = "y = -ln|sec(x)+tan(x)| + C";
             } else {
-                // Generic equation - try to process with math.js
-                try {
-                    originalEquation = normalizedEq;
-                    
-                    // Try to extract derivative pattern
-                    if (normalizedEq.includes("dy/dx") || normalizedEq.includes("y'")) {
-                        // Already a differential equation
-                        const derivativePart = normalizedEq.includes("dy/dx") ? 
-                            normalizedEq.split("dy/dx")[1] : normalizedEq.split("y'")[1];
-                        
-                        step1Derivative = `Given: dy/dx = ${derivativePart.trim()}`;
-                        step2Derivative = `For orthogonal trajectory: dy/dx = -1/(${derivativePart.trim()})`;
-                        
-                        // Simple integration for demonstration
-                        if (derivativePart.includes("x/y") || derivativePart.includes("x / y")) {
-                            step3Solution = "∫ y dy = ∫ -x dx → ½y² = -½x² + C₁";
-                            finalEquation = "y² = -x² + K, where K = 2C₁";
-                            trajectoryEquation = "y² = -x² + K";
-                            graphType = "generic";
-                        } else {
-                            step3Solution = "∫ dy = ∫ -1/(expression) dx → Requires specific integration based on the expression";
-                            finalEquation = "General orthogonal trajectory requires solving the resulting differential equation";
-                            trajectoryEquation = "Solve: dy/dx = -1/(given expression)";
-                            graphType = "generic";
-                        }
-                    } else {
-                        // Try to differentiate
-                        step1Derivative = "dy/dx = [Derivative of given equation]";
-                        step2Derivative = "For orthogonal trajectory: dy/dx = -1/(original slope)";
-                        step3Solution = "Integrate to find the orthogonal trajectory equation";
-                        finalEquation = "Orthogonal trajectory family depends on specific integration";
-                        trajectoryEquation = "Solve: dy/dx = -1/(derivative of original)";
-                        graphType = "generic";
-                    }
-                } catch (error) {
-                    // Fallback to default example
-                    originalEquation = "y = x²";
-                    trajectoryEquation = "y² = -½x² + C";
-                    step1Derivative = "dy/dx = 2x";
-                    step2Derivative = "For orthogonal trajectory: dy/dx = -1/(2x)";
-                    step3Solution = "∫ dy = ∫ -1/(2x) dx → y = -½ ln|x| + C";
-                    finalEquation = "y = -½ ln|x| + C";
-                    graphType = "parabola";
-                }
+                // Default parabola example
+                originalEquation = "y = x²";
+                trajectoryEquation = "y² = -½x² + C";
+                step1Derivative = "dy/dx = 2x";
+                step2Derivative = "dy/dx = -1/(2x)";
+                step3Solution = "∫ dy = ∫ -1/(2x) dx → y = -½ ln|x| + C";
+                finalEquation = "y = -½ ln|x| + C";
             }
             
             // Update the UI with the results
@@ -832,45 +505,131 @@
             document.getElementById('step1-equation').textContent = originalEquation;
             document.getElementById('step1-derivative').textContent = step1Derivative;
             document.getElementById('step2-derivative').textContent = step2Derivative;
-            document.getElementById('step3-equation').textContent = step2Derivative.includes('=') ? 
-                step2Derivative.split('=')[1].trim() : step2Derivative;
+            document.getElementById('step3-equation').textContent = step2Derivative;
             document.getElementById('step3-solution').textContent = step3Solution;
             document.getElementById('step4-solution').textContent = step3Solution;
             document.getElementById('final-equation').textContent = finalEquation;
             
             // Generate the graph
-            generateGraph(graphType, originalEquation);
+            generateGraph(originalEquation, finalEquation);
         }
         
-        // Generate the Plotly graph based on equation type
-        function generateGraph(graphType, equation) {
+        // Generate the Plotly graph
+        function generateGraph(originalEq, trajectoryEq) {
+            // Generate data for the original equation
             let originalX = [];
             let originalY = [];
+            
+            // Generate data for the trajectory equation
             let trajectoryX = [];
             let trajectoryY = [];
             
-            // Generate data based on graph type
-            switch(graphType) {
-                case "circle":
-                    // Circle family
-                    for (let r = 2; r <= 6; r += 1) {
-                        for (let angle = 0; angle < 2 * Math.PI; angle += 0.1) {
-                            originalX.push(r * Math.cos(angle));
-                            originalY.push(r * Math.sin(angle));
+            // Based on the equation type, generate appropriate data
+            if (originalEq.includes('x² + y² = r²')) {
+                // Circle family
+                for (let i = -10; i <= 10; i += 0.5) {
+                    for (let r = 3; r <= 7; r += 2) {
+                        if (Math.abs(i) <= r) {
+                            originalX.push(i);
+                            originalY.push(Math.sqrt(r*r - i*i));
+                            originalX.push(i);
+                            originalY.push(-Math.sqrt(r*r - i*i));
                         }
                     }
-                    
-                    // Orthogonal trajectories (lines through origin)
-                    for (let c = -2; c <= 2; c += 0.5) {
-                        for (let i = -8; i <= 8; i += 0.2) {
-                            trajectoryX.push(i);
-                            trajectoryY.push(c * i);
-                        }
+                }
+                
+                // Orthogonal trajectories (lines through origin)
+                for (let c = -2; c <= 2; c += 0.5) {
+                    for (let i = -8; i <= 8; i += 0.5) {
+                        trajectoryX.push(i);
+                        trajectoryY.push(c * i);
                     }
-                    break;
-                    
-                case "parabola":
-                    // Parabola family
+                }
+            } else if (originalEq.includes('y = 1/x')) {
+                // Hyperbola
+                for (let i = 0.5; i <= 5; i += 0.2) {
+                    originalX.push(i);
+                    originalY.push(1/i);
+                    originalX.push(-i);
+                    originalY.push(-1/i);
+                }
+                
+                // Orthogonal trajectories (cubic curves)
+                for (let c = -1; c <= 1; c += 0.5) {
                     for (let i = -4; i <= 4; i += 0.2) {
-                        originalX.push(i);
-                        originalY.push(i*i);
+                        trajectoryX.push(i);
+                        trajectoryY.push(i*i*i/3 + c);
+                    }
+                }
+            } else {
+                // Default parabola
+                for (let i = -4; i <= 4; i += 0.2) {
+                    originalX.push(i);
+                    originalY.push(i*i);
+                }
+                
+                // Orthogonal trajectories (logarithmic curves)
+                for (let c = -2; c <= 2; c += 0.5) {
+                    for (let i = 0.1; i <= 4; i += 0.2) {
+                        trajectoryX.push(i);
+                        trajectoryY.push(-0.5 * Math.log(i) + c);
+                        trajectoryX.push(-i);
+                        trajectoryY.push(-0.5 * Math.log(-i) + c);
+                    }
+                }
+            }
+            
+            // Create the plot
+            const trace1 = {
+                x: originalX,
+                y: originalY,
+                mode: 'markers',
+                name: 'Original Family',
+                marker: {
+                    size: 4,
+                    color: '#339af0'
+                },
+                type: 'scatter'
+            };
+            
+            const trace2 = {
+                x: trajectoryX,
+                y: trajectoryY,
+                mode: 'markers',
+                name: 'Orthogonal Trajectories',
+                marker: {
+                    size: 4,
+                    color: '#f06595'
+                },
+                type: 'scatter'
+            };
+            
+            const layout = {
+                title: 'Original Curves and Orthogonal Trajectories',
+                xaxis: {
+                    title: 'x-axis',
+                    range: [-8, 8]
+                },
+                yaxis: {
+                    title: 'y-axis',
+                    range: [-8, 8]
+                },
+                showlegend: true,
+                legend: {
+                    x: 0.8,
+                    y: 0.1
+                },
+                plot_bgcolor: '#f8f9fa',
+                paper_bgcolor: '#f8f9fa'
+            };
+            
+            Plotly.newPlot('trajectory-graph', [trace1, trace2], layout);
+        }
+        
+        // Initialize with a default example
+        window.addEventListener('DOMContentLoaded', function() {
+            setExample('y = x^2');
+        });
+    </script>
+</body>
+</html>
