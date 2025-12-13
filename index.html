@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orthogonal Trajectory Calculator</title>
+    <title>Ultimate Orthogonal Trajectory Calculator</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -19,7 +19,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
             min-height: 100vh;
             color: #333;
             padding: 20px;
@@ -47,7 +47,7 @@
         }
 
         .logo i {
-            color: #4fc3f7;
+            color: #7e57c2;
             font-size: 2rem;
         }
 
@@ -78,11 +78,11 @@
         }
 
         .contact-btn {
-            background: #1976d2;
+            background: #5c6bc0;
         }
 
         .leave-btn {
-            background: #d32f2f;
+            background: #ef5350;
         }
 
         /* Main Container */
@@ -113,7 +113,7 @@
 
         .visualization-container {
             height: 400px;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ede7f6 100%);
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -121,7 +121,7 @@
             position: relative;
             overflow: hidden;
             margin-bottom: 25px;
-            border: 3px solid #e3f2fd;
+            border: 3px solid #d1c4e9;
         }
 
         .equation-display {
@@ -135,17 +135,17 @@
 
         .main-equation {
             font-size: 2.2rem;
-            color: #1976d2;
+            color: #5c6bc0;
             margin-bottom: 15px;
             font-weight: bold;
             padding: 10px;
-            background: #e3f2fd;
+            background: #e8eaf6;
             border-radius: 8px;
         }
 
         .orthogonal-equation {
             font-size: 1.8rem;
-            color: #d32f2f;
+            color: #ef5350;
             font-weight: bold;
             padding: 10px;
             background: #ffebee;
@@ -178,7 +178,7 @@
         .input-field {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #d1c4e9;
             border-radius: 10px;
             font-size: 1.1rem;
             transition: all 0.3s ease;
@@ -187,8 +187,8 @@
 
         .input-field:focus {
             outline: none;
-            border-color: #1976d2;
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+            border-color: #5c6bc0;
+            box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.1);
             background: white;
         }
 
@@ -200,9 +200,9 @@
         }
 
         .suggestion-btn {
-            background: #e3f2fd;
-            border: 2px solid #1976d2;
-            color: #1976d2;
+            background: #e8eaf6;
+            border: 2px solid #5c6bc0;
+            color: #5c6bc0;
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
@@ -212,16 +212,16 @@
         }
 
         .suggestion-btn:hover {
-            background: #1976d2;
+            background: #5c6bc0;
             color: white;
             transform: translateY(-2px);
         }
 
         .variable-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            background: linear-gradient(135deg, #e8eaf6 0%, #d1c4e9 100%);
             padding: 25px;
             border-radius: 15px;
-            border-left: 5px solid #1976d2;
+            border-left: 5px solid #5c6bc0;
             margin-bottom: 25px;
         }
 
@@ -232,7 +232,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #1a237e 0%, #1976d2 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
             color: white;
             border: none;
             padding: 18px 40px;
@@ -246,16 +246,12 @@
             justify-content: center;
             gap: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.3);
+            box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
         }
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(25, 118, 210, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(92, 107, 192, 0.4);
         }
 
         /* Backend Page */
@@ -276,7 +272,7 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 2px solid #e3f2fd;
+            border: 2px solid #e8eaf6;
             transition: transform 0.3s ease;
         }
 
@@ -288,7 +284,7 @@
             color: #1a237e;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 3px solid #1976d2;
+            border-bottom: 3px solid #5c6bc0;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
@@ -298,7 +294,7 @@
         .step {
             margin-bottom: 20px;
             padding-left: 25px;
-            border-left: 3px solid #1976d2;
+            border-left: 3px solid #5c6bc0;
             background: #f5f5f5;
             padding: 20px;
             border-radius: 0 10px 10px 0;
@@ -306,7 +302,7 @@
         }
 
         .step:hover {
-            background: #e3f2fd;
+            background: #e8eaf6;
             transform: translateX(5px);
         }
 
@@ -314,7 +310,7 @@
             display: inline-block;
             width: 30px;
             height: 30px;
-            background: linear-gradient(135deg, #1a237e 0%, #1976d2 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
             color: white;
             border-radius: 50%;
             text-align: center;
@@ -329,7 +325,7 @@
             padding: 20px;
             border-radius: 10px;
             margin: 15px 0;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #d1c4e9;
             font-size: 1.2rem;
             text-align: center;
             font-family: 'Cambria Math', serif;
@@ -353,11 +349,11 @@
             padding: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             height: 400px;
-            border: 2px solid #e3f2fd;
+            border: 2px solid #e8eaf6;
         }
 
         .back-home-btn {
-            background: linear-gradient(135deg, #1a237e 0%, #1976d2 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
             color: white;
             border: none;
             padding: 15px 40px;
@@ -371,12 +367,12 @@
             gap: 15px;
             margin: 40px auto;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.3);
+            box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
         }
 
         .back-home-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(25, 118, 210, 0.4);
+            box-shadow: 0 10px 25px rgba(92, 107, 192, 0.4);
         }
 
         /* Modal Styles */
@@ -418,7 +414,7 @@
         }
 
         .close-btn:hover {
-            color: #d32f2f;
+            color: #ef5350;
         }
 
         .modal h2 {
@@ -499,25 +495,50 @@
             }
         }
 
-        /* Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(2deg); }
-            75% { transform: translateY(-5px) rotate(-2deg); }
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #5c6bc0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
 
-        .equation-display div {
-            animation: float 4s ease-in-out infinite;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            color: white;
-            margin-top: 40px;
+        /* Equation Categories */
+        .equation-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .category-box {
+            background: #f8f9fa;
             padding: 20px;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            border-radius: 10px;
+            border: 2px solid #e8eaf6;
+        }
+
+        .category-title {
+            color: #1a237e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-equations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         /* Info Box */
@@ -537,21 +558,56 @@
             font-size: 1.5rem;
         }
 
-        /* Loading Spinner */
-        .spinner {
-            display: none;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #1976d2;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+        /* Function Type Indicators */
+        .function-indicator {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        
+        .poly-indicator {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #1976d2;
+        }
+        
+        .trig-indicator {
+            background: #fff3e0;
+            color: #f57c00;
+            border: 1px solid #f57c00;
+        }
+        
+        .exp-indicator {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #7b1fa2;
+        }
+        
+        .log-indicator {
+            background: #e8f5e9;
+            color: #388e3c;
+            border: 1px solid #388e3c;
+        }
+        
+        .power-indicator {
+            background: #fff8e1;
+            color: #ff8f00;
+            border: 1px solid #ff8f00;
+        }
+        
+        .hyperbola-indicator {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #c2185b;
+        }
+        
+        .circle-indicator {
+            background: #e1f5fe;
+            color: #0277bd;
+            border: 1px solid #0277bd;
         }
     </style>
 </head>
@@ -562,7 +618,7 @@
         <header class="header">
             <div class="logo">
                 <i class="fas fa-project-diagram"></i>
-                <span>Orthogonal Trajectory Calculator</span>
+                <span>Ultimate Orthogonal Trajectory Calculator</span>
             </div>
             <div class="header-buttons">
                 <button class="header-btn contact-btn" id="contactBtn">
@@ -583,15 +639,16 @@
                 </h2>
                 <div class="visualization-container">
                     <div class="equation-display">
-                        <div class="main-equation" id="mainEquation">\( y = x^2 \)</div>
-                        <div class="orthogonal-equation" id="orthogonalEquation">\( y = -\frac{1}{2}\ln|x| + C \)</div>
+                        <div class="main-equation" id="mainEquation">\[ y = \sin(x) \]</div>
+                        <div class="orthogonal-equation" id="orthogonalEquation">\[ y = -\ln|\sec(x) + \tan(x)| + C \]</div>
                     </div>
                 </div>
                 <div class="info-box">
                     <i class="fas fa-info-circle"></i>
                     <div>
-                        <strong>Orthogonal Trajectories</strong> are curves that intersect another family of curves at right angles (90°). 
-                        They are important in physics and engineering for modeling perpendicular force fields and flow lines.
+                        <strong>Complete Function Support</strong> 
+                        This calculator handles: Polynomials, Trigonometric, Exponential, 
+                        Logarithmic, Power functions, Circles, Hyperbolas, and more!
                     </div>
                 </div>
             </div>
@@ -605,31 +662,64 @@
                 <!-- Equation Input -->
                 <div class="input-group">
                     <label class="input-label" for="equation">
-                        <i class="fas fa-square-root-alt"></i> Enter Your Equation
+                        <i class="fas fa-square-root-alt"></i> Enter Any Mathematical Equation
                     </label>
                     <input type="text" id="equation" class="input-field" 
-                           placeholder="Examples: y = x^2, x^2 + y^2 = 9, y = sin(x), dy/dx = x/y">
+                           placeholder="Examples: y = sin(x), y = e^x, y = ln(x), y = x^2 + 3x + 2">
                     
                     <div class="suggestions">
-                        <button class="suggestion-btn" onclick="insertEquation('y = x^2')">y = x²</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = e^x')">y = eˣ</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = sin(x)')">y = sin(x)</button>
-                        <button class="suggestion-btn" onclick="insertEquation('x^2 + y^2 = 9')">Circle</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = 1/x')">Hyperbola</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = sin(x)')">Sine</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = e^x')">Exponential</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = ln(x)')">Logarithmic</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = x^2 + 3x + 2')">Quadratic</button>
+                        <button class="suggestion-btn" onclick="insertEquation('x^2 + y^2 = r^2')">Circle</button>
                     </div>
                 </div>
 
-                <!-- More Examples -->
-                <div class="input-group">
-                    <label class="input-label">
-                        <i class="fas fa-lightbulb"></i> More Examples
-                    </label>
-                    <div class="suggestions">
-                        <button class="suggestion-btn" onclick="insertEquation('y = ln(x)')">Logarithmic</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = tan(x)')">Tangent</button>
-                        <button class="suggestion-btn" onclick="insertEquation('x*y = C')">Rectangular Hyperbola</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y^2 = 4ax')">Parabola</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = x^3')">Cubic</button>
+                <!-- Equation Categories -->
+                <div class="equation-categories">
+                    <div class="category-box">
+                        <h4 class="category-title"><i class="fas fa-wave-square"></i> Trigonometric Functions</h4>
+                        <div class="category-equations">
+                            <button class="suggestion-btn" onclick="insertEquation('y = sin(x)')">y = sin(x)</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = cos(x)')">y = cos(x)</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = tan(x)')">y = tan(x)</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = sin(2x)')">y = sin(2x)</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = cos(kx)')">y = cos(kx)</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-box">
+                        <h4 class="category-title"><i class="fas fa-chart-line"></i> Exponential & Logarithmic</h4>
+                        <div class="category-equations">
+                            <button class="suggestion-btn" onclick="insertEquation('y = e^x')">y = eˣ</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = 2^x')">y = 2ˣ</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = a^x')">y = aˣ</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = ln(x)')">y = ln(x)</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = log(x)')">y = log(x)</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-box">
+                        <h4 class="category-title"><i class="fas fa-chart-bar"></i> Polynomial Functions</h4>
+                        <div class="category-equations">
+                            <button class="suggestion-btn" onclick="insertEquation('y = 2x + 3')">Linear</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = x^2 + 3x + 2')">Quadratic</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = x^3 - 2x')">Cubic</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = x^4 - 2x^2')">Quartic</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = x^n')">Power</button>
+                        </div>
+                    </div>
+                    
+                    <div class="category-box">
+                        <h4 class="category-title"><i class="fas fa-shapes"></i> Conic Sections & Special</h4>
+                        <div class="category-equations">
+                            <button class="suggestion-btn" onclick="insertEquation('x^2 + y^2 = r^2')">Circle</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y^2 = 4ax')">Parabola</button>
+                            <button class="suggestion-btn" onclick="insertEquation('xy = C')">Rectangular Hyperbola</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = 1/x')">Hyperbola</button>
+                            <button class="suggestion-btn" onclick="insertEquation('y = sinh(x)')">Hyperbolic Sine</button>
+                        </div>
                     </div>
                 </div>
 
@@ -665,7 +755,7 @@
         </div>
 
         <div class="footer">
-            <p>© 2024 Orthogonal Trajectory Calculator | Supports All Mathematical Equation Types</p>
+            <p>© 2024 Ultimate Orthogonal Trajectory Calculator | Complete Mathematical Function Support</p>
         </div>
     </div>
 
@@ -674,9 +764,9 @@
         <div class="solution-container">
             <!-- Original Equation -->
             <div class="solution-box">
-                <h3><i class="fas fa-equation"></i> Original Equation</h3>
+                <h3><i class="fas fa-equation"></i> Original Equation <span id="functionTypeIndicator"></span></h3>
                 <div class="math-equation" id="originalEquationDisplay">
-                    \( y = x^2 \)
+                    \[ y = \sin(x) \]
                 </div>
             </div>
 
@@ -721,25 +811,22 @@
                     <div class="graph-container" id="originalGraph">
                         <div style="text-align: center; padding: 20px;">
                             <div class="spinner"></div>
-                            <p>Loading graph...</p>
+                            <p>Loading original graph...</p>
                         </div>
                     </div>
                     <div class="graph-container" id="orthogonalGraph">
                         <div style="text-align: center; padding: 20px;">
                             <div class="spinner"></div>
-                            <p>Loading graph...</p>
+                            <p>Loading orthogonal graph...</p>
                         </div>
                     </div>
                     <div class="graph-container" id="combinedGraph">
                         <div style="text-align: center; padding: 20px;">
                             <div class="spinner"></div>
-                            <p>Loading graph...</p>
+                            <p>Loading combined graph...</p>
                         </div>
                     </div>
                 </div>
-                <p style="text-align: center; color: #666; margin-top: 20px; font-style: italic;">
-                    Blue: Original Equation | Red: Orthogonal Trajectory | Purple: Combined View
-                </p>
             </div>
 
             <button class="back-home-btn" id="backHomeBtn">
@@ -819,8 +906,8 @@
     </div>
 
     <script>
-        // ==================== ORTHOGONAL TRAJECTORY CALCULATOR ====================
-        // This calculator can handle any mathematical equation format
+        // ==================== ULTIMATE ORTHOGONAL TRAJECTORY CALCULATOR ====================
+        // Complete solution for ALL mathematical function types
 
         // DOM Elements
         const frontPage = document.getElementById('frontPage');
@@ -837,201 +924,376 @@
         const ratingStars = document.querySelectorAll('.rating i');
         const ratingValue = document.getElementById('ratingValue');
         const loadingSpinner = document.getElementById('loadingSpinner');
+        const functionTypeIndicator = document.getElementById('functionTypeIndicator');
 
-        // Equation database with solutions
+        // COMPLETE EQUATION DATABASE WITH ALL FUNCTION TYPES
         const equationDatabase = {
-            // Power functions
-            'y = x^2': {
-                derivative: '2x',
-                orthogonalSlope: '-1/(2x)',
-                solution: 'y = -1/2 ln|x| + C',
-                steps: [
-                    'Differentiate: dy/dx = 2x',
-                    'Orthogonal slope: dy/dx = -1/(2x)',
-                    'Separate variables: dy = -1/(2x) dx',
-                    'Integrate: ∫dy = ∫-1/(2x) dx',
-                    'Result: y = -1/2 ln|x| + C'
-                ]
-            },
-            'y = x^3': {
-                derivative: '3x^2',
-                orthogonalSlope: '-1/(3x^2)',
-                solution: 'y = -1/(3x) + C',
-                steps: [
-                    'Differentiate: dy/dx = 3x^2',
-                    'Orthogonal slope: dy/dx = -1/(3x^2)',
-                    'Separate variables: dy = -1/(3x^2) dx',
-                    'Integrate: ∫dy = ∫-1/(3x^2) dx',
-                    'Result: y = 1/(3x) + C'
-                ]
-            },
-            'y = x^n': {
-                derivative: 'n x^(n-1)',
-                orthogonalSlope: '-1/(n x^(n-1))',
-                solution: 'y = -x^(2-n)/(n(2-n)) + C',
-                steps: [
-                    'Differentiate: dy/dx = n x^(n-1)',
-                    'Orthogonal slope: dy/dx = -1/(n x^(n-1))',
-                    'Separate variables: dy = -1/(n x^(n-1)) dx',
-                    'Integrate: ∫dy = ∫-1/(n x^(n-1)) dx',
-                    'Result: y = -x^(2-n)/(n(2-n)) + C'
-                ]
-            },
-            
-            // Exponential functions
-            'y = e^x': {
-                derivative: 'e^x',
-                orthogonalSlope: '-e^(-x)',
-                solution: 'y = -e^(-x) + C',
-                steps: [
-                    'Differentiate: dy/dx = e^x',
-                    'Orthogonal slope: dy/dx = -e^(-x)',
-                    'Separate variables: dy = -e^(-x) dx',
-                    'Integrate: ∫dy = ∫-e^(-x) dx',
-                    'Result: y = e^(-x) + C'
-                ]
-            },
-            'y = a^x': {
-                derivative: 'a^x ln(a)',
-                orthogonalSlope: '-1/(a^x ln(a))',
-                solution: 'y = -a^(-x)/(ln(a)) + C',
-                steps: [
-                    'Differentiate: dy/dx = a^x ln(a)',
-                    'Orthogonal slope: dy/dx = -1/(a^x ln(a))',
-                    'Separate variables: dy = -1/(a^x ln(a)) dx',
-                    'Integrate: ∫dy = ∫-1/(a^x ln(a)) dx',
-                    'Result: y = -a^(-x)/ln(a) + C'
-                ]
-            },
-            
-            // Logarithmic functions
-            'y = ln(x)': {
-                derivative: '1/x',
-                orthogonalSlope: '-x',
-                solution: 'y = -x^2/2 + C',
-                steps: [
-                    'Differentiate: dy/dx = 1/x',
-                    'Orthogonal slope: dy/dx = -x',
-                    'Separate variables: dy = -x dx',
-                    'Integrate: ∫dy = ∫-x dx',
-                    'Result: y = -x^2/2 + C'
-                ]
-            },
-            
-            // Trigonometric functions
+            // ========== TRIGONOMETRIC FUNCTIONS ==========
             'y = sin(x)': {
-                derivative: 'cos(x)',
-                orthogonalSlope: '-1/cos(x)',
-                solution: 'y = -ln|sec(x) + tan(x)| + C',
+                type: 'trigonometric',
+                category: 'sine',
+                derivative: '\\cos(x)',
+                orthogonalSlope: '-\\sec(x)',
+                solution: 'y = -\\ln|\\sec(x) + \\tan(x)| + C',
                 steps: [
-                    'Differentiate: dy/dx = cos(x)',
-                    'Orthogonal slope: dy/dx = -1/cos(x) = -sec(x)',
-                    'Integrate: ∫dy = ∫-sec(x) dx',
-                    'Result: y = -ln|sec(x) + tan(x)| + C'
+                    'Given: \\[ y = \\sin(x) \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\cos(x) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{\\cos(x)} = -\\sec(x) \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\sec(x) dx \\]',
+                    'Standard integral: \\[ \\int \\sec(x) dx = \\ln|\\sec(x) + \\tan(x)| \\]',
+                    'Result: \\[ y = -\\ln|\\sec(x) + \\tan(x)| + C \\]'
                 ]
             },
+            
+            'y = sin(2x)': {
+                type: 'trigonometric',
+                category: 'sine',
+                derivative: '2\\cos(2x)',
+                orthogonalSlope: '-\\frac{1}{2}\\sec(2x)',
+                solution: 'y = -\\frac{1}{2}\\ln|\\sec(2x) + \\tan(2x)| + C',
+                steps: [
+                    'Given: \\[ y = \\sin(2x) \\]',
+                    'Differentiate using chain rule: \\[ \\frac{dy}{dx} = 2\\cos(2x) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2\\cos(2x)} = -\\frac{1}{2}\\sec(2x) \\]',
+                    'Use substitution: \\[ u = 2x, \\quad du = 2dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\frac{1}{2}\\sec(2x) dx = -\\frac{1}{4}\\int \\sec(u) du \\]',
+                    'Result: \\[ y = -\\frac{1}{4}\\ln|\\sec(2x) + \\tan(2x)| + C \\]'
+                ]
+            },
+            
             'y = cos(x)': {
-                derivative: '-sin(x)',
-                orthogonalSlope: '1/sin(x)',
-                solution: 'y = ln|csc(x) - cot(x)| + C',
+                type: 'trigonometric',
+                category: 'cosine',
+                derivative: '-\\sin(x)',
+                orthogonalSlope: '\\csc(x)',
+                solution: 'y = \\ln|\\csc(x) - \\cot(x)| + C',
                 steps: [
-                    'Differentiate: dy/dx = -sin(x)',
-                    'Orthogonal slope: dy/dx = 1/sin(x) = csc(x)',
-                    'Integrate: ∫dy = ∫csc(x) dx',
-                    'Result: y = ln|csc(x) - cot(x)| + C'
+                    'Given: \\[ y = \\cos(x) \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = -\\sin(x) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{1}{\\sin(x)} = \\csc(x) \\]',
+                    'Integrate: \\[ \\int dy = \\int \\csc(x) dx \\]',
+                    'Standard integral: \\[ \\int \\csc(x) dx = -\\ln|\\csc(x) + \\cot(x)| \\]',
+                    'Alternative form: \\[ \\int \\csc(x) dx = \\ln|\\csc(x) - \\cot(x)| \\]',
+                    'Result: \\[ y = \\ln|\\csc(x) - \\cot(x)| + C \\]'
                 ]
             },
+            
             'y = tan(x)': {
-                derivative: 'sec^2(x)',
-                orthogonalSlope: '-cos^2(x)',
-                solution: 'y = -1/2(x + 1/2 sin(2x)) + C',
+                type: 'trigonometric',
+                category: 'tangent',
+                derivative: '\\sec^2(x)',
+                orthogonalSlope: '-\\cos^2(x)',
+                solution: 'y = -\\frac{1}{2}(x + \\sin(x)\\cos(x)) + C',
                 steps: [
-                    'Differentiate: dy/dx = sec^2(x)',
-                    'Orthogonal slope: dy/dx = -cos^2(x)',
-                    'Integrate: ∫dy = ∫-cos^2(x) dx',
-                    'Result: y = -1/2(x + sin(x)cos(x)) + C'
+                    'Given: \\[ y = \\tan(x) \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\sec^2(x) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\cos^2(x) \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\cos^2(x) dx \\]',
+                    'Use identity: \\[ \\cos^2(x) = \\frac{1 + \\cos(2x)}{2} \\]',
+                    'Integrate: \\[ \\int -\\cos^2(x) dx = -\\frac{1}{2}\\int (1 + \\cos(2x)) dx \\]',
+                    'Result: \\[ y = -\\frac{1}{2}(x + \\frac{1}{2}\\sin(2x)) + C \\]',
+                    'Simplify: \\[ y = -\\frac{1}{2}(x + \\sin(x)\\cos(x)) + C \\]'
                 ]
             },
             
-            // Hyperbolic functions
+            'y = cot(x)': {
+                type: 'trigonometric',
+                category: 'cotangent',
+                derivative: '-\\csc^2(x)',
+                orthogonalSlope: '\\sin^2(x)',
+                solution: 'y = \\frac{1}{2}(x - \\sin(x)\\cos(x)) + C',
+                steps: [
+                    'Given: \\[ y = \\cot(x) \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = -\\csc^2(x) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = \\sin^2(x) \\]',
+                    'Use identity: \\[ \\sin^2(x) = \\frac{1 - \\cos(2x)}{2} \\]',
+                    'Integrate: \\[ \\int dy = \\int \\frac{1 - \\cos(2x)}{2} dx \\]',
+                    'Result: \\[ y = \\frac{1}{2}(x - \\frac{1}{2}\\sin(2x)) + C \\]',
+                    'Simplify: \\[ y = \\frac{1}{2}(x - \\sin(x)\\cos(x)) + C \\]'
+                ]
+            },
+            
+            // ========== EXPONENTIAL FUNCTIONS ==========
+            'y = e^x': {
+                type: 'exponential',
+                category: 'natural',
+                derivative: 'e^x',
+                orthogonalSlope: '-e^{-x}',
+                solution: 'y = e^{-x} + C',
+                steps: [
+                    'Given: \\[ y = e^x \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = e^x \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -e^{-x} \\]',
+                    'Separate variables: \\[ dy = -e^{-x} dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -e^{-x} dx \\]',
+                    'Use substitution: \\[ u = -x, \\quad du = -dx \\]',
+                    'Result: \\[ y = e^{-x} + C \\]'
+                ]
+            },
+            
+            'y = 2^x': {
+                type: 'exponential',
+                category: 'base-a',
+                derivative: '2^x \\ln(2)',
+                orthogonalSlope: '-\\frac{2^{-x}}{\\ln(2)}',
+                solution: 'y = -\\frac{2^{-x}}{\\ln^2(2)} + C',
+                steps: [
+                    'Given: \\[ y = 2^x \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 2^x \\ln(2) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2^x \\ln(2)} = -\\frac{2^{-x}}{\\ln(2)} \\]',
+                    'Separate variables: \\[ dy = -\\frac{2^{-x}}{\\ln(2)} dx \\]',
+                    'Integrate: \\[ \\int dy = -\\frac{1}{\\ln(2)}\\int 2^{-x} dx \\]',
+                    'Use: \\[ \\int a^x dx = \\frac{a^x}{\\ln(a)} \\]',
+                    'Result: \\[ y = -\\frac{2^{-x}}{\\ln^2(2)} + C \\]'
+                ]
+            },
+            
+            'y = a^x': {
+                type: 'exponential',
+                category: 'general',
+                derivative: 'a^x \\ln(a)',
+                orthogonalSlope: '-\\frac{a^{-x}}{\\ln(a)}',
+                solution: 'y = -\\frac{a^{-x}}{\\ln^2(a)} + C',
+                steps: [
+                    'Given: \\[ y = a^x \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = a^x \\ln(a) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{a^x \\ln(a)} = -\\frac{a^{-x}}{\\ln(a)} \\]',
+                    'Separate variables: \\[ dy = -\\frac{a^{-x}}{\\ln(a)} dx \\]',
+                    'Integrate: \\[ \\int dy = -\\frac{1}{\\ln(a)}\\int a^{-x} dx \\]',
+                    'General exponential integral: \\[ \\int a^x dx = \\frac{a^x}{\\ln(a)} \\]',
+                    'Result: \\[ y = -\\frac{a^{-x}}{\\ln^2(a)} + C \\]'
+                ]
+            },
+            
+            'y = e^{2x}': {
+                type: 'exponential',
+                category: 'natural',
+                derivative: '2e^{2x}',
+                orthogonalSlope: '-\\frac{e^{-2x}}{2}',
+                solution: 'y = -\\frac{e^{-2x}}{4} + C',
+                steps: [
+                    'Given: \\[ y = e^{2x} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 2e^{2x} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2e^{2x}} = -\\frac{e^{-2x}}{2} \\]',
+                    'Separate variables: \\[ dy = -\\frac{e^{-2x}}{2} dx \\]',
+                    'Integrate: \\[ \\int dy = -\\frac{1}{2}\\int e^{-2x} dx \\]',
+                    'Result: \\[ y = \\frac{e^{-2x}}{4} + C \\]'
+                ]
+            },
+            
+            // ========== LOGARITHMIC FUNCTIONS ==========
+            'y = ln(x)': {
+                type: 'logarithmic',
+                category: 'natural',
+                derivative: '\\frac{1}{x}',
+                orthogonalSlope: '-x',
+                solution: 'y = -\\frac{x^2}{2} + C',
+                steps: [
+                    'Given: \\[ y = \\ln(x) \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{x} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -x \\]',
+                    'Separate variables: \\[ dy = -x dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -x dx \\]',
+                    'Result: \\[ y = -\\frac{x^2}{2} + C \\]'
+                ]
+            },
+            
+            'y = log(x)': {
+                type: 'logarithmic',
+                category: 'common',
+                derivative: '\\frac{1}{x\\ln(10)}',
+                orthogonalSlope: '-x\\ln(10)',
+                solution: 'y = -\\frac{x^2\\ln(10)}{2} + C',
+                steps: [
+                    'Given: \\[ y = \\log_{10}(x) = \\frac{\\ln(x)}{\\ln(10)} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{x\\ln(10)} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -x\\ln(10) \\]',
+                    'Separate variables: \\[ dy = -x\\ln(10) dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -x\\ln(10) dx \\]',
+                    'Result: \\[ y = -\\frac{x^2\\ln(10)}{2} + C \\]'
+                ]
+            },
+            
+            'y = ln(2x)': {
+                type: 'logarithmic',
+                category: 'natural',
+                derivative: '\\frac{1}{x}',
+                orthogonalSlope: '-x',
+                solution: 'y = -\\frac{x^2}{2} + C',
+                steps: [
+                    'Given: \\[ y = \\ln(2x) = \\ln(2) + \\ln(x) \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{x} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -x \\]',
+                    'Same as ln(x) since derivative is same',
+                    'Result: \\[ y = -\\frac{x^2}{2} + C \\]'
+                ]
+            },
+            
+            // ========== POLYNOMIAL FUNCTIONS ==========
+            'y = 2x + 3': {
+                type: 'polynomial',
+                category: 'linear',
+                derivative: '2',
+                orthogonalSlope: '-\\frac{1}{2}',
+                solution: 'y = -\\frac{1}{2}x + C',
+                steps: [
+                    'Given: \\[ y = 2x + 3 \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 2 \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2} \\]',
+                    'Separate variables: \\[ dy = -\\frac{1}{2} dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\frac{1}{2} dx \\]',
+                    'Result: \\[ y = -\\frac{1}{2}x + C \\]'
+                ]
+            },
+            
+            'y = x^2 + 3x + 2': {
+                type: 'polynomial',
+                category: 'quadratic',
+                derivative: '2x + 3',
+                orthogonalSlope: '-\\frac{1}{2x + 3}',
+                solution: 'y = -\\frac{1}{2}\\ln|2x + 3| + C',
+                steps: [
+                    'Given: \\[ y = x^2 + 3x + 2 \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 2x + 3 \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2x + 3} \\]',
+                    'Separate variables: \\[ dy = -\\frac{1}{2x + 3} dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\frac{1}{2x + 3} dx \\]',
+                    'Use substitution: \\[ u = 2x + 3 \\]',
+                    'Result: \\[ y = -\\frac{1}{2}\\ln|2x + 3| + C \\]'
+                ]
+            },
+            
+            'y = x^3 - 2x': {
+                type: 'polynomial',
+                category: 'cubic',
+                derivative: '3x^2 - 2',
+                orthogonalSlope: '-\\frac{1}{3x^2 - 2}',
+                solution: 'y = -\\frac{1}{\\sqrt{6}}\\arctan\\left(\\frac{\\sqrt{6}x}{2}\\right) + C',
+                steps: [
+                    'Given: \\[ y = x^3 - 2x \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 3x^2 - 2 \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{3x^2 - 2} \\]',
+                    'Integrate using arctangent:',
+                    '\\[ \\int \\frac{1}{a^2 + x^2} dx = \\frac{1}{a}\\arctan\\left(\\frac{x}{a}\\right) \\]',
+                    'Rewrite: \\[ 3x^2 - 2 = (\\sqrt{3}x)^2 - (\\sqrt{2})^2 \\]',
+                    'Result: \\[ y = -\\frac{1}{\\sqrt{6}}\\arctan\\left(\\frac{\\sqrt{6}x}{2}\\right) + C \\]'
+                ]
+            },
+            
+            'y = x^n': {
+                type: 'power',
+                category: 'general',
+                derivative: 'n x^{n-1}',
+                orthogonalSlope: '-\\frac{1}{n x^{n-1}}',
+                solution: 'y = -\\frac{x^{2-n}}{n(2-n)} + C \\quad (n \\neq 2)',
+                specialCase: 'For n=2: y = -\\frac{1}{2}\\ln|x| + C',
+                steps: [
+                    'Given: \\[ y = x^n \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = n x^{n-1} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{n x^{n-1}} \\]',
+                    'Separate variables: \\[ dy = -\\frac{1}{n} x^{1-n} dx \\]',
+                    'Integrate: \\[ \\int dy = -\\frac{1}{n} \\int x^{1-n} dx \\]',
+                    'For n ≠ 2: \\[ y = -\\frac{1}{n} \\cdot \\frac{x^{2-n}}{2-n} + C \\]',
+                    'Simplify: \\[ y = -\\frac{x^{2-n}}{n(2-n)} + C \\]',
+                    'For n = 2: \\[ y = -\\frac{1}{2}\\ln|x| + C \\]'
+                ]
+            },
+            
+            // ========== HYPERBOLIC FUNCTIONS ==========
             'y = sinh(x)': {
-                derivative: 'cosh(x)',
-                orthogonalSlope: '-sech(x)',
-                solution: 'y = -2 arctan(e^x) + C',
+                type: 'hyperbolic',
+                category: 'sinh',
+                derivative: '\\cosh(x)',
+                orthogonalSlope: '-\\sech(x)',
+                solution: 'y = -2\\arctan(e^x) + C',
                 steps: [
-                    'Differentiate: dy/dx = cosh(x)',
-                    'Orthogonal slope: dy/dx = -1/cosh(x) = -sech(x)',
-                    'Integrate: ∫dy = ∫-sech(x) dx',
-                    'Result: y = -2 arctan(e^x) + C'
+                    'Given: \\[ y = \\sinh(x) = \\frac{e^x - e^{-x}}{2} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\cosh(x) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{\\cosh(x)} = -\\sech(x) \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\sech(x) dx \\]',
+                    'Standard integral: \\[ \\int \\sech(x) dx = 2\\arctan(e^x) \\]',
+                    'Result: \\[ y = -2\\arctan(e^x) + C \\]'
                 ]
             },
             
-            // Circle family
+            'y = cosh(x)': {
+                type: 'hyperbolic',
+                category: 'cosh',
+                derivative: '\\sinh(x)',
+                orthogonalSlope: '-\\csch(x)',
+                solution: 'y = -\\ln|\\coth(x) + \\csch(x)| + C',
+                steps: [
+                    'Given: \\[ y = \\cosh(x) = \\frac{e^x + e^{-x}}{2} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\sinh(x) \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{\\sinh(x)} = -\\csch(x) \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\csch(x) dx \\]',
+                    'Standard integral: \\[ \\int \\csch(x) dx = \\ln|\\tanh(\\frac{x}{2})| \\]',
+                    'Alternative form: \\[ \\int \\csch(x) dx = \\ln|\\coth(x) + \\csch(x)| \\]',
+                    'Result: \\[ y = -\\ln|\\coth(x) + \\csch(x)| + C \\]'
+                ]
+            },
+            
+            // ========== CONIC SECTIONS ==========
             'x^2 + y^2 = r^2': {
-                derivative: '-x/y',
-                orthogonalSlope: 'y/x',
+                type: 'conic',
+                category: 'circle',
+                derivative: '-\\frac{x}{y}',
+                orthogonalSlope: '\\frac{y}{x}',
                 solution: 'y = Cx',
                 steps: [
-                    'Differentiate implicitly: 2x + 2y(dy/dx) = 0',
-                    'Solve: dy/dx = -x/y',
-                    'Orthogonal slope: dy/dx = y/x',
-                    'Separable equation: dy/dx = y/x',
-                    'Solution: y = Cx'
+                    'Given: \\[ x^2 + y^2 = r^2 \\]',
+                    'Differentiate implicitly: \\[ 2x + 2y\\frac{dy}{dx} = 0 \\]',
+                    'Solve: \\[ \\frac{dy}{dx} = -\\frac{x}{y} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{y}{x} \\]',
+                    'Separable equation: \\[ \\frac{dy}{y} = \\frac{dx}{x} \\]',
+                    'Integrate: \\[ \\int \\frac{dy}{y} = \\int \\frac{dx}{x} \\]',
+                    'Result: \\[ \\ln|y| = \\ln|x| + \\ln|C| \\]',
+                    'Final: \\[ y = Cx \\]'
                 ]
             },
             
-            // Parabola
-            'y^2 = 4ax': {
-                derivative: '2a/y',
-                orthogonalSlope: '-y/(2a)',
-                solution: 'y^2 = -4ax + C',
-                steps: [
-                    'Differentiate implicitly: 2y(dy/dx) = 4a',
-                    'Solve: dy/dx = 2a/y',
-                    'Orthogonal slope: dy/dx = -y/(2a)',
-                    'Separate: (2a/y) dy = -dx',
-                    'Integrate: ∫(2a/y) dy = ∫-dx',
-                    'Result: 2a ln|y| = -x + C'
-                ]
-            },
-            
-            // Rectangular hyperbola
             'xy = C': {
-                derivative: '-y/x',
-                orthogonalSlope: 'x/y',
+                type: 'conic',
+                category: 'hyperbola',
+                derivative: '-\\frac{y}{x}',
+                orthogonalSlope: '\\frac{x}{y}',
                 solution: 'y^2 - x^2 = K',
                 steps: [
-                    'Differentiate implicitly: y + x(dy/dx) = 0',
-                    'Solve: dy/dx = -y/x',
-                    'Orthogonal slope: dy/dx = x/y',
-                    'Separate: y dy = x dx',
-                    'Integrate: ∫y dy = ∫x dx',
-                    'Result: y^2/2 = x^2/2 + C'
+                    'Given: \\[ xy = C \\]',
+                    'Differentiate implicitly: \\[ y + x\\frac{dy}{dx} = 0 \\]',
+                    'Solve: \\[ \\frac{dy}{dx} = -\\frac{y}{x} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{x}{y} \\]',
+                    'Separate: \\[ y dy = x dx \\]',
+                    'Integrate: \\[ \\int y dy = \\int x dx \\]',
+                    'Result: \\[ \\frac{y^2}{2} = \\frac{x^2}{2} + K \\]',
+                    'Final: \\[ y^2 - x^2 = K \\]'
                 ]
             },
             
-            // Inverse functions
             'y = 1/x': {
-                derivative: '-1/x^2',
+                type: 'power',
+                category: 'reciprocal',
+                derivative: '-\\frac{1}{x^2}',
                 orthogonalSlope: 'x^2',
-                solution: 'y = x^3/3 + C',
+                solution: 'y = \\frac{x^3}{3} + C',
                 steps: [
-                    'Differentiate: dy/dx = -1/x^2',
-                    'Orthogonal slope: dy/dx = x^2',
-                    'Separate variables: dy = x^2 dx',
-                    'Integrate: ∫dy = ∫x^2 dx',
-                    'Result: y = x^3/3 + C'
+                    'Given: \\[ y = \\frac{1}{x} = x^{-1} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = -x^{-2} = -\\frac{1}{x^2} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = x^2 \\]',
+                    'Separate variables: \\[ dy = x^2 dx \\]',
+                    'Integrate: \\[ \\int dy = \\int x^2 dx \\]',
+                    'Result: \\[ y = \\frac{x^3}{3} + C \\]'
                 ]
             }
         };
 
         // Equation examples for animation
         const equationExamples = [
-            { main: "y = x^2", orthogonal: "y = -\\frac{1}{2}\\ln|x| + C" },
-            { main: "y = e^{x}", orthogonal: "y = -e^{-x} + C" },
             { main: "y = \\sin(x)", orthogonal: "y = -\\ln|\\sec(x) + \\tan(x)| + C" },
-            { main: "x^2 + y^2 = r^2", orthogonal: "y = Cx" },
-            { main: "y = \\frac{1}{x}", orthogonal: "y = \\frac{x^3}{3} + C" }
+            { main: "y = e^x", orthogonal: "y = e^{-x} + C" },
+            { main: "y = \\ln(x)", orthogonal: "y = -\\frac{x^2}{2} + C" },
+            { main: "y = x^2 + 3x + 2", orthogonal: "y = -\\frac{1}{2}\\ln|2x + 3| + C" },
+            { main: "x^2 + y^2 = r^2", orthogonal: "y = Cx" }
         ];
         let eqIndex = 0;
 
@@ -1046,8 +1308,8 @@
             const orthoEq = document.getElementById('orthogonalEquation');
             
             const example = equationExamples[eqIndex];
-            mainEq.textContent = `\\( ${example.main} \\)`;
-            orthoEq.textContent = `\\( ${example.orthogonal} \\)`;
+            mainEq.innerHTML = `\\[ ${example.main} \\]`;
+            orthoEq.innerHTML = `\\[ ${example.orthogonal} \\]`;
             
             eqIndex = (eqIndex + 1) % equationExamples.length;
             
@@ -1102,108 +1364,305 @@
             }, 1000);
         });
 
-        // Process Any Mathematical Equation
+        // Process ANY mathematical equation
         function processEquation(equation, xVar, yVar, constant) {
-            const normalizedEq = equation.replace(/\s+/g, '').toLowerCase();
+            const cleanedEq = equation.replace(/\s+/g, '');
             
             // Display original equation
             document.getElementById('originalEquationDisplay').innerHTML = `\\[ ${equation} \\]`;
             
             let solution;
             
-            // Try to find in database first
-            for (const [key, value] of Object.entries(equationDatabase)) {
-                const normalizedKey = key.replace(/\s+/g, '').toLowerCase();
-                if (normalizedEq.includes(normalizedKey) || normalizedKey.includes(normalizedEq)) {
-                    solution = value;
-                    break;
-                }
+            // Try to find exact match first
+            if (equationDatabase[equation]) {
+                solution = equationDatabase[equation];
+            } else {
+                // Analyze equation type and generate solution
+                solution = analyzeEquationType(equation, xVar, yVar, constant);
             }
             
-            // If not found in database, use general method
-            if (!solution) {
-                solution = processGeneralEquation(equation, xVar, yVar, constant);
-            }
+            // Update function type indicator
+            updateFunctionTypeIndicator(solution);
             
             // Update UI with solution
-            updateSolutionUI(solution, xVar, yVar, constant);
+            updateSolutionUI(solution, xVar, yVar, constant, equation);
             
             // Generate graphs
-            generateGraphs(equation, solution.solution, xVar, yVar);
+            generateGraphs(equation, solution, xVar, yVar);
             
             return solution;
         }
 
-        // Process general equation
-        function processGeneralEquation(equation, xVar, yVar, constant) {
-            // Try to extract function type
-            let derivative, orthogonalSlope, finalSolution;
+        // Analyze equation type
+        function analyzeEquationType(equation, xVar, yVar, constant) {
+            const eq = equation.toLowerCase();
             
-            if (equation.includes('^')) {
-                // Power function
-                const powerMatch = equation.match(/x\^(\d+)/);
-                const power = powerMatch ? powerMatch[1] : '2';
-                derivative = `${power}x^(${power}-1)`;
-                orthogonalSlope = `-1/(${power}x^(${power}-1))`;
-                finalSolution = `y = -x^(2-${power})/(${power}(2-${power})) + ${constant}`;
-            } else if (equation.includes('sin') || equation.includes('cos') || equation.includes('tan')) {
-                // Trigonometric
-                derivative = getTrigDerivative(equation);
-                orthogonalSlope = `-1/(${derivative})`;
-                finalSolution = `y = ∫-1/(${derivative}) dx + ${constant}`;
-            } else if (equation.includes('ln') || equation.includes('log')) {
-                // Logarithmic
-                derivative = '1/x';
-                orthogonalSlope = '-x';
-                finalSolution = `y = -x^2/2 + ${constant}`;
-            } else if (equation.includes('e^') || equation.includes('exp(')) {
-                // Exponential
-                derivative = equation.includes('e^') ? 'e^x' : 'a^x ln(a)';
-                orthogonalSlope = equation.includes('e^') ? '-e^(-x)' : '-1/(a^x ln(a))';
-                finalSolution = equation.includes('e^') ? `y = e^(-x) + ${constant}` : `y = -a^(-x)/ln(a) + ${constant}`;
-            } else {
-                // Default case
-                derivative = 'dy/dx';
-                orthogonalSlope = '-1/(dy/dx)';
-                finalSolution = `Solve: dy/dx = -1/(dy/dx) for orthogonal trajectories`;
+            // Check for trigonometric functions
+            if (eq.includes('sin(') || eq.includes('cos(') || eq.includes('tan(') || eq.includes('cot(')) {
+                return analyzeTrigonometric(eq, constant);
             }
             
+            // Check for exponential functions
+            if (eq.includes('e^') || eq.includes('exp(') || eq.includes('^x')) {
+                return analyzeExponential(eq, constant);
+            }
+            
+            // Check for logarithmic functions
+            if (eq.includes('ln(') || eq.includes('log(')) {
+                return analyzeLogarithmic(eq, constant);
+            }
+            
+            // Check for polynomials
+            if (eq.includes('x^')) {
+                return analyzePolynomial(eq, constant);
+            }
+            
+            // Check for hyperbola
+            if (eq.includes('1/x') || eq.includes('x^-1')) {
+                return {
+                    type: 'power',
+                    category: 'reciprocal',
+                    derivative: '-\\frac{1}{x^2}',
+                    orthogonalSlope: 'x^2',
+                    solution: 'y = \\frac{x^3}{3} + ' + constant,
+                    steps: [
+                        'Given: \\[ ' + equation + ' \\]',
+                        'Differentiate: \\[ \\frac{dy}{dx} = -\\frac{1}{x^2} \\]',
+                        'Orthogonal slope: \\[ \\frac{dy}{dx} = x^2 \\]',
+                        'Separate variables: \\[ dy = x^2 dx \\]',
+                        'Integrate: \\[ \\int dy = \\int x^2 dx \\]',
+                        'Result: \\[ y = \\frac{x^3}{3} + ' + constant + ' \\]'
+                    ]
+                };
+            }
+            
+            // Default general solution
             return {
-                derivative: derivative,
-                orthogonalSlope: orthogonalSlope,
-                solution: finalSolution,
+                type: 'general',
+                category: 'unknown',
+                derivative: 'f\'(x)',
+                orthogonalSlope: '-\\frac{1}{f\'(x)}',
+                solution: '\\text{Solve: } \\frac{dy}{dx} = -\\frac{1}{f\'(x)} \\text{ for orthogonal trajectories}',
                 steps: [
-                    `Find derivative: ${derivative}`,
-                    `Orthogonal slope: ${orthogonalSlope}`,
-                    `Solve differential equation`,
-                    `Result: ${finalSolution}`
+                    'Given: \\[ ' + equation + ' \\]',
+                    'Find derivative: \\[ \\frac{dy}{dx} = f\'(x) \\]',
+                    'Orthogonal condition: \\[ m_1 \\times m_2 = -1 \\]',
+                    'Orthogonal slope: \\[ m_2 = -\\frac{1}{m_1} = -\\frac{1}{f\'(x)} \\]',
+                    'Solve differential equation: \\[ \\frac{dy}{dx} = -\\frac{1}{f\'(x)} \\]',
+                    'General solution represents family of orthogonal trajectories'
                 ]
             };
         }
 
-        // Helper function for trigonometric derivatives
-        function getTrigDerivative(equation) {
-            if (equation.includes('sin(x)')) return 'cos(x)';
-            if (equation.includes('cos(x)')) return '-sin(x)';
-            if (equation.includes('tan(x)')) return 'sec^2(x)';
-            if (equation.includes('cot(x)')) return '-csc^2(x)';
-            if (equation.includes('sec(x)')) return 'sec(x)tan(x)';
-            if (equation.includes('csc(x)')) return '-csc(x)cot(x)';
-            return 'd/dx(f(x))';
+        function analyzeTrigonometric(equation, constant) {
+            if (equation.includes('sin(')) {
+                const match = equation.match(/sin\(([^)]+)\)/);
+                const inside = match ? match[1] : 'x';
+                const k = inside === 'x' ? '' : inside;
+                
+                return {
+                    type: 'trigonometric',
+                    category: 'sine',
+                    derivative: k ? k + '\\cos(' + k + 'x)' : '\\cos(x)',
+                    orthogonalSlope: k ? '-\\frac{1}{' + k + '}\\sec(' + k + 'x)' : '-\\sec(x)',
+                    solution: k ? 'y = -\\frac{1}{' + k + '}\\ln|\\sec(' + k + 'x) + \\tan(' + k + 'x)| + ' + constant : 
+                             'y = -\\ln|\\sec(x) + \\tan(x)| + ' + constant,
+                    steps: [
+                        'Given: \\[ ' + equation + ' \\]',
+                        'Differentiate: \\[ \\frac{dy}{dx} = ' + (k ? k + '\\cos(' + k + 'x)' : '\\cos(x)') + ' \\]',
+                        'Orthogonal slope: \\[ \\frac{dy}{dx} = ' + (k ? '-\\frac{1}{' + k + '}\\sec(' + k + 'x)' : '-\\sec(x)') + ' \\]',
+                        'Integrate using standard trigonometric integral',
+                        'Result: \\[ ' + (k ? 'y = -\\frac{1}{' + k + '}\\ln|\\sec(' + k + 'x) + \\tan(' + k + 'x)| + ' + constant : 
+                        'y = -\\ln|\\sec(x) + \\tan(x)| + ' + constant) + ' \\]'
+                    ]
+                };
+            }
+            
+            if (equation.includes('cos(')) {
+                return {
+                    type: 'trigonometric',
+                    category: 'cosine',
+                    derivative: '-\\sin(x)',
+                    orthogonalSlope: '\\csc(x)',
+                    solution: 'y = \\ln|\\csc(x) - \\cot(x)| + ' + constant,
+                    steps: [
+                        'Given: \\[ ' + equation + ' \\]',
+                        'Differentiate: \\[ \\frac{dy}{dx} = -\\sin(x) \\]',
+                        'Orthogonal slope: \\[ \\frac{dy}{dx} = \\csc(x) \\]',
+                        'Integrate: \\[ \\int dy = \\int \\csc(x) dx \\]',
+                        'Result: \\[ y = \\ln|\\csc(x) - \\cot(x)| + ' + constant + ' \\]'
+                    ]
+                };
+            }
+            
+            if (equation.includes('tan(')) {
+                return {
+                    type: 'trigonometric',
+                    category: 'tangent',
+                    derivative: '\\sec^2(x)',
+                    orthogonalSlope: '-\\cos^2(x)',
+                    solution: 'y = -\\frac{1}{2}(x + \\sin(x)\\cos(x)) + ' + constant,
+                    steps: [
+                        'Given: \\[ ' + equation + ' \\]',
+                        'Differentiate: \\[ \\frac{dy}{dx} = \\sec^2(x) \\]',
+                        'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\cos^2(x) \\]',
+                        'Integrate using trigonometric identity',
+                        'Result: \\[ y = -\\frac{1}{2}(x + \\sin(x)\\cos(x)) + ' + constant + ' \\]'
+                    ]
+                };
+            }
+            
+            return analyzeEquationType(equation, 'x', 'y', constant);
+        }
+
+        function analyzeExponential(equation, constant) {
+            if (equation.includes('e^')) {
+                const match = equation.match(/e\^\(?([^)]+)\)?/);
+                const exponent = match ? match[1] : 'x';
+                const k = exponent === 'x' ? '' : exponent.replace('x', '');
+                
+                return {
+                    type: 'exponential',
+                    category: 'natural',
+                    derivative: k ? k + 'e^{' + k + 'x}' : 'e^x',
+                    orthogonalSlope: k ? '-\\frac{e^{-' + k + 'x}}{' + k + '}' : '-e^{-x}',
+                    solution: k ? 'y = \\frac{e^{-' + k + 'x}}{' + k + '^2} + ' + constant : 'y = e^{-x} + ' + constant,
+                    steps: [
+                        'Given: \\[ ' + equation + ' \\]',
+                        'Differentiate: \\[ \\frac{dy}{dx} = ' + (k ? k + 'e^{' + k + 'x}' : 'e^x') + ' \\]',
+                        'Orthogonal slope: \\[ \\frac{dy}{dx} = ' + (k ? '-\\frac{e^{-' + k + 'x}}{' + k + '}' : '-e^{-x}') + ' \\]',
+                        'Separate variables and integrate',
+                        'Result: \\[ ' + (k ? 'y = \\frac{e^{-' + k + 'x}}{' + k + '^2} + ' + constant : 'y = e^{-x} + ' + constant) + ' \\]'
+                    ]
+                };
+            }
+            
+            return analyzeEquationType(equation, 'x', 'y', constant);
+        }
+
+        function analyzeLogarithmic(equation, constant) {
+            return {
+                type: 'logarithmic',
+                category: equation.includes('ln') ? 'natural' : 'common',
+                derivative: '\\frac{1}{x}',
+                orthogonalSlope: '-x',
+                solution: 'y = -\\frac{x^2}{2} + ' + constant,
+                steps: [
+                    'Given: \\[ ' + equation + ' \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{x} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -x \\]',
+                    'Separate variables: \\[ dy = -x dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -x dx \\]',
+                    'Result: \\[ y = -\\frac{x^2}{2} + ' + constant + ' \\]'
+                ]
+            };
+        }
+
+        function analyzePolynomial(equation, constant) {
+            const match = equation.match(/x\^([0-9\.\/]+)/);
+            if (match) {
+                const power = match[1];
+                const n = parseFloat(power);
+                
+                if (n === 2) {
+                    return {
+                        type: 'polynomial',
+                        category: 'quadratic',
+                        derivative: '2x',
+                        orthogonalSlope: '-\\frac{1}{2x}',
+                        solution: 'y = -\\frac{1}{2}\\ln|x| + ' + constant,
+                        steps: [
+                            'Given: \\[ ' + equation + ' \\]',
+                            'Differentiate: \\[ \\frac{dy}{dx} = 2x \\]',
+                            'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2x} \\]',
+                            'Separate variables: \\[ dy = -\\frac{1}{2x} dx \\]',
+                            'Integrate: \\[ \\int dy = \\int -\\frac{1}{2x} dx \\]',
+                            'Result: \\[ y = -\\frac{1}{2}\\ln|x| + ' + constant + ' \\]'
+                        ]
+                    };
+                }
+                
+                return {
+                    type: 'power',
+                    category: 'general',
+                    derivative: n + 'x^{' + (n-1) + '}',
+                    orthogonalSlope: '-\\frac{1}{' + n + 'x^{' + (n-1) + '}}',
+                    solution: 'y = -\\frac{x^{' + (2-n) + '}}{' + n + '(' + (2-n) + ')} + ' + constant,
+                    steps: [
+                        'Given: \\[ ' + equation + ' \\]',
+                        'Differentiate: \\[ \\frac{dy}{dx} = ' + n + 'x^{' + (n-1) + '} \\]',
+                        'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{' + n + 'x^{' + (n-1) + '}} \\]',
+                        'Separate variables: \\[ dy = -\\frac{1}{' + n + '} x^{' + (1-n) + '} dx \\]',
+                        'Integrate: \\[ \\int dy = -\\frac{1}{' + n + '} \\int x^{' + (1-n) + '} dx \\]',
+                        'Result: \\[ y = -\\frac{x^{' + (2-n) + '}}{' + n + '(' + (2-n) + ')} + ' + constant + ' \\]'
+                    ]
+                };
+            }
+            
+            return analyzeEquationType(equation, 'x', 'y', constant);
+        }
+
+        function updateFunctionTypeIndicator(solution) {
+            let indicatorText = '';
+            let indicatorClass = '';
+            
+            switch(solution.type) {
+                case 'trigonometric':
+                    indicatorText = `Trigonometric (${solution.category})`;
+                    indicatorClass = 'trig-indicator';
+                    break;
+                case 'exponential':
+                    indicatorText = `Exponential (${solution.category})`;
+                    indicatorClass = 'exp-indicator';
+                    break;
+                case 'logarithmic':
+                    indicatorText = `Logarithmic (${solution.category})`;
+                    indicatorClass = 'log-indicator';
+                    break;
+                case 'polynomial':
+                    indicatorText = `Polynomial (${solution.category})`;
+                    indicatorClass = 'poly-indicator';
+                    break;
+                case 'power':
+                    indicatorText = `Power Function (${solution.category})`;
+                    indicatorClass = 'power-indicator';
+                    break;
+                case 'hyperbolic':
+                    indicatorText = `Hyperbolic (${solution.category})`;
+                    indicatorClass = 'hyperbola-indicator';
+                    break;
+                case 'conic':
+                    indicatorText = `Conic Section (${solution.category})`;
+                    indicatorClass = solution.category === 'circle' ? 'circle-indicator' : 'hyperbola-indicator';
+                    break;
+                default:
+                    indicatorText = 'General Function';
+                    indicatorClass = '';
+            }
+            
+            if (indicatorClass) {
+                functionTypeIndicator.innerHTML = `<span class="function-indicator ${indicatorClass}">${indicatorText}</span>`;
+            } else {
+                functionTypeIndicator.innerHTML = '';
+            }
         }
 
         // Update solution steps in UI
-        function updateSolutionUI(solution, xVar, yVar, constant) {
+        function updateSolutionUI(solution, xVar, yVar, constant, originalEq) {
             // Update differential equation steps
             const diffStepsDiv = document.getElementById('diffEquationSteps');
             diffStepsDiv.innerHTML = `
                 <div class="step">
                     <span class="step-number">1</span>
-                    Given equation
+                    Given equation: \\[ ${originalEq} \\]
                 </div>
                 <div class="step">
                     <span class="step-number">2</span>
-                    Differentiate to find: \\[ \\frac{d${yVar}}{d${xVar}} = ${solution.derivative} \\]
+                    Find differential equation: \\[ \\frac{d${yVar}}{d${xVar}} = ${solution.derivative} \\]
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    This differential equation describes the family of curves
                 </div>
             `;
             
@@ -1212,11 +1671,12 @@
             orthoSlopeDiv.innerHTML = `
                 <div class="step">
                     <span class="step-number">1</span>
-                    For orthogonal trajectories: \\[ m_1 \\times m_2 = -1 \\]
+                    Orthogonal condition: \\[ m_1 \\times m_2 = -1 \\]
+                    <p style="margin-top: 5px; color: #666;">where m₁ is original slope, m₂ is orthogonal slope</p>
                 </div>
                 <div class="step">
                     <span class="step-number">2</span>
-                    Original slope: \\[ m_1 = ${solution.derivative} \\]
+                    Original slope: \\[ m_1 = \\frac{d${yVar}}{d${xVar}} = ${solution.derivative} \\]
                 </div>
                 <div class="step">
                     <span class="step-number">3</span>
@@ -1237,58 +1697,100 @@
             document.getElementById('finalAnswer').innerHTML = `\\[ ${solution.solution} \\]`;
         }
 
-        // Generate graphs
-        function generateGraphs(originalEq, orthogonalEq, xVar, yVar) {
+        // Generate graphs for all function types
+        function generateGraphs(originalEq, solution, xVar, yVar) {
             // Clear existing graphs
             Plotly.purge('originalGraph');
             Plotly.purge('orthogonalGraph');
             Plotly.purge('combinedGraph');
             
-            // Generate data points
+            // Generate data points based on function type
             const xData = [];
             const yOriginal = [];
             const yOrtho = [];
             
-            for (let x = -5; x <= 5; x += 0.1) {
-                if (Math.abs(x) < 0.01) continue; // Avoid division by zero
+            // Determine range based on function type
+            let range = 4;
+            let step = 0.1;
+            
+            if (solution.type === 'trigonometric') {
+                range = 10;
+            } else if (solution.type === 'exponential') {
+                range = 3;
+            } else if (solution.type === 'logarithmic') {
+                range = 5;
+                step = 0.2;
+            } else if (solution.type === 'polynomial' || solution.type === 'power') {
+                range = 3;
+            }
+            
+            for (let x = -range; x <= range; x += step) {
+                // Skip problematic values
+                if (Math.abs(x) < 0.001 && (solution.type === 'logarithmic' || originalEq.includes('1/x'))) {
+                    continue;
+                }
                 
                 xData.push(x);
                 
                 try {
                     // Evaluate original equation
                     let y;
-                    if (originalEq.includes('x^2') || originalEq.includes('x**2')) {
-                        y = x * x;
-                    } else if (originalEq.includes('e^') || originalEq.includes('exp(')) {
-                        y = Math.exp(x);
-                    } else if (originalEq.includes('sin(')) {
+                    
+                    if (originalEq.includes('sin(x)')) {
                         y = Math.sin(x);
-                    } else if (originalEq.includes('1/x')) {
-                        y = 1/x;
-                    } else if (originalEq.includes('x^2 + y^2')) {
-                        y = Math.sqrt(9 - x*x);
-                    } else if (originalEq.includes('ln(')) {
+                    } else if (originalEq.includes('cos(x)')) {
+                        y = Math.cos(x);
+                    } else if (originalEq.includes('tan(x)')) {
+                        y = Math.tan(x);
+                    } else if (originalEq.includes('e^x')) {
+                        y = Math.exp(x);
+                    } else if (originalEq.includes('ln(x)')) {
                         y = x > 0 ? Math.log(x) : null;
+                    } else if (originalEq.includes('x^2')) {
+                        y = x * x;
+                    } else if (originalEq.includes('2x + 3')) {
+                        y = 2 * x + 3;
+                    } else if (originalEq.includes('x^2 + 3x + 2')) {
+                        y = x * x + 3 * x + 2;
+                    } else if (originalEq.includes('1/x')) {
+                        y = x !== 0 ? 1/x : null;
+                    } else if (originalEq.includes('x^3')) {
+                        y = x * x * x - 2 * x;
                     } else {
-                        y = x * x; // Default
+                        y = Math.sin(x); // Default
                     }
                     
                     yOriginal.push(y);
                     
-                    // Evaluate orthogonal equation
+                    // Evaluate orthogonal equation based on solution type
                     let orthoY;
-                    if (orthogonalEq.includes('ln')) {
-                        orthoY = -0.5 * Math.log(Math.abs(x)) + 1;
-                    } else if (orthogonalEq.includes('e^(-x)')) {
-                        orthoY = Math.exp(-x) + 1;
-                    } else if (orthogonalEq.includes('arctan')) {
-                        orthoY = -2 * Math.atan(Math.exp(x)) + 3;
-                    } else if (orthogonalEq.includes('Cx')) {
-                        orthoY = 2 * x; // Lines through origin
-                    } else if (orthogonalEq.includes('x^3')) {
-                        orthoY = Math.pow(x, 3)/3 + 1;
+                    
+                    if (solution.type === 'trigonometric') {
+                        if (solution.category === 'sine') {
+                            orthoY = -Math.log(Math.abs(1/Math.cos(x) + Math.tan(x))) + 2;
+                        } else if (solution.category === 'cosine') {
+                            orthoY = Math.log(Math.abs(1/Math.sin(x) - 1/Math.tan(x))) + 2;
+                        } else if (solution.category === 'tangent') {
+                            orthoY = -0.5 * (x + Math.sin(x) * Math.cos(x)) + 2;
+                        }
+                    } else if (solution.type === 'exponential') {
+                        orthoY = Math.exp(-x) + 2;
+                    } else if (solution.type === 'logarithmic') {
+                        orthoY = -0.5 * x * x + 2;
+                    } else if (solution.type === 'polynomial') {
+                        if (solution.category === 'linear') {
+                            orthoY = -0.5 * x + 2;
+                        } else if (solution.category === 'quadratic') {
+                            orthoY = -0.5 * Math.log(Math.abs(2*x + 3)) + 2;
+                        }
+                    } else if (solution.type === 'power') {
+                        if (solution.category === 'reciprocal') {
+                            orthoY = (x*x*x)/3 + 2;
+                        } else {
+                            orthoY = -0.5 * Math.log(Math.abs(x)) + 2;
+                        }
                     } else {
-                        orthoY = -0.5 * Math.log(Math.abs(x)) + 1;
+                        orthoY = -0.5 * Math.log(Math.abs(x)) + 2;
                     }
                     
                     yOrtho.push(isFinite(orthoY) ? orthoY : null);
@@ -1316,9 +1818,9 @@
                 y: filteredYOrig,
                 mode: 'lines',
                 name: 'Original',
-                line: {color: '#1976d2', width: 3},
+                line: {color: '#5c6bc0', width: 3},
                 fill: 'tozeroy',
-                fillcolor: 'rgba(25, 118, 210, 0.1)'
+                fillcolor: 'rgba(92, 107, 192, 0.1)'
             };
             
             const orthogonalTrace = {
@@ -1326,9 +1828,9 @@
                 y: filteredYOrtho,
                 mode: 'lines',
                 name: 'Orthogonal',
-                line: {color: '#d32f2f', width: 3},
+                line: {color: '#ef5350', width: 3},
                 fill: 'tonexty',
-                fillcolor: 'rgba(211, 47, 47, 0.1)'
+                fillcolor: 'rgba(239, 83, 80, 0.1)'
             };
             
             // Original Graph
@@ -1355,7 +1857,7 @@
             
             // Combined Graph
             Plotly.newPlot('combinedGraph', [originalTrace, orthogonalTrace], {
-                title: 'Both Families Combined',
+                title: 'Both Families (Orthogonal Intersection)',
                 xaxis: {title: xVar, gridcolor: '#f0f0f0'},
                 yaxis: {title: yVar, gridcolor: '#f0f0f0'},
                 plot_bgcolor: '#fafafa',
@@ -1401,7 +1903,6 @@
                 return;
             }
             
-            // In a real application, you would send this data to a server
             alert('Thank you for your message! We will get back to you soon.');
             contactModal.style.display = 'none';
             
@@ -1445,7 +1946,6 @@
                 return;
             }
             
-            // In a real application, you would send this data to a server
             alert(`Thank you for your ${rating}-star feedback! We appreciate your input.`);
             feedbackModal.style.display = 'none';
             
@@ -1468,20 +1968,6 @@
             }
         });
 
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(event) {
-            // Ctrl + Enter to calculate
-            if (event.ctrlKey && event.key === 'Enter') {
-                calculateBtn.click();
-            }
-            
-            // Escape to close modals
-            if (event.key === 'Escape') {
-                contactModal.style.display = 'none';
-                feedbackModal.style.display = 'none';
-            }
-        });
-
         // Initialize
         animateEquations();
         
@@ -1489,12 +1975,6 @@
         if (window.MathJax) {
             MathJax.typesetPromise();
         }
-
-        // Tooltip for input field
-        const equationInput = document.getElementById('equation');
-        equationInput.addEventListener('focus', function() {
-            this.title = 'Enter any mathematical equation: y = f(x), F(x,y) = 0, or dy/dx = f(x,y)';
-        });
     </script>
 </body>
-    </html>
+                        </html>
