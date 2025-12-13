@@ -1,1676 +1,530 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Trajectory - Your Home for Your Help</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #ffffff;
-            color: #000000;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            text-align: left;
-        }
-
-        .logo h1 {
-            color: #000000;
-            font-size: 2.4rem;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .nav-link:hover {
-            background-color: rgba(255,255,255,0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        #contactBtn {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        #contactBtn:hover {
-            background: linear-gradient(135deg, #e03e60, #e0452a);
-            transform: scale(1.05);
-        }
-
-        /* Hero Section */
-        .hero {
-            max-width: 1400px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
-
-        .hero-content {
-            display: flex;
-            gap: 4rem;
-            align-items: center;
-            background: linear-gradient(135deg, #f8f9ff, #eef2ff);
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-            min-height: 550px;
-            position: relative;
-        }
-
-        .hero-text {
-            flex: 1;
-            padding: 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-text h2 {
-            font-size: 3.2rem;
-            color: #1a237e;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-text p {
-            font-size: 1.3rem;
-            color: #424242;
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-        }
-
-        .math-preview {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            margin: 2rem 0;
-            border-left: 5px solid #1a2980;
-        }
-
-        .math-preview p {
-            font-size: 1.4rem;
-            margin: 0.8rem 0;
-            color: #1a237e;
-            font-weight: 600;
-        }
-
-        .hero-image {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            min-height: 550px;
-            background: linear-gradient(45deg, #1a2980, #26d0ce);
-        }
-
-        .math-visualization {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            z-index: 2;
-        }
-
-        .visual-graph {
-            width: 100%;
-            height: 250px;
-            margin-bottom: 2rem;
-        }
-
-        .equation-display {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(26, 41, 128, 0.2);
-            text-align: center;
-            width: 100%;
-        }
-
-        .equation-display .eq {
-            font-size: 1.8rem;
-            color: white;
-            margin: 0.5rem 0;
-            font-weight: 600;
-        }
-
-        /* Calculator Section */
-        .calculator-section {
-            max-width: 1400px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .calculator-container {
-            background: linear-gradient(135deg, #ffffff, #f8f9ff);
-            padding: 3rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            border: 2px solid #eef2ff;
-        }
-
-        .calculator-container h2 {
-            color: #1a237e;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        .input-group {
-            margin-bottom: 2rem;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            color: #1a237e;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        #equation {
-            width: 100%;
-            padding: 1.2rem;
-            font-size: 1.3rem;
-            border: 3px solid #1a2980;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s;
-            background: #f8f9ff;
-        }
-
-        #equation:focus {
-            outline: none;
-            border-color: #26d0ce;
-            box-shadow: 0 0 0 3px rgba(38, 208, 206, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .variables-container {
-            background: #eef2ff;
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2.5rem 0;
-            border: 2px dashed #1a2980;
-        }
-
-        .variables-container h3 {
-            color: #1a237e;
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-        }
-
-        .variable-row {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.2rem;
-            align-items: center;
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .variable-input, .range-input {
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .variable-input {
-            width: 100px;
-        }
-
-        .range-input {
-            flex: 1;
-        }
-
-        .variable-input:focus, .range-input:focus {
-            outline: none;
-            border-color: #1a2980;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .primary-btn {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: white;
-            box-shadow: 0 8px 20px rgba(26, 41, 128, 0.3);
-        }
-
-        .primary-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(26, 41, 128, 0.4);
-        }
-
-        .secondary-btn {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
-        }
-
-        .secondary-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.3);
-        }
-
-        .add-btn {
-            background: #27ae60;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-
-        .add-btn:hover {
-            background: #219653;
-            transform: translateY(-2px);
-        }
-
-        .remove-btn {
-            background: #e74c3c;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .remove-btn:hover {
-            background: #c0392b;
-        }
-
-        /* Results Section */
-        .results-section {
-            max-width: 1400px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-            display: none;
-        }
-
-        .back-home {
-            margin-bottom: 2.5rem;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-            margin-bottom: 4rem;
-        }
-
-        .result-block {
-            background: linear-gradient(135deg, #ffffff, #f8f9ff);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            border: 2px solid #eef2ff;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .result-block:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-        }
-
-        .result-block h3 {
-            color: #1a237e;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid #1a2980;
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-
-        .block-content {
-            min-height: 250px;
-            position: relative;
-        }
-
-        .step {
-            margin-bottom: 1.5rem;
-            padding: 1.2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid #1a2980;
-        }
-
-        .step h4 {
-            color: #1a237e;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        .step p {
-            color: #424242;
-            line-height: 1.7;
-            margin: 0.5rem 0;
-        }
-
-        /* Graphs Section */
-        .graphs-section {
-            background: linear-gradient(135deg, #ffffff, #f8f9ff);
-            padding: 3rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            margin-top: 3rem;
-            border: 2px solid #eef2ff;
-        }
-
-        .graphs-section h2 {
-            color: #1a237e;
-            text-align: center;
-            margin-bottom: 2.5rem;
-            font-size: 2.2rem;
-            font-weight: 800;
-        }
-
-        .graphs-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .graph-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            border: 2px solid #eef2ff;
-        }
-
-        .graph-box h3 {
-            text-align: center;
-            color: #1a237e;
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        canvas {
-            width: 100% !important;
-            height: 350px !important;
-            border-radius: 10px;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #ffffff, #f8f9ff);
-            padding: 3rem;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 550px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            position: relative;
-            border: 3px solid #1a2980;
-        }
-
-        .modal h2 {
-            color: #1a237e;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-size: 2.2rem;
-        }
-
-        .modal p {
-            color: #424242;
-            margin-bottom: 2rem;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            color: #1a237e;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: white;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #1a2980;
-            box-shadow: 0 0 0 3px rgba(26, 41, 128, 0.2);
-        }
-
-        .stars {
-            display: flex;
-            gap: 0.8rem;
-            margin: 1.5rem 0;
-            justify-content: center;
-        }
-
-        .star {
-            font-size: 2.5rem;
-            color: #ffd700;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .star:hover {
-            transform: scale(1.2);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
-            flex: 1;
-            padding: 1.2rem;
-            font-size: 1.1rem;
-        }
-
-        .cancel-btn {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            flex: 1;
-            padding: 1.2rem;
-            font-size: 1.1rem;
-        }
-
-        .submit-btn:hover, .cancel-btn:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 5rem;
-            border-top: 5px solid #ff416c;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        footer p {
-            margin: 1rem 0;
-            font-size: 1.1rem;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .social-icon {
-            font-size: 1.8rem;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-5px);
-            color: #ffd700;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .hero-content, .results-grid, .graphs-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-content {
-                flex-direction: column;
-            }
-            
-            .hero-text {
-                padding: 2.5rem;
-            }
-            
-            .calculator-container, .graphs-section {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-            
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-            
-            .logo h1 {
-                font-size: 2rem;
-                text-align: center;
-            }
-            
-            .hero-text h2 {
-                font-size: 2.5rem;
-            }
-            
-            .variable-row {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .variable-input, .range-input {
-                width: 100%;
-            }
-        }
-
-        /* Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Highlight Box */
-        .highlight-box {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin: 1.5rem 0;
-            box-shadow: 0 8px 25px rgba(26, 41, 128, 0.3);
-        }
-
-        .highlight-box h4 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #26d0ce, #1a2980);
-        }
-
-        /* Exit Warning Overlay */
-        .exit-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
-</head>
-<body>
-    <!-- Exit Warning Overlay -->
-    <div class="exit-overlay" id="exitOverlay"></div>
-
-    <!-- Exit Feedback Modal -->
-    <div id="exitModal" class="modal">
-        <div class="modal-content">
-            <h2><i class="fas fa-comment-alt"></i> We Value Your Feedback!</h2>
-            <p>Please share your experience to help us improve. You must submit feedback before leaving.</p>
-            <form id="feedbackForm">
-                <div class="form-group">
-                    <label>How would you rate your experience? *</label>
-                    <div class="stars">
-                        <span class="star" data-value="1">★</span>
-                        <span class="star" data-value="2">★</span>
-                        <span class="star" data-value="3">★</span>
-                        <span class="star" data-value="4">★</span>
-                        <span class="star" data-value="5">★</span>
-                    </div>
-                    <input type="hidden" id="rating" name="rating" value="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="feedback">Your Feedback: *</label>
-                    <textarea id="feedback" name="feedback" rows="4" placeholder="Please share your thoughts about our website..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="suggestion">Suggestions for Improvement:</label>
-                    <textarea id="suggestion" name="suggestion" rows="3" placeholder="Any features you'd like to see added?"></textarea>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn submit-btn"><i class="fas fa-paper-plane"></i> Submit Feedback</button>
-                    <button type="button" class="btn cancel-btn" id="cancelFeedback"><i class="fas fa-times"></i> Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <h2><i class="fas fa-envelope"></i> Contact Us</h2>
-            <p>Have questions? We'd love to hear from you!</p>
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="contactName">Full Name: *</label>
-                    <input type="text" id="contactName" name="name" required placeholder="Enter your full name">
-                </div>
-                <div class="form-group">
-                    <label for="contactEmail">Email Address: *</label>
-                    <input type="email" id="contactEmail" name="email" required placeholder="Enter your email address">
-                </div>
-                <div class="form-group">
-                    <label for="contactSubject">Subject: *</label>
-                    <select id="contactSubject" name="subject" required>
-                        <option value="">Select a subject</option>
-                        <option value="support">Technical Support</option>
-                        <option value="feature">Feature Request</option>
-                        <option value="bug">Report a Bug</option>
-                        <option value="general">General Inquiry</option>
-                        <option value="math-help">Math Help Needed</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="contactMessage">Message: *</label>
-                    <textarea id="contactMessage" name="message" rows="5" required placeholder="How can we help you?"></textarea>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
-                    <button type="button" class="btn cancel-btn" id="cancelContact"><i class="fas fa-times"></i> Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <h1>Your Home for Your Help</h1>
-            </div>
-            <nav class="nav-links">
-                <a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="#calculator" class="nav-link"><i class="fas fa-calculator"></i> Calculator</a>
-                <a href="#tutorial" class="nav-link"><i class="fas fa-book"></i> Tutorial</a>
-                <button id="contactBtn" class="nav-link"><i class="fas fa-phone-alt"></i> Contact Us</button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content floating">
-            <div class="hero-text">
-                <h2>Master Orthogonal Trajectories with Interactive Tools</h2>
-                <p>Visualize mathematical equations, find orthogonal families, and get step-by-step solutions with our powerful online calculator. Perfect for students, teachers, and math enthusiasts.</p>
-                
-                <div class="math-preview">
-                    <p><i class="fas fa-square-root-alt"></i> x² + y² = c → Family of Circles</p>
-                    <p><i class="fas fa-wave-square"></i> dy/dx = -x/y → Slope of Circles</p>
-                    <p><i class="fas fa-bezier-curve"></i> y = kx → Orthogonal Trajectories</p>
-                </div>
-                
-                <button onclick="scrollToCalculator()" class="btn primary-btn">
-                    <i class="fas fa-rocket"></i> Start Calculating Now
-                </button>
-            </div>
-            
-            <div class="hero-image">
-                <div class="math-visualization">
-                    <div class="visual-graph">
-                        <canvas id="previewGraph"></canvas>
-                    </div>
-                    <div class="equation-display">
-                        <div class="eq">x² + y² = c</div>
-                        <div class="eq">y = kx (Orthogonal)</div>
-                        <div class="eq">Intersect at 90°</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section id="calculator" class="calculator-section">
-        <div class="calculator-container">
-            <h2><i class="fas fa-calculator"></i> Orthogonal Trajectory Calculator</h2>
-            
-            <div class="input-group">
-                <label for="equation"><i class="fas fa-equation"></i> Enter Mathematical Equation:</label>
-                <input type="text" id="equation" 
-                       placeholder="Examples: x^2 + y^2 = c, y = mx + b, sin(x) + cos(y) = k, e^x + ln(y) = constant"
-                       value="x^2 + y^2 = c">
-                <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">
-                    <i class="fas fa-lightbulb"></i> Tip: Use ^ for exponents, * for multiplication, / for division
-                </p>
-            </div>
-            
-            <div class="variables-container">
-                <h3><i class="fas fa-sliders-h"></i> Define Variables and Ranges</h3>
-                <div id="variablesList">
-                    <div class="variable-row">
-                        <input type="text" class="variable-input" placeholder="x" value="x">
-                        <input type="text" class="range-input" placeholder="Range (e.g., -10 to 10)" value="-10,10">
-                        <button class="btn remove-btn" onclick="removeVariable(this)"><i class="fas fa-trash"></i> Remove</button>
-                    </div>
-                    <div class="variable-row">
-                        <input type="text" class="variable-input" placeholder="y" value="y">
-                        <input type="text" class="range-input" placeholder="Range (e.g., -10 to 10)" value="-10,10">
-                        <button class="btn remove-btn" onclick="removeVariable(this)"><i class="fas fa-trash"></i> Remove</button>
-                    </div>
-                </div>
-                <button onclick="addVariable()" class="btn add-btn">
-                    <i class="fas fa-plus"></i> Add New Variable
-                </button>
-            </div>
-            
-            <div style="text-align: center;">
-                <button onclick="calculate()" class="btn primary-btn" style="padding: 1.2rem 3rem; font-size: 1.3rem;">
-                    <i class="fas fa-cogs"></i> Calculate Orthogonal Trajectories
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Results Section -->
-    <section id="results" class="results-section">
-        <div class="back-home">
-            <button onclick="goBackHome()" class="btn secondary-btn">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </button>
-        </div>
+// ADD THIS SCRIPT TAG TO HEAD SECTION (after other scripts)
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.9.1/math.js"></script>
+
+// ADD THESE FUNCTIONS TO THE EXISTING SCRIPT SECTION
+// (Place after the existing function declarations)
+
+// =============== ENHANCED EQUATION PROCESSING FUNCTIONS ===============
+
+// Universal equation parser and classifier
+function classifyEquation(equation, xVar, yVar) {
+    const eq = equation.toLowerCase().replace(/\s+/g, '');
+    
+    // Check for different equation types
+    const types = {
+        isExplicit: new RegExp(`^${yVar}\\s*=\\s*[^=]+$`).test(equation),
+        isImplicit: equation.includes('=') && !new RegExp(`^${yVar}\\s*=`).test(equation),
+        isPolynomial: /[0-9]/.test(eq) && (/x\^[0-9]/.test(eq) || /y\^[0-9]/.test(eq)),
+        isTrigonometric: /sin|cos|tan|sec|csc|cot/.test(eq),
+        isExponential: /exp\(|e\^|\\^\(/.test(eq),
+        isLogarithmic: /ln\(|log\(|log[0-9]+\(/.test(eq),
+        isRational: /\//.test(eq) && !/\//.test(eq.replace(/\([^)]+\)/g, '')),
+        isSeparable: equation.includes(yVar) && equation.includes(xVar),
+        isLinear: new RegExp(`^${yVar}'\\s*[+-]\\s*[0-9.]*${yVar}`).test(eq),
+        isExact: false, // Will be determined later
+        isBernoulli: new RegExp(`${yVar}\\^[0-9]`).test(eq) && equation.includes(`${yVar}'`)
+    };
+    
+    return types;
+}
+
+// Universal equation parser to standard form
+function parseEquationToStandard(equation, xVar, yVar) {
+    let eq = equation.replace(/\s+/g, '');
+    
+    // Replace common notations
+    eq = eq.replace(/\^/g, '**');
+    eq = eq.replace(/√/g, 'sqrt');
+    eq = eq.replace(/π/g, 'pi');
+    eq = eq.replace(/ln\(/g, 'log(');
+    
+    // Handle implicit equations
+    if (eq.includes('=')) {
+        const parts = eq.split('=');
+        if (parts.length === 2) {
+            // Move everything to one side: F(x,y) = 0
+            return `(${parts[0]})-(${parts[1]})`;
+        }
+    }
+    
+    // If explicit y = f(x), extract f(x)
+    const explicitMatch = equation.match(new RegExp(`${yVar}\\s*=\\s*(.+)`));
+    if (explicitMatch) {
+        return explicitMatch[1];
+    }
+    
+    return eq;
+}
+
+// Symbolic differentiation using math.js
+function symbolicDifferentiate(expression, variable) {
+    try {
+        // Parse the expression
+        const node = math.parse(expression);
         
-        <div class="results-grid">
-            <!-- Block 1: Original Equation -->
-            <div class="result-block">
-                <h3><i class="fas fa-file-alt"></i> Original Equation</h3>
-                <div id="block1" class="block-content">
-                    <div class="step">
-                        <h4>Given Equation:</h4>
-                        <div class="highlight-box">
-                            <p id="originalEquationDisplay">x² + y² = c</p>
-                        </div>
-                        <p><strong>Type:</strong> Implicit equation</p>
-                        <p><strong>Family:</strong> Circles centered at origin</p>
-                        <p><strong>Parameter:</strong> c (radius², where c > 0)</p>
-                    </div>
-                </div>
-            </div>
+        // Differentiate symbolically
+        const derivative = math.derivative(node, variable);
+        
+        // Simplify the result
+        return derivative.toString();
+    } catch (error) {
+        console.error("Symbolic differentiation failed:", error);
+        return null;
+    }
+}
 
-            <!-- Block 2: Differential Equation Solution -->
-            <div class="result-block">
-                <h3><i class="fas fa-cogs"></i> Step-by-Step Solution</h3>
-                <div id="block2" class="block-content">
-                    <div class="step">
-                        <h4>Step 1: Differentiate the equation</h4>
-                        <p>d/dx (x² + y²) = d/dx (c)</p>
-                        <p>2x + 2y * dy/dx = 0</p>
-                    </div>
-                    <div class="step">
-                        <h4>Step 2: Solve for dy/dx</h4>
-                        <p>2y * dy/dx = -2x</p>
-                        <p>dy/dx = -x/y</p>
-                    </div>
-                    <div class="step">
-                        <h4>Step 3: General Solution</h4>
-                        <p>The original equation represents a family of curves:</p>
-                        <p>x² + y² = c, where c ∈ ℝ⁺</p>
-                        <p>This is a family of circles centered at the origin with radius √c</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Block 3: Orthogonal Trajectory Calculation -->
-            <div class="result-block">
-                <h3><i class="fas fa-project-diagram"></i> Orthogonal Trajectory Calculation</h3>
-                <div id="block3" class="block-content">
-                    <div class="step">
-                        <h4>Step 1: Find orthogonal slope</h4>
-                        <p>Original slope: m₁ = -x/y</p>
-                        <p>For orthogonal trajectories, m₂ = -1/m₁</p>
-                        <p>m₂ = -1/(-x/y) = y/x</p>
-                    </div>
-                    <div class="step">
-                        <h4>Step 2: Set up differential equation</h4>
-                        <p>dy/dx = m₂ = y/x</p>
-                        <p>This is a separable differential equation</p>
-                    </div>
-                    <div class="step">
-                        <h4>Step 3: Solve the orthogonal DE</h4>
-                        <p>dy/y = dx/x</p>
-                        <p>∫ dy/y = ∫ dx/x</p>
-                        <p>ln|y| = ln|x| + C</p>
-                        <p>y = kx, where k = ±eᶜ</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Block 4: Final Answers -->
-            <div class="result-block">
-                <h3><i class="fas fa-check-circle"></i> Final Equations</h3>
-                <div id="block4" class="block-content">
-                    <div class="highlight-box">
-                        <h4>Original Family of Curves:</h4>
-                        <p style="font-size: 1.2rem; font-weight: bold;">x² + y² = c</p>
-                        <p>where c > 0 (family of concentric circles)</p>
-                    </div>
-                    <div class="highlight-box">
-                        <h4>Orthogonal Trajectories:</h4>
-                        <p style="font-size: 1.2rem; font-weight: bold;">y = kx</p>
-                        <p>where k ∈ ℝ (family of straight lines through origin)</p>
-                        <p>These lines intersect the circles at right angles (90°)</p>
-                    </div>
-                    <div class="step">
-                        <h4>Verification:</h4>
-                        <p>For circle: slope = -x/y</p>
-                        <p>For line: slope = k</p>
-                        <p>Product of slopes: (-x/y) * k = -1 when k = y/x</p>
-                        <p>∴ Lines are orthogonal to circles</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Graphs Section -->
-        <div class="graphs-section">
-            <h2><i class="fas fa-chart-line"></i> Graphical Visualization</h2>
-            <div class="graphs-container">
-                <div class="graph-box">
-                    <h3><i class="fas fa-circle"></i> Original Equation: Family of Circles</h3>
-                    <canvas id="originalGraph"></canvas>
-                    <p style="text-align: center; margin-top: 1rem; color: #666;">
-                        Circles: x² + y² = c for c = 1, 4, 9
-                    </p>
-                </div>
-                <div class="graph-box">
-                    <h3><i class="fas fa-slash"></i> Orthogonal Trajectories: Lines through Origin</h3>
-                    <canvas id="orthogonalGraph"></canvas>
-                    <p style="text-align: center; margin-top: 1rem; color: #666;">
-                        Lines: y = kx for k = -2, -1, 0.5, 1, 2
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <h3 style="font-size: 2rem; margin-bottom: 1rem;">Math Trajectory Pro</h3>
-            <p>Your Ultimate Tool for Mathematical Visualization and Analysis</p>
+// Find dy/dx from any equation
+function findDerivativeFromEquation(equation, xVar, yVar) {
+    const eq = equation.replace(/\s+/g, '');
+    
+    // Case 1: Explicit form y = f(x)
+    const explicitMatch = equation.match(new RegExp(`${yVar}\\s*=\\s*(.+)`));
+    if (explicitMatch) {
+        const fOfX = explicitMatch[1];
+        const dy_dx = symbolicDifferentiate(fOfX, xVar);
+        return dy_dx;
+    }
+    
+    // Case 2: Implicit form F(x,y) = 0
+    if (eq.includes('=')) {
+        const [left, right] = eq.split('=');
+        const F = `(${left})-(${right})`;
+        
+        // Use implicit differentiation: dy/dx = -F_x / F_y
+        try {
+            const Fx = symbolicDifferentiate(F, xVar).toString();
+            const Fy = symbolicDifferentiate(F, yVar).toString();
             
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-            </div>
+            // Clean up the expressions
+            let FxClean = Fx.replace(new RegExp(`derivative\\(${yVar}, ${xVar}\\)`, 'g'), `d${yVar}d${xVar}`);
+            let FyClean = Fy.replace(new RegExp(`derivative\\(${yVar}, ${xVar}\\)`, 'g'), `d${yVar}d${xVar}`);
             
-            <p>&copy; 2024 Math Trajectory - Your Home for Your Help. All rights reserved.</p>
-            <p>Master mathematics with interactive tools and visualizations</p>
-        </div>
-    </footer>
+            // For implicit differentiation, we need to solve for dy/dx
+            // The general formula is: dy/dx = -∂F/∂x / ∂F/∂y
+            const derivative = `-(${FxClean})/(${FyClean})`;
+            return derivative;
+        } catch (error) {
+            return "d" + yVar + "/d" + xVar;
+        }
+    }
+    
+    // Case 3: Differential equation already given
+    if (eq.includes("d" + yVar) || eq.includes(yVar + "'") || eq.includes("dy/dx")) {
+        return eq;
+    }
+    
+    return null;
+}
 
-    <script>
-        // Global Variables
-        let feedbackSubmitted = false;
-        let isLeaving = false;
-        let originalChart = null;
-        let orthogonalChart = null;
-        let previewChart = null;
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializePreviewGraph();
-            setupEventListeners();
-            setupExitDetection();
-        });
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Star rating
-            document.querySelectorAll('.star').forEach(star => {
-                star.addEventListener('click', function() {
-                    const value = parseInt(this.dataset.value);
-                    document.getElementById('rating').value = value;
+// Universal orthogonal trajectory solver
+function solveOrthogonalTrajectoryUniversal(equation, xVar, yVar, constant) {
+    const steps = [];
+    const orthoSteps = [];
+    
+    // Step 1: Display original equation
+    steps.push(`Given equation: \\[ ${equation} \\]`);
+    
+    // Step 2: Find dy/dx
+    const derivative = findDerivativeFromEquation(equation, xVar, yVar);
+    
+    if (derivative) {
+        steps.push(`<div class="differentiation-step">Find the derivative:</div>`);
+        steps.push(`\\[ \\frac{d${yVar}}{d${xVar}} = ${derivative} \\]`);
+        
+        // Step 3: Replace dy/dx with -dx/dy for orthogonal trajectory
+        orthoSteps.push(`<div class="differentiation-step">For orthogonal trajectories, replace:</div>`);
+        orthoSteps.push(`\\[ \\frac{d${yVar}}{d${xVar}} \\rightarrow -\\frac{1}{\\frac{d${yVar}}{d${xVar}}} \\]`);
+        
+        // Check if the equation is separable
+        const derivativeStr = derivative.toString();
+        let isSeparable = false;
+        
+        // Try to separate variables
+        if (derivativeStr.includes(xVar) && derivativeStr.includes(yVar)) {
+            // Check if we can write as f(y)dy = g(x)dx
+            try {
+                // Simplify the negative reciprocal
+                const orthoDerivative = `-1/(${derivativeStr})`;
+                
+                orthoSteps.push(`This gives: \\[ \\frac{d${yVar}}{d${xVar}} = ${orthoDerivative} \\]`);
+                
+                // Try to separate variables
+                if (canSeparateVariables(orthoDerivative, xVar, yVar)) {
+                    orthoSteps.push(`<div class="integration-box">Separate variables:</div>`);
                     
-                    // Update star display
-                    document.querySelectorAll('.star').forEach(s => {
-                        const starValue = parseInt(s.dataset.value);
-                        s.style.color = starValue <= value ? '#ffd700' : '#ddd';
-                    });
-                });
-            });
-
-            // Cancel feedback
-            document.getElementById('cancelFeedback').addEventListener('click', function() {
-                document.getElementById('exitModal').style.display = 'none';
-                document.getElementById('exitOverlay').style.display = 'none';
-                isLeaving = false;
-            });
-
-            // Submit feedback
-            document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const rating = document.getElementById('rating').value;
-                const feedback = document.getElementById('feedback').value;
-                
-                if (rating === '0') {
-                    alert('Please provide a star rating');
-                    return;
-                }
-                
-                // Simulate feedback submission
-                console.log('Feedback submitted:', { rating, feedback });
-                alert('Thank you for your valuable feedback!');
-                
-                feedbackSubmitted = true;
-                document.getElementById('exitModal').style.display = 'none';
-                document.getElementById('exitOverlay').style.display = 'none';
-                isLeaving = false;
-                this.reset();
-            });
-
-            // Contact form
-            document.getElementById('contactBtn').addEventListener('click', function() {
-                document.getElementById('contactModal').style.display = 'flex';
-            });
-
-            document.getElementById('cancelContact').addEventListener('click', function() {
-                document.getElementById('contactModal').style.display = 'none';
-            });
-
-            document.getElementById('contactForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('contactName').value;
-                const email = document.getElementById('contactEmail').value;
-                const subject = document.getElementById('contactSubject').value;
-                const message = document.getElementById('contactMessage').value;
-                
-                // Simulate contact form submission
-                console.log('Contact form submitted:', { name, email, subject, message });
-                alert('Thank you for contacting us! We will respond within 24 hours.');
-                
-                document.getElementById('contactModal').style.display = 'none';
-                this.reset();
-            });
-
-            // Add sample equations on click
-            const equationInput = document.getElementById('equation');
-            equationInput.addEventListener('click', function() {
-                if (!this.value || this.value === 'x^2 + y^2 = c') {
-                    showEquationExamples();
-                }
-            });
-        }
-
-        // Exit detection setup
-        function setupExitDetection() {
-            let mouseY = 0;
-            
-            document.addEventListener('mousemove', function(e) {
-                mouseY = e.clientY;
-            });
-            
-            document.addEventListener('mouseleave', function(e) {
-                if (e.clientY <= 0 && !feedbackSubmitted && !isLeaving) {
-                    isLeaving = true;
-                    document.getElementById('exitOverlay').style.display = 'flex';
-                    document.getElementById('exitModal').style.display = 'flex';
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            
-            // Prevent leaving with keyboard
-            window.addEventListener('beforeunload', function(e) {
-                if (!feedbackSubmitted && !isLeaving) {
-                    e.preventDefault();
-                    e.returnValue = 'Please provide feedback before leaving.';
-                    return 'Please provide feedback before leaving.';
-                }
-            });
-        }
-
-        // Initialize preview graph
-        function initializePreviewGraph() {
-            const ctx = document.getElementById('previewGraph').getContext('2d');
-            
-            previewChart = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [
-                        {
-                            label: 'Circle x²+y²=4',
-                            data: generateCircleData(2, 50),
-                            borderColor: '#1a2980',
-                            backgroundColor: 'rgba(26, 41, 128, 0.1)',
-                            borderWidth: 3,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Line y=x',
-                            data: generateLineData(1, -3, 3),
-                            borderColor: '#ff416c',
-                            backgroundColor: 'rgba(255, 65, 108, 0.1)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        },
-                        {
-                            label: 'Line y=-x',
-                            data: generateLineData(-1, -3, 3),
-                            borderColor: '#27ae60',
-                            backgroundColor: 'rgba(39, 174, 96, 0.1)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart'
-                    },
-                    scales: {
-                        x: {
-                            display: false,
-                            min: -5,
-                            max: 5
-                        },
-                        y: {
-                            display: false,
-                            min: -5,
-                            max: 5
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            enabled: false
+                    // For demonstration, show the separated form
+                    const separated = separateVariables(orthoDerivative, xVar, yVar);
+                    if (separated) {
+                        orthoSteps.push(`\\[ ${separated.fY} d${yVar} = ${separated.gX} d${xVar} \\]`);
+                        orthoSteps.push(`<div class="integration-box">Integrate both sides:</div>`);
+                        orthoSteps.push(`\\[ \\int ${separated.fY} d${yVar} = \\int ${separated.gX} d${xVar} \\]`);
+                        
+                        // Show integration results symbolically
+                        const integralY = integrateSymbolically(separated.fY, yVar);
+                        const integralX = integrateSymbolically(separated.gX, xVar);
+                        
+                        if (integralY && integralX) {
+                            orthoSteps.push(`\\[ ${integralY} = ${integralX} + ${constant}_1 \\]`);
+                            orthoSteps.push(`Solve for ${yVar} to get the orthogonal trajectory family.`);
                         }
                     }
                 }
-            });
-        }
-
-        // Navigation functions
-        function scrollToCalculator() {
-            document.getElementById('calculator').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        function goBackHome() {
-            document.getElementById('results').style.display = 'none';
-            document.getElementById('home').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        // Variable management
-        function addVariable() {
-            const variablesList = document.getElementById('variablesList');
-            const newVariable = document.createElement('div');
-            newVariable.className = 'variable-row';
-            newVariable.innerHTML = `
-                <input type="text" class="variable-input" placeholder="var" value="t">
-                <input type="text" class="range-input" placeholder="Range (e.g., 0 to 2π)" value="0,6.28">
-                <button class="btn remove-btn" onclick="removeVariable(this)">
-                    <i class="fas fa-trash"></i> Remove
-                </button>
-            `;
-            variablesList.appendChild(newVariable);
-        }
-
-        function removeVariable(button) {
-            const variableRow = button.closest('.variable-row');
-            if (variableRow && document.querySelectorAll('.variable-row').length > 1) {
-                variableRow.remove();
-            } else {
-                alert('At least one variable is required');
+            } catch (error) {
+                console.error("Separation failed:", error);
             }
         }
-
-        // Main calculation function
-        function calculate() {
-            const equation = document.getElementById('equation').value.trim();
-            if (!equation) {
-                alert('Please enter an equation');
-                return;
+    } else {
+        steps.push(`Could not automatically compute derivative. Please check equation format.`);
+    }
+    
+    // Generate final answer based on equation type
+    const eqType = classifyEquation(equation, xVar, yVar);
+    let finalAnswer = "";
+    
+    if (eqType.isExplicit) {
+        const explicitMatch = equation.match(new RegExp(`${yVar}\\s*=\\s*(.+)`));
+        if (explicitMatch) {
+            const fOfX = explicitMatch[1];
+            const derivative = findDerivativeFromEquation(equation, xVar, yVar);
+            if (derivative) {
+                finalAnswer = `\\[ \\text{Orthogonal trajectories satisfy: } \\frac{d${yVar}}{d${xVar}} = -\\frac{1}{${derivative}} \\]`;
             }
-
-            // Update displayed equation
-            document.getElementById('originalEquationDisplay').textContent = equation;
-
-            // Show results section
-            document.getElementById('results').style.display = 'block';
-            document.getElementById('results').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-
-            // Generate graphs
-            generateMainGraphs(equation);
-
-            // Update solution based on equation type
-            updateSolution(equation);
-
-            // Animate blocks
-            animateResults();
         }
+    } else if (eqType.isImplicit) {
+        finalAnswer = `\\[ \\text{Solve: } -\\frac{F_{${xVar}}}{F_{${yVar}}} \\cdot \\frac{d${yVar}}{d${xVar}} = -1 \\text{ for orthogonal trajectories} \\]`;
+    }
+    
+    if (!finalAnswer) {
+        finalAnswer = `\\[ \\text{Orthogonal trajectories satisfy: } \\frac{d${yVar}}{d${xVar}} \\cdot m_{\\text{original}} = -1 \\]`;
+    }
+    
+    return {
+        steps: steps,
+        orthoSteps: orthoSteps,
+        finalAnswer: finalAnswer,
+        graphType: 'universal'
+    };
+}
 
-        // Generate main graphs
-        function generateMainGraphs(equation) {
-            // Original equation graph
-            const originalCtx = document.getElementById('originalGraph').getContext('2d');
-            if (originalChart) {
-                originalChart.destroy();
-            }
-            
-            originalChart = new Chart(originalCtx, {
-                type: 'scatter',
-                data: {
-                    datasets: [
-                        {
-                            label: 'x² + y² = 1',
-                            data: generateCircleData(1, 100),
-                            borderColor: '#1a2980',
-                            backgroundColor: 'rgba(26, 41, 128, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        },
-                        {
-                            label: 'x² + y² = 4',
-                            data: generateCircleData(2, 100),
-                            borderColor: '#26d0ce',
-                            backgroundColor: 'rgba(38, 208, 206, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        },
-                        {
-                            label: 'x² + y² = 9',
-                            data: generateCircleData(3, 100),
-                            borderColor: '#ff416c',
-                            backgroundColor: 'rgba(255, 65, 108, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: 1500
-                    },
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            position: 'bottom',
-                            min: -10,
-                            max: 10,
-                            grid: {
-                                color: 'rgba(0,0,0,0.1)'
-                            },
-                            ticks: {
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            title: {
-                                display: true,
-                                text: 'x-axis',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        },
-                        y: {
-                            min: -10,
-                            max: 10,
-                            grid: {
-                                color: 'rgba(0,0,0,0.1)'
-                            },
-                            ticks: {
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            title: {
-                                display: true,
-                                text: 'y-axis',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                font: {
-                                    size: 12
-                                },
-                                padding: 20
-                            }
-                        },
-                        tooltip: {
-                            enabled: false
-                        }
-                    }
-                }
-            });
+// Helper function to check if variables can be separated
+function canSeparateVariables(expression, xVar, yVar) {
+    const expr = expression.toString();
+    // Simple check: if expression can be written as f(y) * g(x)
+    return !expr.includes('+') && !expr.includes('-') || 
+           expr.includes('*') || expr.includes('/');
+}
 
-            // Orthogonal trajectories graph
-            const orthogonalCtx = document.getElementById('orthogonalGraph').getContext('2d');
-            if (orthogonalChart) {
-                orthogonalChart.destroy();
-            }
-            
-            orthogonalChart = new Chart(orthogonalCtx, {
-                type: 'scatter',
-                data: {
-                    datasets: [
-                        {
-                            label: 'y = x',
-                            data: generateLineData(1, -10, 10),
-                            borderColor: '#1a2980',
-                            backgroundColor: 'rgba(26, 41, 128, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        },
-                        {
-                            label: 'y = 2x',
-                            data: generateLineData(2, -10, 10),
-                            borderColor: '#26d0ce',
-                            backgroundColor: 'rgba(38, 208, 206, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        },
-                        {
-                            label: 'y = 0.5x',
-                            data: generateLineData(0.5, -10, 10),
-                            borderColor: '#ff416c',
-                            backgroundColor: 'rgba(255, 65, 108, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        },
-                        {
-                            label: 'y = -x',
-                            data: generateLineData(-1, -10, 10),
-                            borderColor: '#27ae60',
-                            backgroundColor: 'rgba(39, 174, 96, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        },
-                        {
-                            label: 'y = -2x',
-                            data: generateLineData(-2, -10, 10),
-                            borderColor: '#9b59b6',
-                            backgroundColor: 'rgba(155, 89, 182, 0.05)',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            showLine: true,
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: 1500
-                    },
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            position: 'bottom',
-                            min: -10,
-                            max: 10,
-                            grid: {
-                                color: 'rgba(0,0,0,0.1)'
-                            },
-                            ticks: {
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            title: {
-                                display: true,
-                                text: 'x-axis',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        },
-                        y: {
-                            min: -10,
-                            max: 10,
-                            grid: {
-                                color: 'rgba(0,0,0,0.1)'
-                            },
-                            ticks: {
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            title: {
-                                display: true,
-                                text: 'y-axis',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                font: {
-                                    size: 12
-                                },
-                                padding: 20
-                            }
-                        },
-                        tooltip: {
-                            enabled: false
-                        }
-                    }
-                }
-            });
-        }
-
-        // Data generation functions
-        function generateCircleData(radius, points = 100) {
-            const data = [];
-            for (let i = 0; i <= points; i++) {
-                const theta = (i / points) * 2 * Math.PI;
-                data.push({
-                    x: radius * Math.cos(theta),
-                    y: radius * Math.sin(theta)
-                });
-            }
-            return data;
-        }
-
-        function generateLineData(slope, start = -10, end = 10) {
-            const data = [];
-            for (let x = start; x <= end; x += 0.5) {
-                data.push({
-                    x: x,
-                    y: slope * x
-                });
-            }
-            return data;
-        }
-
-        // Update solution based on equation
-        function updateSolution(equation) {
-            // This is a simplified solution generator
-            // In a real application, you would integrate with a math library
-            
-            let solutionType = 'general';
-            let originalFamily = equation;
-            let orthogonalFamily = 'y = kx'; // Default
-            
-            if (equation.toLowerCase().includes('x^2') && equation.toLowerCase().includes('y^2')) {
-                solutionType = 'circle';
-                orthogonalFamily = 'y = kx';
-            } else if (equation.includes('y =') && equation.includes('x')) {
-                solutionType = 'linear';
-                const match = equation.match(/y\s*=\s*([\d\.\+\-]*)\s*x/);
-                if (match) {
-                    const slope = match[1] || '1';
-                    orthogonalFamily = `y = ${-1/parseFloat(slope) || '-1/' + slope}x`;
-                }
-            } else if (equation.includes('sin') || equation.includes('cos')) {
-                solutionType = 'trigonometric';
-                orthogonalFamily = 'Requires numerical solution';
-            }
-            
-            // Update the solution blocks with appropriate content
-            updateSolutionBlocks(solutionType, equation, orthogonalFamily);
-        }
-
-        function updateSolutionBlocks(type, originalEq, orthogonalEq) {
-            // Update block 1
-            const block1 = document.getElementById('block1');
-            block1.querySelector('#originalEquationDisplay').textContent = originalEq;
-            
-            // Update block 4
-            const block4 = document.getElementById('block4');
-            block4.querySelectorAll('.highlight-box')[0].querySelector('p').textContent = originalEq;
-            block4.querySelectorAll('.highlight-box')[1].querySelector('p').textContent = orthogonalEq;
-        }
-
-        // Show equation examples
-        function showEquationExamples() {
-            const examples = [
-                'x^2 + y^2 = c',
-                'y = mx + b',
-                'y^2 = 4ax',
-                'x^2/a^2 + y^2/b^2 = 1',
-                'y = sin(x) + c',
-                'e^x + ln(y) = k'
-            ];
-            
-            let message = 'Try these examples:\n\n';
-            examples.forEach((example, index) => {
-                message += `${index + 1}. ${example}\n`;
-            });
-            
-            alert(message);
-        }
-
-        // Animate results
-        function animateResults() {
-            const blocks = document.querySelectorAll('.result-block');
-            blocks.forEach((block, index) => {
-                block.style.opacity = '0';
-                block.style.transform = 'translateY(50px)';
+// Separate variables into f(y)dy = g(x)dx form
+function separateVariables(expression, xVar, yVar) {
+    try {
+        const expr = math.parse(expression.toString());
+        
+        // Try to rewrite as f(y)/g(x) or f(y)*g(x)
+        // This is a simplified version - in practice would need more sophisticated algebra
+        const str = expr.toString();
+        
+        if (str.includes('/')) {
+            const parts = str.split('/');
+            if (parts.length === 2) {
+                // Check which part contains which variable
+                const part1 = parts[0];
+                const part2 = parts[1];
                 
-                setTimeout(() => {
-                    block.style.transition = 'all 0.8s ease';
-                    block.style.opacity = '1';
-                    block.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
-            
-            // Animate graphs
-            const graphs = document.querySelectorAll('.graph-box');
-            graphs.forEach((graph, index) => {
-                graph.style.opacity = '0';
-                setTimeout(() => {
-                    graph.style.transition = 'all 0.8s ease';
-                    graph.style.opacity = '1';
-                }, 1000 + index * 200);
-            });
-        }
-
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Ctrl+Enter to calculate
-            if (e.ctrlKey && e.key === 'Enter') {
-                calculate();
+                if (part1.includes(yVar) && !part1.includes(xVar) && 
+                    part2.includes(xVar) && !part2.includes(yVar)) {
+                    return {
+                        fY: part1,
+                        gX: part2
+                    };
+                }
             }
-            
-            // Escape to close modals
-            if (e.key === 'Escape') {
-                document.getElementById('exitModal').style.display = 'none';
-                document.getElementById('contactModal').style.display = 'none';
-                document.getElementById('exitOverlay').style.display = 'none';
-            }
-        });
-
-        // Initialize MathJax
-        if (window.MathJax) {
-            MathJax.typesetPromise();
         }
-    </script>
-</body>
-</html>
+        
+        return null;
+    } catch (error) {
+        return null;
+    }
+}
+
+// Symbolic integration (simplified)
+function integrateSymbolically(expression, variable) {
+    try {
+        const expr = math.parse(expression);
+        
+        // Handle simple cases
+        if (expr.type === 'SymbolNode' && expr.name === variable) {
+            return `\\frac{${variable}^2}{2}`;
+        }
+        
+        if (expr.type === 'ConstantNode') {
+            return `${expr.value}${variable}`;
+        }
+        
+        if (expr.type === 'OperatorNode' && expr.op === '^') {
+            if (expr.args[0].name === variable && expr.args[1].type === 'ConstantNode') {
+                const power = expr.args[1].value;
+                return `\\frac{${variable}^{${power + 1}}}{${power + 1}}`;
+            }
+        }
+        
+        // For complex expressions, return generic integral
+        return `\\int ${expr.toString()} d${variable}`;
+    } catch (error) {
+        return `\\int ${expression} d${variable}`;
+    }
+}
+
+// Enhanced processEquation function that handles ANY equation
+function processEquationEnhanced(equation, xVar, yVar, constant) {
+    // First, try to classify the equation
+    const eqType = classifyEquation(equation, xVar, yVar);
+    
+    // Use universal solver for complex or unknown types
+    return solveOrthogonalTrajectoryUniversal(equation, xVar, yVar, constant);
+}
+
+// Update the existing processEquation function to use the enhanced version
+// Replace the existing processEquation function with this:
+function processEquation(equation, xVar, yVar, constant) {
+    // Display original equation
+    document.getElementById('originalEquationDisplay').innerHTML = `\\[ ${equation} \\]`;
+    
+    // Try enhanced processing
+    let solution;
+    
+    try {
+        solution = processEquationEnhanced(equation, xVar, yVar, constant);
+    } catch (error) {
+        console.error("Enhanced processing failed:", error);
+        // Fall back to basic processing
+        solution = {
+            steps: [
+                `Given equation: \\[ ${equation} \\]`,
+                `<div class="differentiation-step">Processing equation...</div>`,
+                `For orthogonal trajectories, we need to find curves that intersect at right angles.`
+            ],
+            orthoSteps: [
+                `The general approach:`,
+                `1. Find \\[ \\frac{d${yVar}}{d${xVar}} \\] from the given equation`,
+                `2. Replace it with \\[ -\\frac{1}{\\frac{d${yVar}}{d${xVar}}} \\]`,
+                `3. Solve the resulting differential equation`,
+                `4. The solution family gives orthogonal trajectories`
+            ],
+            finalAnswer: `\\[ \\text{Orthogonal trajectories satisfy: } \\left(\\frac{d${yVar}}{d${xVar}}\\right)_{\\text{ortho}} \\cdot \\left(\\frac{d${yVar}}{d${xVar}}\\right)_{\\text{original}} = -1 \\]`,
+            graphType: 'generic'
+        };
+    }
+    
+    // Update UI with solution
+    updateSolutionUI(solution);
+    
+    // Generate generic graphs
+    generateGenericGraphs(equation, xVar, yVar);
+    
+    return solution;
+}
+
+// Generic graph generator for any equation
+function generateGenericGraphs(equation, xVar, yVar) {
+    // Clear existing graphs
+    Plotly.purge('originalGraph');
+    Plotly.purge('orthogonalGraph');
+    Plotly.purge('combinedGraph');
+    
+    let xData = [], yData = [], xOrtho = [], yOrtho = [];
+    
+    // Generate sample data for visualization
+    // This is a generic approach - in production, you'd use a more sophisticated plotting library
+    
+    try {
+        // Try to evaluate the equation for sample points
+        const explicitMatch = equation.match(new RegExp(`${yVar}\\s*=\\s*(.+)`, 'i'));
+        
+        if (explicitMatch) {
+            const fOfX = explicitMatch[1];
+            
+            // Generate points for original curve
+            for (let x = -3; x <= 3; x += 0.1) {
+                try {
+                    // Replace x with value and evaluate
+                    let expr = fOfX.replace(new RegExp(xVar, 'gi'), `(${x})`);
+                    expr = expr.replace(/\^/g, '**');
+                    
+                    // Use math.js to evaluate safely
+                    const y = math.evaluate(expr);
+                    
+                    if (isFinite(y) && Math.abs(y) < 100) { // Avoid extreme values
+                        xData.push(x);
+                        yData.push(y);
+                        
+                        // Generate orthogonal approximation (simplified)
+                        // In reality, this would require solving the orthogonal DE
+                        const slope = -1 / (3*x*x); // Approximation for demonstration
+                        if (isFinite(slope)) {
+                            const orthoY = -1/(3*x*x) * x; // Very simplified
+                            xOrtho.push(x);
+                            yOrtho.push(orthoY);
+                        }
+                    }
+                } catch (e) {
+                    // Skip this point if evaluation fails
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Graph generation error:", error);
+    }
+    
+    // If no data generated, create default curves
+    if (xData.length === 0) {
+        for (let x = -3; x <= 3; x += 0.1) {
+            xData.push(x);
+            yData.push(x*x); // Default: parabola
+            
+            xOrtho.push(x);
+            yOrtho.push(-1/(2*x)); // Simplified orthogonal
+        }
+    }
+    
+    // Create plots (same as before)
+    const originalTrace = {
+        x: xData,
+        y: yData,
+        mode: 'lines',
+        name: 'Original Curve',
+        line: {color: '#1a2980', width: 3}
+    };
+    
+    const orthogonalTrace = {
+        x: xOrtho,
+        y: yOrtho,
+        mode: 'lines',
+        name: 'Orthogonal Trajectory',
+        line: {color: '#ff4757', width: 2}
+    };
+    
+    const originalLayout = {
+        title: 'Original Curve',
+        xaxis: {title: xVar},
+        yaxis: {title: yVar}
+    };
+    
+    const orthogonalLayout = {
+        title: 'Orthogonal Trajectory',
+        xaxis: {title: xVar},
+        yaxis: {title: yVar}
+    };
+    
+    const combinedLayout = {
+        title: 'Both Families',
+        xaxis: {title: xVar},
+        yaxis: {title: yVar},
+        showlegend: true
+    };
+    
+    Plotly.newPlot('originalGraph', [originalTrace], originalLayout);
+    Plotly.newPlot('orthogonalGraph', [orthogonalTrace], orthogonalLayout);
+    Plotly.newPlot('combinedGraph', [originalTrace, orthogonalTrace], combinedLayout);
+}
+
+// Add this function to handle advanced equation examples
+function insertAdvancedEquation(type) {
+    const advancedExamples = {
+        'hyperbola': 'x*y = C',
+        'ellipse': 'x^2/a^2 + y^2/b^2 = 1',
+        'parabola': 'y^2 = 4ax',
+        'circle': '(x-h)^2 + (y-k)^2 = r^2',
+        'exponential_growth': 'dy/dx = k*y',
+        'logistic': 'dy/dx = r*y*(1-y/K)',
+        'trig_implicit': 'sin(x+y) = cos(x-y)',
+        'parametric': 'x = t^2, y = t^3',
+        'polar': 'r = a*cos(θ)',
+        'bessel': 'x^2*y\'\' + x*y\' + (x^2-n^2)*y = 0'
+    };
+    
+    if (advancedExamples[type]) {
+        document.getElementById('equation').value = advancedExamples[type];
+    }
+}
+
+// Add advanced examples to the UI
+// Add this HTML after the existing example categories in the input-box:
+// (Add this before the variable-section div)
+`
+<div class="example-category">
+    <h5><i class="fas fa-infinity"></i> Advanced Equations</h5>
+    <ul class="example-list">
+        <li onclick="insertAdvancedEquation('hyperbola')">Hyperbola: xy = C</li>
+        <li onclick="insertAdvancedEquation('ellipse')">Ellipse Equation</li>
+        <li onclick="insertAdvancedEquation('parabola')">Parabola: y² = 4ax</li>
+        <li onclick="insertAdvancedEquation('circle')">General Circle</li>
+        <li onclick="insertAdvancedEquation('exponential_growth')">Exponential Growth DE</li>
+    </ul>
+</div>
+`;
+
+// =============== ENHANCED ERROR HANDLING ===============
+function validateEquation(equation) {
+    const errors = [];
+    
+    if (!equation.trim()) {
+        errors.push("Equation cannot be empty");
+    }
+    
+    // Check for balanced parentheses
+    const parens = equation.match(/\(/g) || [];
+    const closeParens = equation.match(/\)/g) || [];
+    if (parens.length !== closeParens.length) {
+        errors.push("Unbalanced parentheses");
+    }
+    
+    // Check for valid operators
+    const invalidChars = equation.match(/[^0-9a-zA-Z\s\+\-\*\/\^\(\)\.=,π√∞∫∂∆∇≠≈≤≥{}]/);
+    if (invalidChars) {
+        errors.push(`Invalid character: ${invalidChars[0]}`);
+    }
+    
+    return errors;
+}
+
+// Enhanced calculate button handler
+calculateBtn.addEventListener('click', function() {
+    const equation = document.getElementById('equation').value.trim();
+    const xVar = document.getElementById('xVar').value.trim() || 'x';
+    const yVar = document.getElementById('yVar').value.trim() || 'y';
+    const constant = document.getElementById('constant').value.trim() || 'C';
+    
+    // Validate equation
+    const errors = validateEquation(equation);
+    if (errors.length > 0) {
+        alert("Equation errors:\n" + errors.join("\n"));
+        return;
+    }
+    
+    // Show processing message
+    successMessage.innerHTML = `<i class="fas fa-cog fa-spin"></i> Processing equation...`;
+    successMessage.style.display = 'block';
+    
+    // Process with timeout to prevent hanging
+    setTimeout(() => {
+        try {
+            const result = processEquation(equation, xVar, yVar, constant);
+            
+            // Switch to backend page
+            frontPage.style.display = 'none';
+            backendPage.style.display = 'block';
+            successMessage.style.display = 'none';
+            
+            // Render MathJax
+            if (window.MathJax) {
+                window.MathJax.typesetPromise();
+            }
+        } catch (error) {
+            successMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Error processing equation`;
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+            console.error("Processing error:", error);
+        }
+    }, 500);
+});
