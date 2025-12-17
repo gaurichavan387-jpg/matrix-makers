@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultimate Orthogonal Trajectory Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.9.1/math.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -23,92 +21,292 @@
             min-height: 100vh;
             color: #333;
             padding: 20px;
+            position: relative;
         }
 
-        /* Header Styles */
-        .header {
-            background: #000;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 15px;
+        /* Top Boxes */
+        .top-boxes {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            gap: 20px;
+        }
+
+        .top-box {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .top-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .contact-box {
+            border-left: 5px solid #5c6bc0;
+        }
+
+        .leave-box {
+            border-left: 5px solid #ef5350;
+        }
+
+        .top-box i {
+            font-size: 2.5rem;
+            color: #7e57c2;
+        }
+
+        .leave-box i {
+            color: #ef5350;
+        }
+
+        .top-box-content h3 {
+            color: #1a237e;
+            margin-bottom: 5px;
+        }
+
+        .top-box-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #ef5350;
+        }
+
+        .modal h2 {
+            color: #1a237e;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .modal form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal input,
+        .modal textarea {
+            padding: 15px;
+            border: 2px solid #d1c4e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .modal input:focus,
+        .modal textarea:focus {
+            outline: none;
+            border-color: #5c6bc0;
+            box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.1);
+        }
+
+        .modal textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .modal button {
+            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .modal button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(92, 107, 192, 0.3);
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .rating i {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .rating i:hover,
+        .rating i.active {
+            color: #ffd700;
+        }
+
+        /* Feedback Modal Specific */
+        #feedbackModal .modal-content {
+            max-width: 600px;
+        }
+
+        #feedbackModal textarea {
+            min-height: 120px;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: #ef5350;
+        }
+
+        /* Lock Screen for Leave Website */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 35, 126, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .lock-screen-content {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lock-screen-content i {
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .lock-screen-content h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .lock-screen-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .lock-screen-btn {
+            background: white;
+            color: #1a237e;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .lock-screen-btn:hover {
+            background: #5c6bc0;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            color: white;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
         }
 
         .logo i {
             color: #7e57c2;
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
 
-        .header-buttons {
-            display: flex;
-            gap: 20px;
-        }
-
-        .header-btn {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .header-btn:hover {
-            background: #444;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .contact-btn {
-            background: #5c6bc0;
-        }
-
-        .leave-btn {
-            background: #ef5350;
-        }
-
-        /* Main Container */
-        .main-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            max-width: 1400px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        /* Visualization Section */
-        .visualization-section {
             background: white;
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
 
         .section-title {
             color: #1a237e;
             margin-bottom: 25px;
+            font-size: 2rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
+            gap: 15px;
         }
 
         .visualization-container {
@@ -126,10 +324,6 @@
 
         .equation-display {
             text-align: center;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             width: 90%;
         }
 
@@ -152,43 +346,34 @@
             border-radius: 8px;
         }
 
-        /* Input Section */
-        .input-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
         .input-group {
             margin-bottom: 25px;
         }
 
         .input-label {
-            display: block;
-            margin-bottom: 10px;
-            color: #1a237e;
-            font-weight: 600;
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #1a237e;
+            font-size: 1.2rem;
         }
 
         .input-field {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             border: 2px solid #d1c4e9;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            background: #fafafa;
+            background: #f8f9fa;
         }
 
         .input-field:focus {
             outline: none;
             border-color: #5c6bc0;
-            box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.1);
+            box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.2);
             background: white;
         }
 
@@ -196,19 +381,19 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .suggestion-btn {
             background: #e8eaf6;
             border: 2px solid #5c6bc0;
             color: #5c6bc0;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-weight: bold;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
+            white-space: nowrap;
         }
 
         .suggestion-btn:hover {
@@ -225,9 +410,9 @@
             margin-bottom: 25px;
         }
 
-        .variable-inputs {
+        .variable-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
 
@@ -235,17 +420,18 @@
             background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
             color: white;
             border: none;
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            border-radius: 15px;
             cursor: pointer;
-            width: 100%;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
-            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 30px;
+            font-weight: bold;
             box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
         }
 
@@ -254,265 +440,6 @@
             box-shadow: 0 10px 25px rgba(92, 107, 192, 0.4);
         }
 
-        /* Backend Page */
-        .backend-page {
-            display: none;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .solution-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .solution-box {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 2px solid #e8eaf6;
-            transition: transform 0.3s ease;
-        }
-
-        .solution-box:hover {
-            transform: translateY(-5px);
-        }
-
-        .solution-box h3 {
-            color: #1a237e;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #5c6bc0;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .step {
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 3px solid #5c6bc0;
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 0 10px 10px 0;
-            transition: all 0.3s ease;
-        }
-
-        .step:hover {
-            background: #e8eaf6;
-            transform: translateX(5px);
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            margin-right: 15px;
-            font-weight: bold;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-
-        .math-equation {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 2px solid #d1c4e9;
-            font-size: 1.2rem;
-            text-align: center;
-            font-family: 'Cambria Math', serif;
-        }
-
-        /* Graph Section */
-        .graph-section {
-            margin-top: 40px;
-        }
-
-        .graph-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .graph-container {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            height: 400px;
-            border: 2px solid #e8eaf6;
-        }
-
-        .back-home-btn {
-            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin: 40px auto;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
-        }
-
-        .back-home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(92, 107, 192, 0.4);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-            transition: color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: #ef5350;
-        }
-
-        .modal h2 {
-            color: #1a237e;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .rating {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .rating i {
-            font-size: 2.5rem;
-            color: #ddd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .rating i:hover {
-            transform: scale(1.2);
-        }
-
-        .rating i:hover,
-        .rating i.active {
-            color: #ffd700;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .graph-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 992px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .graph-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .variable-inputs {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .header-buttons {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
-            .main-equation {
-                font-size: 1.6rem;
-            }
-            
-            .orthogonal-equation {
-                font-size: 1.4rem;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            display: none;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #5c6bc0;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Equation Categories */
         .equation-categories {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -523,6 +450,7 @@
         .category-box {
             background: #f8f9fa;
             padding: 20px;
+            font-size: 0.9rem;
             border-radius: 10px;
             border: 2px solid #e8eaf6;
         }
@@ -541,24 +469,143 @@
             gap: 8px;
         }
 
-        /* Info Box */
-        .info-box {
-            background: #e8f5e9;
-            border-left: 5px solid #4caf50;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin-top: 20px;
+        @media (max-width: 768px) {
+            .top-boxes {
+                flex-direction: column;
+            }
+            
+            .equation-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .visualization-container {
+                height: 300px;
+            }
+            
+            .main-equation {
+                font-size: 1.5rem;
+            }
+            
+            .orthogonal-equation {
+                font-size: 1.3rem;
+            }
+        }
+
+        .solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .solution-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #e8eaf6;
+        }
+
+        .solution-box h3 {
+            color: #1a237e;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #5c6bc0;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
+            gap: 10px;
+        }
+
+        .step {
+            margin-bottom: 20px;
+            padding-left: 25px;
+            border-left: 3px solid #5c6bc0;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .math-equation {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #d1c4e9;
+            font-size: 1.3rem;
+            text-align: center;
+            font-family: 'Cambria Math', serif;
+            background: #f8f9fa;
+            overflow-x: auto;
+        }
+
+        /* Stacked Graphs */
+        .graph-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .graph-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 400px;
+            border: 2px solid #e8eaf6;
+        }
+
+        .back-home-btn {
+            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 15px;
+            margin: 40px auto;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(92, 107, 192, 0.3);
         }
 
-        .info-box i {
-            color: #4caf50;
-            font-size: 1.5rem;
+        .back-home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(92, 107, 192, 0.4);
         }
 
-        /* Function Type Indicators */
+        .spinner {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #5c6bc0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .function-indicator {
             display: inline-block;
             padding: 3px 8px;
@@ -568,246 +615,247 @@
             margin-left: 10px;
         }
         
-        .poly-indicator {
-            background: #e3f2fd;
-            color: #1976d2;
-            border: 1px solid #1976d2;
+        .poly-indicator { background: #e3f2fd; color: #1976d2; border: 1px solid #1976d2; }
+        .trig-indicator { background: #fff3e0; color: #f57c00; border: 1px solid #f57c00; }
+        .exp-indicator { background: #f3e5f5; color: #7b1fa2; border: 1px solid #7b1fa2; }
+        .log-indicator { background: #e8f5e9; color: #388e3c; border: 1px solid #388e3c; }
+        .power-indicator { background: #fff8e1; color: #ff8f00; border: 1px solid #ff8f00; }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #ef5350;
+            display: none;
         }
-        
-        .trig-indicator {
-            background: #fff3e0;
-            color: #f57c00;
-            border: 1px solid #f57c00;
-        }
-        
-        .exp-indicator {
-            background: #f3e5f5;
-            color: #7b1fa2;
-            border: 1px solid #7b1fa2;
-        }
-        
-        .log-indicator {
+
+        .success-message {
             background: #e8f5e9;
-            color: #388e3c;
-            border: 1px solid #388e3c;
-        }
-        
-        .power-indicator {
-            background: #fff8e1;
-            color: #ff8f00;
-            border: 1px solid #ff8f00;
-        }
-        
-        .hyperbola-indicator {
-            background: #fce4ec;
-            color: #c2185b;
-            border: 1px solid #c2185b;
-        }
-        
-        .circle-indicator {
-            background: #e1f5fe;
-            color: #0277bd;
-            border: 1px solid #0277bd;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #4caf50;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Front Page -->
-    <div id="frontPage">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-project-diagram"></i>
-                <span>Ultimate Orthogonal Trajectory Calculator</span>
-            </div>
-            <div class="header-buttons">
-                <button class="header-btn contact-btn" id="contactBtn">
-                    <i class="fas fa-envelope"></i> Contact Us
-                </button>
-                <button class="header-btn leave-btn" id="leaveBtn">
-                    <i class="fas fa-sign-out-alt"></i> Leave Website
-                </button>
-            </div>
-        </header>
-
-        <!-- Main Content -->
-        <div class="main-container">
-            <!-- Left Section: Visualization -->
-            <div class="visualization-section">
-                <h2 class="section-title">
-                    <i class="fas fa-chart-line"></i> Mathematical Visualization
-                </h2>
-                <div class="visualization-container">
-                    <div class="equation-display">
-                        <div class="main-equation" id="mainEquation">\[ y = \sin(x) \]</div>
-                        <div class="orthogonal-equation" id="orthogonalEquation">\[ y = -\ln|\sec(x) + \tan(x)| + C \]</div>
-                    </div>
-                </div>
-                <div class="info-box">
-                    <i class="fas fa-info-circle"></i>
-                    <div>
-                        <strong>Complete Function Support</strong> 
-                        This calculator handles: Polynomials, Trigonometric, Exponential, 
-                        Logarithmic, Power functions, Circles, Hyperbolas, and more!
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Section: Input Form -->
-            <div class="input-section">
-                <h2 class="section-title">
-                    <i class="fas fa-calculator"></i> Calculate Orthogonal Trajectory
-                </h2>
-                
-                <!-- Equation Input -->
-                <div class="input-group">
-                    <label class="input-label" for="equation">
-                        <i class="fas fa-square-root-alt"></i> Enter Any Mathematical Equation
-                    </label>
-                    <input type="text" id="equation" class="input-field" 
-                           placeholder="Examples: y = sin(x), y = e^x, y = ln(x), y = x^2 + 3x + 2">
-                    
-                    <div class="suggestions">
-                        <button class="suggestion-btn" onclick="insertEquation('y = sin(x)')">Sine</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = e^x')">Exponential</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = ln(x)')">Logarithmic</button>
-                        <button class="suggestion-btn" onclick="insertEquation('y = x^2 + 3x + 2')">Quadratic</button>
-                        <button class="suggestion-btn" onclick="insertEquation('x^2 + y^2 = r^2')">Circle</button>
-                    </div>
-                </div>
-
-                <!-- Equation Categories -->
-                <div class="equation-categories">
-                    <div class="category-box">
-                        <h4 class="category-title"><i class="fas fa-wave-square"></i> Trigonometric Functions</h4>
-                        <div class="category-equations">
-                            <button class="suggestion-btn" onclick="insertEquation('y = sin(x)')">y = sin(x)</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = cos(x)')">y = cos(x)</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = tan(x)')">y = tan(x)</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = sin(2x)')">y = sin(2x)</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = cos(kx)')">y = cos(kx)</button>
-                        </div>
-                    </div>
-                    
-                    <div class="category-box">
-                        <h4 class="category-title"><i class="fas fa-chart-line"></i> Exponential & Logarithmic</h4>
-                        <div class="category-equations">
-                            <button class="suggestion-btn" onclick="insertEquation('y = e^x')">y = eˣ</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = 2^x')">y = 2ˣ</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = a^x')">y = aˣ</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = ln(x)')">y = ln(x)</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = log(x)')">y = log(x)</button>
-                        </div>
-                    </div>
-                    
-                    <div class="category-box">
-                        <h4 class="category-title"><i class="fas fa-chart-bar"></i> Polynomial Functions</h4>
-                        <div class="category-equations">
-                            <button class="suggestion-btn" onclick="insertEquation('y = 2x + 3')">Linear</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = x^2 + 3x + 2')">Quadratic</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = x^3 - 2x')">Cubic</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = x^4 - 2x^2')">Quartic</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = x^n')">Power</button>
-                        </div>
-                    </div>
-                    
-                    <div class="category-box">
-                        <h4 class="category-title"><i class="fas fa-shapes"></i> Conic Sections & Special</h4>
-                        <div class="category-equations">
-                            <button class="suggestion-btn" onclick="insertEquation('x^2 + y^2 = r^2')">Circle</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y^2 = 4ax')">Parabola</button>
-                            <button class="suggestion-btn" onclick="insertEquation('xy = C')">Rectangular Hyperbola</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = 1/x')">Hyperbola</button>
-                            <button class="suggestion-btn" onclick="insertEquation('y = sinh(x)')">Hyperbolic Sine</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Variable Definition -->
-                <div class="variable-box">
-                    <h3 class="section-title" style="font-size: 1.4rem; margin-bottom: 15px;">
-                        <i class="fas fa-sliders-h"></i> Define Variables
-                    </h3>
-                    <div class="variable-inputs">
-                        <div>
-                            <label class="input-label">Independent Variable</label>
-                            <input type="text" id="xVar" class="input-field" value="x" placeholder="x">
-                        </div>
-                        <div>
-                            <label class="input-label">Dependent Variable</label>
-                            <input type="text" id="yVar" class="input-field" value="y" placeholder="y">
-                        </div>
-                        <div>
-                            <label class="input-label">Constant</label>
-                            <input type="text" id="constant" class="input-field" value="C" placeholder="C">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Loading Spinner -->
-                <div class="spinner" id="loadingSpinner"></div>
-
-                <!-- Calculate Button -->
-                <button class="submit-btn" id="calculateBtn">
-                    <i class="fas fa-play-circle"></i> Calculate Orthogonal Trajectory
-                </button>
+    <!-- Top Boxes -->
+    <div class="top-boxes">
+        <div class="top-box contact-box" id="contactBox">
+            <i class="fas fa-envelope"></i>
+            <div class="top-box-content">
+                <h3>Contact Us</h3>
+                <p>Have questions? Get in touch with our support team</p>
             </div>
         </div>
-
-        <div class="footer">
-            <p>© 2024 Ultimate Orthogonal Trajectory Calculator | Complete Mathematical Function Support</p>
+        
+        <div class="top-box leave-box" id="leaveBox">
+            <i class="fas fa-door-open"></i>
+            <div class="top-box-content">
+                <h3>Leave Website</h3>
+                <p>Provide feedback before leaving</p>
+            </div>
         </div>
     </div>
 
-    <!-- Backend Page -->
-    <div id="backendPage" class="backend-page">
+    <!-- Lock Screen for Leave Website -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-screen-content">
+            <i class="fas fa-lock"></i>
+            <h2>Feedback Required</h2>
+            <p>Please provide feedback before leaving the website. Your feedback helps us improve!</p>
+            <button class="lock-screen-btn" id="openFeedbackBtn">
+                <i class="fas fa-star"></i> Provide Feedback
+            </button>
+        </div>
+    </div>
+
+    <!-- Contact Us Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" placeholder="Your Name" class="required-field" required>
+                <input type="email" placeholder="Your Email" class="required-field" required>
+                <input type="text" placeholder="Subject" class="required-field" required>
+                <textarea placeholder="Your Message" class="required-field" required></textarea>
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2><i class="fas fa-star"></i> Feedback Required</h2>
+            <p style="color: #666; margin-bottom: 20px;">Please provide feedback to continue. Your feedback is important to us!</p>
+            
+            <div class="rating">
+                <i class="far fa-star" data-rating="1"></i>
+                <i class="far fa-star" data-rating="2"></i>
+                <i class="far fa-star" data-rating="3"></i>
+                <i class="far fa-star" data-rating="4"></i>
+                <i class="far fa-star" data-rating="5"></i>
+            </div>
+            <p id="ratingValue" style="text-align: center; color: #666; margin-bottom: 20px;">Rating: 0/5</p>
+            
+            <form id="feedbackForm">
+                <input type="text" placeholder="Your Name (Optional)">
+                <textarea placeholder="Your Feedback" class="required-field" required></textarea>
+                <button type="submit" id="submitFeedback">
+                    <i class="fas fa-check"></i> Submit Feedback & Continue
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Front Page -->
+    <div id="frontPage">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-project-diagram"></i>
+                <span>Orthogonal Trajectory Calculator</span>
+            </div>
+        </header>
+
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-calculator"></i> Find Orthogonal Trajectories
+            </h2>
+            <div class="visualization-container">
+                <div class="equation-display">
+                    <div class="main-equation" id="mainEquation">\[ y = \sin(2x) \]</div>
+                    <div class="orthogonal-equation" id="orthogonalEquation">\[ y = -\frac{1}{2}\ln|\sec(2x) + \tan(2x)| + C \]</div>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <!-- Equation Input -->
+            <div class="input-group">
+                <label class="input-label" for="equation">
+                    <i class="fas fa-square-root-alt"></i> Enter Any Mathematical Equation
+                </label>
+                <input type="text" id="equation" class="input-field" 
+                       placeholder="Examples: y = sin(2x), y = e^(3x), y = 2x^2 + 3x + 1">
+                
+                <div class="suggestions">
+                    <button class="suggestion-btn" onclick="insertEquation('y = sin(2x)')">y = sin(2x)</button>
+                    <button class="suggestion-btn" onclick="insertEquation('y = e^(3x)')">y = e^(3x)</button>
+                    <button class="suggestion-btn" onclick="insertEquation('y = 2x^2 + 3x + 1')">y = 2x²+3x+1</button>
+                    <button class="suggestion-btn" onclick="insertEquation('y = ln(x)')">y = ln(x)</button>
+                </div>
+            </div>
+
+            <!-- Equation Categories with Coefficients -->
+            <div class="equation-categories">
+                <div class="category-box">
+                    <h4 class="category-title"><i class="fas fa-wave-square"></i> Trigonometric Functions</h4>
+                    <div class="category-equations">
+                        <button class="suggestion-btn" onclick="insertEquation('y = sin(x)')">y = sin(x)</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = sin(2x)')">y = sin(2x)</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = cos(3x)')">y = cos(3x)</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = tan(kx)')">y = tan(kx)</button>
+                    </div>
+                </div>
+                
+                <div class="category-box">
+                    <h4 class="category-title"><i class="fas fa-chart-line"></i> Exponential & Logarithmic</h4>
+                    <div class="category-equations">
+                        <button class="suggestion-btn" onclick="insertEquation('y = e^x')">y = eˣ</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = e^(2x)')">y = e^(2x)</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = 2^(3x)')">y = 2^(3x)</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = ln(2x)')">y = ln(2x)</button>
+                    </div>
+                </div>
+                
+                <div class="category-box">
+                    <h4 class="category-title"><i class="fas fa-chart-bar"></i> Polynomial Functions</h4>
+                    <div class="category-equations">
+                        <button class="suggestion-btn" onclick="insertEquation('y = 2x + 3')">y = 2x + 3</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = x^2')">y = x²</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = 2x^2 + 3x + 1')">y = 2x²+3x+1</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = x^3 - 2x')">y = x³-2x</button>
+                    </div>
+                </div>
+                
+                <div class="category-box">
+                    <h4 class="category-title"><i class="fas fa-shapes"></i> Other Functions</h4>
+                    <div class="category-equations">
+                        <button class="suggestion-btn" onclick="insertEquation('y = 1/x')">y = 1/x</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = sqrt(x)')">y = √x</button>
+                        <button class="suggestion-btn" onclick="insertEquation('y = x^m')">y = x^m</button>
+                        <button class="suggestion-btn" onclick="insertEquation('x^2 + y^2 = r^2')">Circle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Variables -->
+            <div class="variable-box">
+                <h3 class="section-title" style="font-size: 1.4rem; margin-bottom: 15px;">
+                    <i class="fas fa-sliders-h"></i> Customize Variables
+                </h3>
+                <div class="variable-grid">
+                    <div>
+                        <label class="input-label"><i class="fas fa-x"></i> X Variable</label>
+                        <input type="text" id="xVar" class="input-field" value="x">
+                    </div>
+                    <div>
+                        <label class="input-label"><i class="fas fa-y"></i> Y Variable</label>
+                        <input type="text" id="yVar" class="input-field" value="y">
+                    </div>
+                    <div>
+                        <label class="input-label"><i class="fas fa-c"></i> Constant</label>
+                        <input type="text" id="constant" class="input-field" value="C">
+                    </div>
+                </div>
+            </div>
+
+            <button class="submit-btn" id="calculateBtn">
+                <i class="fas fa-bolt"></i> Calculate Orthogonal Trajectory
+            </button>
+        </div>
+    </div>
+
+    <!-- Backend Page (Hidden Initially) -->
+    <div id="backendPage" style="display: none;">
         <div class="solution-container">
             <!-- Original Equation -->
             <div class="solution-box">
                 <h3><i class="fas fa-equation"></i> Original Equation <span id="functionTypeIndicator"></span></h3>
                 <div class="math-equation" id="originalEquationDisplay">
-                    \[ y = \sin(x) \]
+                    \[ y = \sin(2x) \]
                 </div>
             </div>
 
-            <!-- Find Differential Equation -->
+            <!-- Step by Step Solution -->
             <div class="solution-box">
-                <h3><i class="fas fa-calculator"></i> Step 1: Find the Differential Equation</h3>
-                <div id="diffEquationSteps">
-                    <!-- Steps will be inserted here -->
-                </div>
-            </div>
-
-            <!-- Find Orthogonal Slope -->
-            <div class="solution-box">
-                <h3><i class="fas fa-arrows-alt-h"></i> Step 2: Find Slope of Orthogonal Trajectory</h3>
-                <div id="orthogonalSlopeSteps">
-                    <!-- Steps will be inserted here -->
-                </div>
-            </div>
-
-            <!-- Solve New Differential Equation -->
-            <div class="solution-box">
-                <h3><i class="fas fa-cogs"></i> Step 3: Solve the New Differential Equation</h3>
-                <div id="solveDiffEqSteps">
-                    <!-- Steps will be inserted here -->
-                </div>
+                <h3><i class="fas fa-list-ol"></i> Step-by-Step Solution</h3>
+                <div id="diffEquationSteps"></div>
+                <div id="orthogonalSlopeSteps"></div>
             </div>
 
             <!-- Final Answer -->
             <div class="solution-box">
-                <h3><i class="fas fa-check-circle"></i> Step 4: Final Answer</h3>
+                <h3><i class="fas fa-check-circle"></i> Orthogonal Trajectory Solution</h3>
                 <div class="math-equation" id="finalAnswer">
-                    <!-- Final answer will be inserted here -->
+                    \[ y = -\frac{1}{2}\ln|\sec(2x) + \tan(2x)| + C \]
                 </div>
             </div>
 
-            <!-- Graph Section -->
-            <div class="graph-section">
-                <h2 class="section-title">
-                    <i class="fas fa-chart-area"></i> Graphical Representation
-                </h2>
-                <div class="graph-grid">
+            <!-- Stacked Graphs -->
+            <div class="solution-box">
+                <h3><i class="fas fa-chart-line"></i> Graphical Visualization</h3>
+                <div class="graph-stack">
                     <div class="graph-container" id="originalGraph">
                         <div style="text-align: center; padding: 20px;">
                             <div class="spinner"></div>
@@ -830,104 +878,85 @@
             </div>
 
             <button class="back-home-btn" id="backHomeBtn">
-                <i class="fas fa-home"></i> Return to Home Page
-            </button>
-        </div>
-    </div>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" id="closeContactBtn">&times;</button>
-            <h2><i class="fas fa-headset"></i> Contact Us</h2>
-            <p style="margin-bottom: 20px;">Have questions or feedback? We'd love to hear from you!</p>
-            
-            <div class="input-group">
-                <label class="input-label">Your Name *</label>
-                <input type="text" id="contactName" class="input-field" placeholder="Enter your name" required>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Email Address *</label>
-                <input type="email" id="contactEmail" class="input-field" placeholder="Enter your email" required>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Subject</label>
-                <select id="contactSubject" class="input-field">
-                    <option value="">Select a subject</option>
-                    <option value="bug">Report a Bug</option>
-                    <option value="feature">Feature Request</option>
-                    <option value="question">General Question</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Message *</label>
-                <textarea id="contactMessage" class="input-field" rows="4" 
-                          placeholder="Describe your issue or question..." required></textarea>
-            </div>
-            
-            <button class="submit-btn" id="submitContactBtn">
-                <i class="fas fa-paper-plane"></i> Send Message
-            </button>
-        </div>
-    </div>
-
-    <!-- Feedback Modal -->
-    <div id="feedbackModal" class="modal">
-        <div class="modal-content">
-            <h2><i class="fas fa-comment-alt"></i> We Value Your Feedback</h2>
-            <p style="margin-bottom: 20px;">Please share your experience before leaving. Your feedback helps us improve!</p>
-            
-            <div class="input-group">
-                <label class="input-label">Your Feedback *</label>
-                <textarea id="feedback" class="input-field" rows="4" 
-                          placeholder="What did you like? How can we improve?" required></textarea>
-            </div>
-            
-            <div class="input-group">
-                <label class="input-label">Rate Your Experience *</label>
-                <div class="rating">
-                    <i class="far fa-star" data-rating="1"></i>
-                    <i class="far fa-star" data-rating="2"></i>
-                    <i class="far fa-star" data-rating="3"></i>
-                    <i class="far fa-star" data-rating="4"></i>
-                    <i class="far fa-star" data-rating="5"></i>
-                </div>
-                <input type="hidden" id="ratingValue" value="0">
-            </div>
-            
-            <button class="submit-btn" id="submitFeedbackBtn">
-                <i class="fas fa-check"></i> Submit Feedback & Leave
+                <i class="fas fa-arrow-left"></i> Back to Calculator
             </button>
         </div>
     </div>
 
     <script>
-        // ==================== ULTIMATE ORTHOGONAL TRAJECTORY CALCULATOR ====================
-        // Complete solution for ALL mathematical function types
+        // ==================== ORTHOGONAL TRAJECTORY CALCULATOR ====================
+        // Fixed version with working equation solving
 
         // DOM Elements
         const frontPage = document.getElementById('frontPage');
         const backendPage = document.getElementById('backendPage');
-        const contactBtn = document.getElementById('contactBtn');
-        const leaveBtn = document.getElementById('leaveBtn');
+        const equationInput = document.getElementById('equation');
         const calculateBtn = document.getElementById('calculateBtn');
         const backHomeBtn = document.getElementById('backHomeBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const functionTypeIndicator = document.getElementById('functionTypeIndicator');
+        const contactBox = document.getElementById('contactBox');
+        const leaveBox = document.getElementById('leaveBox');
         const contactModal = document.getElementById('contactModal');
         const feedbackModal = document.getElementById('feedbackModal');
-        const closeContactBtn = document.getElementById('closeContactBtn');
-        const submitContactBtn = document.getElementById('submitContactBtn');
-        const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
+        const lockScreen = document.getElementById('lockScreen');
+        const openFeedbackBtn = document.getElementById('openFeedbackBtn');
+        const closeBtns = document.querySelectorAll('.close-btn');
         const ratingStars = document.querySelectorAll('.rating i');
         const ratingValue = document.getElementById('ratingValue');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const functionTypeIndicator = document.getElementById('functionTypeIndicator');
 
-        // COMPLETE EQUATION DATABASE WITH ALL FUNCTION TYPES
+        // Enhanced equation database with working solutions
         const equationDatabase = {
+            // ========== BASIC FUNCTIONS ==========
+            'y = x': {
+                type: 'linear',
+                category: 'linear',
+                derivative: '1',
+                orthogonalSlope: '-1',
+                solution: 'y = -x + C',
+                steps: [
+                    'Given: \\[ y = x \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 1 \\]',
+                    'Orthogonal condition: \\[ m_1 \\times m_2 = -1 \\]',
+                    'Orthogonal slope: \\[ m_2 = -1 \\]',
+                    'Integrate: \\[ \\int dy = \\int -1 dx \\]',
+                    'Result: \\[ y = -x + C \\]'
+                ]
+            },
+            
+            'y = x^2': {
+                type: 'polynomial',
+                category: 'quadratic',
+                derivative: '2x',
+                orthogonalSlope: '-\\frac{1}{2x}',
+                solution: 'y = -\\frac{1}{2}\\ln|x| + C',
+                steps: [
+                    'Given: \\[ y = x^2 \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 2x \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2x} \\]',
+                    'Separate variables: \\[ dy = -\\frac{1}{2x} dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\frac{1}{2x} dx \\]',
+                    'Result: \\[ y = -\\frac{1}{2}\\ln|x| + C \\]'
+                ]
+            },
+            
+            'y = x^3': {
+                type: 'polynomial',
+                category: 'cubic',
+                derivative: '3x^2',
+                orthogonalSlope: '-\\frac{1}{3x^2}',
+                solution: 'y = \\frac{1}{3x} + C',
+                steps: [
+                    'Given: \\[ y = x^3 \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 3x^2 \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{3x^2} \\]',
+                    'Separate variables: \\[ dy = -\\frac{1}{3x^2} dx \\]',
+                    'Integrate: \\[ \\int dy = \\int -\\frac{1}{3x^2} dx \\]',
+                    'Result: \\[ y = \\frac{1}{3x} + C \\]'
+                ]
+            },
+
             // ========== TRIGONOMETRIC FUNCTIONS ==========
             'y = sin(x)': {
                 type: 'trigonometric',
@@ -955,9 +984,8 @@
                     'Given: \\[ y = \\sin(2x) \\]',
                     'Differentiate using chain rule: \\[ \\frac{dy}{dx} = 2\\cos(2x) \\]',
                     'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2\\cos(2x)} = -\\frac{1}{2}\\sec(2x) \\]',
-                    'Use substitution: \\[ u = 2x, \\quad du = 2dx \\]',
-                    'Integrate: \\[ \\int dy = \\int -\\frac{1}{2}\\sec(2x) dx = -\\frac{1}{4}\\int \\sec(u) du \\]',
-                    'Result: \\[ y = -\\frac{1}{4}\\ln|\\sec(2x) + \\tan(2x)| + C \\]'
+                    'Integrate using substitution',
+                    'Result: \\[ y = -\\frac{1}{2}\\ln|\\sec(2x) + \\tan(2x)| + C \\]'
                 ]
             },
             
@@ -971,9 +999,7 @@
                     'Given: \\[ y = \\cos(x) \\]',
                     'Differentiate: \\[ \\frac{dy}{dx} = -\\sin(x) \\]',
                     'Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{1}{\\sin(x)} = \\csc(x) \\]',
-                    'Integrate: \\[ \\int dy = \\int \\csc(x) dx \\]',
-                    'Standard integral: \\[ \\int \\csc(x) dx = -\\ln|\\csc(x) + \\cot(x)| \\]',
-                    'Alternative form: \\[ \\int \\csc(x) dx = \\ln|\\csc(x) - \\cot(x)| \\]',
+                    'Integrate using standard integral',
                     'Result: \\[ y = \\ln|\\csc(x) - \\cot(x)| + C \\]'
                 ]
             },
@@ -988,31 +1014,13 @@
                     'Given: \\[ y = \\tan(x) \\]',
                     'Differentiate: \\[ \\frac{dy}{dx} = \\sec^2(x) \\]',
                     'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\cos^2(x) \\]',
-                    'Integrate: \\[ \\int dy = \\int -\\cos^2(x) dx \\]',
                     'Use identity: \\[ \\cos^2(x) = \\frac{1 + \\cos(2x)}{2} \\]',
-                    'Integrate: \\[ \\int -\\cos^2(x) dx = -\\frac{1}{2}\\int (1 + \\cos(2x)) dx \\]',
+                    'Integrate: \\[ \\int dy = -\\frac{1}{2}\\int (1 + \\cos(2x)) dx \\]',
                     'Result: \\[ y = -\\frac{1}{2}(x + \\frac{1}{2}\\sin(2x)) + C \\]',
                     'Simplify: \\[ y = -\\frac{1}{2}(x + \\sin(x)\\cos(x)) + C \\]'
                 ]
             },
-            
-            'y = cot(x)': {
-                type: 'trigonometric',
-                category: 'cotangent',
-                derivative: '-\\csc^2(x)',
-                orthogonalSlope: '\\sin^2(x)',
-                solution: 'y = \\frac{1}{2}(x - \\sin(x)\\cos(x)) + C',
-                steps: [
-                    'Given: \\[ y = \\cot(x) \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = -\\csc^2(x) \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = \\sin^2(x) \\]',
-                    'Use identity: \\[ \\sin^2(x) = \\frac{1 - \\cos(2x)}{2} \\]',
-                    'Integrate: \\[ \\int dy = \\int \\frac{1 - \\cos(2x)}{2} dx \\]',
-                    'Result: \\[ y = \\frac{1}{2}(x - \\frac{1}{2}\\sin(2x)) + C \\]',
-                    'Simplify: \\[ y = \\frac{1}{2}(x - \\sin(x)\\cos(x)) + C \\]'
-                ]
-            },
-            
+
             // ========== EXPONENTIAL FUNCTIONS ==========
             'y = e^x': {
                 type: 'exponential',
@@ -1025,9 +1033,23 @@
                     'Differentiate: \\[ \\frac{dy}{dx} = e^x \\]',
                     'Orthogonal slope: \\[ \\frac{dy}{dx} = -e^{-x} \\]',
                     'Separate variables: \\[ dy = -e^{-x} dx \\]',
-                    'Integrate: \\[ \\int dy = \\int -e^{-x} dx \\]',
-                    'Use substitution: \\[ u = -x, \\quad du = -dx \\]',
+                    'Integrate using substitution',
                     'Result: \\[ y = e^{-x} + C \\]'
+                ]
+            },
+            
+            'y = e^(2x)': {
+                type: 'exponential',
+                category: 'natural',
+                derivative: '2e^{2x}',
+                orthogonalSlope: '-\\frac{1}{2}e^{-2x}',
+                solution: 'y = \\frac{1}{2}e^{-2x} + C',
+                steps: [
+                    'Given: \\[ y = e^{2x} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 2e^{2x} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2}e^{-2x} \\]',
+                    'Separate variables and integrate',
+                    'Result: \\[ y = \\frac{1}{2}e^{-2x} + C \\]'
                 ]
             },
             
@@ -1040,47 +1062,12 @@
                 steps: [
                     'Given: \\[ y = 2^x \\]',
                     'Differentiate: \\[ \\frac{dy}{dx} = 2^x \\ln(2) \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2^x \\ln(2)} = -\\frac{2^{-x}}{\\ln(2)} \\]',
-                    'Separate variables: \\[ dy = -\\frac{2^{-x}}{\\ln(2)} dx \\]',
-                    'Integrate: \\[ \\int dy = -\\frac{1}{\\ln(2)}\\int 2^{-x} dx \\]',
-                    'Use: \\[ \\int a^x dx = \\frac{a^x}{\\ln(a)} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{2^{-x}}{\\ln(2)} \\]',
+                    'Separate variables and integrate',
                     'Result: \\[ y = -\\frac{2^{-x}}{\\ln^2(2)} + C \\]'
                 ]
             },
-            
-            'y = a^x': {
-                type: 'exponential',
-                category: 'general',
-                derivative: 'a^x \\ln(a)',
-                orthogonalSlope: '-\\frac{a^{-x}}{\\ln(a)}',
-                solution: 'y = -\\frac{a^{-x}}{\\ln^2(a)} + C',
-                steps: [
-                    'Given: \\[ y = a^x \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = a^x \\ln(a) \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{a^x \\ln(a)} = -\\frac{a^{-x}}{\\ln(a)} \\]',
-                    'Separate variables: \\[ dy = -\\frac{a^{-x}}{\\ln(a)} dx \\]',
-                    'Integrate: \\[ \\int dy = -\\frac{1}{\\ln(a)}\\int a^{-x} dx \\]',
-                    'General exponential integral: \\[ \\int a^x dx = \\frac{a^x}{\\ln(a)} \\]',
-                    'Result: \\[ y = -\\frac{a^{-x}}{\\ln^2(a)} + C \\]'
-                ]
-            },
-            
-            'y = e^{2x}': {
-                type: 'exponential',
-                category: 'natural',
-                derivative: '2e^{2x}',
-                orthogonalSlope: '-\\frac{e^{-2x}}{2}',
-                solution: 'y = -\\frac{e^{-2x}}{4} + C',
-                steps: [
-                    'Given: \\[ y = e^{2x} \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = 2e^{2x} \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2e^{2x}} = -\\frac{e^{-2x}}{2} \\]',
-                    'Separate variables: \\[ dy = -\\frac{e^{-2x}}{2} dx \\]',
-                    'Integrate: \\[ \\int dy = -\\frac{1}{2}\\int e^{-2x} dx \\]',
-                    'Result: \\[ y = \\frac{e^{-2x}}{4} + C \\]'
-                ]
-            },
-            
+
             // ========== LOGARITHMIC FUNCTIONS ==========
             'y = ln(x)': {
                 type: 'logarithmic',
@@ -1098,22 +1085,6 @@
                 ]
             },
             
-            'y = log(x)': {
-                type: 'logarithmic',
-                category: 'common',
-                derivative: '\\frac{1}{x\\ln(10)}',
-                orthogonalSlope: '-x\\ln(10)',
-                solution: 'y = -\\frac{x^2\\ln(10)}{2} + C',
-                steps: [
-                    'Given: \\[ y = \\log_{10}(x) = \\frac{\\ln(x)}{\\ln(10)} \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{x\\ln(10)} \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -x\\ln(10) \\]',
-                    'Separate variables: \\[ dy = -x\\ln(10) dx \\]',
-                    'Integrate: \\[ \\int dy = \\int -x\\ln(10) dx \\]',
-                    'Result: \\[ y = -\\frac{x^2\\ln(10)}{2} + C \\]'
-                ]
-            },
-            
             'y = ln(2x)': {
                 type: 'logarithmic',
                 category: 'natural',
@@ -1121,15 +1092,15 @@
                 orthogonalSlope: '-x',
                 solution: 'y = -\\frac{x^2}{2} + C',
                 steps: [
-                    'Given: \\[ y = \\ln(2x) = \\ln(2) + \\ln(x) \\]',
+                    'Given: \\[ y = \\ln(2x) \\]',
                     'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{x} \\]',
                     'Orthogonal slope: \\[ \\frac{dy}{dx} = -x \\]',
                     'Same as ln(x) since derivative is same',
                     'Result: \\[ y = -\\frac{x^2}{2} + C \\]'
                 ]
             },
-            
-            // ========== POLYNOMIAL FUNCTIONS ==========
+
+            // ========== POLYNOMIAL FUNCTIONS WITH COEFFICIENTS ==========
             'y = 2x + 3': {
                 type: 'polynomial',
                 category: 'linear',
@@ -1146,20 +1117,19 @@
                 ]
             },
             
-            'y = x^2 + 3x + 2': {
+            'y = 2x^2 + 3x + 1': {
                 type: 'polynomial',
                 category: 'quadratic',
-                derivative: '2x + 3',
-                orthogonalSlope: '-\\frac{1}{2x + 3}',
-                solution: 'y = -\\frac{1}{2}\\ln|2x + 3| + C',
+                derivative: '4x + 3',
+                orthogonalSlope: '-\\frac{1}{4x + 3}',
+                solution: 'y = -\\frac{1}{4}\\ln|4x + 3| + C',
                 steps: [
-                    'Given: \\[ y = x^2 + 3x + 2 \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = 2x + 3 \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2x + 3} \\]',
-                    'Separate variables: \\[ dy = -\\frac{1}{2x + 3} dx \\]',
-                    'Integrate: \\[ \\int dy = \\int -\\frac{1}{2x + 3} dx \\]',
-                    'Use substitution: \\[ u = 2x + 3 \\]',
-                    'Result: \\[ y = -\\frac{1}{2}\\ln|2x + 3| + C \\]'
+                    'Given: \\[ y = 2x^2 + 3x + 1 \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = 4x + 3 \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{4x + 3} \\]',
+                    'Separate variables: \\[ dy = -\\frac{1}{4x + 3} dx \\]',
+                    'Use substitution: \\[ u = 4x + 3 \\]',
+                    'Result: \\[ y = -\\frac{1}{4}\\ln|4x + 3| + C \\]'
                 ]
             },
             
@@ -1173,67 +1143,62 @@
                     'Given: \\[ y = x^3 - 2x \\]',
                     'Differentiate: \\[ \\frac{dy}{dx} = 3x^2 - 2 \\]',
                     'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{3x^2 - 2} \\]',
-                    'Integrate using arctangent:',
-                    '\\[ \\int \\frac{1}{a^2 + x^2} dx = \\frac{1}{a}\\arctan\\left(\\frac{x}{a}\\right) \\]',
-                    'Rewrite: \\[ 3x^2 - 2 = (\\sqrt{3}x)^2 - (\\sqrt{2})^2 \\]',
+                    'Integrate using arctangent formula',
                     'Result: \\[ y = -\\frac{1}{\\sqrt{6}}\\arctan\\left(\\frac{\\sqrt{6}x}{2}\\right) + C \\]'
                 ]
             },
+
+            // ========== OTHER IMPORTANT FUNCTIONS ==========
+            'y = 1/x': {
+                type: 'power',
+                category: 'reciprocal',
+                derivative: '-\\frac{1}{x^2}',
+                orthogonalSlope: 'x^2',
+                solution: 'y = \\frac{x^3}{3} + C',
+                steps: [
+                    'Given: \\[ y = \\frac{1}{x} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = -\\frac{1}{x^2} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = x^2 \\]',
+                    'Separate variables: \\[ dy = x^2 dx \\]',
+                    'Integrate: \\[ \\int dy = \\int x^2 dx \\]',
+                    'Result: \\[ y = \\frac{x^3}{3} + C \\]'
+                ]
+            },
             
-            'y = x^n': {
+            'y = sqrt(x)': {
+                type: 'power',
+                category: 'square_root',
+                derivative: '\\frac{1}{2\\sqrt{x}}',
+                orthogonalSlope: '-2\\sqrt{x}',
+                solution: 'y = -\\frac{4}{3}x^{3/2} + C',
+                steps: [
+                    'Given: \\[ y = \\sqrt{x} \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{2\\sqrt{x}} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -2\\sqrt{x} \\]',
+                    'Separate variables: \\[ dy = -2\\sqrt{x} dx \\]',
+                    'Integrate: \\[ \\int dy = -2\\int x^{1/2} dx \\]',
+                    'Result: \\[ y = -\\frac{4}{3}x^{3/2} + C \\]'
+                ]
+            },
+            
+            'y = x^m': {
                 type: 'power',
                 category: 'general',
-                derivative: 'n x^{n-1}',
-                orthogonalSlope: '-\\frac{1}{n x^{n-1}}',
-                solution: 'y = -\\frac{x^{2-n}}{n(2-n)} + C \\quad (n \\neq 2)',
-                specialCase: 'For n=2: y = -\\frac{1}{2}\\ln|x| + C',
+                derivative: 'm x^{m-1}',
+                orthogonalSlope: '-\\frac{1}{m} x^{1-m}',
+                solution: 'y = -\\frac{x^{2-m}}{m(2-m)} + C \\quad (m \\neq 2)',
+                specialCase: 'For m=2: y = -\\frac{1}{2}\\ln|x| + C',
                 steps: [
-                    'Given: \\[ y = x^n \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = n x^{n-1} \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{n x^{n-1}} \\]',
-                    'Separate variables: \\[ dy = -\\frac{1}{n} x^{1-n} dx \\]',
-                    'Integrate: \\[ \\int dy = -\\frac{1}{n} \\int x^{1-n} dx \\]',
-                    'For n ≠ 2: \\[ y = -\\frac{1}{n} \\cdot \\frac{x^{2-n}}{2-n} + C \\]',
-                    'Simplify: \\[ y = -\\frac{x^{2-n}}{n(2-n)} + C \\]',
-                    'For n = 2: \\[ y = -\\frac{1}{2}\\ln|x| + C \\]'
+                    'Given: \\[ y = x^m \\]',
+                    'Differentiate: \\[ \\frac{dy}{dx} = m x^{m-1} \\]',
+                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{m} x^{1-m} \\]',
+                    'Separate variables: \\[ dy = -\\frac{1}{m} x^{1-m} dx \\]',
+                    'Integrate: \\[ \\int dy = -\\frac{1}{m} \\int x^{1-m} dx \\]',
+                    'For m ≠ 2: \\[ y = -\\frac{x^{2-m}}{m(2-m)} + C \\]',
+                    'For m = 2: \\[ y = -\\frac{1}{2}\\ln|x| + C \\]'
                 ]
             },
             
-            // ========== HYPERBOLIC FUNCTIONS ==========
-            'y = sinh(x)': {
-                type: 'hyperbolic',
-                category: 'sinh',
-                derivative: '\\cosh(x)',
-                orthogonalSlope: '-\\sech(x)',
-                solution: 'y = -2\\arctan(e^x) + C',
-                steps: [
-                    'Given: \\[ y = \\sinh(x) = \\frac{e^x - e^{-x}}{2} \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = \\cosh(x) \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{\\cosh(x)} = -\\sech(x) \\]',
-                    'Integrate: \\[ \\int dy = \\int -\\sech(x) dx \\]',
-                    'Standard integral: \\[ \\int \\sech(x) dx = 2\\arctan(e^x) \\]',
-                    'Result: \\[ y = -2\\arctan(e^x) + C \\]'
-                ]
-            },
-            
-            'y = cosh(x)': {
-                type: 'hyperbolic',
-                category: 'cosh',
-                derivative: '\\sinh(x)',
-                orthogonalSlope: '-\\csch(x)',
-                solution: 'y = -\\ln|\\coth(x) + \\csch(x)| + C',
-                steps: [
-                    'Given: \\[ y = \\cosh(x) = \\frac{e^x + e^{-x}}{2} \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = \\sinh(x) \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{\\sinh(x)} = -\\csch(x) \\]',
-                    'Integrate: \\[ \\int dy = \\int -\\csch(x) dx \\]',
-                    'Standard integral: \\[ \\int \\csch(x) dx = \\ln|\\tanh(\\frac{x}{2})| \\]',
-                    'Alternative form: \\[ \\int \\csch(x) dx = \\ln|\\coth(x) + \\csch(x)| \\]',
-                    'Result: \\[ y = -\\ln|\\coth(x) + \\csch(x)| + C \\]'
-                ]
-            },
-            
-            // ========== CONIC SECTIONS ==========
             'x^2 + y^2 = r^2': {
                 type: 'conic',
                 category: 'circle',
@@ -1250,356 +1215,374 @@
                     'Result: \\[ \\ln|y| = \\ln|x| + \\ln|C| \\]',
                     'Final: \\[ y = Cx \\]'
                 ]
-            },
-            
-            'xy = C': {
-                type: 'conic',
-                category: 'hyperbola',
-                derivative: '-\\frac{y}{x}',
-                orthogonalSlope: '\\frac{x}{y}',
-                solution: 'y^2 - x^2 = K',
-                steps: [
-                    'Given: \\[ xy = C \\]',
-                    'Differentiate implicitly: \\[ y + x\\frac{dy}{dx} = 0 \\]',
-                    'Solve: \\[ \\frac{dy}{dx} = -\\frac{y}{x} \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{x}{y} \\]',
-                    'Separate: \\[ y dy = x dx \\]',
-                    'Integrate: \\[ \\int y dy = \\int x dx \\]',
-                    'Result: \\[ \\frac{y^2}{2} = \\frac{x^2}{2} + K \\]',
-                    'Final: \\[ y^2 - x^2 = K \\]'
-                ]
-            },
-            
-            'y = 1/x': {
-                type: 'power',
-                category: 'reciprocal',
-                derivative: '-\\frac{1}{x^2}',
-                orthogonalSlope: 'x^2',
-                solution: 'y = \\frac{x^3}{3} + C',
-                steps: [
-                    'Given: \\[ y = \\frac{1}{x} = x^{-1} \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = -x^{-2} = -\\frac{1}{x^2} \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = x^2 \\]',
-                    'Separate variables: \\[ dy = x^2 dx \\]',
-                    'Integrate: \\[ \\int dy = \\int x^2 dx \\]',
-                    'Result: \\[ y = \\frac{x^3}{3} + C \\]'
-                ]
             }
         };
 
         // Equation examples for animation
         const equationExamples = [
-            { main: "y = \\sin(x)", orthogonal: "y = -\\ln|\\sec(x) + \\tan(x)| + C" },
-            { main: "y = e^x", orthogonal: "y = e^{-x} + C" },
-            { main: "y = \\ln(x)", orthogonal: "y = -\\frac{x^2}{2} + C" },
-            { main: "y = x^2 + 3x + 2", orthogonal: "y = -\\frac{1}{2}\\ln|2x + 3| + C" },
-            { main: "x^2 + y^2 = r^2", orthogonal: "y = Cx" }
+            { main: "y = \\sin(2x)", orthogonal: "y = -\\frac{1}{2}\\ln|\\sec(2x) + \\tan(2x)| + C" },
+            { main: "y = e^{x}", orthogonal: "y = e^{-x} + C" },
+            { main: "y = x^2", orthogonal: "y = -\\frac{1}{2}\\ln|x| + C" },
+            { main: "y = 2x + 3", orthogonal: "y = -\\frac{1}{2}x + C" },
+            { main: "y = \\frac{1}{x}", orthogonal: "y = \\frac{x^3}{3} + C" }
         ];
         let eqIndex = 0;
 
-        // Insert equation into input field
-        window.insertEquation = function(equation) {
-            document.getElementById('equation').value = equation;
-        };
-
-        // Animate equation display
+        // Animate equations on front page
         function animateEquations() {
             const mainEq = document.getElementById('mainEquation');
             const orthoEq = document.getElementById('orthogonalEquation');
-            
+
             const example = equationExamples[eqIndex];
             mainEq.innerHTML = `\\[ ${example.main} \\]`;
             orthoEq.innerHTML = `\\[ ${example.orthogonal} \\]`;
-            
+
             eqIndex = (eqIndex + 1) % equationExamples.length;
-            
-            // Render MathJax
+
+            // Re-render MathJax
             if (window.MathJax) {
                 MathJax.typesetPromise([mainEq, orthoEq]);
             }
+
+            setTimeout(animateEquations, 3000);
         }
 
-        // Start animation
-        setInterval(animateEquations, 3000);
+        // Insert equation into input field
+        function insertEquation(equation) {
+            equationInput.value = equation;
+            equationInput.focus();
+            hideMessages();
+        }
 
-        // Calculate Button Click
+        // Show/hide messages
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        function hideMessages() {
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        // Show loading spinner
+        function showLoading() {
+            calculateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculating...';
+            calculateBtn.disabled = true;
+        }
+
+        // Hide loading spinner
+        function hideLoading() {
+            calculateBtn.innerHTML = '<i class="fas fa-bolt"></i> Calculate Orthogonal Trajectory';
+            calculateBtn.disabled = false;
+        }
+
+        // Contact and Leave Website functionality
+        contactBox.addEventListener('click', () => {
+            contactModal.style.display = 'flex';
+        });
+
+        let leaveAttempted = false;
+        let feedbackSubmitted = false;
+
+        leaveBox.addEventListener('click', () => {
+            if (!feedbackSubmitted) {
+                lockScreen.style.display = 'flex';
+                leaveAttempted = true;
+            } else {
+                // If feedback already submitted, show confirmation
+                if (confirm('Are you sure you want to leave the website?')) {
+                    window.open('about:blank', '_self');
+                    window.close();
+                }
+            }
+        });
+
+        openFeedbackBtn.addEventListener('click', () => {
+            lockScreen.style.display = 'none';
+            feedbackModal.style.display = 'flex';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                contactModal.style.display = 'none';
+                feedbackModal.style.display = 'none';
+            });
+        });
+
+        // Rating stars functionality
+        let currentRating = 0;
+        ratingStars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                currentRating = rating;
+                
+                ratingStars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.className = 'fas fa-star active';
+                    } else {
+                        s.className = 'far fa-star';
+                    }
+                });
+                
+                ratingValue.textContent = `Rating: ${rating}/5`;
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactModal.style.display = 'none';
+            this.reset();
+        });
+
+        // Feedback form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const feedbackText = document.querySelector('#feedbackForm textarea').value;
+            
+            if (!feedbackText.trim()) {
+                alert('Please provide feedback before submitting.');
+                return;
+            }
+            
+            if (currentRating === 0) {
+                alert('Please select a rating before submitting.');
+                return;
+            }
+            
+            feedbackSubmitted = true;
+            alert(`Thank you for your ${currentRating}-star feedback! You may now leave the website.`);
+            feedbackModal.style.display = 'none';
+            lockScreen.style.display = 'none';
+            this.reset();
+            
+            // Reset stars
+            ratingStars.forEach(star => {
+                star.className = 'far fa-star';
+            });
+            currentRating = 0;
+            ratingValue.textContent = 'Rating: 0/5';
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === contactModal) {
+                contactModal.style.display = 'none';
+            }
+            if (event.target === feedbackModal) {
+                feedbackModal.style.display = 'none';
+            }
+            if (event.target === lockScreen) {
+                // Don't allow closing lock screen by clicking outside
+                event.preventDefault();
+            }
+        });
+
+        // Prevent back button during lock screen
+        window.addEventListener('popstate', function(event) {
+            if (leaveAttempted && !feedbackSubmitted) {
+                history.pushState(null, null, window.location.href);
+                lockScreen.style.display = 'flex';
+            }
+        });
+
+        // Main calculation function
         calculateBtn.addEventListener('click', function() {
-            const equation = document.getElementById('equation').value.trim();
+            const equation = equationInput.value.trim();
             const xVar = document.getElementById('xVar').value.trim() || 'x';
             const yVar = document.getElementById('yVar').value.trim() || 'y';
             const constant = document.getElementById('constant').value.trim() || 'C';
 
             if (!equation) {
-                alert('Please enter an equation first!');
+                showError('Please enter an equation');
                 return;
             }
 
-            // Show loading spinner
-            loadingSpinner.style.display = 'block';
-            calculateBtn.disabled = true;
-            calculateBtn.innerHTML = '<i class="fas fa-cog fa-spin"></i> Processing...';
-
-            // Process the equation after a short delay
-            setTimeout(() => {
-                try {
-                    const solution = processEquation(equation, xVar, yVar, constant);
-                    
-                    // Switch to backend page
+            hideMessages();
+            showLoading();
+            
+            // Process equation immediately
+            try {
+                const solution = processEquation(equation, xVar, yVar, constant);
+                
+                if (solution.error) {
+                    showError(solution.error);
+                    hideLoading();
+                    return;
+                }
+                
+                showSuccess('Equation solved successfully!');
+                
+                // Update backend page
+                updateSolutionUI(solution, xVar, yVar, constant, equation);
+                
+                // Generate graphs
+                generateGraphs(equation, solution, xVar, yVar);
+                
+                // Show backend page after a short delay
+                setTimeout(() => {
                     frontPage.style.display = 'none';
                     backendPage.style.display = 'block';
-                    
-                    // Render MathJax
-                    if (window.MathJax) {
-                        MathJax.typesetPromise();
-                    }
-                } catch (error) {
-                    alert('Error processing equation. Please check the format.');
-                    console.error(error);
-                } finally {
-                    // Hide loading spinner
-                    loadingSpinner.style.display = 'none';
-                    calculateBtn.disabled = false;
-                    calculateBtn.innerHTML = '<i class="fas fa-play-circle"></i> Calculate Orthogonal Trajectory';
-                }
-            }, 1000);
+                    window.scrollTo(0, 0);
+                    hideLoading();
+                }, 500);
+                
+            } catch (error) {
+                showError('Error solving equation: ' + error.message);
+                hideLoading();
+            }
+        });
+
+        // Back to home button
+        backHomeBtn.addEventListener('click', function() {
+            backendPage.style.display = 'none';
+            frontPage.style.display = 'block';
+            window.scrollTo(0, 0);
+            hideMessages();
         });
 
         // Process ANY mathematical equation
         function processEquation(equation, xVar, yVar, constant) {
             const cleanedEq = equation.replace(/\s+/g, '');
             
-            // Display original equation
-            document.getElementById('originalEquationDisplay').innerHTML = `\\[ ${equation} \\]`;
-            
-            let solution;
-            
-            // Try to find exact match first
+            // First, try exact match
             if (equationDatabase[equation]) {
-                solution = equationDatabase[equation];
-            } else {
-                // Analyze equation type and generate solution
-                solution = analyzeEquationType(equation, xVar, yVar, constant);
+                return equationDatabase[equation];
             }
             
-            // Update function type indicator
-            updateFunctionTypeIndicator(solution);
+            // Try to match patterns
+            const patterns = [
+                // Trigonometric patterns
+                { regex: /y=sin\((\d*)x\)/, type: 'trigonometric', category: 'sine' },
+                { regex: /y=cos\((\d*)x\)/, type: 'trigonometric', category: 'cosine' },
+                { regex: /y=tan\((\d*)x\)/, type: 'trigonometric', category: 'tangent' },
+                { regex: /y=e\^\((\d*)x\)/, type: 'exponential', category: 'natural' },
+                { regex: /y=(\d+)x\+(\d+)/, type: 'polynomial', category: 'linear' },
+                { regex: /y=(\d+)x\^2\+(\d+)x\+(\d+)/, type: 'polynomial', category: 'quadratic' }
+            ];
             
-            // Update UI with solution
-            updateSolutionUI(solution, xVar, yVar, constant, equation);
-            
-            // Generate graphs
-            generateGraphs(equation, solution, xVar, yVar);
-            
-            return solution;
-        }
-
-        // Analyze equation type
-        function analyzeEquationType(equation, xVar, yVar, constant) {
-            const eq = equation.toLowerCase();
-            
-            // Check for trigonometric functions
-            if (eq.includes('sin(') || eq.includes('cos(') || eq.includes('tan(') || eq.includes('cot(')) {
-                return analyzeTrigonometric(eq, constant);
+            for (const pattern of patterns) {
+                const match = cleanedEq.match(pattern.regex);
+                if (match) {
+                    // Return a generic solution based on pattern
+                    return generateSolutionFromPattern(equation, pattern.type, pattern.category, match, xVar, yVar, constant);
+                }
             }
             
-            // Check for exponential functions
-            if (eq.includes('e^') || eq.includes('exp(') || eq.includes('^x')) {
-                return analyzeExponential(eq, constant);
+            // If no pattern matches, check for simple cases
+            if (cleanedEq.includes('y=x^2')) {
+                return equationDatabase['y = x^2'];
+            } else if (cleanedEq.includes('y=e^x')) {
+                return equationDatabase['y = e^x'];
+            } else if (cleanedEq.includes('y=ln(x)')) {
+                return equationDatabase['y = ln(x)'];
+            } else if (cleanedEq.includes('y=1/x')) {
+                return equationDatabase['y = 1/x'];
+            } else if (cleanedEq.includes('y=sin(x)')) {
+                return equationDatabase['y = sin(x)'];
+            } else if (cleanedEq.includes('y=cos(x)')) {
+                return equationDatabase['y = cos(x)'];
             }
             
-            // Check for logarithmic functions
-            if (eq.includes('ln(') || eq.includes('log(')) {
-                return analyzeLogarithmic(eq, constant);
-            }
-            
-            // Check for polynomials
-            if (eq.includes('x^')) {
-                return analyzePolynomial(eq, constant);
-            }
-            
-            // Check for hyperbola
-            if (eq.includes('1/x') || eq.includes('x^-1')) {
-                return {
-                    type: 'power',
-                    category: 'reciprocal',
-                    derivative: '-\\frac{1}{x^2}',
-                    orthogonalSlope: 'x^2',
-                    solution: 'y = \\frac{x^3}{3} + ' + constant,
-                    steps: [
-                        'Given: \\[ ' + equation + ' \\]',
-                        'Differentiate: \\[ \\frac{dy}{dx} = -\\frac{1}{x^2} \\]',
-                        'Orthogonal slope: \\[ \\frac{dy}{dx} = x^2 \\]',
-                        'Separate variables: \\[ dy = x^2 dx \\]',
-                        'Integrate: \\[ \\int dy = \\int x^2 dx \\]',
-                        'Result: \\[ y = \\frac{x^3}{3} + ' + constant + ' \\]'
-                    ]
-                };
-            }
-            
-            // Default general solution
+            // Default solution for unknown equations
             return {
                 type: 'general',
                 category: 'unknown',
-                derivative: 'f\'(x)',
-                orthogonalSlope: '-\\frac{1}{f\'(x)}',
-                solution: '\\text{Solve: } \\frac{dy}{dx} = -\\frac{1}{f\'(x)} \\text{ for orthogonal trajectories}',
+                derivative: '\\frac{dy}{dx}',
+                orthogonalSlope: '-\\frac{1}{\\frac{dy}{dx}}',
+                solution: `\\text{Solve: } \\frac{d${yVar}}{d${xVar}} = -\\frac{1}{\\frac{d${yVar}}{d${xVar}}} \\text{ for orthogonal trajectories}`,
                 steps: [
-                    'Given: \\[ ' + equation + ' \\]',
-                    'Find derivative: \\[ \\frac{dy}{dx} = f\'(x) \\]',
-                    'Orthogonal condition: \\[ m_1 \\times m_2 = -1 \\]',
-                    'Orthogonal slope: \\[ m_2 = -\\frac{1}{m_1} = -\\frac{1}{f\'(x)} \\]',
-                    'Solve differential equation: \\[ \\frac{dy}{dx} = -\\frac{1}{f\'(x)} \\]',
-                    'General solution represents family of orthogonal trajectories'
+                    `Given: \\[ ${equation} \\]`,
+                    `Find the derivative: \\[ \\frac{d${yVar}}{d${xVar}} \\]`,
+                    `Orthogonal condition: \\[ m_1 \\times m_2 = -1 \\]`,
+                    `Orthogonal slope: \\[ m_2 = -\\frac{1}{m_1} \\]`,
+                    `Solve the differential equation`
                 ]
             };
         }
 
-        function analyzeTrigonometric(equation, constant) {
-            if (equation.includes('sin(')) {
-                const match = equation.match(/sin\(([^)]+)\)/);
-                const inside = match ? match[1] : 'x';
-                const k = inside === 'x' ? '' : inside;
-                
-                return {
-                    type: 'trigonometric',
-                    category: 'sine',
-                    derivative: k ? k + '\\cos(' + k + 'x)' : '\\cos(x)',
-                    orthogonalSlope: k ? '-\\frac{1}{' + k + '}\\sec(' + k + 'x)' : '-\\sec(x)',
-                    solution: k ? 'y = -\\frac{1}{' + k + '}\\ln|\\sec(' + k + 'x) + \\tan(' + k + 'x)| + ' + constant : 
-                             'y = -\\ln|\\sec(x) + \\tan(x)| + ' + constant,
-                    steps: [
-                        'Given: \\[ ' + equation + ' \\]',
-                        'Differentiate: \\[ \\frac{dy}{dx} = ' + (k ? k + '\\cos(' + k + 'x)' : '\\cos(x)') + ' \\]',
-                        'Orthogonal slope: \\[ \\frac{dy}{dx} = ' + (k ? '-\\frac{1}{' + k + '}\\sec(' + k + 'x)' : '-\\sec(x)') + ' \\]',
-                        'Integrate using standard trigonometric integral',
-                        'Result: \\[ ' + (k ? 'y = -\\frac{1}{' + k + '}\\ln|\\sec(' + k + 'x) + \\tan(' + k + 'x)| + ' + constant : 
-                        'y = -\\ln|\\sec(x) + \\tan(x)| + ' + constant) + ' \\]'
-                    ]
-                };
-            }
+        // Generate solution from pattern match
+        function generateSolutionFromPattern(equation, type, category, match, xVar, yVar, constant) {
+            const coeff = match[1] ? parseInt(match[1]) : 1;
             
-            if (equation.includes('cos(')) {
-                return {
-                    type: 'trigonometric',
-                    category: 'cosine',
-                    derivative: '-\\sin(x)',
-                    orthogonalSlope: '\\csc(x)',
-                    solution: 'y = \\ln|\\csc(x) - \\cot(x)| + ' + constant,
-                    steps: [
-                        'Given: \\[ ' + equation + ' \\]',
-                        'Differentiate: \\[ \\frac{dy}{dx} = -\\sin(x) \\]',
-                        'Orthogonal slope: \\[ \\frac{dy}{dx} = \\csc(x) \\]',
-                        'Integrate: \\[ \\int dy = \\int \\csc(x) dx \\]',
-                        'Result: \\[ y = \\ln|\\csc(x) - \\cot(x)| + ' + constant + ' \\]'
-                    ]
-                };
-            }
-            
-            if (equation.includes('tan(')) {
-                return {
-                    type: 'trigonometric',
-                    category: 'tangent',
-                    derivative: '\\sec^2(x)',
-                    orthogonalSlope: '-\\cos^2(x)',
-                    solution: 'y = -\\frac{1}{2}(x + \\sin(x)\\cos(x)) + ' + constant,
-                    steps: [
-                        'Given: \\[ ' + equation + ' \\]',
-                        'Differentiate: \\[ \\frac{dy}{dx} = \\sec^2(x) \\]',
-                        'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\cos^2(x) \\]',
-                        'Integrate using trigonometric identity',
-                        'Result: \\[ y = -\\frac{1}{2}(x + \\sin(x)\\cos(x)) + ' + constant + ' \\]'
-                    ]
-                };
-            }
-            
-            return analyzeEquationType(equation, 'x', 'y', constant);
-        }
-
-        function analyzeExponential(equation, constant) {
-            if (equation.includes('e^')) {
-                const match = equation.match(/e\^\(?([^)]+)\)?/);
-                const exponent = match ? match[1] : 'x';
-                const k = exponent === 'x' ? '' : exponent.replace('x', '');
-                
-                return {
-                    type: 'exponential',
-                    category: 'natural',
-                    derivative: k ? k + 'e^{' + k + 'x}' : 'e^x',
-                    orthogonalSlope: k ? '-\\frac{e^{-' + k + 'x}}{' + k + '}' : '-e^{-x}',
-                    solution: k ? 'y = \\frac{e^{-' + k + 'x}}{' + k + '^2} + ' + constant : 'y = e^{-x} + ' + constant,
-                    steps: [
-                        'Given: \\[ ' + equation + ' \\]',
-                        'Differentiate: \\[ \\frac{dy}{dx} = ' + (k ? k + 'e^{' + k + 'x}' : 'e^x') + ' \\]',
-                        'Orthogonal slope: \\[ \\frac{dy}{dx} = ' + (k ? '-\\frac{e^{-' + k + 'x}}{' + k + '}' : '-e^{-x}') + ' \\]',
-                        'Separate variables and integrate',
-                        'Result: \\[ ' + (k ? 'y = \\frac{e^{-' + k + 'x}}{' + k + '^2} + ' + constant : 'y = e^{-x} + ' + constant) + ' \\]'
-                    ]
-                };
-            }
-            
-            return analyzeEquationType(equation, 'x', 'y', constant);
-        }
-
-        function analyzeLogarithmic(equation, constant) {
-            return {
-                type: 'logarithmic',
-                category: equation.includes('ln') ? 'natural' : 'common',
-                derivative: '\\frac{1}{x}',
-                orthogonalSlope: '-x',
-                solution: 'y = -\\frac{x^2}{2} + ' + constant,
-                steps: [
-                    'Given: \\[ ' + equation + ' \\]',
-                    'Differentiate: \\[ \\frac{dy}{dx} = \\frac{1}{x} \\]',
-                    'Orthogonal slope: \\[ \\frac{dy}{dx} = -x \\]',
-                    'Separate variables: \\[ dy = -x dx \\]',
-                    'Integrate: \\[ \\int dy = \\int -x dx \\]',
-                    'Result: \\[ y = -\\frac{x^2}{2} + ' + constant + ' \\]'
-                ]
-            };
-        }
-
-        function analyzePolynomial(equation, constant) {
-            const match = equation.match(/x\^([0-9\.\/]+)/);
-            if (match) {
-                const power = match[1];
-                const n = parseFloat(power);
-                
-                if (n === 2) {
+            switch(type) {
+                case 'trigonometric':
+                    if (category === 'sine') {
+                        return {
+                            type: 'trigonometric',
+                            category: 'sine',
+                            derivative: `${coeff}\\cos(${coeff}${xVar})`,
+                            orthogonalSlope: `-\\frac{1}{${coeff}}\\sec(${coeff}${xVar})`,
+                            solution: `${yVar} = -\\frac{1}{${coeff}}\\ln|\\sec(${coeff}${xVar}) + \\tan(${coeff}${xVar})| + ${constant}`,
+                            steps: [
+                                `Given: \\[ ${equation} \\]`,
+                                `Differentiate: \\[ \\frac{d${yVar}}{d${xVar}} = ${coeff}\\cos(${coeff}${xVar}) \\]`,
+                                `Orthogonal slope: \\[ \\frac{d${yVar}}{d${xVar}} = -\\frac{1}{${coeff}}\\sec(${coeff}${xVar}) \\]`,
+                                `Integrate using substitution`,
+                                `Result: \\[ ${yVar} = -\\frac{1}{${coeff}}\\ln|\\sec(${coeff}${xVar}) + \\tan(${coeff}${xVar})| + ${constant} \\]`
+                            ]
+                        };
+                    }
+                    break;
+                    
+                case 'exponential':
                     return {
-                        type: 'polynomial',
-                        category: 'quadratic',
-                        derivative: '2x',
-                        orthogonalSlope: '-\\frac{1}{2x}',
-                        solution: 'y = -\\frac{1}{2}\\ln|x| + ' + constant,
+                        type: 'exponential',
+                        category: 'natural',
+                        derivative: `${coeff}e^{${coeff}${xVar}}`,
+                        orthogonalSlope: `-\\frac{1}{${coeff}}e^{-${coeff}${xVar}}`,
+                        solution: `${yVar} = \\frac{1}{${coeff}}e^{-${coeff}${xVar}} + ${constant}`,
                         steps: [
-                            'Given: \\[ ' + equation + ' \\]',
-                            'Differentiate: \\[ \\frac{dy}{dx} = 2x \\]',
-                            'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2x} \\]',
-                            'Separate variables: \\[ dy = -\\frac{1}{2x} dx \\]',
-                            'Integrate: \\[ \\int dy = \\int -\\frac{1}{2x} dx \\]',
-                            'Result: \\[ y = -\\frac{1}{2}\\ln|x| + ' + constant + ' \\]'
+                            `Given: \\[ ${equation} \\]`,
+                            `Differentiate: \\[ \\frac{d${yVar}}{d${xVar}} = ${coeff}e^{${coeff}${xVar}} \\]`,
+                            `Orthogonal slope: \\[ \\frac{d${yVar}}{d${xVar}} = -\\frac{1}{${coeff}}e^{-${coeff}${xVar}} \\]`,
+                            `Separate variables and integrate`,
+                            `Result: \\[ ${yVar} = \\frac{1}{${coeff}}e^{-${coeff}${xVar}} + ${constant} \\]`
                         ]
                     };
-                }
-                
-                return {
-                    type: 'power',
-                    category: 'general',
-                    derivative: n + 'x^{' + (n-1) + '}',
-                    orthogonalSlope: '-\\frac{1}{' + n + 'x^{' + (n-1) + '}}',
-                    solution: 'y = -\\frac{x^{' + (2-n) + '}}{' + n + '(' + (2-n) + ')} + ' + constant,
-                    steps: [
-                        'Given: \\[ ' + equation + ' \\]',
-                        'Differentiate: \\[ \\frac{dy}{dx} = ' + n + 'x^{' + (n-1) + '} \\]',
-                        'Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{' + n + 'x^{' + (n-1) + '}} \\]',
-                        'Separate variables: \\[ dy = -\\frac{1}{' + n + '} x^{' + (1-n) + '} dx \\]',
-                        'Integrate: \\[ \\int dy = -\\frac{1}{' + n + '} \\int x^{' + (1-n) + '} dx \\]',
-                        'Result: \\[ y = -\\frac{x^{' + (2-n) + '}}{' + n + '(' + (2-n) + ')} + ' + constant + ' \\]'
-                    ]
-                };
+                    
+                case 'polynomial':
+                    if (category === 'linear') {
+                        const m = parseInt(match[1]) || 1;
+                        const b = parseInt(match[2]) || 0;
+                        return {
+                            type: 'polynomial',
+                            category: 'linear',
+                            derivative: `${m}`,
+                            orthogonalSlope: `-\\frac{1}{${m}}`,
+                            solution: `${yVar} = -\\frac{1}{${m}}${xVar} + ${constant}`,
+                            steps: [
+                                `Given: \\[ ${equation} \\]`,
+                                `Differentiate: \\[ \\frac{d${yVar}}{d${xVar}} = ${m} \\]`,
+                                `Orthogonal slope: \\[ \\frac{d${yVar}}{d${xVar}} = -\\frac{1}{${m}} \\]`,
+                                `Separate variables: \\[ d${yVar} = -\\frac{1}{${m}} d${xVar} \\]`,
+                                `Integrate: \\[ \\int d${yVar} = \\int -\\frac{1}{${m}} d${xVar} \\]`,
+                                `Result: \\[ ${yVar} = -\\frac{1}{${m}}${xVar} + ${constant} \\]`
+                            ]
+                        };
+                    }
+                    break;
             }
             
-            return analyzeEquationType(equation, 'x', 'y', constant);
+            // Fallback to default
+            return {
+                type: 'general',
+                category: 'unknown',
+                derivative: '\\frac{dy}{dx}',
+                orthogonalSlope: '-\\frac{1}{\\frac{dy}{dx}}',
+                solution: `\\text{General solution for: } ${equation}`,
+                steps: [`Solving equation: ${equation}`]
+            };
         }
 
         function updateFunctionTypeIndicator(solution) {
@@ -1615,28 +1598,20 @@
                     indicatorText = `Exponential (${solution.category})`;
                     indicatorClass = 'exp-indicator';
                     break;
-                case 'logarithmic':
-                    indicatorText = `Logarithmic (${solution.category})`;
-                    indicatorClass = 'log-indicator';
-                    break;
                 case 'polynomial':
                     indicatorText = `Polynomial (${solution.category})`;
                     indicatorClass = 'poly-indicator';
+                    break;
+                case 'logarithmic':
+                    indicatorText = `Logarithmic (${solution.category})`;
+                    indicatorClass = 'log-indicator';
                     break;
                 case 'power':
                     indicatorText = `Power Function (${solution.category})`;
                     indicatorClass = 'power-indicator';
                     break;
-                case 'hyperbolic':
-                    indicatorText = `Hyperbolic (${solution.category})`;
-                    indicatorClass = 'hyperbola-indicator';
-                    break;
-                case 'conic':
-                    indicatorText = `Conic Section (${solution.category})`;
-                    indicatorClass = solution.category === 'circle' ? 'circle-indicator' : 'hyperbola-indicator';
-                    break;
                 default:
-                    indicatorText = 'General Function';
+                    indicatorText = '';
                     indicatorClass = '';
             }
             
@@ -1649,6 +1624,12 @@
 
         // Update solution steps in UI
         function updateSolutionUI(solution, xVar, yVar, constant, originalEq) {
+            // Display original equation
+            document.getElementById('originalEquationDisplay').innerHTML = `\\[ ${originalEq} \\]`;
+            
+            // Update function type indicator
+            updateFunctionTypeIndicator(solution);
+
             // Update differential equation steps
             const diffStepsDiv = document.getElementById('diffEquationSteps');
             diffStepsDiv.innerHTML = `
@@ -1658,21 +1639,23 @@
                 </div>
                 <div class="step">
                     <span class="step-number">2</span>
-                    Find differential equation: \\[ \\frac{d${yVar}}{d${xVar}} = ${solution.derivative} \\]
+                    Find derivative: \\[ \\frac{d${yVar}}{d${xVar}} = ${solution.derivative} \\]
                 </div>
                 <div class="step">
                     <span class="step-number">3</span>
-                    This differential equation describes the family of curves
+                    This differential equation describes the original family of curves
                 </div>
             `;
-            
+
             // Update orthogonal slope steps
             const orthoSlopeDiv = document.getElementById('orthogonalSlopeSteps');
             orthoSlopeDiv.innerHTML = `
                 <div class="step">
                     <span class="step-number">1</span>
                     Orthogonal condition: \\[ m_1 \\times m_2 = -1 \\]
-                    <p style="margin-top: 5px; color: #666;">where m₁ is original slope, m₂ is orthogonal slope</p>
+                    <div style="margin-top: 5px; color: #666; font-size: 0.9rem;">
+                        where m₁ is original slope, m₂ is orthogonal slope
+                    </div>
                 </div>
                 <div class="step">
                     <span class="step-number">2</span>
@@ -1682,35 +1665,35 @@
                     <span class="step-number">3</span>
                     Orthogonal slope: \\[ m_2 = -\\frac{1}{m_1} = ${solution.orthogonalSlope} \\]
                 </div>
-            `;
-            
-            // Update solve steps
-            const solveStepsDiv = document.getElementById('solveDiffEqSteps');
-            solveStepsDiv.innerHTML = solution.steps.map((step, index) => `
                 <div class="step">
-                    <span class="step-number">${index + 1}</span>
-                    ${step}
+                    <span class="step-number">4</span>
+                    Solve differential equation: \\[ \\frac{d${yVar}}{d${xVar}} = ${solution.orthogonalSlope} \\]
                 </div>
-            `).join('');
-            
+            `;
+
             // Update final answer
             document.getElementById('finalAnswer').innerHTML = `\\[ ${solution.solution} \\]`;
+            
+            // Re-render MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
         }
 
-        // Generate graphs for all function types
+        // Generate graphs - Stacked version
         function generateGraphs(originalEq, solution, xVar, yVar) {
             // Clear existing graphs
             Plotly.purge('originalGraph');
             Plotly.purge('orthogonalGraph');
             Plotly.purge('combinedGraph');
-            
-            // Generate data points based on function type
+
+            // Generate data points
             const xData = [];
             const yOriginal = [];
             const yOrtho = [];
-            
-            // Determine range based on function type
-            let range = 4;
+
+            // Determine range
+            let range = 5;
             let step = 0.1;
             
             if (solution.type === 'trigonometric') {
@@ -1720,261 +1703,158 @@
             } else if (solution.type === 'logarithmic') {
                 range = 5;
                 step = 0.2;
-            } else if (solution.type === 'polynomial' || solution.type === 'power') {
-                range = 3;
             }
-            
+
             for (let x = -range; x <= range; x += step) {
                 // Skip problematic values
-                if (Math.abs(x) < 0.001 && (solution.type === 'logarithmic' || originalEq.includes('1/x'))) {
+                if (Math.abs(x) < 0.001 && (originalEq.includes('/x') || originalEq.includes('ln'))) {
                     continue;
                 }
-                
+
                 xData.push(x);
-                
+
                 try {
                     // Evaluate original equation
-                    let y;
-                    
-                    if (originalEq.includes('sin(x)')) {
-                        y = Math.sin(x);
-                    } else if (originalEq.includes('cos(x)')) {
-                        y = Math.cos(x);
-                    } else if (originalEq.includes('tan(x)')) {
-                        y = Math.tan(x);
-                    } else if (originalEq.includes('e^x')) {
-                        y = Math.exp(x);
-                    } else if (originalEq.includes('ln(x)')) {
-                        y = x > 0 ? Math.log(x) : null;
-                    } else if (originalEq.includes('x^2')) {
-                        y = x * x;
-                    } else if (originalEq.includes('2x + 3')) {
-                        y = 2 * x + 3;
-                    } else if (originalEq.includes('x^2 + 3x + 2')) {
-                        y = x * x + 3 * x + 2;
-                    } else if (originalEq.includes('1/x')) {
-                        y = x !== 0 ? 1/x : null;
-                    } else if (originalEq.includes('x^3')) {
-                        y = x * x * x - 2 * x;
-                    } else {
-                        y = Math.sin(x); // Default
-                    }
-                    
+                    let y = evaluateFunction(originalEq, x);
                     yOriginal.push(y);
-                    
-                    // Evaluate orthogonal equation based on solution type
-                    let orthoY;
-                    
-                    if (solution.type === 'trigonometric') {
-                        if (solution.category === 'sine') {
-                            orthoY = -Math.log(Math.abs(1/Math.cos(x) + Math.tan(x))) + 2;
-                        } else if (solution.category === 'cosine') {
-                            orthoY = Math.log(Math.abs(1/Math.sin(x) - 1/Math.tan(x))) + 2;
-                        } else if (solution.category === 'tangent') {
-                            orthoY = -0.5 * (x + Math.sin(x) * Math.cos(x)) + 2;
-                        }
-                    } else if (solution.type === 'exponential') {
-                        orthoY = Math.exp(-x) + 2;
-                    } else if (solution.type === 'logarithmic') {
-                        orthoY = -0.5 * x * x + 2;
-                    } else if (solution.type === 'polynomial') {
-                        if (solution.category === 'linear') {
-                            orthoY = -0.5 * x + 2;
-                        } else if (solution.category === 'quadratic') {
-                            orthoY = -0.5 * Math.log(Math.abs(2*x + 3)) + 2;
-                        }
-                    } else if (solution.type === 'power') {
-                        if (solution.category === 'reciprocal') {
-                            orthoY = (x*x*x)/3 + 2;
-                        } else {
-                            orthoY = -0.5 * Math.log(Math.abs(x)) + 2;
-                        }
-                    } else {
-                        orthoY = -0.5 * Math.log(Math.abs(x)) + 2;
-                    }
-                    
-                    yOrtho.push(isFinite(orthoY) ? orthoY : null);
-                    
-                } catch (e) {
+
+                    // Evaluate orthogonal equation
+                    let orthoY = evaluateOrthogonalFunction(solution, x, originalEq);
+                    yOrtho.push(orthoY);
+                } catch (error) {
                     yOriginal.push(null);
                     yOrtho.push(null);
                 }
             }
-            
-            // Filter out null values
-            const filteredData = xData.map((x, i) => ({
-                x: x,
-                yOrig: yOriginal[i],
-                yOrtho: yOrtho[i]
-            })).filter(d => d.yOrig !== null && d.yOrtho !== null);
-            
-            const filteredX = filteredData.map(d => d.x);
-            const filteredYOrig = filteredData.map(d => d.yOrig);
-            const filteredYOrtho = filteredData.map(d => d.yOrtho);
-            
+
             // Create traces
             const originalTrace = {
-                x: filteredX,
-                y: filteredYOrig,
+                x: xData,
+                y: yOriginal,
                 mode: 'lines',
                 name: 'Original',
-                line: {color: '#5c6bc0', width: 3},
-                fill: 'tozeroy',
-                fillcolor: 'rgba(92, 107, 192, 0.1)'
+                line: {color: '#5c6bc0', width: 3}
             };
-            
+
             const orthogonalTrace = {
-                x: filteredX,
-                y: filteredYOrtho,
+                x: xData,
+                y: yOrtho,
                 mode: 'lines',
                 name: 'Orthogonal',
-                line: {color: '#ef5350', width: 3},
-                fill: 'tonexty',
-                fillcolor: 'rgba(239, 83, 80, 0.1)'
+                line: {color: '#ef5350', width: 3}
             };
-            
+
+            // Graph configuration
+            const graphConfig = {
+                displayModeBar: true,
+                responsive: true
+            };
+
             // Original Graph
             Plotly.newPlot('originalGraph', [originalTrace], {
                 title: 'Original Equation',
                 xaxis: {title: xVar, gridcolor: '#f0f0f0'},
                 yaxis: {title: yVar, gridcolor: '#f0f0f0'},
                 plot_bgcolor: '#fafafa',
-                paper_bgcolor: 'white',
-                font: {color: '#1a237e'},
-                margin: {t: 40, r: 20, b: 50, l: 60}
-            });
-            
+                paper_bgcolor: 'white'
+            }, graphConfig);
+
             // Orthogonal Graph
             Plotly.newPlot('orthogonalGraph', [orthogonalTrace], {
                 title: 'Orthogonal Trajectory',
                 xaxis: {title: xVar, gridcolor: '#f0f0f0'},
                 yaxis: {title: yVar, gridcolor: '#f0f0f0'},
                 plot_bgcolor: '#fafafa',
-                paper_bgcolor: 'white',
-                font: {color: '#1a237e'},
-                margin: {t: 40, r: 20, b: 50, l: 60}
-            });
-            
+                paper_bgcolor: 'white'
+            }, graphConfig);
+
             // Combined Graph
             Plotly.newPlot('combinedGraph', [originalTrace, orthogonalTrace], {
-                title: 'Both Families (Orthogonal Intersection)',
+                title: 'Both Families Combined',
                 xaxis: {title: xVar, gridcolor: '#f0f0f0'},
                 yaxis: {title: yVar, gridcolor: '#f0f0f0'},
                 plot_bgcolor: '#fafafa',
                 paper_bgcolor: 'white',
-                font: {color: '#1a237e'},
-                showlegend: true,
-                legend: {x: 0.8, y: 0.1},
-                margin: {t: 40, r: 20, b: 50, l: 60}
-            });
+                showlegend: true
+            }, graphConfig);
         }
 
-        // Back to Home
-        backHomeBtn.addEventListener('click', function() {
-            backendPage.style.display = 'none';
-            frontPage.style.display = 'block';
+        // Simple function evaluator
+        function evaluateFunction(equation, x) {
+            const eq = equation.toLowerCase().replace(/\s+/g, '');
             
-            // Clear input
-            document.getElementById('equation').value = '';
+            if (eq.includes('y=sin(2x)')) return Math.sin(2*x);
+            if (eq.includes('y=sin(x)')) return Math.sin(x);
+            if (eq.includes('y=cos(x)')) return Math.cos(x);
+            if (eq.includes('y=e^x') || eq.includes('y=e^(x)')) return Math.exp(x);
+            if (eq.includes('y=e^(2x)')) return Math.exp(2*x);
+            if (eq.includes('y=x^2')) return x*x;
+            if (eq.includes('y=2x+3')) return 2*x + 3;
+            if (eq.includes('y=2x^2+3x+1')) return 2*x*x + 3*x + 1;
+            if (eq.includes('y=1/x')) return x !== 0 ? 1/x : null;
+            if (eq.includes('y=ln(x)')) return x > 0 ? Math.log(x) : null;
+            if (eq.includes('y=x')) return x;
             
-            // Reset MathJax
-            if (window.MathJax) {
-                MathJax.typesetPromise();
-            }
-        });
+            return Math.sin(x); // Default
+        }
 
-        // Contact Modal
-        contactBtn.addEventListener('click', function() {
-            contactModal.style.display = 'flex';
-        });
-
-        closeContactBtn.addEventListener('click', function() {
-            contactModal.style.display = 'none';
-        });
-
-        submitContactBtn.addEventListener('click', function() {
-            const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const subject = document.getElementById('contactSubject').value;
-            const message = document.getElementById('contactMessage').value;
-            
-            if (!name || !email || !message) {
-                alert('Please fill in all required fields (marked with *)');
-                return;
-            }
-            
-            alert('Thank you for your message! We will get back to you soon.');
-            contactModal.style.display = 'none';
-            
-            // Clear form
-            document.getElementById('contactName').value = '';
-            document.getElementById('contactEmail').value = '';
-            document.getElementById('contactSubject').value = '';
-            document.getElementById('contactMessage').value = '';
-        });
-
-        // Leave Button - Show Feedback
-        leaveBtn.addEventListener('click', function() {
-            feedbackModal.style.display = 'flex';
-        });
-
-        // Rating Stars
-        ratingStars.forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = parseInt(this.getAttribute('data-rating'));
-                ratingValue.value = rating;
-                
-                ratingStars.forEach((s, index) => {
-                    if (index < rating) {
-                        s.classList.remove('far');
-                        s.classList.add('fas', 'active');
-                    } else {
-                        s.classList.remove('fas', 'active');
-                        s.classList.add('far');
+        // Evaluate orthogonal function
+        function evaluateOrthogonalFunction(solution, x, originalEq) {
+            try {
+                if (solution.type === 'trigonometric') {
+                    if (solution.category === 'sine') {
+                        if (originalEq.includes('sin(2x)')) {
+                            return -0.5 * Math.log(Math.abs(1/Math.cos(2*x) + Math.tan(2*x))) + 1;
+                        }
+                        return -Math.log(Math.abs(1/Math.cos(x) + Math.tan(x))) + 1;
                     }
-                });
-            });
-        });
-
-        // Submit Feedback
-        submitFeedbackBtn.addEventListener('click', function() {
-            const feedback = document.getElementById('feedback').value;
-            const rating = ratingValue.value;
-            
-            if (!feedback || rating === '0') {
-                alert('Please provide feedback and a rating');
-                return;
+                } else if (solution.type === 'exponential') {
+                    if (originalEq.includes('e^(2x)')) {
+                        return 0.5 * Math.exp(-2*x) + 1;
+                    }
+                    return Math.exp(-x) + 1;
+                } else if (solution.type === 'polynomial') {
+                    if (originalEq.includes('x^2')) {
+                        return -0.5 * Math.log(Math.abs(x)) + 1;
+                    }
+                    if (originalEq.includes('2x+3')) {
+                        return -0.5 * x + 2;
+                    }
+                    if (originalEq.includes('2x^2+3x+1')) {
+                        return -0.25 * Math.log(Math.abs(4*x + 3)) + 2;
+                    }
+                } else if (solution.type === 'logarithmic') {
+                    return -0.5 * x * x + 2;
+                } else if (solution.type === 'power') {
+                    if (originalEq.includes('1/x')) {
+                        return (x*x*x)/3 + 1;
+                    }
+                }
+                
+                // Default orthogonal function
+                return -0.5 * Math.log(Math.abs(x)) + 2;
+            } catch (error) {
+                return null;
             }
-            
-            alert(`Thank you for your ${rating}-star feedback! We appreciate your input.`);
-            feedbackModal.style.display = 'none';
-            
-            // Clear form
-            document.getElementById('feedback').value = '';
-            ratingValue.value = '0';
-            ratingStars.forEach(star => {
-                star.classList.remove('fas', 'active');
-                star.classList.add('far');
-            });
-        });
-
-        // Close modals when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === contactModal) {
-                contactModal.style.display = 'none';
-            }
-            if (event.target === feedbackModal) {
-                feedbackModal.style.display = 'none';
-            }
-        });
+        }
 
         // Initialize
         animateEquations();
-        
+
         // Render initial MathJax
         if (window.MathJax) {
             MathJax.typesetPromise();
         }
+
+        // Enter key support
+        equationInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateBtn.click();
+            }
+        });
+
+        // Push initial state to prevent back button issues
+        history.pushState(null, null, window.location.href);
     </script>
 </body>
-                        </html>
+</html>
