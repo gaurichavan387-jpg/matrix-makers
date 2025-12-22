@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Orthogonal Trajectory Calculator</title>
+    <title>Virtual Labs - Orthogonal Trajectory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         * {
             margin: 0;
@@ -17,2003 +14,1672 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0d47a1 0%, #311b92 100%);
-            min-height: 100vh;
+            background-color: #f8f9fa;
             color: #333;
-            padding: 10px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 12px 0;
-            margin-bottom: 20px;
-            color: white;
-            text-align: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .logo i {
-            color: #7e57c2;
-            font-size: 2rem;
-        }
-
-        .logo-text {
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        @media (max-width: 480px) {
-            .logo-text {
-                font-size: 1rem;
-            }
-            .logo i {
-                font-size: 1.5rem;
-            }
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 0 20px;
         }
 
-        .section-title {
-            color: #1a237e;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .section-title i {
-            color: #5c6bc0;
-        }
-
-        .visualization-container {
-            height: 250px;
-            background: linear-gradient(135deg, #f5f5f5 0%, #ede7f6 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border: 2px solid #d1c4e9;
-        }
-
-        .equation-display {
-            text-align: center;
-            width: 95%;
-            padding: 5px;
-        }
-
-        .main-equation {
-            font-size: 1.4rem;
-            color: #5c6bc0;
-            margin-bottom: 8px;
-            font-weight: bold;
-            padding: 8px;
-            background: #e8eaf6;
-            border-radius: 6px;
-            overflow-x: auto;
-        }
-
-        .orthogonal-equation {
-            font-size: 1.2rem;
-            color: #ef5350;
-            font-weight: bold;
-            padding: 8px;
-            background: #ffebee;
-            border-radius: 6px;
-            overflow-x: auto;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #1a237e;
-            font-size: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #d1c4e9;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #5c6bc0;
-            box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.2);
-            background: white;
-        }
-
-        .suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 8px;
-        }
-
-        .suggestion-btn {
-            background: #e8eaf6;
-            border: 2px solid #5c6bc0;
-            color: #5c6bc0;
-            padding: 6px 12px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            font-size: 0.85rem;
-            flex: 1;
-            min-width: 80px;
-            text-align: center;
-            min-height: 36px;
-        }
-
-        .suggestion-btn:hover {
-            background: #5c6bc0;
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
             color: white;
-            transform: translateY(-2px);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .equation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .equation-box {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 12px;
-            border: 2px solid #e8eaf6;
-            transition: transform 0.3s ease;
-        }
-
-        .equation-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .equation-box h4 {
-            color: #1a237e;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.1rem;
-        }
-
-        .eq-examples {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .eq-example {
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px;
-            background: white;
-            border-radius: 6px;
-            border: 1px solid #e0e0e0;
-            min-height: 44px;
-            transition: all 0.2s ease;
         }
 
-        .eq-example:hover {
-            background: #f0f0f0;
-        }
-
-        .eq-text {
-            font-family: 'Cambria Math', serif;
-            font-size: 0.9rem;
-            flex: 1;
-            overflow-x: auto;
-            padding-right: 5px;
-        }
-
-        .eq-btn {
-            background: #5c6bc0;
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            min-width: 50px;
-            transition: all 0.2s ease;
-        }
-
-        .eq-btn:hover {
-            background: #3f51b5;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
-            color: white;
-            border: none;
-            padding: 16px 20px;
-            font-size: 1.1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .logo-section {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            margin-top: 20px;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(92, 107, 192, 0.3);
-            min-height: 50px;
+            gap: 25px;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(92, 107,192, 0.4);
-            background: linear-gradient(135deg, #0d1b5e 0%, #3f51b5 100%);
+        .pcce-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-right: 25px;
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .solution-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 10px;
+        .pcce-logo-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: white;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .solution-box {
-            background: white;
-            border-radius: 12px;
+        .pcce-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pcce-logo-text .main {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .pcce-logo-text .sub {
+            font-size: 12px;
+            color: #ecf0f1;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        .virtual-labs-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .virtual-labs-logo i {
+            font-size: 32px;
+            color: #3498db;
+        }
+
+        .virtual-labs-logo h1 {
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .virtual-labs-logo span {
+            color: #3498db;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info i {
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        /* Content Area */
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            min-height: 600px;
+            margin-top: 30px;
+        }
+
+        .content-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .content-header h2 {
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .content-header p {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        /* Aim Sections */
+        .aim-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .section-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 2px solid #e8eaf6;
-            animation: fadeIn 0.5s ease;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
         }
 
-        .solution-box h3 {
-            color: #1a237e;
+        .section-card.active {
+            background-color: #e8f4fc;
+            border-color: #3498db;
+        }
+
+        .section-card i {
+            font-size: 32px;
+            color: #3498db;
             margin-bottom: 15px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #5c6bc0;
-            font-size: 1.3rem;
+        }
+
+        .section-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .section-card p {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        /* Backend Page Styles */
+        .backend-page {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            min-height: 600px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .backend-page.active {
+            display: block;
+        }
+
+        .backend-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .backend-header h2 {
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .close-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .close-btn:hover {
+            background: #c0392b;
+        }
+
+        .return-home-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
-        .step {
-            margin-bottom: 12px;
-            padding-left: 15px;
-            border-left: 3px solid #5c6bc0;
-            background: #f5f5f5;
-            padding: 12px;
-            border-radius: 0 6px 6px 0;
-            animation: slideIn 0.3s ease;
+        .return-home-btn:hover {
+            background: #2980b9;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+        .aim-content, .theory-content, .pretest-content, .posttest-content, .references-content, .contributors-content, .feedback-content {
+            line-height: 1.6;
         }
 
-        .step-number {
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 22px;
-            margin-right: 8px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            flex-shrink: 0;
+        .aim-content h3, .theory-content h3, .pretest-content h3, .posttest-content h3, .references-content h3, .contributors-content h3, .feedback-content h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
         }
 
-        .math-equation {
-            padding: 12px;
-            border-radius: 6px;
-            margin: 8px 0;
-            border: 2px solid #d1c4e9;
-            font-size: 1rem;
-            text-align: center;
-            font-family: 'Cambria Math', serif;
-            background: #f8f9fa;
-            overflow-x: auto;
-            animation: fadeIn 0.5s ease;
+        .aim-content p, .theory-content p, .pretest-content p, .references-content p, .contributors-content p, .feedback-content p {
+            margin-bottom: 15px;
+            color: #555;
         }
 
-        /* Improved Graph Layout */
-        .graph-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 15px;
+        .theory-content ul, .pretest-content ul, .references-content ul, .contributors-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
         }
 
-        .graph-wrapper {
-            background: white;
-            border-radius: 10px;
+        .theory-content li, .pretest-content li, .references-content li, .contributors-content li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .question-block {
+            background-color: #f8f9fa;
             padding: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            border: 2px solid #e8eaf6;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
         }
 
-        .graph-title {
-            color: #1a237e;
+        .question-block h4 {
+            color: #2c3e50;
             margin-bottom: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-align: center;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e8eaf6;
         }
 
-        .graph-container {
-            height: 300px;
-            width: 100%;
+        .solution {
+            background-color: #e8f4fc;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+            border-left: 3px solid #2980b9;
+        }
+
+        .posttest-question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .options {
+            margin-left: 20px;
             margin-top: 10px;
         }
 
-        .back-home-btn {
-            background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
-            color: white;
-            border: none;
-            padding: 14px 25px;
-            font-size: 1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .option {
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin: 25px auto;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(92, 107, 192, 0.3);
-            width: 100%;
-            max-width: 300px;
-            min-height: 50px;
+            gap: 10px;
         }
 
-        .back-home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(92, 107, 192, 0.4);
-            background: linear-gradient(135deg, #0d1b5e 0%, #3f51b5 100%);
-        }
-
-        .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 10px;
+        .submit-btn {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
             border-radius: 6px;
-            margin: 8px 0;
-            border: 2px solid #ef5350;
-            display: none;
-            font-size: 0.9rem;
-            animation: shake 0.5s ease;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 500;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+        .submit-btn:hover {
+            background: linear-gradient(to right, #27ae60, #219653);
         }
 
-        .success-message {
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 10px;
-            border-radius: 6px;
-            margin: 8px 0;
-            border: 2px solid #4caf50;
-            display: none;
-            font-size: 0.9rem;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .coeff-inputs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-            margin: 12px 0;
-            padding: 12px;
-            background: #f0f4ff;
+        .result-section {
+            background-color: #e8f4fc;
+            padding: 20px;
             border-radius: 8px;
+            margin-top: 20px;
+            display: none;
         }
 
-        .coeff-group {
+        .feedback-form {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .coeff-label {
-            font-weight: bold;
-            color: #5c6bc0;
-            font-size: 0.85rem;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        .coeff-input {
-            padding: 6px;
-            border: 2px solid #d1c4e9;
-            border-radius: 5px;
-            font-size: 0.85rem;
+        .form-group label {
+            font-weight: 500;
+            color: #2c3e50;
         }
 
-        .derivative-display {
-            background: #e8eaf6;
-            padding: 12px;
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit-btn {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
             border-radius: 6px;
-            margin: 12px 0;
-            font-family: 'Cambria Math', serif;
-            font-size: 1.1rem;
-            text-align: center;
-            border: 2px solid #5c6bc0;
-            overflow-x: auto;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
         }
 
-        .info-tooltip {
-            position: relative;
+        .form-submit-btn:hover {
+            background: linear-gradient(to right, #2980b9, #216794);
+        }
+
+        /* Simulation Link */
+        .simulation-link {
             display: inline-block;
-            margin-left: 5px;
-        }
-
-        .info-tooltip i {
-            color: #5c6bc0;
-            font-size: 0.9rem;
-            cursor: help;
-        }
-
-        .tooltip-text {
-            visibility: hidden;
-            width: 200px;
-            background-color: #1a237e;
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
             color: white;
-            text-align: center;
+            padding: 12px 25px;
             border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: all 0.3s ease;
         }
 
-        .info-tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
+        .simulation-link:hover {
+            background: linear-gradient(to right, #8e44ad, #7d3c98);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
         }
 
-        /* Mobile-specific adjustments */
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .logo {
-                font-size: 1.1rem;
-            }
-            
-            .logo i {
-                font-size: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 1.2rem;
-            }
-            
-            .visualization-container {
-                height: 200px;
-            }
-            
-            .main-equation {
-                font-size: 1.1rem;
-            }
-            
-            .orthogonal-equation {
-                font-size: 1rem;
-            }
-            
-            .equation-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .graph-container {
-                height: 250px;
-            }
-            
-            .suggestion-btn {
-                min-width: 70px;
-                padding: 5px 10px;
-                font-size: 0.8rem;
-            }
-            
-            .eq-text {
-                font-size: 0.85rem;
-            }
-            
-            .coeff-inputs {
-                grid-template-columns: 1fr;
-            }
-            
-            .submit-btn, .back-home-btn {
-                padding: 14px 20px;
-                font-size: 1rem;
-            }
-            
-            .tooltip-text {
-                width: 150px;
-                font-size: 0.7rem;
-            }
-        }
-
-        @media (max-width: 768px) and (min-width: 481px) {
-            .equation-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .coeff-inputs {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Touch-friendly improvements */
-        button, .suggestion-btn, .eq-btn, .submit-btn, .back-home-btn {
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        
-        input, select, textarea {
-            font-size: 16px; /* Prevents zoom on iOS */
-        }
-        
-        /* Improve scroll on mobile */
-        .math-equation, .derivative-display {
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .loading {
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
             display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 20px 0;
             text-align: center;
-            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #eee;
         }
 
-        .loading-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #5c6bc0;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+        .footer-logo {
+            display: inline-block;
+            margin: 0 5px;
+            font-weight: bold;
+            color: #2c3e50;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .footer {
-            text-align: center;
+        /* Debug styling - to help identify if image loads */
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
             color: white;
-            padding: 20px;
-            margin-top: 20px;
-            font-size: 0.9rem;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
         }
 
-        .instructions {
-            background: #e8eaf6;
-            padding: 15px;
+        /* Question Section */
+        .question-section {
+            background-color: #f8f9fa;
             border-radius: 8px;
-            margin: 15px 0;
-            font-size: 0.9rem;
-            color: #1a237e;
-            border-left: 4px solid #5c6bc0;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
         }
 
-        .instructions h4 {
-            margin-bottom: 8px;
-            color: #1a237e;
+        .question-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 22px;
         }
 
-        .instructions ul {
-            padding-left: 20px;
+        .question-text {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
-        .instructions li {
-            margin-bottom: 5px;
+        /* Feedback Section */
+        .feedback-section {
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #d1e7ff;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feedback-header i {
+            font-size: 28px;
+            color: #3498db;
+        }
+
+        .feedback-header h3 {
+            color: #2c3e50;
+            font-size: 22px;
+        }
+
+        .feedback-content {
+            margin-bottom: 25px;
+        }
+
+        .feedback-content p {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .feedback-button {
+            background: linear-gradient(to right, #3498db, #2c80b9);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feedback-button:hover {
+            background: linear-gradient(to right, #2c80b9, #216794);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .aim-sections {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+
+            .backend-page {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .logo-section {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+            
+            .pcce-logo-container {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+                padding-bottom: 20px;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .virtual-labs-logo {
+                justify-content: center;
+            }
+            
+            .aim-sections {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .aim-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .pcce-logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .pcce-logo-img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .backend-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .backend-header h2 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Front Page -->
-    <div id="frontPage">
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-infinity"></i>
-                <div class="logo-text">
-                    Universal Orthogonal Trajectory Calculator
+    <!-- Debug info - remove this in production -->
+    <div class="debug-info" id="debugInfo">
+        Checking image loading...
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-section">
+                <!-- PCOE Logo -->
+                <div class="pcce-logo-container">
+                    <!-- Using GitHub raw URL with fallback -->
+                    <img src="https://raw.githubusercontent.com/dineshkute90/virtual_lab_LAUC/main/pccoe.png" 
+                         alt="PCOE Logo" 
+                         class="pcce-logo-img"
+                         id="pcceLogo"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/2c3e50/ffffff?text=PCOE';">
+                    <div class="pcce-logo-text">
+                        <div class="main">APPLIED SCIENCES & HUMANITIES</div>
+                        <div class="sub">Pimpri Chinchwad College of Engineering</div>
+                    </div>
+                </div>
+                
+                <!-- Virtual Labs Logo -->
+                <div class="virtual-labs-logo">
+                    <i class="fas fa-flask"></i>
+                    <h1>Virtual <span>Labs</span></h1>
                 </div>
             </div>
-        </header>
+            
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>Welcome, Student</span>
+            </div>
+        </div>
+    </header>
 
-        <div class="container">
-            <h2 class="section-title">
-                <i class="fas fa-calculator"></i> Calculate Orthogonal Trajectories
-            </h2>
-           
-            <div class="visualization-container">
-                <div class="equation-display">
-                    <div class="main-equation" id="mainEquation">\[ y = f(x) \]</div>
-                    <div class="orthogonal-equation" id="orthogonalEquation">\[ \text{Orthogonal: } y = \int -\frac{1}{f'(x)} dx + C \]</div>
-                </div>
+    <!-- Content Area -->
+    <div class="container">
+        <main class="content">
+            <div class="content-header">
+                <h2>A Virtual Lab on Orthogonal Trajectory</h2>
+                <p>Engineering Mathematics Experiment</p>
             </div>
 
-            <div class="instructions">
-                <h4><i class="fas fa-info-circle"></i> How to use:</h4>
+            <!-- Aim Sections -->
+            <div class="aim-sections">
+                <div class="section-card active" data-section="aim">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Aim</h3>
+                    <p>Objective of the experiment</p>
+                </div>
+                <div class="section-card" data-section="theory">
+                    <i class="fas fa-book"></i>
+                    <h3>Theory</h3>
+                    <p>Background concepts</p>
+                </div>
+                <div class="section-card" data-section="pretest">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Pretest</h3>
+                    <p>Pre-experiment assessment</p>
+                </div>
+                <div class="section-card" data-section="simulation">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Simulation</h3>
+                    <p>Interactive simulation</p>
+                </div>
+                <div class="section-card" data-section="posttest">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h3>Posttest</h3>
+                    <p>Post-experiment assessment</p>
+                </div>
+                <div class="section-card" data-section="references">
+                    <i class="fas fa-book-open"></i>
+                    <h3>References</h3>
+                    <p>Further reading materials</p>
+                </div>
+                <div class="section-card" data-section="contributors">
+                    <i class="fas fa-users"></i>
+                    <h3>Contributors</h3>
+                    <p>People involved</p>
+                </div>
+                <div class="section-card feedback-card" data-section="feedback">
+                    <i class="fas fa-comment-alt"></i>
+                    <h3>Feedback</h3>
+                    <p>Share your experience</p>
+                </div>        
+            </div>
+
+            <!-- Question and Feedback Section (Default View) -->
+            <div class="question-section">
+                <h3>About This Virtual Lab</h3>
+                <p class="question-text">
+                    Welcome to the Virtual Lab on Orthogonal Trajectory. This lab is designed to help you understand the concept of orthogonal trajectories, which are families of curves that intersect another family of curves at right angles. Click on any of the sections above to explore different aspects of this experiment.
+                </p>
+            </div>
+
+            <div class="feedback-section">
+                <div class="feedback-header">
+                    <i class="fas fa-comment-alt"></i>
+                    <h3>Need Help?</h3>
+                </div>
+                <div class="feedback-content">
+                    <p>If you have any questions or need assistance with the virtual lab, please don't hesitate to reach out to your instructor or use the feedback form.</p>
+                    <button class="feedback-button">
+                        <i class="fas fa-comments"></i>
+                        Contact Instructor
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Backend Pages -->
+
+    <!-- Aim Page -->
+    <div class="backend-page" id="aim-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-bullseye"></i> Aim of the Experiment</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="aim-content">
+            <h3>Objective</h3>
+            <p>The aim of this virtual lab is to provide students with a comprehensive understanding of orthogonal trajectories through interactive learning modules. By the end of this experiment, students will be able to:</p>
+            <ul>
+                <li>Understand the concept of orthogonal trajectories and their significance in mathematics</li>
+                <li>Identify orthogonal families of curves</li>
+                <li>Solve problems related to finding orthogonal trajectories of given families of curves</li>
+                <li>Apply the concept of orthogonal trajectories to real-world problems in physics and engineering</li>
+                <li>Analyze and verify the orthogonality of curves using mathematical principles</li>
+            </ul>
+            <p>This virtual lab provides a simulated environment where students can learn, practice, and test their understanding of orthogonal trajectories without the need for physical equipment.</p>
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Theory Page -->
+    <div class="backend-page" id="theory-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-book"></i> Theory: Orthogonal Trajectory</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="theory-content">
+            <h3>What are Orthogonal Trajectories?</h3>
+            <p>Orthogonal trajectories are families of curves that intersect another family of curves at right angles (90°). In mathematics, particularly in differential equations, finding orthogonal trajectories is an important application.</p>
+            
+            <h3>Mathematical Definition</h3>
+            <p>Given a one-parameter family of curves F(x, y, c) = 0, an orthogonal trajectory is a curve that intersects each curve of the family at a right angle.</p>
+            
+            <h3>Method to Find Orthogonal Trajectories</h3>
+            <p>To find the orthogonal trajectories of a given family of curves:</p>
+            <ol>
+                <li>Find the differential equation of the given family by eliminating the parameter</li>
+                <li>Replace dy/dx with -dx/dy (or -1/(dy/dx)) to get the differential equation of orthogonal trajectories</li>
+                <li>Solve this new differential equation to obtain the family of orthogonal trajectories</li>
+            </ol>
+            
+            <h3>Example: Orthogonal Trajectories of Straight Lines</h3>
+            <div class="question-block">
+                <h4>Problem:</h4>
+                <p>Find the orthogonal trajectories of the family of straight lines through the origin: y = mx</p>
+                
+                <h4>Solution:</h4>
+                <div class="solution">
+                    <p>1. Given family: y = mx</p>
+                    <p>2. Differentiate: dy/dx = m</p>
+                    <p>3. But from y = mx, m = y/x</p>
+                    <p>4. So differential equation is: dy/dx = y/x</p>
+                    <p>5. For orthogonal trajectories, replace dy/dx with -dx/dy</p>
+                    <p>6. So: -dx/dy = y/x ⇒ x dx + y dy = 0</p>
+                    <p>7. Integrate: x²/2 + y²/2 = c/2 ⇒ x² + y² = c</p>
+                    <p>8. Orthogonal trajectories are circles centered at origin</p>
+                </div>
+            </div>
+            
+            <h3>Applications of Orthogonal Trajectories</h3>
+            <ul>
+                <li><strong>Electrostatics:</strong> Electric field lines and equipotential surfaces are orthogonal</li>
+                <li><strong>Fluid Dynamics:</strong> Streamlines and equipotential lines in ideal fluid flow</li>
+                <li><strong>Heat Transfer:</strong> Isotherms and heat flow lines</li>
+                <li><strong>Cartography:</strong> Lines of longitude and latitude on Earth</li>
+            </ul>
+            
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Pretest Page -->
+    <div class="backend-page" id="pretest-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-question-circle"></i> Pretest Questions</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="pretest-content">
+            <h3>Pre-experiment Assessment</h3>
+            <p>Answer the following questions to test your preliminary knowledge about orthogonal trajectories.</p>
+            
+            <h4>Section A: Polynomial Functions (3 Questions)</h4>
+            
+            <div class="question-block">
+                <h4>Question 1:</h4>
+                <p>Find the orthogonal trajectories of the family of parabolas y = ax².</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. Given: y = ax² ⇒ a = y/x²</p>
+                    <p>2. Differentiate: dy/dx = 2ax = 2(y/x²)x = 2y/x</p>
+                    <p>3. Replace dy/dx with -dx/dy: -dx/dy = 2y/x</p>
+                    <p>4. Rearranging: x dx + 2y dy = 0</p>
+                    <p>5. Integrate: x²/2 + y² = c</p>
+                    <p>6. Orthogonal trajectories: x²/2 + y² = c (ellipses)</p>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h4>Question 2:</h4>
+                <p>Find orthogonal trajectories of the family of curves y = cx³.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. y = cx³ ⇒ c = y/x³</p>
+                    <p>2. dy/dx = 3cx² = 3(y/x³)x² = 3y/x</p>
+                    <p>3. For orthogonal trajectories: -dx/dy = 3y/x</p>
+                    <p>4. So: x dx + 3y dy = 0</p>
+                    <p>5. Integrate: x²/2 + (3/2)y² = c ⇒ x² + 3y² = 2c</p>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h4>Question 3:</h4>
+                <p>Find orthogonal trajectories of the family: y² = 4ax (parabolas opening right).</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. y² = 4ax ⇒ a = y²/(4x)</p>
+                    <p>2. Differentiate: 2y(dy/dx) = 4a ⇒ dy/dx = 2a/y = 2(y²/(4x))/y = y/(2x)</p>
+                    <p>3. For orthogonal trajectories: -dx/dy = y/(2x)</p>
+                    <p>4. So: 2x dx + y dy = 0</p>
+                    <p>5. Integrate: x² + y²/2 = c ⇒ 2x² + y² = 2c</p>
+                </div>
+            </div>
+            
+            <h4>Section B: Trigonometric Functions (2 Questions)</h4>
+            
+            <div class="question-block">
+                <h4>Question 4:</h4>
+                <p>Find orthogonal trajectories of the family: y = c sin x.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. y = c sin x ⇒ c = y/sin x</p>
+                    <p>2. dy/dx = c cos x = (y/sin x) cos x = y cot x</p>
+                    <p>3. For orthogonal trajectories: -dx/dy = y cot x</p>
+                    <p>4. So: -dx = y cot x dy ⇒ -tan x dx = y dy</p>
+                    <p>5. Integrate: ln|cos x| = y²/2 + c'</p>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h4>Question 5:</h4>
+                <p>Find orthogonal trajectories of the family: x = c cos y.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. x = c cos y ⇒ c = x/cos y</p>
+                    <p>2. Differentiate: 1 = -c sin y (dy/dx) ⇒ dy/dx = -1/(c sin y) = -cos y/(x sin y) = -cot y/x</p>
+                    <p>3. For orthogonal trajectories: -dx/dy = -cot y/x ⇒ dx/dy = cot y/x</p>
+                    <p>4. So: x dx = cot y dy</p>
+                    <p>5. Integrate: x²/2 = ln|sin y| + c</p>
+                </div>
+            </div>
+            
+            <h4>Section C: Exponential & Logarithmic Functions (3 Questions)</h4>
+            
+            <div class="question-block">
+                <h4>Question 6:</h4>
+                <p>Find orthogonal trajectories of the family: y = ce^x.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. y = ce^x ⇒ c = ye^{-x}</p>
+                    <p>2. dy/dx = ce^x = (ye^{-x})e^x = y</p>
+                    <p>3. For orthogonal trajectories: -dx/dy = y</p>
+                    <p>4. So: -dx = y dy</p>
+                    <p>5. Integrate: -x = y²/2 + c ⇒ y² = -2x + 2c</p>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h4>Question 7:</h4>
+                <p>Find orthogonal trajectories of the family: y = ln(cx).</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. y = ln(cx) = ln c + ln x</p>
+                    <p>2. dy/dx = 1/x</p>
+                    <p>3. For orthogonal trajectories: -dx/dy = 1/x</p>
+                    <p>4. So: -x dx = dy</p>
+                    <p>5. Integrate: -x²/2 = y + c ⇒ y = -x²/2 - c</p>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h4>Question 8:</h4>
+                <p>Find orthogonal trajectories of the family: e^x sin y = c.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. e^x sin y = c</p>
+                    <p>2. Differentiate: e^x sin y + e^x cos y (dy/dx) = 0</p>
+                    <p>3. So: dy/dx = -sin y/cos y = -tan y</p>
+                    <p>4. For orthogonal trajectories: -dx/dy = -tan y ⇒ dx/dy = tan y</p>
+                    <p>5. So: dx = tan y dy</p>
+                    <p>6. Integrate: x = ln|sec y| + c'</p>
+                </div>
+            </div>
+            
+            <h4>Section D: Circles (2 Questions)</h4>
+            
+            <div class="question-block">
+                <h4>Question 9:</h4>
+                <p>Find orthogonal trajectories of the family of circles: x² + y² = a².</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. x² + y² = a²</p>
+                    <p>2. Differentiate: 2x + 2y(dy/dx) = 0 ⇒ dy/dx = -x/y</p>
+                    <p>3. For orthogonal trajectories: -dx/dy = -x/y ⇒ dx/dy = x/y</p>
+                    <p>4. So: dx/x = dy/y</p>
+                    <p>5. Integrate: ln|x| = ln|y| + ln|c| ⇒ y = cx (straight lines through origin)</p>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h4>Question 10:</h4>
+                <p>Find orthogonal trajectories of the family of circles: (x - h)² + y² = h².</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>1. (x - h)² + y² = h² ⇒ x² - 2hx + h² + y² = h² ⇒ x² + y² = 2hx</p>
+                    <p>2. Differentiate: 2x + 2y(dy/dx) = 2h ⇒ h = x + y(dy/dx)</p>
+                    <p>3. From original equation: h = (x² + y²)/(2x)</p>
+                    <p>4. Equate: x + y(dy/dx) = (x² + y²)/(2x)</p>
+                    <p>5. Solve for dy/dx, then replace with -dx/dy for orthogonal trajectories</p>
+                    <p>6. Final result: y² = -x² + 2kx (orthogonal trajectories are also circles)</p>
+                </div>
+            </div>
+            
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Posttest Page -->
+    <div class="backend-page" id="posttest-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-clipboard-check"></i> Posttest Assessment</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="posttest-content">
+            <h3>Post-Experiment Test</h3>
+            <p>This test contains 10 questions, each worth 1 mark. Select the correct orthogonal trajectory for each given family of curves.</p>
+            
+            <form id="posttest-form">
+                <!-- Question 1 -->
+                <div class="posttest-question">
+                    <h4>Question 1: For the family of curves y = mx (straight lines through origin), the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" value="a" id="q1a">
+                            <label for="q1a">A) Parabolas</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="b" id="q1b">
+                            <label for="q1b">B) Circles centered at origin</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="c" id="q1c">
+                            <label for="q1c">C) Ellipses</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="d" id="q1d">
+                            <label for="q1d">D) Hyperbolas</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="posttest-question">
+                    <h4>Question 2: For the family of circles x² + y² = a², the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q2" value="a" id="q2a">
+                            <label for="q2a">A) Straight lines through origin</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="b" id="q2b">
+                            <label for="q2b">B) Concentric circles</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="c" id="q2c">
+                            <label for="q2c">C) Parabolas</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="d" id="q2d">
+                            <label for="q2d">D) Exponential curves</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="posttest-question">
+                    <h4>Question 3: For the family of parabolas y = ax², the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" value="a" id="q3a">
+                            <label for="q3a">A) x²/2 + y² = c (ellipses)</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="b" id="q3b">
+                            <label for="q3b">B) y = cx³</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="c" id="q3c">
+                            <label for="q3c">C) x² - y² = c</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="d" id="q3d">
+                            <label for="q3d">D) y = ce^x</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="posttest-question">
+                    <h4>Question 4: For the family of curves y = ce^x, the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" value="a" id="q4a">
+                            <label for="q4a">A) y² = -2x + k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="b" id="q4b">
+                            <label for="q4b">B) x² + y² = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="c" id="q4c">
+                            <label for="q4c">C) y = k/x</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="d" id="q4d">
+                            <label for="q4d">D) y = k ln x</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="posttest-question">
+                    <h4>Question 5: For the family of curves y = c/x (rectangular hyperbolas), the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" value="a" id="q5a">
+                            <label for="q5a">A) y = kx</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="b" id="q5b">
+                            <label for="q5b">B) x² - y² = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="c" id="q5c">
+                            <label for="q5c">C) y = kx²</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="d" id="q5d">
+                            <label for="q5d">D) y = ke^x</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="posttest-question">
+                    <h4>Question 6: For the family of curves y = c sin x, the orthogonal trajectories satisfy:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q6" value="a" id="q6a">
+                            <label for="q6a">A) ln|cos x| = y²/2 + k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="b" id="q6b">
+                            <label for="q6b">B) x = ln|sin y| + k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="c" id="q6c">
+                            <label for="q6c">C) y = tan x + k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="d" id="q6d">
+                            <label for="q6d">D) x² + sin y = k</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 7 -->
+                <div class="posttest-question">
+                    <h4>Question 7: For the family of curves x² - y² = a (hyperbolas), the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q7" value="a" id="q7a">
+                            <label for="q7a">A) xy = c (rectangular hyperbolas)</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="b" id="q7b">
+                            <label for="q7b">B) x² + y² = c</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="c" id="q7c">
+                            <label for="q7c">C) y = cx</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="d" id="q7d">
+                            <label for="q7d">D) y = cx²</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 8 -->
+                <div class="posttest-question">
+                    <h4>Question 8: For the family of curves y = c cos x, the orthogonal trajectories satisfy:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q8" value="a" id="q8a">
+                            <label for="q8a">A) ln|sin x| = y²/2 + k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="b" id="q8b">
+                            <label for="q8b">B) x = ln|cos y| + k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="c" id="q8c">
+                            <label for="q8c">C) y = cot x + k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="d" id="q8d">
+                            <label for="q8d">D) x² + cos y = k</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 9 -->
+                <div class="posttest-question">
+                    <h4>Question 9: For the family of curves r = a(1 + cos θ) (cardioids), the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q9" value="a" id="q9a">
+                            <label for="q9a">A) r = b(1 - cos θ)</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" value="b" id="q9b">
+                            <label for="q9b">B) r = b sin θ</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" value="c" id="q9c">
+                            <label for="q9c">C) r = b(1 + sin θ)</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" value="d" id="q9d">
+                            <label for="q9d">D) r = b cos θ</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 10 -->
+                <div class="posttest-question">
+                    <h4>Question 10: For the family of curves y² = 4ax (parabolas opening right), the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q10" value="a" id="q10a">
+                            <label for="q10a">A) 2x² + y² = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" value="b" id="q10b">
+                            <label for="q10b">B) x² + 2y² = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" value="c" id="q10c">
+                            <label for="q10c">C) x² + y² = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" value="d" id="q10d">
+                            <label for="q10d">D) y² = -4ax</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="submit-btn" onclick="submitPosttest()">
+                    <i class="fas fa-paper-plane"></i> Submit Test
+                </button>
+            </form>
+            
+            <div class="result-section" id="result-section">
+                <h3>Test Results</h3>
+                <p id="score-text"></p>
+                <div id="solutions"></div>
+            </div>
+            
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- References Page -->
+    <div class="backend-page" id="references-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-book-open"></i> References</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="references-content">
+            <h3>Recommended Books and Resources</h3>
+            <p>Here are some excellent references for learning more about orthogonal trajectories and differential equations:</p>
+            
+            <div class="question-block">
+                <h4>Textbooks:</h4>
                 <ul>
-                    <li>Enter your function in the box below or select from examples</li>
-                    <li>Use * for multiplication (e.g., 2*x, 3*sin(2*x))</li>
-                    <li>Use ^ for exponentiation (e.g., x^2, e^(3*x))</li>
-                    <li>Adjust coefficients if needed, then click Calculate</li>
+                    <li><strong>Advanced Engineering Mathematics</strong> by Erwin Kreyszig - Chapter 1 covers differential equations and orthogonal trajectories in detail</li>
+                    <li><strong>Differential Equations with Applications and Historical Notes</strong> by George F. Simmons - Excellent theoretical foundation with practical applications</li>
+                    <li><strong>A First Course in Differential Equations</strong> by Dennis G. Zill - Comprehensive coverage with many solved examples</li>
+                    <li><strong>Elementary Differential Equations and Boundary Value Problems</strong> by William E. Boyce and Richard C. DiPrima - Standard textbook with clear explanations</li>
+                    <li><strong>Mathematics for Engineers</strong> by Anthony Croft and Robert Davison - Practical approach with engineering applications</li>
                 </ul>
             </div>
-
-            <div class="error-message" id="errorMessage"></div>
-            <div class="success-message" id="successMessage"></div>
-
-            <!-- Equation Input -->
-            <div class="input-group">
-                <label class="input-label" for="equation">
-                    <i class="fas fa-square-root-alt"></i> Enter Function f(x)
-                    <div class="info-tooltip">
-                        <i class="fas fa-question-circle"></i>
-                        <span class="tooltip-text">Use standard mathematical notation. Example: y = 2*x^2 + 3*x + 1</span>
-                    </div>
-                </label>
-                <input type="text" id="equation" class="input-field"
-                       placeholder="Examples: y = 2*x^2 + 3*x + 1, y = sin(2*x), y = log(2*x)">
-                <div class="suggestions">
-                    <button class="suggestion-btn" onclick="insertEquation('y = 2*x^2 + 3*x + 1')">Quadratic</button>
-                    <button class="suggestion-btn" onclick="insertEquation('y = 3*x + 2')">Linear</button>
-                    <button class="suggestion-btn" onclick="insertEquation('y = x^3 - 2*x^2 + x - 1')">Cubic</button>
-                    <button class="suggestion-btn" onclick="insertEquation('y = log(2*x)')">Logarithm</button>
-                </div>
+            
+            <div class="question-block">
+                <h4>Online Resources:</h4>
+                <ul>
+                    <li>MIT OpenCourseWare: Differential Equations - Free online course materials</li>
+                    <li>Khan Academy: Differential Equations - Video tutorials and practice problems</li>
+                    <li>Wolfram MathWorld: Orthogonal Trajectories - Detailed mathematical explanations</li>
+                    <li>Paul's Online Math Notes: Differential Equations - Comprehensive notes with examples</li>
+                    <li>GeoGebra: Interactive visualization of orthogonal trajectories</li>
+                </ul>
             </div>
-
-            <!-- Coefficient Inputs -->
-            <div class="coeff-inputs" id="coeffInputs" style="display: none;">
-                <!-- Dynamic coefficient inputs will be added here -->
+            
+            <div class="question-block">
+                <h4>Research Papers:</h4>
+                <ul>
+                    <li>"Orthogonal Trajectories in Physics and Engineering" - Journal of Applied Mathematics</li>
+                    <li>"Geometric Methods in Differential Equations" - SIAM Review</li>
+                    <li>"Applications of Orthogonal Trajectories in Fluid Dynamics" - Physics of Fluids</li>
+                    <li>"Computer Visualization of Orthogonal Families of Curves" - Journal of Computational Mathematics</li>
+                </ul>
             </div>
-
-            <!-- Loading Spinner -->
-            <div class="loading" id="loading">
-                <div class="loading-spinner"></div>
-                <p>Calculating orthogonal trajectory...</p>
+            
+            <div class="question-block">
+                <h4>Software Tools:</h4>
+                <ul>
+                    <li>MATLAB: For numerical solutions and visualization</li>
+                    <li>Mathematica: For symbolic computation and graphing</li>
+                    <li>Desmos: Online graphing calculator for visualizing orthogonal trajectories</li>
+                    <li>GeoGebra: Interactive geometry software</li>
+                </ul>
             </div>
-
-            <!-- Equation Examples Grid -->
-            <div class="equation-grid">
-                <!-- Polynomial Functions -->
-                <div class="equation-box">
-                    <h4><i class="fas fa-chart-line"></i> Polynomial Functions</h4>
-                    <div class="eq-examples">
-                        <div class="eq-example">
-                            <span class="eq-text">y = a·x² + b·x + p</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 2*x^2 + 3*x + 1')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = a·x³ + b·x² + p·x + d</span>
-                            <button class="eq-btn" onclick="insertEquation('y = x^3 - 2*x^2 + x - 1')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = a·x + b</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 3*x + 2')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = xⁿ</span>
-                            <button class="eq-btn" onclick="insertEquation('y = x^3')">Use</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trigonometric Functions -->
-                <div class="equation-box">
-                    <h4><i class="fas fa-wave-square"></i> Trigonometric Functions</h4>
-                    <div class="eq-examples">
-                        <div class="eq-example">
-                            <span class="eq-text">y = a·tan(b·x)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 2*tan(3*x)')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = a·sin(b·x)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 2*sin(3*x)')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = a·cos(b·x)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 3*cos(2*x)')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">sin(x) + cos(x)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = sin(x) + cos(x)')">Use</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Exponential & Logarithmic -->
-                <div class="equation-box">
-                    <h4><i class="fas fa-chart-bar"></i> Exponential & Logarithmic</h4>
-                    <div class="eq-examples">
-                        <div class="eq-example">
-                            <span class="eq-text">y = e^(a·x)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = e^(2*x)')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = b·e^(a·xⁿ)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 2*e^(3*x^2)')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = ln(a·x)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = ln(2*x)')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = log(a·x)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = log(2*x)')">Use</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Advanced Functions -->
-                <div class="equation-box">
-                    <h4><i class="fas fa-shapes"></i> Advanced Functions</h4>
-                    <div class="eq-examples">
-                        <div class="eq-example">
-                            <span class="eq-text">y = a/(b·x + d)</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 2/(3*x+1)')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y = a/xⁿ</span>
-                            <button class="eq-btn" onclick="insertEquation('y = 1/x^2')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">x² + y² = r²</span>
-                            <button class="eq-btn" onclick="insertEquation('x^2 + y^2 = 25')">Use</button>
-                        </div>
-                        <div class="eq-example">
-                            <span class="eq-text">y² = 4·a·x</span>
-                            <button class="eq-btn" onclick="insertEquation('y^2 = 4*x')">Use</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="submit-btn" id="calculateBtn">
-                <i class="fas fa-bolt"></i> Calculate Orthogonal Trajectory
-            </button>
-        </div>
-
-        <div class="footer">
-            <p>© 2024 Universal Orthogonal Trajectory Calculator | Mathematical Tool</p>
-        </div>
-    </div>
-
-    <!-- Backend Page -->
-    <div id="backendPage" style="display: none;">
-        <div class="solution-container">
-            <!-- Original Equation -->
-            <div class="solution-box">
-                <h3><i class="fas fa-equation"></i> Original Function</h3>
-                <div class="math-equation" id="originalEquationDisplay">
-                    \[ y = f(x) \]
-                </div>
-                <div id="paramsDisplay"></div>
-            </div>
-
-            <!-- Differentiation Steps -->
-            <div class="solution-box">
-                <h3><i class="fas fa-calculator"></i> Differentiation Process</h3>
-                <div class="derivative-display" id="derivativeDisplay">
-                    \[ \frac{dy}{dx} = f'(x) \]
-                </div>
-                <div id="differentiationSteps">
-                    <!-- Differentiation steps will be added here -->
-                </div>
-            </div>
-
-            <!-- Orthogonal Trajectory Steps -->
-            <div class="solution-box">
-                <h3><i class="fas fa-list-ol"></i> Step-by-Step Solution</h3>
-                <div id="orthogonalSteps">
-                    <!-- Orthogonal trajectory steps will be added here -->
-                </div>
-            </div>
-
-            <!-- Final Orthogonal Trajectory -->
-            <div class="solution-box">
-                <h3><i class="fas fa-check-circle"></i> Orthogonal Trajectory Solution</h3>
-                <div class="math-equation" id="finalAnswer">
-                    \[ \text{Orthogonal Trajectory} \]
-                </div>
-                <div id="integrationConstant" style="margin-top: 15px; color: #666; font-style: italic;">
-                    Note: C is the integration constant representing family of orthogonal curves
-                </div>
-            </div>
-
-            <!-- Graphs -->
-            <div class="solution-box">
-                <h3><i class="fas fa-chart-line"></i> Graphical Visualization</h3>
-                <div class="graph-column">
-                    <!-- Original Function Graph -->
-                    <div class="graph-wrapper">
-                        <div class="graph-title">Original Function: <span id="graph1Title"></span></div>
-                        <div class="graph-container" id="originalGraph"></div>
-                    </div>
-                    
-                    <!-- Orthogonal Trajectory Graph -->
-                    <div class="graph-wrapper">
-                        <div class="graph-title">Orthogonal Trajectories</div>
-                        <div class="graph-container" id="orthogonalGraph"></div>
-                    </div>
-                    
-                    <!-- Combined Graph -->
-                    <div class="graph-wrapper">
-                        <div class="graph-title">Combined View (Original + Orthogonal with C=0)</div>
-                        <div class="graph-container" id="combinedGraph"></div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="back-home-btn" id="backHomeBtn">
-                <i class="fas fa-arrow-left"></i> Back to Calculator
+            
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
             </button>
         </div>
     </div>
+
+    <!-- Contributors Page -->
+    <div class="backend-page" id="contributors-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-users"></i> Contributors</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="contributors-content">
+            <h3>Subject Matter Expert</h3>
+            <div class="question-block">
+                <p><strong>Prof. Dinesh Kute</strong></p>
+                <p>Professor of Mathematics, Applied Sciences & Humanities Department</p>
+            </div>
+            
+            <h3>Development Team</h3>
+            <div class="question-block">
+                <p>The following students contributed to the development of this virtual lab:</p>
+                <ul>
+                    <li><strong>1] Gauri Chavan</strong></li>
+                    <li><strong>2] Prachi Bute</strong></li>
+                    <li><strong>3] Prachi Pardeshi</strong></li>
+                    <li><strong>4] Prachi Patil</strong></li>
+                </ul>
+            </div>
+            
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Feedback Page -->
+    <div class="backend-page" id="feedback-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-comment-alt"></i> Feedback Form</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="feedback-content">
+            <h3>Share Your Experience</h3>
+            <p>Your feedback is valuable to us. Please take a moment to share your experience with this virtual lab.</p>
+            
+            <form class="feedback-form" id="feedback-form">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rollno">Roll Number:</label>
+                    <input type="text" id="rollno" name="rollno" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rating">Overall Rating:</label>
+                    <select id="rating" name="rating" required>
+                        <option value="">Select Rating</option>
+                        <option value="5">Excellent (5 stars)</option>
+                        <option value="4">Very Good (4 stars)</option>
+                        <option value="3">Good (3 stars)</option>
+                        <option value="2">Fair (2 stars)</option>
+                        <option value="1">Poor (1 star)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ease-of-use">Ease of Use:</label>
+                    <select id="ease-of-use" name="ease-of-use" required>
+                        <option value="">Select Option</option>
+                        <option value="5">Very Easy</option>
+                        <option value="4">Easy</option>
+                        <option value="3">Moderate</option>
+                        <option value="2">Difficult</option>
+                        <option value="1">Very Difficult</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="content-quality">Content Quality:</label>
+                    <select id="content-quality" name="content-quality" required>
+                        <option value="">Select Option</option>
+                        <option value="5">Excellent</option>
+                        <option value="4">Very Good</option>
+                        <option value="3">Good</option>
+                        <option value="2">Fair</option>
+                        <option value="1">Poor</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="suggestions">Suggestions for Improvement:</label>
+                    <textarea id="suggestions" name="suggestions" placeholder="Please share any suggestions for improving this virtual lab..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="issues">Technical Issues Encountered (if any):</label>
+                    <textarea id="issues" name="issues" placeholder="Describe any technical problems you faced..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="recommend">Would you recommend this virtual lab to other students?</label>
+                    <select id="recommend" name="recommend" required>
+                        <option value="">Select Option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="maybe">Maybe</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="form-submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Feedback
+                </button>
+            </form>
+            
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Simulation Page -->
+    <div class="backend-page" id="simulation-page">
+        <div class="backend-header">
+            <h2><i class="fas fa-desktop"></i> Simulation</h2>
+            <button class="close-btn" onclick="closeBackendPage()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="pretest-content">
+            <h3>Orthogonal Trajectory Calculator</h3>
+            <p>Click the link below to access an interactive orthogonal trajectory calculator. This external tool will help you visualize and compute orthogonal trajectories for various families of curves.</p>
+            
+            <div class="question-block">
+                <h4>Interactive Simulation:</h4>
+                <p>The following website provides an interactive calculator for orthogonal trajectories:</p>
+                <a href="https://gaurichavan387-jpg.github.io/matrix-makers/" target="_blank" class="simulation-link">
+                    <i class="fas fa-external-link-alt"></i> Open Orthogonal Trajectory Calculator
+                </a>
+                <p><em>Note: This will open in a new tab. Make sure to allow pop-ups for this site.</em></p>
+            </div>
+            
+            <div class="question-block">
+                <h4>How to Use the Calculator:</h4>
+                <ol>
+                    <li>Enter the equation of the family of curves in the input field</li>
+                    <li>Specify the parameter range if needed</li>
+                    <li>Click "Calculate" to generate the orthogonal trajectories</li>
+                    <li>Use the visualization tools to explore the curves</li>
+                    <li>Adjust parameters to see how the orthogonal trajectories change</li>
+                </ol>
+            </div>
+            
+            <div class="question-block">
+                <h4>Example Equations to Try:</h4>
+                <ul>
+                    <li><code>y = m*x</code> (straight lines through origin)</li>
+                    <li><code>x^2 + y^2 = a^2</code> (circles centered at origin)</li>
+                    <li><code>y = a*x^2</code> (parabolas)</li>
+                    <li><code>y = a/x</code> (rectangular hyperbolas)</li>
+                    <li><code>y = a*e^x</code> (exponential curves)</li>
+                </ul>
+            </div>
+            
+            <button class="return-home-btn" onclick="closeBackendPage()">
+                <i class="fas fa-home"></i> Return to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeBackendPage()"></div>
+
+    <!-- Footer -->
+    <footer class="container">
+        <p>Virtual Labs &copy; 2025 | Applied Sciences & Humanities Department | 
+           <span class="footer-logo">Pimpri Chinchwad College of Engineering</span>
+        </p>
+    </footer>
 
     <script>
-        // ==================== UNIVERSAL ORTHOGONAL TRAJECTORY CALCULATOR ====================
-       
-        // DOM Elements
-        const frontPage = document.getElementById('frontPage');
-        const backendPage = document.getElementById('backendPage');
-        const equationInput = document.getElementById('equation');
-        const calculateBtn = document.getElementById('calculateBtn');
-        const backHomeBtn = document.getElementById('backHomeBtn');
-        const errorMessage = document.getElementById('errorMessage');
-        const successMessage = document.getElementById('successMessage');
-        const coeffInputs = document.getElementById('coeffInputs');
-        const loadingDiv = document.getElementById('loading');
-        const graph1Title = document.getElementById('graph1Title');
-
-        // Equation patterns and solutions with explicit multiplication signs
-        const equationPatterns = {
-            // ========== POLYNOMIAL FUNCTIONS ==========
-            'quadratic': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\^\s*2\s*([+-]\s*\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d*\.?\d*)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*x\s*\^\s*2/i,
-                template: 'y = a·x² + b·x + p',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1,
-                    b: parseFloat(match[2].replace(/\s/g, '')) || 0,
-                    p: parseFloat(match[3].replace(/\s/g, '')) || 0
-                }),
-                derivative: (coeff) => `2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = ${coeff.a} \\cdot x^2 + ${coeff.b} \\cdot x + ${coeff.p} \\]`,
-                    `Apply power rule: \\[ \\frac{d}{dx}(x^n) = n \\cdot x^{n-1} \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.a} \\cdot x^2) = 2 \\cdot ${coeff.a} \\cdot x^{2-1} = 2 \\cdot ${coeff.a} \\cdot x \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.b} \\cdot x) = ${coeff.b} \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.p}) = 0 \\]`,
-                    `Combine: \\[ \\frac{dy}{dx} = 2 \\cdot ${coeff.a} \\cdot x + ${coeff.b} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}}`,
-                solution: (coeff, C) => `y = -\\frac{1}{2 \\cdot ${coeff.a}} \\cdot \\ln|2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}| + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = 2 \\cdot ${coeff.a} \\cdot x + ${coeff.b} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}} \\]`,
-                    `Separate variables: \\[ dy = -\\frac{dx}{2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}} \\]`,
-                    `Integrate both sides: \\[ \\int dy = -\\int \\frac{dx}{2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}} \\]`,
-                    `Let \\[ u = 2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}, \\quad du = 2 \\cdot ${coeff.a} \\cdot dx \\]`,
-                    `\\[ \\int dy = -\\frac{1}{2 \\cdot ${coeff.a}} \\int \\frac{du}{u} \\]`,
-                    `\\[ y = -\\frac{1}{2 \\cdot ${coeff.a}} \\cdot \\ln|u| + ${C} \\]`,
-                    `\\[ y = -\\frac{1}{2 \\cdot ${coeff.a}} \\cdot \\ln|2 \\cdot ${coeff.a} \\cdot x + ${coeff.b}| + ${C} \\]`
-                ]
-            },
-
-            'linear': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d*\.?\d*)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*x/i,
-                template: 'y = a·x + b',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1,
-                    b: parseFloat(match[2].replace(/\s/g, '')) || 0
-                }),
-                derivative: (coeff) => `${coeff.a}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = ${coeff.a} \\cdot x + ${coeff.b} \\]`,
-                    `Apply power rule: \\[ \\frac{d}{dx}(x) = 1 \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.a} \\cdot x) = ${coeff.a} \\cdot 1 = ${coeff.a} \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.b}) = 0 \\]`,
-                    `Combine: \\[ \\frac{dy}{dx} = ${coeff.a} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{${coeff.a}}`,
-                solution: (coeff, C) => `y = -\\frac{x}{${coeff.a}} + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = ${coeff.a} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot ${coeff.a} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a}} \\]`,
-                    `Separable equation: \\[ dy = -\\frac{dx}{${coeff.a}} \\]`,
-                    `Integrate: \\[ \\int dy = -\\frac{1}{${coeff.a}} \\int dx \\]`,
-                    `\\[ y = -\\frac{x}{${coeff.a}} + ${C} \\]`
-                ]
-            },
-
-            'cubic': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\^\s*3\s*([+-]\s*\d*\.?\d*)\s*\*?\s*x\s*\^\s*2\s*([+-]\s*\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d*\.?\d*)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*x\s*\^\s*3/i,
-                template: 'y = a·x³ + b·x² + p·x + d',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1,
-                    b: parseFloat(match[2].replace(/\s/g, '')) || 0,
-                    p: parseFloat(match[3].replace(/\s/g, '')) || 0,
-                    d: parseFloat(match[4].replace(/\s/g, '')) || 0
-                }),
-                derivative: (coeff) => `3 \\cdot ${coeff.a} \\cdot x^2 + 2 \\cdot ${coeff.b} \\cdot x + ${coeff.p}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = ${coeff.a} \\cdot x^3 + ${coeff.b} \\cdot x^2 + ${coeff.p} \\cdot x + ${coeff.d} \\]`,
-                    `Apply power rule: \\[ \\frac{d}{dx}(x^n) = n \\cdot x^{n-1} \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.a} \\cdot x^3) = 3 \\cdot ${coeff.a} \\cdot x^{3-1} = 3 \\cdot ${coeff.a} \\cdot x^2 \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.b} \\cdot x^2) = 2 \\cdot ${coeff.b} \\cdot x^{2-1} = 2 \\cdot ${coeff.b} \\cdot x \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.p} \\cdot x) = ${coeff.p} \\]`,
-                    `\\[ \\frac{d}{dx}(${coeff.d}) = 0 \\]`,
-                    `Combine: \\[ \\frac{dy}{dx} = 3 \\cdot ${coeff.a} \\cdot x^2 + 2 \\cdot ${coeff.b} \\cdot x + ${coeff.p} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{3 \\cdot ${coeff.a} \\cdot x^2 + 2 \\cdot ${coeff.b} \\cdot x + ${coeff.p}}`,
-                solution: (coeff, C) => {
-                    const discriminant = Math.pow(2 * coeff.b, 2) - 4 * (3 * coeff.a) * coeff.p;
-                    if (discriminant > 0) {
-                        const sqrtDisc = Math.sqrt(discriminant);
-                        const root1 = (-2 * coeff.b + sqrtDisc) / (6 * coeff.a);
-                        const root2 = (-2 * coeff.b - sqrtDisc) / (6 * coeff.a);
-                        return `y = -\\frac{1}{3 \\cdot ${coeff.a}} \\cdot \\ln\\left|\\frac{x - ${root1.toFixed(2)}}{x - ${root2.toFixed(2)}}\\right| + ${C}`;
-                    } else if (discriminant === 0) {
-                        const root = -coeff.b / (3 * coeff.a);
-                        return `y = -\\frac{1}{3 \\cdot ${coeff.a}} \\cdot \\frac{1}{x - ${root.toFixed(2)}} + ${C}`;
-                    } else {
-                        return `y = -\\frac{2}{\\sqrt{${-discriminant}}} \\cdot \\arctan\\left(\\frac{${6 * coeff.a} \\cdot x + ${2 * coeff.b}}{\\sqrt{${-discriminant}}}\\right) + ${C}`;
-                    }
-                },
-                steps: (coeff, C) => {
-                    const discriminant = Math.pow(2 * coeff.b, 2) - 4 * (3 * coeff.a) * coeff.p;
-                    const steps = [
-                        `Original derivative: \\[ \\frac{dy}{dx} = 3 \\cdot ${coeff.a} \\cdot x^2 + 2 \\cdot ${coeff.b} \\cdot x + ${coeff.p} \\]`,
-                        `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                        `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{3 \\cdot ${coeff.a} \\cdot x^2 + 2 \\cdot ${coeff.b} \\cdot x + ${coeff.p}} \\]`,
-                        `Separable equation: \\[ dy = -\\frac{dx}{3 \\cdot ${coeff.a} \\cdot x^2 + 2 \\cdot ${coeff.b} \\cdot x + ${coeff.p}} \\]`
-                    ];
-                    
-                    if (discriminant > 0) {
-                        steps.push(`Discriminant > 0 (${discriminant.toFixed(2)}) - Use partial fractions`);
-                        steps.push(`Factor denominator: \\[ 3 \\cdot ${coeff.a} \\cdot x^2 + 2 \\cdot ${coeff.b} \\cdot x + ${coeff.p} \\]`);
-                        steps.push(`Integrate using partial fractions`);
-                    } else if (discriminant === 0) {
-                        steps.push(`Discriminant = 0 - Perfect square`);
-                        steps.push(`Factor denominator: \\[ 3 \\cdot ${coeff.a} \\cdot \\left(x + \\frac{${coeff.b}}{3 \\cdot ${coeff.a}}\\right)^2 \\]`);
-                        steps.push(`Integrate using substitution`);
-                    } else {
-                        steps.push(`Discriminant < 0 (${discriminant.toFixed(2)}) - Use arctangent formula`);
-                        steps.push(`Complete the square: \\[ 3 \\cdot ${coeff.a} \\cdot \\left(x^2 + \\frac{${2 * coeff.b}}{3 \\cdot ${coeff.a}}x\\right) + ${coeff.p} \\]`);
-                        steps.push(`Integrate using arctangent formula`);
-                    }
-                    
-                    steps.push(`General solution depends on the discriminant of the quadratic`);
-                    return steps;
-                }
-            },
-
-            'power': {
-                pattern: /y\s*=\s*x\s*\^\s*([+-]?\d*\.?\d*)/i,
-                test: /y\s*=\s*x\s*\^\s*[+-]?\d*\.?\d*/i,
-                template: 'y = xⁿ',
-                parse: (match) => ({
-                    n: parseFloat(match[1]) || 1
-                }),
-                derivative: (coeff) => `${coeff.n} \\cdot x^{${coeff.n - 1}}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = x^{${coeff.n}} \\]`,
-                    `Apply power rule: \\[ \\frac{d}{dx}(x^n) = n \\cdot x^{n-1} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.n} \\cdot x^{${coeff.n}-1} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.n} \\cdot x^{${coeff.n - 1}} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{${coeff.n} \\cdot x^{${coeff.n - 1}}}`,
-                solution: (coeff, C) => {
-                    if (coeff.n === 2) {
-                        return `y = -\\frac{1}{2} \\cdot \\ln|x| + ${C}`;
-                    } else if (coeff.n === 1) {
-                        return `y = -x + ${C}`;
-                    } else {
-                        return `y = -\\frac{x^{${2 - coeff.n}}}{${coeff.n} \\cdot (${2 - coeff.n})} + ${C}`;
-                    }
-                },
-                steps: (coeff, C) => {
-                    const steps = [
-                        `Original derivative: \\[ \\frac{dy}{dx} = ${coeff.n} \\cdot x^{${coeff.n - 1}} \\]`,
-                        `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                        `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.n} \\cdot x^{${coeff.n - 1}}} \\]`,
-                        `Simplify: \\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.n}} \\cdot x^{${1 - coeff.n}} \\]`,
-                        `Separable equation: \\[ dy = -\\frac{1}{${coeff.n}} \\cdot x^{${1 - coeff.n}} \\cdot dx \\]`,
-                        `Integrate: \\[ \\int dy = -\\frac{1}{${coeff.n}} \\int x^{${1 - coeff.n}} \\cdot dx \\]`
-                    ];
-                    
-                    if (coeff.n === 2) {
-                        steps.push(`For n = 2: \\[ y = -\\frac{1}{2} \\cdot \\ln|x| + ${C} \\]`);
-                    } else if (coeff.n === 1) {
-                        steps.push(`For n = 1: \\[ y = -x + ${C} \\]`);
-                    } else {
-                        steps.push(`\\[ y = -\\frac{1}{${coeff.n}} \\cdot \\frac{x^{${2 - coeff.n}}}{${2 - coeff.n}} + ${C} \\]`);
-                        steps.push(`\\[ y = -\\frac{x^{${2 - coeff.n}}}{${coeff.n} \\cdot (${2 - coeff.n})} + ${C} \\]`);
-                    }
-                    return steps;
-                }
-            },
-
-            // ========== TRIGONOMETRIC FUNCTIONS ==========
-            'tangent': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*tan\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*tan/i,
-                template: 'y = a·tan(b·x)',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1,
-                    b: parseFloat(match[2]) || 1
-                }),
-                derivative: (coeff) => `${coeff.a} \\cdot ${coeff.b} \\cdot \\sec^2(${coeff.b} \\cdot x)`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = ${coeff.a} \\cdot \\tan(${coeff.b} \\cdot x) \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}\\tan(u) = \\sec^2(u) \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.b} \\cdot x, \\quad \\frac{du}{dx} = ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a} \\cdot \\sec^2(u) \\cdot ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a} \\cdot ${coeff.b} \\cdot \\sec^2(${coeff.b} \\cdot x) \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a * coeff.b} \\cdot \\sec^2(${coeff.b} \\cdot x) \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot \\sec^2(${coeff.b} \\cdot x)}`,
-                solution: (coeff, C) => `y = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}^2} \\cdot \\sin^2(${coeff.b} \\cdot x) + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = ${coeff.a} \\cdot ${coeff.b} \\cdot \\sec^2(${coeff.b} \\cdot x) \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot \\sec^2(${coeff.b} \\cdot x)} \\]`,
-                    `\\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\cos^2(${coeff.b} \\cdot x) \\]`,
-                    `Separable equation: \\[ dy = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\cos^2(${coeff.b} \\cdot x) \\cdot dx \\]`,
-                    `Integrate using identity: \\[ \\cos^2(ax) = \\frac{1 + \\cos(2ax)}{2} \\]`,
-                    `\\[ \\int \\cos^2(${coeff.b} \\cdot x) \\cdot dx = \\frac{x}{2} + \\frac{\\sin(2 \\cdot ${coeff.b} \\cdot x)}{4 \\cdot ${coeff.b}} \\]`,
-                    `\\[ y = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\left[ \\frac{x}{2} + \\frac{\\sin(2 \\cdot ${coeff.b} \\cdot x)}{4 \\cdot ${coeff.b}} \\right] + ${C} \\]`,
-                    `Simplified: \\[ y = -\\frac{x}{2 \\cdot ${coeff.a} \\cdot ${coeff.b}} - \\frac{\\sin(2 \\cdot ${coeff.b} \\cdot x)}{4 \\cdot ${coeff.a} \\cdot ${coeff.b}^2} + ${C} \\]`
-                ]
-            },
-
-            'sine': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*sin\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*sin/i,
-                template: 'y = a·sin(b·x)',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1,
-                    b: parseFloat(match[2]) || 1
-                }),
-                derivative: (coeff) => `${coeff.a} \\cdot ${coeff.b} \\cdot \\cos(${coeff.b} \\cdot x)`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = ${coeff.a} \\cdot \\sin(${coeff.b} \\cdot x) \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}\\sin(u) = \\cos(u) \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.b} \\cdot x, \\quad \\frac{du}{dx} = ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a} \\cdot \\cos(u) \\cdot ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a} \\cdot ${coeff.b} \\cdot \\cos(${coeff.b} \\cdot x) \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a * coeff.b} \\cdot \\cos(${coeff.b} \\cdot x) \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot \\cos(${coeff.b} \\cdot x)}`,
-                solution: (coeff, C) => `y = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}^2} \\cdot \\ln|\\sec(${coeff.b} \\cdot x) + \\tan(${coeff.b} \\cdot x)| + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = ${coeff.a} \\cdot ${coeff.b} \\cdot \\cos(${coeff.b} \\cdot x) \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot \\cos(${coeff.b} \\cdot x)} \\]`,
-                    `\\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\sec(${coeff.b} \\cdot x) \\]`,
-                    `Separable equation: \\[ dy = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\sec(${coeff.b} \\cdot x) \\cdot dx \\]`,
-                    `Integrate using standard formula: \\[ \\int \\sec(ax) \\cdot dx = \\frac{1}{a} \\cdot \\ln|\\sec(ax) + \\tan(ax)| \\]`,
-                    `\\[ y = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\frac{1}{${coeff.b}} \\cdot \\ln|\\sec(${coeff.b} \\cdot x) + \\tan(${coeff.b} \\cdot x)| + ${C} \\]`,
-                    `\\[ y = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}^2} \\cdot \\ln|\\sec(${coeff.b} \\cdot x) + \\tan(${coeff.b} \\cdot x)| + ${C} \\]`
-                ]
-            },
-
-            'cosine': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*cos\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*cos/i,
-                template: 'y = a·cos(b·x)',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1,
-                    b: parseFloat(match[2]) || 1
-                }),
-                derivative: (coeff) => `-${coeff.a} \\cdot ${coeff.b} \\cdot \\sin(${coeff.b} \\cdot x)`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = ${coeff.a} \\cdot \\cos(${coeff.b} \\cdot x) \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}\\cos(u) = -\\sin(u) \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.b} \\cdot x, \\quad \\frac{du}{dx} = ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a} \\cdot (-\\sin(u)) \\cdot ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = -${coeff.a} \\cdot ${coeff.b} \\cdot \\sin(${coeff.b} \\cdot x) \\]`,
-                    `\\[ \\frac{dy}{dx} = -${coeff.a * coeff.b} \\cdot \\sin(${coeff.b} \\cdot x) \\]`
-                ],
-                orthogonalSlope: (coeff) => `\\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot \\sin(${coeff.b} \\cdot x)}`,
-                solution: (coeff, C) => `y = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}^2} \\cdot \\ln|\\csc(${coeff.b} \\cdot x) + \\cot(${coeff.b} \\cdot x)| + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = -${coeff.a} \\cdot ${coeff.b} \\cdot \\sin(${coeff.b} \\cdot x) \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot \\sin(${coeff.b} \\cdot x)} \\]`,
-                    `\\[ \\frac{dy}{dx} = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\csc(${coeff.b} \\cdot x) \\]`,
-                    `Separable equation: \\[ dy = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\csc(${coeff.b} \\cdot x) \\cdot dx \\]`,
-                    `Integrate using standard formula: \\[ \\int \\csc(ax) \\cdot dx = -\\frac{1}{a} \\cdot \\ln|\\csc(ax) + \\cot(ax)| \\]`,
-                    `\\[ y = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\left(-\\frac{1}{${coeff.b}}\\right) \\cdot \\ln|\\csc(${coeff.b} \\cdot x) + \\cot(${coeff.b} \\cdot x)| + ${C} \\]`,
-                    `\\[ y = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}^2} \\cdot \\ln|\\csc(${coeff.b} \\cdot x) + \\cot(${coeff.b} \\cdot x)| + ${C} \\]`
-                ]
-            },
-
-            // ========== EXPONENTIAL FUNCTIONS ==========
-            'exponential': {
-                pattern: /y\s*=\s*e\s*\^\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\)/i,
-                test: /y\s*=\s*e\s*\^\s*\(\s*[+-]?\d*\.?\d*\s*\*?\s*x\s*\)/i,
-                template: 'y = e^(a·x)',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1
-                }),
-                derivative: (coeff) => `${coeff.a} \\cdot e^{${coeff.a} \\cdot x}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = e^{${coeff.a} \\cdot x} \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}e^{u} = e^{u} \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.a} \\cdot x, \\quad \\frac{du}{dx} = ${coeff.a} \\]`,
-                    `\\[ \\frac{dy}{dx} = e^{u} \\cdot ${coeff.a} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a} \\cdot e^{${coeff.a} \\cdot x} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{${coeff.a} \\cdot e^{${coeff.a} \\cdot x}}`,
-                solution: (coeff, C) => `y = \\frac{1}{${coeff.a}^2} \\cdot e^{-${coeff.a} \\cdot x} + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = ${coeff.a} \\cdot e^{${coeff.a} \\cdot x} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a} \\cdot e^{${coeff.a} \\cdot x}} \\]`,
-                    `\\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a}} \\cdot e^{-${coeff.a} \\cdot x} \\]`,
-                    `Separable equation: \\[ dy = -\\frac{1}{${coeff.a}} \\cdot e^{-${coeff.a} \\cdot x} \\cdot dx \\]`,
-                    `Integrate using substitution: \\[ u = -${coeff.a} \\cdot x, \\quad du = -${coeff.a} \\cdot dx \\]`,
-                    `\\[ \\int e^{-${coeff.a} \\cdot x} \\cdot dx = -\\frac{1}{${coeff.a}} \\cdot e^{-${coeff.a} \\cdot x} \\]`,
-                    `\\[ y = -\\frac{1}{${coeff.a}} \\cdot \\left(-\\frac{1}{${coeff.a}} \\cdot e^{-${coeff.a} \\cdot x}\\right) + ${C} \\]`,
-                    `\\[ y = \\frac{1}{${coeff.a}^2} \\cdot e^{-${coeff.a} \\cdot x} + ${C} \\]`
-                ]
-            },
-
-            'exponential_complex': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*e\s*\^\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\^\s*([+-]?\d*\.?\d*)\s*\)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*e\s*\^\s*\(\s*[+-]?\d*\.?\d*\s*\*?\s*x\s*\^\s*[+-]?\d*\.?\d*\s*\)/i,
-                template: 'y = b·e^(a·xⁿ)',
-                parse: (match) => ({
-                    b: parseFloat(match[1]) || 1,
-                    a: parseFloat(match[2]) || 1,
-                    n: parseFloat(match[3]) || 1
-                }),
-                derivative: (coeff) => `${coeff.b} \\cdot ${coeff.a} \\cdot ${coeff.n} \\cdot x^{${coeff.n-1}} \\cdot e^{${coeff.a} \\cdot x^{${coeff.n}}}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = ${coeff.b} \\cdot e^{${coeff.a} \\cdot x^{${coeff.n}}} \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}e^{u} = e^{u} \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.a} \\cdot x^{${coeff.n}}, \\quad \\frac{du}{dx} = ${coeff.a} \\cdot ${coeff.n} \\cdot x^{${coeff.n-1}} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.b} \\cdot e^{u} \\cdot ${coeff.a} \\cdot ${coeff.n} \\cdot x^{${coeff.n-1}} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.b} \\cdot ${coeff.a} \\cdot ${coeff.n} \\cdot x^{${coeff.n-1}} \\cdot e^{${coeff.a} \\cdot x^{${coeff.n}}} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{1}{${coeff.b} \\cdot ${coeff.a} \\cdot ${coeff.n} \\cdot x^{${coeff.n-1}} \\cdot e^{${coeff.a} \\cdot x^{${coeff.n}}}}`,
-                solution: (coeff, C) => coeff.n === 1 
-                    ? `y = \\frac{1}{${coeff.a}^2 \\cdot ${coeff.b}} \\cdot e^{-${coeff.a} \\cdot x} + ${C}`
-                    : `y = -\\frac{x^{${2-coeff.n}}}{${coeff.a} \\cdot ${coeff.b} \\cdot ${coeff.n} \\cdot (${2-coeff.n})} + ${C}`,
-                steps: (coeff, C) => {
-                    if (coeff.n === 1) {
-                        return [
-                            `Original derivative: \\[ \\frac{dy}{dx} = ${coeff.b} \\cdot ${coeff.a} \\cdot e^{${coeff.a} \\cdot x} \\]`,
-                            `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                            `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.b} \\cdot ${coeff.a} \\cdot e^{${coeff.a} \\cdot x}} \\]`,
-                            `\\[ \\frac{dy}{dx} = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot e^{-${coeff.a} \\cdot x} \\]`,
-                            `Separable equation: \\[ dy = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot e^{-${coeff.a} \\cdot x} \\cdot dx \\]`,
-                            `Integrate: \\[ \\int dy = -\\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\int e^{-${coeff.a} \\cdot x} \\cdot dx \\]`,
-                            `\\[ \\int e^{-${coeff.a} \\cdot x} \\cdot dx = -\\frac{1}{${coeff.a}} \\cdot e^{-${coeff.a} \\cdot x} \\]`,
-                            `\\[ y = \\frac{1}{${coeff.a}^2 \\cdot ${coeff.b}} \\cdot e^{-${coeff.a} \\cdot x} + ${C} \\]`
-                        ];
-                    } else {
-                        return [
-                            `Original derivative: \\[ \\frac{dy}{dx} = ${coeff.b} \\cdot ${coeff.a} \\cdot ${coeff.n} \\cdot x^{${coeff.n-1}} \\cdot e^{${coeff.a} \\cdot x^{${coeff.n}}} \\]`,
-                            `For orthogonal trajectory (ignoring exponential term for approximation):`,
-                            `\\[ \\frac{dy}{dx} \\approx -\\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot ${coeff.n} \\cdot x^{${coeff.n-1}}} \\]`,
-                            `Separable equation: \\[ dy = -\\frac{x^{${1-coeff.n}}}{${coeff.a} \\cdot ${coeff.b} \\cdot ${coeff.n}} \\cdot dx \\]`,
-                            `Integrate: \\[ \\int dy = -\\frac{1}{${coeff.a} \\cdot ${coeff.b} \\cdot ${coeff.n}} \\int x^{${1-coeff.n}} \\cdot dx \\]`,
-                            `\\[ y = -\\frac{x^{${2-coeff.n}}}{${coeff.a} \\cdot ${coeff.b} \\cdot ${coeff.n} \\cdot (${2-coeff.n})} + ${C} \\]`
-                        ];
-                    }
-                }
-            },
-
-            // ========== LOGARITHMIC FUNCTIONS ==========
-            'logarithm_natural': {
-                pattern: /y\s*=\s*ln\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\)/i,
-                test: /y\s*=\s*ln\s*\(\s*[+-]?\d*\.?\d*\s*\*?\s*x\s*\)/i,
-                template: 'y = ln(a·x)',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1
-                }),
-                derivative: (coeff) => `\\frac{1}{x}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = \\ln(${coeff.a} \\cdot x) \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}\\ln(u) = \\frac{1}{u} \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.a} \\cdot x, \\quad \\frac{du}{dx} = ${coeff.a} \\]`,
-                    `\\[ \\frac{dy}{dx} = \\frac{1}{${coeff.a} \\cdot x} \\cdot ${coeff.a} \\]`,
-                    `\\[ \\frac{dy}{dx} = \\frac{1}{x} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-x`,
-                solution: (coeff, C) => `y = -\\frac{x^2}{2} + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = \\frac{1}{x} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -x \\]`,
-                    `Separable equation: \\[ dy = -x \\cdot dx \\]`,
-                    `Integrate: \\[ \\int dy = -\\int x \\cdot dx \\]`,
-                    `\\[ y = -\\frac{x^2}{2} + ${C} \\]`
-                ]
-            },
-
-            'logarithm_common': {
-                pattern: /y\s*=\s*log\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*\)/i,
-                test: /y\s*=\s*log\s*\(\s*[+-]?\d*\.?\d*\s*\*?\s*x\s*\)/i,
-                template: 'y = log(a·x)',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1
-                }),
-                derivative: (coeff) => `\\frac{1}{x \\cdot \\ln(10)}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = \\log(${coeff.a} \\cdot x) \\]`,
-                    `Convert to natural log: \\[ \\log(u) = \\frac{\\ln(u)}{\\ln(10)} \\]`,
-                    `\\[ y = \\frac{\\ln(${coeff.a} \\cdot x)}{\\ln(10)} \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}\\ln(u) = \\frac{1}{u} \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.a} \\cdot x, \\quad \\frac{du}{dx} = ${coeff.a} \\]`,
-                    `\\[ \\frac{dy}{dx} = \\frac{1}{\\ln(10)} \\cdot \\frac{1}{${coeff.a} \\cdot x} \\cdot ${coeff.a} \\]`,
-                    `\\[ \\frac{dy}{dx} = \\frac{1}{x \\cdot \\ln(10)} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-x \\cdot \\ln(10)`,
-                solution: (coeff, C) => `y = -\\frac{\\ln(10)}{2} \\cdot x^2 + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = \\frac{1}{x \\cdot \\ln(10)} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -x \\cdot \\ln(10) \\]`,
-                    `Separable equation: \\[ dy = -\\ln(10) \\cdot x \\cdot dx \\]`,
-                    `Integrate: \\[ \\int dy = -\\ln(10) \\int x \\cdot dx \\]`,
-                    `\\[ y = -\\ln(10) \\cdot \\frac{x^2}{2} + ${C} \\]`,
-                    `\\[ y = -\\frac{\\ln(10)}{2} \\cdot x^2 + ${C} \\]`
-                ]
-            },
-
-            // ========== RATIONAL FUNCTIONS ==========
-            'rational_linear': {
-                pattern: /y\s*=\s*([+-]?\d*\.?\d*)\s*\/\s*\(\s*([+-]?\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d*\.?\d*)\s*\)/i,
-                test: /y\s*=\s*[+-]?\d*\.?\d*\s*\/\s*\(\s*[+-]?\d*\.?\d*\s*\*?\s*x\s*[+-]\s*\d*\.?\d*\s*\)/i,
-                template: 'y = a/(b·x + d)',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) || 1,
-                    b: parseFloat(match[2]) || 1,
-                    d: parseFloat(match[3].replace(/\s/g, '')) || 0
-                }),
-                derivative: (coeff) => `-\\frac{${coeff.a} \\cdot ${coeff.b}}{(${coeff.b} \\cdot x + ${coeff.d})^2}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y = \\frac{${coeff.a}}{${coeff.b} \\cdot x + ${coeff.d}} \\]`,
-                    `Rewrite: \\[ y = ${coeff.a} \\cdot (${coeff.b} \\cdot x + ${coeff.d})^{-1} \\]`,
-                    `Apply chain rule: \\[ \\frac{d}{dx}(u^{-1}) = -u^{-2} \\cdot \\frac{du}{dx} \\]`,
-                    `Let \\[ u = ${coeff.b} \\cdot x + ${coeff.d}, \\quad \\frac{du}{dx} = ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = ${coeff.a} \\cdot (-u^{-2}) \\cdot ${coeff.b} \\]`,
-                    `\\[ \\frac{dy}{dx} = -\\frac{${coeff.a} \\cdot ${coeff.b}}{(${coeff.b} \\cdot x + ${coeff.d})^2} \\]`
-                ],
-                orthogonalSlope: (coeff) => `\\frac{(${coeff.b} \\cdot x + ${coeff.d})^2}{${coeff.a} \\cdot ${coeff.b}}`,
-                solution: (coeff, C) => `y = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\left[ \\frac{${coeff.b}^2 \\cdot x^3}{3} + ${coeff.b} \\cdot ${coeff.d} \\cdot x^2 + ${coeff.d}^2 \\cdot x \\right] + ${C}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = -\\frac{${coeff.a} \\cdot ${coeff.b}}{(${coeff.b} \\cdot x + ${coeff.d})^2} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{(${coeff.b} \\cdot x + ${coeff.d})^2}{${coeff.a} \\cdot ${coeff.b}} \\]`,
-                    `Expand: \\[ (${coeff.b} \\cdot x + ${coeff.d})^2 = ${coeff.b}^2 \\cdot x^2 + ${2 * coeff.b * coeff.d} \\cdot x + ${coeff.d}^2 \\]`,
-                    `Separable equation: \\[ dy = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot (${coeff.b}^2 \\cdot x^2 + ${2 * coeff.b * coeff.d} \\cdot x + ${coeff.d}^2) \\cdot dx \\]`,
-                    `Integrate: \\[ \\int dy = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\int (${coeff.b}^2 \\cdot x^2 + ${2 * coeff.b * coeff.d} \\cdot x + ${coeff.d}^2) \\cdot dx \\]`,
-                    `\\[ y = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\left[ \\frac{${coeff.b}^2 \\cdot x^3}{3} + \\frac{${2 * coeff.b * coeff.d} \\cdot x^2}{2} + ${coeff.d}^2 \\cdot x \\right] + ${C} \\]`,
-                    `\\[ y = \\frac{1}{${coeff.a} \\cdot ${coeff.b}} \\cdot \\left[ \\frac{${coeff.b}^2 \\cdot x^3}{3} + ${coeff.b} \\cdot ${coeff.d} \\cdot x^2 + ${coeff.d}^2 \\cdot x \\right] + ${C} \\]`
-                ]
-            },
-
-            // ========== IMPLICIT FUNCTIONS ==========
-            'circle': {
-                pattern: /x\s*\^\s*2\s*\+\s*y\s*\^\s*2\s*=\s*([+-]?\d*\.?\d*)/i,
-                test: /x\s*\^\s*2\s*\+\s*y\s*\^\s*2\s*=\s*[+-]?\d*\.?\d*/i,
-                template: 'x² + y² = r²',
-                parse: (match) => ({
-                    r: parseFloat(match[1]) || 1
-                }),
-                derivative: (coeff) => `-\\frac{x}{y}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ x^2 + y^2 = ${coeff.r}^2 \\]`,
-                    `Differentiate implicitly:`,
-                    `\\[ \\frac{d}{dx}(x^2) + \\frac{d}{dx}(y^2) = \\frac{d}{dx}(${coeff.r}^2) \\]`,
-                    `\\[ 2x + 2y \\cdot \\frac{dy}{dx} = 0 \\]`,
-                    `Solve: \\[ \\frac{dy}{dx} = -\\frac{x}{y} \\]`
-                ],
-                orthogonalSlope: (coeff) => `\\frac{y}{x}`,
-                solution: (coeff, C) => `y = ${C} \\cdot x`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = -\\frac{x}{y} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = \\frac{y}{x} \\]`,
-                    `Separable: \\[ \\frac{dy}{y} = \\frac{dx}{x} \\]`,
-                    `Integrate: \\[ \\int \\frac{dy}{y} = \\int \\frac{dx}{x} \\]`,
-                    `\\[ \\ln|y| = \\ln|x| + \\ln|${C}| \\]`,
-                    `\\[ y = ${C} \\cdot x \\]`,
-                    `For circles at origin, orthogonal trajectories are lines through origin.`
-                ]
-            },
-
-            'parabola': {
-                pattern: /y\s*\^\s*2\s*=\s*([+-]?\d*\.?\d*)\s*\*?\s*x/i,
-                test: /y\s*\^\s*2\s*=\s*[+-]?\d*\.?\d*\s*\*?\s*x/i,
-                template: 'y² = 4·a·x',
-                parse: (match) => ({
-                    a: parseFloat(match[1]) / 4 || 1
-                }),
-                derivative: (coeff) => `\\frac{${2 * coeff.a}}{y}`,
-                derivativeExplanation: (coeff) => [
-                    `Given: \\[ y^2 = ${4 * coeff.a} \\cdot x \\]`,
-                    `Differentiate implicitly:`,
-                    `\\[ \\frac{d}{dx}(y^2) = \\frac{d}{dx}(${4 * coeff.a} \\cdot x) \\]`,
-                    `\\[ 2y \\cdot \\frac{dy}{dx} = ${4 * coeff.a} \\]`,
-                    `Solve: \\[ \\frac{dy}{dx} = \\frac{${2 * coeff.a}}{y} \\]`
-                ],
-                orthogonalSlope: (coeff) => `-\\frac{y}{${2 * coeff.a}}`,
-                solution: (coeff, C) => `y = ${C} \\cdot e^{-\\frac{x}{${2 * coeff.a}}}`,
-                steps: (coeff, C) => [
-                    `Original derivative: \\[ \\frac{dy}{dx} = \\frac{${2 * coeff.a}}{y} \\]`,
-                    `Orthogonal condition: \\[ m_{\\text{orth}} \\cdot m_{\\text{orig}} = -1 \\]`,
-                    `Orthogonal slope: \\[ \\frac{dy}{dx} = -\\frac{y}{${2 * coeff.a}} \\]`,
-                    `Separable: \\[ \\frac{dy}{y} = -\\frac{dx}{${2 * coeff.a}} \\]`,
-                    `Integrate: \\[ \\int \\frac{dy}{y} = -\\frac{1}{${2 * coeff.a}} \\int dx \\]`,
-                    `\\[ \\ln|y| = -\\frac{x}{${2 * coeff.a}} + \\ln|${C}| \\]`,
-                    `\\[ y = ${C} \\cdot e^{-\\frac{x}{${2 * coeff.a}}} \\]`
-                ]
-            }
-        };
-
-        // Insert equation into input field
-        function insertEquation(equation) {
-            equationInput.value = equation;
-            equationInput.focus();
-            hideMessages();
-            showCoefficientInputs(equation);
-        }
-
-        // Show coefficient inputs
-        function showCoefficientInputs(equation) {
-            const detected = detectEquationType(equation);
-            coeffInputs.innerHTML = '';
-           
-            if (!detected || !detected.coefficients) {
-                coeffInputs.style.display = 'none';
-                return;
-            }
-           
-            coeffInputs.style.display = 'grid';
-           
-            for (const [coeff, value] of Object.entries(detected.coefficients)) {
-                const group = document.createElement('div');
-                group.className = 'coeff-group';
-                group.innerHTML = `
-                    <label class="coeff-label">${coeff.toUpperCase()}</label>
-                    <input type="number" class="coeff-input" id="coeff_${coeff}"
-                           value="${value}" step="0.1" placeholder="${coeff}">
-                `;
-                coeffInputs.appendChild(group);
-            }
-        }
-
-        // Get coefficients from inputs
-        function getCoefficients() {
-            const inputs = coeffInputs.querySelectorAll('.coeff-input');
-            const coeffs = {};
-           
-            inputs.forEach(input => {
-                const name = input.id.replace('coeff_', '');
-                coeffs[name] = parseFloat(input.value) || 0;
-            });
-           
-            return coeffs;
-        }
-
-        // Detect equation type
-        function detectEquationType(equation) {
-            // First check all patterns
-            for (const [type, pattern] of Object.entries(equationPatterns)) {
-                const match = equation.match(pattern.pattern);
-                if (match) {
-                    return {
-                        type: type,
-                        coefficients: pattern.parse(match),
-                        pattern: pattern
-                    };
-                }
-            }
-           
-            // Try simplified patterns
-            const eq = equation.replace(/\s/g, '').toLowerCase();
-           
-            if (eq.includes('y=x^3') || eq.includes('y=x³')) {
-                return {
-                    type: 'cubic',
-                    coefficients: {a: 1, b: 0, p: 0, d: 0},
-                    pattern: equationPatterns.cubic
-                };
-            } else if (eq.includes('y=x^2') || eq.includes('y=x²')) {
-                return {
-                    type: 'quadratic',
-                    coefficients: {a: 1, b: 0, p: 0},
-                    pattern: equationPatterns.quadratic
-                };
-            } else if (eq.includes('y=ln(')) {
-                return {
-                    type: 'logarithm_natural',
-                    coefficients: {a: 1},
-                    pattern: equationPatterns.logarithm_natural
-                };
-            } else if (eq.includes('y=log(')) {
-                return {
-                    type: 'logarithm_common',
-                    coefficients: {a: 1},
-                    pattern: equationPatterns.logarithm_common
-                };
-            } else if (eq.includes('y=cos(')) {
-                return {
-                    type: 'cosine',
-                    coefficients: {a: 1, b: 1},
-                    pattern: equationPatterns.cosine
-                };
-            } else if (eq.includes('y=tan(')) {
-                return {
-                    type: 'tangent',
-                    coefficients: {a: 1, b: 1},
-                    pattern: equationPatterns.tangent
-                };
-            } else if (eq.includes('y=sin(')) {
-                return {
-                    type: 'sine',
-                    coefficients: {a: 1, b: 1},
-                    pattern: equationPatterns.sine
-                };
-            } else if (eq.includes('y=e^(') && eq.includes('*x)')) {
-                const aMatch = eq.match(/y=e\^\(([+-]?\d*\.?\d*)\*x\)/);
-                return {
-                    type: 'exponential',
-                    coefficients: {a: aMatch ? parseFloat(aMatch[1]) : 1},
-                    pattern: equationPatterns.exponential
-                };
-            } else if (eq.includes('y=x^')) {
-                const nMatch = eq.match(/y=x\^([+-]?\d*\.?\d*)/);
-                return {
-                    type: 'power',
-                    coefficients: {n: nMatch ? parseFloat(nMatch[1]) : 1},
-                    pattern: equationPatterns.power
-                };
-            } else if (eq.includes('y=1/x')) {
-                return {
-                    type: 'rational_linear',
-                    coefficients: {a: 1, b: 1, d: 0},
-                    pattern: equationPatterns.rational_linear
-                };
-            } else if (eq.includes('x^2+y^2=')) {
-                const r = eq.match(/x\^2\+y\^2=(\d+)/);
-                return {
-                    type: 'circle',
-                    coefficients: {r: r ? parseFloat(r[1]) : 1},
-                    pattern: equationPatterns.circle
-                };
-            } else if (eq.includes('y^2=') && eq.includes('*x')) {
-                const a = eq.match(/y\^2=(\d+)\*x/);
-                return {
-                    type: 'parabola',
-                    coefficients: {a: a ? parseFloat(a[1])/4 : 1},
-                    pattern: equationPatterns.parabola
-                };
-            }
-           
-            return null;
-        }
-
-        // Error handling
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-            successMessage.style.display = 'none';
-        }
-
-        function showSuccess(message) {
-            successMessage.textContent = message;
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-        }
-
-        function hideMessages() {
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-        }
-
-        // Loading states
-        function showLoading() {
-            loadingDiv.style.display = 'block';
-            calculateBtn.style.display = 'none';
-            calculateBtn.disabled = true;
-        }
-
-        function hideLoading() {
-            loadingDiv.style.display = 'none';
-            calculateBtn.style.display = 'flex';
-            calculateBtn.disabled = false;
-        }
-
-        // Main calculation
-        calculateBtn.addEventListener('click', function() {
-            const equation = equationInput.value.trim();
-            const constant = 'C';
-           
-            if (!equation) {
-                showError('Please enter an equation');
-                return;
-            }
-
-            hideMessages();
-            showLoading();
-           
+        // Debug image loading
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoImg = document.getElementById('pcceLogo');
+            const debugInfo = document.getElementById('debugInfo');
+            
+            logoImg.onload = function() {
+                debugInfo.innerHTML = '✓ PCOE logo loaded successfully';
+                debugInfo.style.background = 'rgba(46, 204, 113, 0.8)';
+                setTimeout(() => {
+                    debugInfo.style.display = 'none';
+                }, 3000);
+            };
+            
+            logoImg.onerror = function() {
+                debugInfo.innerHTML = '✗ PCOE logo failed to load, using fallback';
+                debugInfo.style.background = 'rgba(231, 76, 60, 0.8)';
+                setTimeout(() => {
+                    debugInfo.style.display = 'none';
+                }, 5000);
+            };
+            
+            // Check after 2 seconds if image loaded
             setTimeout(() => {
-                try {
-                    const detected = detectEquationType(equation);
-                   
-                    if (!detected) {
-                        showError('Unable to recognize equation format. Please use standard notation with * for multiplication.');
-                        hideLoading();
-                        return;
-                    }
-                   
-                    const pattern = detected.pattern;
-                    let coefficients = detected.coefficients;
-                   
-                    // If coefficient inputs exist, use those values
-                    if (coeffInputs.style.display !== 'none') {
-                        const inputCoeffs = getCoefficients();
-                        coefficients = { ...coefficients, ...inputCoeffs };
-                    }
-                   
-                    // Generate solution
-                    const solution = {
-                        derivative: pattern.derivative(coefficients),
-                        derivativeExplanation: pattern.derivativeExplanation(coefficients),
-                        orthogonalSlope: pattern.orthogonalSlope(coefficients),
-                        solution: pattern.solution(coefficients, constant),
-                        steps: pattern.steps(coefficients, constant)
-                    };
-                   
-                    showSuccess('Solution found successfully!');
-                   
-                    // Update solution display
-                    updateSolutionDisplay(equation, detected.type, coefficients, solution);
-                   
-                    // Generate graphs
-                    generateGraphs(detected.type, coefficients, constant);
-                   
-                    // Show results page
-                    frontPage.style.display = 'none';
-                    backendPage.style.display = 'block';
-                    window.scrollTo(0, 0);
-                    hideLoading();
-                   
-                } catch (error) {
-                    showError('Error: ' + error.message);
-                    hideLoading();
+                if (!logoImg.complete || logoImg.naturalHeight === 0) {
+                    debugInfo.innerHTML = '⚠️ PCOE logo loading slowly...';
                 }
-            }, 500); // Small delay for better UX
+            }, 2000);
         });
 
-        // Update solution display
-        function updateSolutionDisplay(equation, type, coefficients, solution) {
-            // Original equation
-            document.getElementById('originalEquationDisplay').innerHTML = `\\[ ${equation} \\]`;
-           
-            // Set graph title
-            graph1Title.textContent = equation;
-           
-            // Parameters
-            const paramsDisplay = document.getElementById('paramsDisplay');
-            let paramsHTML = `<div style="background:#f0f0f0; padding:10px; border-radius:5px; margin-top:10px;"><strong>Parameters:</strong><br>`;
-            for (const [key, value] of Object.entries(coefficients)) {
-                paramsHTML += `${key} = ${value}<br>`;
-            }
-            paramsHTML += `</div>`;
-            paramsDisplay.innerHTML = paramsHTML;
-           
-            // Derivative display
-            document.getElementById('derivativeDisplay').innerHTML =
-                `\\[ \\frac{dy}{dx} = ${solution.derivative} \\]`;
-           
-            // Differentiation steps
-            const diffStepsDiv = document.getElementById('differentiationSteps');
-            diffStepsDiv.innerHTML = solution.derivativeExplanation.map((step, index) => `
-                <div class="step">
-                    <span class="step-number">${index + 1}</span>
-                    ${step}
-                </div>
-            `).join('');
-           
-            // Orthogonal trajectory steps
-            const orthoStepsDiv = document.getElementById('orthogonalSteps');
-            orthoStepsDiv.innerHTML = Array.isArray(solution.steps) ? 
-                solution.steps.map((step, index) => `
-                    <div class="step">
-                        <span class="step-number">${index + 1}</span>
-                        ${step}
-                    </div>
-                `).join('') :
-                `<div class="step">${solution.steps}</div>`;
-           
-            // Final answer
-            document.getElementById('finalAnswer').innerHTML = `\\[ \\text{Orthogonal Trajectory: } ${solution.solution} \\]`;
-           
-            // Render MathJax
-            if (window.MathJax) {
-                MathJax.typesetPromise();
-            }
-        }
-
-        // Generate graphs
-        function generateGraphs(type, coefficients, constant) {
-            // Clear previous graphs
-            Plotly.purge('originalGraph');
-            Plotly.purge('orthogonalGraph');
-            Plotly.purge('combinedGraph');
-           
-            // Generate data with appropriate domain
-            const xValues = [];
-            let start = -5, end = 5, step = 0.1;
-           
-            // Adjust domain based on function type
-            switch(type) {
-                case 'logarithm_natural':
-                case 'logarithm_common':
-                    start = 0.1; // Avoid log(0)
-                    end = 10;
-                    step = 0.1;
-                    break;
-                case 'rational_linear':
-                    // Avoid division by zero
-                    const zeroPoint = -coefficients.d / coefficients.b;
-                    start = zeroPoint - 5;
-                    end = zeroPoint + 5;
-                    step = 0.05;
-                    // Remove points too close to asymptote
-                    break;
-                case 'circle':
-                    start = -coefficients.r - 1;
-                    end = coefficients.r + 1;
-                    step = 0.05;
-                    break;
-                case 'parabola':
-                    start = 0;
-                    end = 10;
-                    break;
-                case 'cubic':
-                    start = -3;
-                    end = 3;
-                    step = 0.1;
-                    break;
-                default:
-                    start = -5;
-                    end = 5;
-                    step = 0.1;
-            }
-           
-            for (let x = start; x <= end; x += step) {
-                // Skip problematic points
-                if (Math.abs(x) < 0.001 && (type === 'rational_linear' || type.includes('logarithm'))) continue;
-                if (type === 'rational_linear' && Math.abs(coefficients.b * x + coefficients.d) < 0.01) continue;
-                xValues.push(x);
-            }
-           
-            // Original function values
-            const yOriginal = xValues.map(x => evaluateFunction(type, coefficients, x));
-           
-            // Orthogonal trajectories with different constants
-            const constants = [-2, -1, 0, 1, 2];
-            const orthogonalTraces = constants.map(C => {
-                const yOrtho = xValues.map(x => evaluateOrthogonalFunction(type, coefficients, x, C));
-                return {
-                    x: xValues,
-                    y: yOrtho,
-                    mode: 'lines',
-                    name: `C = ${C}`,
-                    line: {color: '#ef5350', width: 2, dash: C === 0 ? 'solid' : 'dash'}
-                };
+        // Section cards interaction
+        const sectionCards = document.querySelectorAll('.section-card');
+        const overlay = document.getElementById('overlay');
+        
+        sectionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                sectionCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                
+                const sectionName = card.getAttribute('data-section');
+                openBackendPage(sectionName);
             });
-           
-            // Clean configuration for clear graphs
-            const config = {
-                displayModeBar: true,
-                responsive: true,
-                displaylogo: false,
-                modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d'],
-                scrollZoom: false
-            };
-           
-            // Layout for all graphs
-            const commonLayout = {
-                xaxis: {
-                    title: 'x',
-                    showgrid: true,
-                    gridcolor: '#f0f0f0',
-                    zeroline: true,
-                    zerolinecolor: '#ccc'
-                },
-                yaxis: {
-                    title: 'y',
-                    showgrid: true,
-                    gridcolor: '#f0f0f0',
-                    zeroline: true,
-                    zerolinecolor: '#ccc'
-                },
-                plot_bgcolor: '#fff',
-                paper_bgcolor: '#fff',
-                font: {size: 12, color: '#333'},
-                margin: {l: 50, r: 20, t: 40, b: 50}
-            };
-           
-            // 1. Original function graph
-            Plotly.newPlot('originalGraph', [{
-                x: xValues,
-                y: yOriginal,
-                mode: 'lines',
-                name: 'Original Function',
-                line: {color: '#5c6bc0', width: 3}
-            }], {
-                ...commonLayout,
-                title: 'Original Function'
-            }, config);
-           
-            // 2. Orthogonal trajectories graph
-            Plotly.newPlot('orthogonalGraph', orthogonalTraces, {
-                ...commonLayout,
-                title: 'Orthogonal Trajectories (Different C values)',
-                showlegend: true
-            }, config);
-           
-            // 3. Combined graph
-            Plotly.newPlot('combinedGraph', [
-                {
-                    x: xValues,
-                    y: yOriginal,
-                    mode: 'lines',
-                    name: 'Original Function',
-                    line: {color: '#5c6bc0', width: 3}
-                },
-                {
-                    x: xValues,
-                    y: orthogonalTraces[2].y, // C = 0
-                    mode: 'lines',
-                    name: 'Orthogonal (C=0)',
-                    line: {color: '#ef5350', width: 3, dash: 'solid'}
-                }
-            ], {
-                ...commonLayout,
-                title: 'Combined View: Original + Orthogonal (C=0)',
-                showlegend: true
-            }, config);
-        }
-
-        // Evaluate function
-        function evaluateFunction(type, coefficients, x) {
-            try {
-                switch(type) {
-                    case 'quadratic':
-                        return coefficients.a * x * x + coefficients.b * x + coefficients.p;
-                    case 'linear':
-                        return coefficients.a * x + coefficients.b;
-                    case 'cubic':
-                        return coefficients.a * x * x * x + coefficients.b * x * x + coefficients.p * x + coefficients.d;
-                    case 'power':
-                        return Math.pow(x, coefficients.n);
-                    case 'tangent':
-                        return coefficients.a * Math.tan(coefficients.b * x);
-                    case 'sine':
-                        return coefficients.a * Math.sin(coefficients.b * x);
-                    case 'cosine':
-                        return coefficients.a * Math.cos(coefficients.b * x);
-                    case 'exponential':
-                        return Math.exp(coefficients.a * x);
-                    case 'exponential_complex':
-                        return coefficients.b * Math.exp(coefficients.a * Math.pow(x, coefficients.n));
-                    case 'logarithm_natural':
-                        return Math.log(coefficients.a * x);
-                    case 'logarithm_common':
-                        return Math.log10(coefficients.a * x);
-                    case 'rational_linear':
-                        return coefficients.a / (coefficients.b * x + coefficients.d);
-                    case 'circle':
-                        return Math.sqrt(Math.max(0, coefficients.r * coefficients.r - x * x));
-                    case 'parabola':
-                        return Math.sqrt(4 * coefficients.a * x);
-                    default:
-                        return Math.sin(x);
-                }
-            } catch (e) {
-                return null;
-            }
-        }
-
-        // Evaluate orthogonal function
-        function evaluateOrthogonalFunction(type, coefficients, x, C) {
-            try {
-                switch(type) {
-                    case 'quadratic':
-                        return -Math.log(Math.abs(2 * coefficients.a * x + coefficients.b)) / (2 * coefficients.a) + C;
-                    case 'linear':
-                        return -x / coefficients.a + C;
-                    case 'cubic':
-                        // For cubic, use numerical approximation
-                        if (Math.abs(3 * coefficients.a * x * x + 2 * coefficients.b * x + coefficients.p) < 0.01) {
-                            return C;
-                        }
-                        return C - 1/(3 * coefficients.a * x * x + 2 * coefficients.b * x + coefficients.p);
-                    case 'power':
-                        if (coefficients.n === 2) {
-                            return -0.5 * Math.log(Math.abs(x)) + C;
-                        } else if (coefficients.n === 1) {
-                            return -x + C;
-                        } else {
-                            return -Math.pow(x, 2 - coefficients.n) / (coefficients.n * (2 - coefficients.n)) + C;
-                        }
-                    case 'tangent':
-                        return -1/(coefficients.a * coefficients.b) * (x/2 + Math.sin(2*coefficients.b*x)/(4*coefficients.b)) + C;
-                    case 'sine':
-                        return -Math.log(Math.abs(1/Math.cos(coefficients.b*x) + Math.tan(coefficients.b*x))) / (coefficients.a * coefficients.b * coefficients.b) + C;
-                    case 'cosine':
-                        return -Math.log(Math.abs(1/Math.sin(coefficients.b*x) + 1/Math.tan(coefficients.b*x))) / (coefficients.a * coefficients.b * coefficients.b) + C;
-                    case 'exponential':
-                        return Math.exp(-coefficients.a * x) / (coefficients.a * coefficients.a) + C;
-                    case 'exponential_complex':
-                        if (coefficients.n === 1) {
-                            return Math.exp(-coefficients.a * x) / (coefficients.a * coefficients.a * coefficients.b) + C;
-                        } else {
-                            return -Math.pow(x, 2 - coefficients.n) / (coefficients.a * coefficients.b * coefficients.n * (2 - coefficients.n)) + C;
-                        }
-                    case 'logarithm_natural':
-                        return -x * x / 2 + C;
-                    case 'logarithm_common':
-                        return -Math.LN10 * x * x / 2 + C;
-                    case 'rational_linear':
-                        return (1/(coefficients.a * coefficients.b)) * 
-                               ((coefficients.b * coefficients.b * x * x * x / 3) + 
-                                (coefficients.b * coefficients.d * x * x) + 
-                                (coefficients.d * coefficients.d * x)) + C;
-                    case 'circle':
-                        return C * x;
-                    case 'parabola':
-                        return C * Math.exp(-x/(2 * coefficients.a));
-                    default:
-                        return -0.5 * Math.log(Math.abs(x)) + C;
-                }
-            } catch (e) {
-                return null;
-            }
-        }
-
-        // Back to home
-        backHomeBtn.addEventListener('click', function() {
-            backendPage.style.display = 'none';
-            frontPage.style.display = 'block';
-            window.scrollTo(0, 0);
-            hideMessages();
         });
 
-        // Initialize
-        window.onload = function() {
-            // Animate equation examples
-            const examples = [
-                "y = log(2*x)",
-                "y = x^3 - 2*x^2 + x - 1",
-                "y = 3*cos(2*x)",
-                "y = e^(2*x)",
-                "y = 2/(3*x+1)"
-            ];
-            let idx = 0;
-           
-            function animateEquation() {
-                const mainEq = document.getElementById('mainEquation');
-                const eq = examples[idx];
-                mainEq.innerHTML = `\\[ ${eq} \\]`;
-               
-                idx = (idx + 1) % examples.length;
-               
-                if (window.MathJax) {
-                    MathJax.typesetPromise();
-                }
-               
-                setTimeout(animateEquation, 3000);
-            }
-           
-            animateEquation();
-           
-            // Show coefficient inputs when equation changes
-            equationInput.addEventListener('input', function() {
-                showCoefficientInputs(this.value);
-            });
-           
-            // Enter key support
-            equationInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    calculateBtn.click();
-                }
+        // Open backend page function
+        function openBackendPage(section) {
+            // Hide all backend pages first
+            const allBackendPages = document.querySelectorAll('.backend-page');
+            allBackendPages.forEach(page => {
+                page.classList.remove('active');
             });
             
-            // Handle mobile touch
-            document.addEventListener('touchstart', function() {}, {passive: true});
-            
-            // Instructions for first-time users
-            if (!localStorage.getItem('calculatorViewed')) {
-                showSuccess('Welcome! Select an equation or enter your own, then click Calculate.');
-                localStorage.setItem('calculatorViewed', 'true');
+            // Show the selected backend page
+            const pageToShow = document.getElementById(`${section}-page`);
+            if (pageToShow) {
+                pageToShow.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
             }
-        };
-
-        // Render MathJax
-        if (window.MathJax) {
-            MathJax.typesetPromise();
+            
+            // Special handling for simulation page
+            if (section === 'simulation') {
+                // We could also automatically redirect to the external site
+                // window.open('https://gaurichavan387-jpg.github.io/matrix-makers/', '_blank');
+            }
         }
+
+        // Close backend page function
+        function closeBackendPage() {
+            const allBackendPages = document.querySelectorAll('.backend-page');
+            allBackendPages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        // Posttest submission function
+        function submitPosttest() {
+            // Correct answers
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'a',
+                q3: 'a',
+                q4: 'a',
+                q5: 'b',
+                q6: 'a',
+                q7: 'a',
+                q8: 'a',
+                q9: 'a',
+                q10: 'a'
+            };
+            
+            let score = 0;
+            const totalQuestions = 10;
+            const userAnswers = {};
+            
+            // Calculate score
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                
+                if (selectedOption) {
+                    userAnswers[questionName] = selectedOption.value;
+                    if (selectedOption.value === correctAnswers[questionName]) {
+                        score++;
+                    }
+                } else {
+                    userAnswers[questionName] = null;
+                }
+            }
+            
+            // Display results
+            const resultSection = document.getElementById('result-section');
+            const scoreText = document.getElementById('score-text');
+            const solutionsDiv = document.getElementById('solutions');
+            
+            scoreText.innerHTML = `<strong>Your Score: ${score}/${totalQuestions}</strong><br>`;
+            if (score === totalQuestions) {
+                scoreText.innerHTML += "Excellent! You have a perfect understanding of orthogonal trajectories.";
+            } else if (score >= 7) {
+                scoreText.innerHTML += "Very good! You have a solid understanding of the concept.";
+            } else if (score >= 5) {
+                scoreText.innerHTML += "Good effort! Review the theory section to improve your understanding.";
+            } else {
+                scoreText.innerHTML += "You may need to revisit the theory and practice more problems.";
+            }
+            
+            // Show solutions
+            let solutionsHTML = "<h4>Solutions:</h4>";
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const userAnswer = userAnswers[questionName];
+                const correctAnswer = correctAnswers[questionName];
+                
+                solutionsHTML += `<p><strong>Question ${i}:</strong> `;
+                solutionsHTML += `Your answer: ${userAnswer ? userAnswer.toUpperCase() : 'Not answered'} | `;
+                solutionsHTML += `Correct answer: ${correctAnswer.toUpperCase()}`;
+                
+                if (userAnswer === correctAnswer) {
+                    solutionsHTML += ` <span style="color: green;">✓ Correct</span>`;
+                } else if (userAnswer) {
+                    solutionsHTML += ` <span style="color: red;">✗ Incorrect</span>`;
+                } else {
+                    solutionsHTML += ` <span style="color: orange;">ⓘ Not answered</span>`;
+                }
+                
+                solutionsHTML += `</p>`;
+            }
+            
+            solutionsDiv.innerHTML = solutionsHTML;
+            resultSection.style.display = 'block';
+            
+            // Scroll to results
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Feedback form submission
+        document.getElementById('feedback-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                rollno: document.getElementById('rollno').value,
+                rating: document.getElementById('rating').value,
+                easeOfUse: document.getElementById('ease-of-use').value,
+                contentQuality: document.getElementById('content-quality').value,
+                suggestions: document.getElementById('suggestions').value,
+                issues: document.getElementById('issues').value,
+                recommend: document.getElementById('recommend').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // In a real application, this would send data to a server
+            // For now, we'll just show a success message
+            alert('Thank you for your feedback! Your response has been recorded successfully.');
+            
+            // Reset form
+            document.getElementById('feedback-form').reset();
+            
+            // Close the feedback page
+            closeBackendPage();
+        });
+
+        // Feedback button interaction
+        const feedbackButton = document.querySelector('.feedback-button');
+        feedbackButton.addEventListener('click', () => {
+            alert('Thank you for your willingness to provide feedback! Please use the feedback section to submit your detailed feedback.');
+        });
+
+        // Simulate active section based on URL or user interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            // Highlight the first section card
+            sectionCards[0].classList.add('active');
+        });
     </script>
 </body>
 </html>
