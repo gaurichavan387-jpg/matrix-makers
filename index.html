@@ -795,7 +795,7 @@
             background-color: #f8f9fa;
             border-radius: 10px;
             padding: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             border-left: 6px solid #3498db;
         }
 
@@ -1115,13 +1115,19 @@
                     </a>        
                 </div>
 
-                <!-- Welcome Section -->
+                <!-- Welcome Section - REMOVED THE "NEED HELP" SECTION FROM HERE -->
                 <div class="question-section">
                     <h3>About This Virtual Lab</h3>
                     <p class="question-text">
                         Welcome to the Virtual Lab on Orthogonal Trajectory. This lab is designed to help you understand the concept of orthogonal trajectories, which are families of curves that intersect another family of curves at right angles. Click on any of the sections above to explore different aspects of this experiment in full-screen view.
                     </p>
+                    <p class="question-text">
+                        To get started, click on any section card above. Each section will open in a full-screen view for an immersive learning experience.
+                    </p>
                 </div>
+            </main>
+        </div>
+
         <!-- Footer -->
         <footer class="container">
             <p>Virtual Labs &copy; 2025 | Applied Sciences & Humanities Department | 
@@ -2336,23 +2342,6 @@
                 });
             }
         }
-
-        // Feedback button interaction in main content
-        document.addEventListener('DOMContentLoaded', function() {
-            const feedbackButton = document.querySelector('.feedback-button');
-            if (feedbackButton) {
-                feedbackButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openFullscreenPage('feedback');
-                });
-            }
-            
-            // Initialize first section card as active
-            const firstCard = document.querySelector('.section-card');
-            if (firstCard) {
-                firstCard.classList.add('active');
-            }
-        });
     </script>
 </body>
 </html>
