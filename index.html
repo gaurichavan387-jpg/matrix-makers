@@ -18,12 +18,18 @@
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        body.fullscreen {
+            overflow: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            transition: all 0.3s ease;
         }
 
         /* Header Styles */
@@ -32,6 +38,7 @@
             color: white;
             padding: 15px 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .header-container {
@@ -122,6 +129,7 @@
             padding: 30px;
             min-height: 600px;
             margin-top: 30px;
+            transition: all 0.3s ease;
         }
 
         .content-header {
@@ -168,6 +176,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .section-card:hover {
@@ -198,128 +209,133 @@
             color: #7f8c8d;
         }
 
-        /* Backend Page Styles */
-        .backend-page {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            min-height: 600px;
-            display: none;
+        /* Full Screen Page Styles */
+        .fullscreen-page {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
             z-index: 1000;
+            overflow-y: auto;
+            display: none;
+            animation: fadeIn 0.3s ease;
         }
 
-        .backend-page.active {
+        .fullscreen-page.active {
             display: block;
         }
 
-        .backend-header {
+        .fullscreen-header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
         }
 
-        .backend-header h2 {
-            color: #2c3e50;
-            font-size: 24px;
+        .fullscreen-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .close-btn {
+        .fullscreen-header h2 i {
+            color: #3498db;
+        }
+
+        .close-fullscreen-btn {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .close-btn:hover {
-            background: #c0392b;
-        }
-
-        .return-home-btn {
-            background: #3498db;
-            color: white;
-            border: none;
             padding: 10px 20px;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-top: 20px;
+            transition: all 0.3s ease;
         }
 
-        .return-home-btn:hover {
-            background: #2980b9;
+        .close-fullscreen-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
         }
 
-        .aim-content, .theory-content, .pretest-content, .posttest-content, .references-content, .contributors-content, .feedback-content, .simulation-content {
+        .fullscreen-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
             line-height: 1.6;
         }
 
-        .aim-content h3, .theory-content h3, .pretest-content h3, .posttest-content h3, .references-content h3, .contributors-content h3, .feedback-content h3, .simulation-content h3 {
+        .fullscreen-content h3 {
+            color: #2c3e50;
+            margin: 30px 0 20px;
+            font-size: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .fullscreen-content h4 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            font-size: 20px;
+        }
+
+        .fullscreen-content p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 17px;
+        }
+
+        .fullscreen-content ul, .fullscreen-content ol {
+            margin-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .fullscreen-content li {
+            margin-bottom: 12px;
+            color: #555;
+            font-size: 17px;
+        }
+
+        .question-block {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-block h4 {
             color: #2c3e50;
             margin-bottom: 15px;
             font-size: 20px;
         }
 
-        .aim-content p, .theory-content p, .pretest-content p, .references-content p, .contributors-content p, .feedback-content p, .simulation-content p {
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        .theory-content ul, .pretest-content ul, .references-content ul, .contributors-content ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        .theory-content li, .pretest-content li, .references-content li, .contributors-content li {
-            margin-bottom: 8px;
-            color: #555;
-        }
-
-        .question-block {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-        }
-
-        .question-block h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
         .solution {
             background-color: #e8f4fc;
-            padding: 10px 15px;
-            border-radius: 4px;
-            margin-top: 10px;
-            border-left: 3px solid #2980b9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #2980b9;
         }
 
         .posttest-question {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #ddd;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #ddd;
         }
 
         .posttest-question:last-child {
@@ -327,26 +343,26 @@
         }
 
         .options {
-            margin-left: 20px;
-            margin-top: 10px;
+            margin-left: 25px;
+            margin-top: 15px;
         }
 
         .option {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .option input[type="radio"] {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
         }
 
         .option label {
             cursor: pointer;
-            font-size: 16px;
+            font-size: 17px;
             color: #2c3e50;
         }
 
@@ -354,57 +370,63 @@
             background: linear-gradient(to right, #2ecc71, #27ae60);
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            border-radius: 6px;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 30px 0;
             font-weight: 500;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .submit-btn:hover {
             background: linear-gradient(to right, #27ae60, #219653);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
         }
 
         .result-section {
             background-color: #e8f4fc;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
             display: none;
+            border: 2px solid #3498db;
         }
 
         .result-section h3 {
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
 
         .result-section p {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: #2c3e50;
+            font-size: 17px;
         }
 
         .feedback-form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            max-width: 700px;
+            gap: 25px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .form-group label {
             font-weight: 600;
             color: #2c3e50;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .form-group label.required::after {
@@ -413,9 +435,9 @@
         }
 
         .form-group input, .form-group select, .form-group textarea {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s ease;
         }
@@ -423,11 +445,11 @@
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
         }
 
         .form-group textarea {
-            min-height: 120px;
+            min-height: 150px;
             resize: vertical;
             font-family: inherit;
         }
@@ -436,32 +458,33 @@
             background: linear-gradient(to right, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 14px 30px;
-            font-size: 16px;
-            border-radius: 6px;
+            padding: 16px 35px;
+            font-size: 18px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            margin-top: 20px;
+            margin-top: 30px;
             transition: all 0.3s ease;
         }
 
         .form-submit-btn:hover {
             background: linear-gradient(to right, #2980b9, #216794);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
         }
 
         .rating-container {
             display: flex;
-            gap: 15px;
-            margin-top: 5px;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
         }
 
         .rating-option {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
         }
 
         .rating-option input[type="radio"] {
@@ -472,55 +495,61 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 15px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-            width: 100px;
+            border: 3px solid transparent;
+            width: 120px;
+            background: #f8f9fa;
         }
 
         .rating-label:hover {
-            background-color: #f8f9fa;
+            background-color: #e8f4fc;
+            transform: translateY(-3px);
         }
 
         .rating-label.selected {
             background-color: #e8f4fc;
             border-color: #3498db;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
         }
 
         .rating-stars {
             color: #f39c12;
-            font-size: 20px;
-            margin-bottom: 5px;
+            font-size: 24px;
+            margin-bottom: 8px;
         }
 
         .rating-text {
-            font-size: 14px;
+            font-size: 16px;
             color: #7f8c8d;
+            font-weight: 500;
         }
 
         .checkbox-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
+            margin-top: 10px;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
         }
 
         .checkbox-item label {
             cursor: pointer;
             color: #2c3e50;
+            font-size: 17px;
         }
 
         /* Simulation Link */
@@ -528,44 +557,269 @@
             display: inline-block;
             background: linear-gradient(to right, #9b59b6, #8e44ad);
             color: white;
-            padding: 12px 25px;
-            border-radius: 6px;
+            padding: 15px 30px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
-            margin-top: 15px;
+            margin-top: 20px;
             transition: all 0.3s ease;
+            font-size: 18px;
         }
 
         .simulation-link:hover {
             background: linear-gradient(to right, #8e44ad, #7d3c98);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
         }
 
-        /* Overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
+        /* Calculator Styles */
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
         }
 
-        .overlay.active {
+        .calculator-inputs {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .calculator-graph {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
             display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 17px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.25);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .example-list {
+            margin-top: 25px;
+        }
+
+        .example-list h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+
+        .example-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 16px;
+        }
+
+        .example-btn:hover {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 25px;
+            padding: 20px;
+            background: #e8f4fc;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+
+        .results h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .equation {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+            margin: 15px 0;
+            font-size: 17px;
+        }
+
+        /* Graph container */
+        #graph {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+        }
+
+        /* External Website Link Section */
+        .external-website-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            border-left: 5px solid #9b59b6;
+        }
+
+        .external-website-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .external-website-section p {
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 17px;
+        }
+
+        .external-link-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .external-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(155, 89, 182, 0.3);
+        }
+
+        .external-link-btn:hover {
+            background: linear-gradient(to right, #8e44ad, #7d3c98);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.4);
+        }
+
+        .external-link-btn i {
+            font-size: 24px;
+        }
+
+        .link-info {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .link-info h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .link-info p {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Question Section */
+        .question-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 6px solid #3498db;
+        }
+
+        .question-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .question-text {
+            font-size: 19px;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
 
         /* Footer */
         footer {
-            margin-top: 40px;
-            padding: 20px 0;
+            margin-top: 50px;
+            padding: 25px 0;
             text-align: center;
             color: #7f8c8d;
-            font-size: 14px;
-            border-top: 1px solid #eee;
+            font-size: 16px;
+            border-top: 2px solid #eee;
         }
 
         .footer-logo {
@@ -573,6 +827,12 @@
             margin: 0 5px;
             font-weight: bold;
             color: #2c3e50;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Debug styling - to help identify if image loads */
@@ -588,316 +848,54 @@
             z-index: 1000;
         }
 
-        /* Question Section */
-        .question-section {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 5px solid #3498db;
-        }
-
-        .question-section h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-
-        .question-text {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        /* Feedback Section */
-        .feedback-section {
-            background-color: #e8f4fc;
-            border-radius: 8px;
-            padding: 25px;
-            border: 1px solid #d1e7ff;
-        }
-
-        .feedback-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .feedback-header i {
-            font-size: 28px;
-            color: #3498db;
-        }
-
-        .feedback-header h3 {
-            color: #2c3e50;
-            font-size: 22px;
-        }
-
-        .feedback-content {
-            margin-bottom: 25px;
-        }
-
-        .feedback-content p {
-            margin-bottom: 15px;
-            color: #2c3e50;
-            line-height: 1.6;
-        }
-
-        .feedback-button {
-            background: linear-gradient(to right, #3498db, #2c80b9);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feedback-button:hover {
-            background: linear-gradient(to right, #2c80b9, #216794);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        /* Calculator Styles */
-        .calculator-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .calculator-inputs {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .calculator-graph {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2980b9;
-        }
-
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-
-        .example-list {
-            margin-top: 20px;
-        }
-
-        .example-list h4 {
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .example-btn {
-            display: block;
-            width: 100%;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            background: #ecf0f1;
-            border: 1px solid #bdc3c7;
-            border-radius: 4px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .example-btn:hover {
-            background: #3498db;
-            color: white;
-            border-color: #2980b9;
-        }
-
-        .results {
-            margin-top: 20px;
-            padding: 15px;
-            background: #e8f4fc;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
-        }
-
-        .results h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .equation {
-            font-family: 'Courier New', monospace;
-            background: white;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            margin: 10px 0;
-        }
-
-        /* Graph container */
-        #graph {
-            width: 100%;
-            height: 400px;
-            border-radius: 4px;
-        }
-
-        /* External Website Link Section */
-        .external-website-section {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 8px;
-            border-left: 5px solid #9b59b6;
-        }
-
-        .external-website-section h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-
-        .external-website-section p {
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        .external-link-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .external-link-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(to right, #9b59b6, #8e44ad);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);
-        }
-
-        .external-link-btn:hover {
-            background: linear-gradient(to right, #8e44ad, #7d3c98);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
-        }
-
-        .external-link-btn i {
-            font-size: 20px;
-        }
-
-        .link-info {
-            flex: 1;
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .link-info h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .link-info p {
-            color: #7f8c8d;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .fullscreen-content {
+                padding: 30px;
+            }
+            
+            .calculator-container {
+                gap: 30px;
+            }
+        }
+
         @media (max-width: 992px) {
             .aim-sections {
                 grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             }
 
-            .backend-page {
-                width: 100%;
-                padding: 20px;
+            .fullscreen-header {
+                padding: 15px 20px;
             }
-
+            
+            .fullscreen-header h2 {
+                font-size: 24px;
+            }
+            
+            .fullscreen-content {
+                padding: 25px;
+            }
+            
             .calculator-container {
                 grid-template-columns: 1fr;
             }
-
+            
             .external-link-container {
                 flex-direction: column;
                 align-items: stretch;
             }
-
+            
             .external-link-btn {
                 text-align: center;
                 justify-content: center;
             }
-
+            
             .rating-container {
-                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .rating-label {
+                width: 100px;
             }
         }
 
@@ -930,6 +928,24 @@
             .aim-sections {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .fullscreen-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .fullscreen-header h2 {
+                font-size: 22px;
+            }
+            
+            .close-fullscreen-btn {
+                align-self: flex-end;
+            }
+            
+            .fullscreen-content h3 {
+                font-size: 22px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -950,29 +966,60 @@
                 width: 70px;
                 height: 70px;
             }
-
-            .backend-header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
+            
+            .fullscreen-content {
+                padding: 20px;
             }
-
-            .backend-header h2 {
+            
+            .fullscreen-content h3 {
                 font-size: 20px;
             }
-
-            .calculator-container {
-                padding: 10px;
-            }
-
-            .external-link-btn {
-                padding: 12px 20px;
+            
+            .fullscreen-content p, .fullscreen-content li {
                 font-size: 16px;
             }
+            
+            .question-block {
+                padding: 20px;
+            }
+            
+            .calculator-container {
+                padding: 15px;
+            }
+            
+            .external-link-btn {
+                padding: 15px 25px;
+                font-size: 18px;
+            }
+            
+            .rating-label {
+                width: 90px;
+                padding: 12px;
+            }
+            
+            .rating-container {
+                gap: 15px;
+            }
+        }
 
+        @media (max-width: 400px) {
             .rating-label {
                 width: 80px;
-                padding: 8px;
+                padding: 10px;
+            }
+            
+            .fullscreen-header h2 {
+                font-size: 20px;
+            }
+            
+            .close-fullscreen-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .external-link-btn {
+                font-size: 16px;
+                padding: 12px 20px;
             }
         }
     </style>
@@ -983,125 +1030,134 @@
         Checking image loading...
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo-section">
-                <!-- PCOE Logo -->
-                <div class="pcce-logo-container">
-                    <!-- Using GitHub raw URL with fallback -->
-                    <img src="https://raw.githubusercontent.com/dineshkute90/virtual_lab_LAUC/main/pccoe.png" 
-                         alt="PCOE Logo" 
-                         class="pcce-logo-img"
-                         id="pcceLogo"
-                         onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/2c3e50/ffffff?text=PCOE';">
-                    <div class="pcce-logo-text">
-                        <div class="main">APPLIED SCIENCES & HUMANITIES</div>
-                        <div class="sub">Pimpri Chinchwad College of Engineering</div>
+    <!-- Main Content (Home Page) -->
+    <div id="main-content">
+        <!-- Header -->
+        <header>
+            <div class="container header-container">
+                <div class="logo-section">
+                    <!-- PCOE Logo -->
+                    <div class="pcce-logo-container">
+                        <img src="https://raw.githubusercontent.com/dineshkute90/virtual_lab_LAUC/main/pccoe.png" 
+                             alt="PCOE Logo" 
+                             class="pcce-logo-img"
+                             id="pcceLogo"
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/2c3e50/ffffff?text=PCOE';">
+                        <div class="pcce-logo-text">
+                            <div class="main">APPLIED SCIENCES & HUMANITIES</div>
+                            <div class="sub">Pimpri Chinchwad College of Engineering</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Virtual Labs Logo -->
+                    <div class="virtual-labs-logo">
+                        <i class="fas fa-flask"></i>
+                        <h1>Virtual <span>Labs</span></h1>
                     </div>
                 </div>
                 
-                <!-- Virtual Labs Logo -->
-                <div class="virtual-labs-logo">
-                    <i class="fas fa-flask"></i>
-                    <h1>Virtual <span>Labs</span></h1>
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Welcome, Student</span>
                 </div>
             </div>
-            
-            <div class="user-info">
-                <i class="fas fa-user-circle"></i>
-                <span>Welcome, Student</span>
-            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="container">
+            <main class="content">
+                <div class="content-header">
+                    <h2>A Virtual Lab on Orthogonal Trajectory</h2>
+                    <p>Engineering Mathematics Experiment</p>
+                </div>
+
+                <!-- Navigation Cards -->
+                <div class="aim-sections">
+                    <a href="javascript:void(0)" class="section-card active" onclick="openFullscreenPage('aim')">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Aim</h3>
+                        <p>Objective of the experiment</p>
+                    </a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('theory')">
+                        <i class="fas fa-book"></i>
+                        <h3>Theory</h3>
+                        <p>Background concepts</p>
+                    </a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('pretest')">
+                        <i class="fas fa-question-circle"></i>
+                        <h3>Pretest</h3>
+                        <p>Pre-experiment assessment</p>
+                    </a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('simulation')">
+                        <i class="fas fa-desktop"></i>
+                        <h3>Simulation</h3>
+                        <p>Interactive simulation</p>
+                    </a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('posttest')">
+                        <i class="fas fa-clipboard-check"></i>
+                        <h3>Posttest</h3>
+                        <p>Post-experiment assessment</p>
+                    </a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('references')">
+                        <i class="fas fa-book-open"></i>
+                        <h3>References</h3>
+                        <p>Further reading materials</p>
+                    </a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('contributors')">
+                        <i class="fas fa-users"></i>
+                        <h3>Contributors</h3>
+                        <p>People involved</p>
+                    </a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('feedback')">
+                        <i class="fas fa-comment-alt"></i>
+                        <h3>Feedback</h3>
+                        <p>Share your experience</p>
+                    </a>        
+                </div>
+
+                <!-- Welcome Section -->
+                <div class="question-section">
+                    <h3>About This Virtual Lab</h3>
+                    <p class="question-text">
+                        Welcome to the Virtual Lab on Orthogonal Trajectory. This lab is designed to help you understand the concept of orthogonal trajectories, which are families of curves that intersect another family of curves at right angles. Click on any of the sections above to explore different aspects of this experiment in full-screen view.
+                    </p>
+                </div>
+
+                <div class="feedback-section" style="background-color: #e8f4fc; border-radius: 8px; padding: 25px; border: 1px solid #d1e7ff;">
+                    <div class="feedback-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <i class="fas fa-comment-alt"></i>
+                        <h3>Need Help?</h3>
+                    </div>
+                    <div class="feedback-content">
+                        <p>If you have any questions or need assistance with the virtual lab, please don't hesitate to reach out to your instructor or use the feedback form.</p>
+                        <button class="feedback-button" style="background: linear-gradient(to right, #3498db, #2c80b9); color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; display: inline-flex; align-items: center; gap: 10px;" onclick="openFullscreenPage('feedback')">
+                            <i class="fas fa-comments"></i>
+                            Contact Instructor
+                        </button>
+                    </div>
+                </div>
+            </main>
         </div>
-    </header>
 
-    <!-- Content Area -->
-    <div class="container">
-        <main class="content">
-            <div class="content-header">
-                <h2>A Virtual Lab on Orthogonal Trajectory</h2>
-                <p>Engineering Mathematics Experiment</p>
-            </div>
-
-            <!-- Aim Sections -->
-            <div class="aim-sections">
-                <div class="section-card active" data-section="aim">
-                    <i class="fas fa-bullseye"></i>
-                    <h3>Aim</h3>
-                    <p>Objective of the experiment</p>
-                </div>
-                <div class="section-card" data-section="theory">
-                    <i class="fas fa-book"></i>
-                    <h3>Theory</h3>
-                    <p>Background concepts</p>
-                </div>
-                <div class="section-card" data-section="pretest">
-                    <i class="fas fa-question-circle"></i>
-                    <h3>Pretest</h3>
-                    <p>Pre-experiment assessment</p>
-                </div>
-                <div class="section-card" data-section="simulation">
-                    <i class="fas fa-desktop"></i>
-                    <h3>Simulation</h3>
-                    <p>Interactive simulation</p>
-                </div>
-                <div class="section-card" data-section="posttest">
-                    <i class="fas fa-clipboard-check"></i>
-                    <h3>Posttest</h3>
-                    <p>Post-experiment assessment</p>
-                </div>
-                <div class="section-card" data-section="references">
-                    <i class="fas fa-book-open"></i>
-                    <h3>References</h3>
-                    <p>Further reading materials</p>
-                </div>
-                <div class="section-card" data-section="contributors">
-                    <i class="fas fa-users"></i>
-                    <h3>Contributors</h3>
-                    <p>People involved</p>
-                </div>
-                <div class="section-card feedback-card" data-section="feedback">
-                    <i class="fas fa-comment-alt"></i>
-                    <h3>Feedback</h3>
-                    <p>Share your experience</p>
-                </div>        
-            </div>
-
-            <!-- Question and Feedback Section (Default View) -->
-            <div class="question-section">
-                <h3>About This Virtual Lab</h3>
-                <p class="question-text">
-                    Welcome to the Virtual Lab on Orthogonal Trajectory. This lab is designed to help you understand the concept of orthogonal trajectories, which are families of curves that intersect another family of curves at right angles. Click on any of the sections above to explore different aspects of this experiment.
-                </p>
-            </div>
-
-            <div class="feedback-section">
-                <div class="feedback-header">
-                    <i class="fas fa-comment-alt"></i>
-                    <h3>Need Help?</h3>
-                </div>
-                <div class="feedback-content">
-                    <p>If you have any questions or need assistance with the virtual lab, please don't hesitate to reach out to your instructor or use the feedback form.</p>
-                    <button class="feedback-button">
-                        <i class="fas fa-comments"></i>
-                        Contact Instructor
-                    </button>
-                </div>
-            </div>
-        </main>
+        <!-- Footer -->
+        <footer class="container">
+            <p>Virtual Labs &copy; 2025 | Applied Sciences & Humanities Department | 
+               <span class="footer-logo">Pimpri Chinchwad College of Engineering</span>
+            </p>
+        </footer>
     </div>
 
-    <!-- Backend Pages -->
+    <!-- Full Screen Pages -->
 
     <!-- Aim Page -->
-    <div class="backend-page" id="aim-page">
-        <div class="backend-header">
+    <div class="fullscreen-page" id="aim-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-bullseye"></i> Aim of the Experiment</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="aim-content">
+        <div class="fullscreen-content">
             <h3>Objective</h3>
             <p>The aim of this virtual lab is to provide students with a comprehensive understanding of orthogonal trajectories through interactive learning modules. By the end of this experiment, students will be able to:</p>
             <ul>
@@ -1112,21 +1168,24 @@
                 <li>Analyze and verify the orthogonality of curves using mathematical principles</li>
             </ul>
             <p>This virtual lab provides a simulated environment where students can learn, practice, and test their understanding of orthogonal trajectories without the need for physical equipment.</p>
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Theory Page -->
-    <div class="backend-page" id="theory-page">
-        <div class="backend-header">
+    <div class="fullscreen-page" id="theory-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-book"></i> Theory: Orthogonal Trajectory</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="theory-content">
+        <div class="fullscreen-content">
             <h3>What are Orthogonal Trajectories?</h3>
             <p>Orthogonal trajectories are families of curves that intersect another family of curves at right angles (90°). In mathematics, particularly in differential equations, finding orthogonal trajectories is an important application.</p>
             
@@ -1167,21 +1226,23 @@
                 <li><strong>Cartography:</strong> Lines of longitude and latitude on Earth</li>
             </ul>
             
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Pretest Page -->
-    <div class="backend-page" id="pretest-page">
-        <div class="backend-header">
+    <div class="fullscreen-page" id="pretest-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-question-circle"></i> Pretest Questions</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="pretest-content">
+        <div class="fullscreen-content">
             <h3>Pre-experiment Assessment</h3>
             <p>Answer the following questions to test your preliminary knowledge about orthogonal trajectories.</p>
             
@@ -1227,21 +1288,23 @@
                 </div>
             </div>
             
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Simulation Page -->
-    <div class="backend-page" id="simulation-page">
-        <div class="backend-header">
+    <div class="fullscreen-page" id="simulation-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-desktop"></i> Simulation</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="simulation-content">
+        <div class="fullscreen-content">
             <h3>Orthogonal Trajectory Calculator</h3>
             <p>This simulation section provides access to an advanced orthogonal trajectory calculator for interactive learning.</p>
             
@@ -1308,21 +1371,23 @@
                 </div>
             </div>
             
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Posttest Page - COMPLETE WITH 10 QUESTIONS -->
-    <div class="backend-page" id="posttest-page">
-        <div class="backend-header">
+    <!-- Posttest Page -->
+    <div class="fullscreen-page" id="posttest-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-clipboard-check"></i> Post-Experiment Test</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="posttest-content">
+        <div class="fullscreen-content">
             <h3>Post-Experiment Assessment</h3>
             <p>This test contains 10 questions, each worth 1 mark. Select the correct orthogonal trajectory for each given family of curves. You must score at least 7/10 to pass.</p>
             
@@ -1557,9 +1622,11 @@
                     </div>
                 </div>
                 
-                <button type="button" class="submit-btn" onclick="submitPosttest()">
-                    <i class="fas fa-paper-plane"></i> Submit Test
-                </button>
+                <div style="text-align: center;">
+                    <button type="button" class="submit-btn" onclick="submitPosttest()">
+                        <i class="fas fa-paper-plane"></i> Submit Test
+                    </button>
+                </div>
             </form>
             
             <div class="result-section" id="result-section">
@@ -1573,21 +1640,23 @@
                 </div>
             </div>
             
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- References Page -->
-    <div class="backend-page" id="references-page">
-        <div class="backend-header">
+    <div class="fullscreen-page" id="references-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-book-open"></i> References</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="references-content">
+        <div class="fullscreen-content">
             <h3>Recommended Books and Resources</h3>
             <p>Here are some excellent references for learning more about orthogonal trajectories and differential equations:</p>
             
@@ -1602,21 +1671,23 @@
                 </ul>
             </div>
             
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Contributors Page -->
-    <div class="backend-page" id="contributors-page">
-        <div class="backend-header">
+    <div class="fullscreen-page" id="contributors-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-users"></i> Contributors</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="contributors-content">
+        <div class="fullscreen-content">
             <h3>Subject Matter Expert</h3>
             <div class="question-block">
                 <p><strong>Prof. Dinesh Kute</strong></p>
@@ -1634,21 +1705,23 @@
                 </ul>
             </div>
             
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Feedback Page - ENHANCED FORM -->
-    <div class="backend-page" id="feedback-page">
-        <div class="backend-header">
+    <!-- Feedback Page -->
+    <div class="fullscreen-page" id="feedback-fullscreen">
+        <div class="fullscreen-header">
             <h2><i class="fas fa-comment-alt"></i> Feedback Form</h2>
-            <button class="close-btn" onclick="closeBackendPage()">
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
-        <div class="feedback-content">
+        <div class="fullscreen-content">
             <h3>Share Your Experience</h3>
             <p>Your feedback is valuable to us. Please take a moment to share your experience with this virtual lab. Your responses will help us improve the learning experience for future students.</p>
             
@@ -1829,26 +1902,20 @@
                     <textarea id="additional-comments" name="additional-comments" placeholder="Any other comments or feedback..."></textarea>
                 </div>
                 
-                <button type="submit" class="form-submit-btn">
-                    <i class="fas fa-paper-plane"></i> Submit Feedback
-                </button>
+                <div style="text-align: center;">
+                    <button type="submit" class="form-submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                    </button>
+                </div>
             </form>
             
-            <button class="return-home-btn" onclick="closeBackendPage()">
-                <i class="fas fa-home"></i> Return to Home
-            </button>
+            <div style="margin-top: 40px; text-align: center;">
+                <button class="submit-btn" onclick="closeFullscreenPage()">
+                    <i class="fas fa-home"></i> Return to Home
+                </button>
+            </div>
         </div>
     </div>
-
-    <!-- Overlay -->
-    <div class="overlay" id="overlay" onclick="closeBackendPage()"></div>
-
-    <!-- Footer -->
-    <footer class="container">
-        <p>Virtual Labs &copy; 2025 | Applied Sciences & Humanities Department | 
-           <span class="footer-logo">Pimpri Chinchwad College of Engineering</span>
-        </p>
-    </footer>
 
     <script>
         // Debug image loading
@@ -1884,49 +1951,73 @@
             
             // Initialize feedback form
             initializeFeedbackForm();
+            
+            // Check URL for section parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const section = urlParams.get('section');
+            if (section) {
+                openFullscreenPage(section);
+            }
         });
 
-        // Section cards interaction
-        const sectionCards = document.querySelectorAll('.section-card');
-        const overlay = document.getElementById('overlay');
-        
-        sectionCards.forEach(card => {
-            card.addEventListener('click', () => {
-                sectionCards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                
-                const sectionName = card.getAttribute('data-section');
-                openBackendPage(sectionName);
-            });
-        });
-
-        // Open backend page function
-        function openBackendPage(section) {
-            // Hide all backend pages first
-            const allBackendPages = document.querySelectorAll('.backend-page');
-            allBackendPages.forEach(page => {
+        // Open fullscreen page function
+        function openFullscreenPage(section) {
+            // Hide main content
+            document.getElementById('main-content').style.display = 'none';
+            
+            // Hide all fullscreen pages first
+            const allFullscreenPages = document.querySelectorAll('.fullscreen-page');
+            allFullscreenPages.forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Show the selected backend page
-            const pageToShow = document.getElementById(`${section}-page`);
+            // Show the selected fullscreen page
+            const pageToShow = document.getElementById(`${section}-fullscreen`);
             if (pageToShow) {
                 pageToShow.classList.add('active');
-                overlay.classList.add('active');
+                document.body.classList.add('fullscreen');
                 document.body.style.overflow = 'hidden';
+                
+                // Update URL without reloading page
+                history.pushState({section: section}, '', `?section=${section}`);
+                
+                // Scroll to top of the page
+                window.scrollTo(0, 0);
             }
         }
 
-        // Close backend page function
-        function closeBackendPage() {
-            const allBackendPages = document.querySelectorAll('.backend-page');
-            allBackendPages.forEach(page => {
+        // Close fullscreen page function
+        function closeFullscreenPage() {
+            // Show main content
+            document.getElementById('main-content').style.display = 'block';
+            
+            // Hide all fullscreen pages
+            const allFullscreenPages = document.querySelectorAll('.fullscreen-page');
+            allFullscreenPages.forEach(page => {
                 page.classList.remove('active');
             });
             
-            overlay.classList.remove('active');
+            document.body.classList.remove('fullscreen');
             document.body.style.overflow = 'auto';
+            
+            // Update URL
+            history.pushState({}, '', window.location.pathname);
+            
+            // Scroll to top of main content
+            window.scrollTo(0, 0);
         }
+
+        // Handle browser back button
+        window.addEventListener('popstate', function(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const section = urlParams.get('section');
+            
+            if (section) {
+                openFullscreenPage(section);
+            } else {
+                closeFullscreenPage();
+            }
+        });
 
         // Simple calculator function
         function calculateSimple() {
@@ -2185,90 +2276,99 @@
         function initializeFeedbackForm() {
             const feedbackForm = document.getElementById('feedback-form');
             
-            feedbackForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Validate required fields
-                let isValid = true;
-                const requiredFields = feedbackForm.querySelectorAll('[required]');
-                
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
+            if (feedbackForm) {
+                feedbackForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validate required fields
+                    let isValid = true;
+                    const requiredFields = feedbackForm.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.style.borderColor = '#e74c3c';
+                        } else {
+                            field.style.borderColor = '#ddd';
+                        }
+                    });
+                    
+                    // Validate radio buttons
+                    const experienceSelected = feedbackForm.querySelector('input[name="experience"]:checked');
+                    if (!experienceSelected) {
                         isValid = false;
-                        field.style.borderColor = '#e74c3c';
-                    } else {
-                        field.style.borderColor = '#ddd';
+                        alert('Please select an Overall Learning Experience rating.');
                     }
+                    
+                    if (!isValid) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    // Collect form data
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        rollno: document.getElementById('rollno').value,
+                        year: document.getElementById('year').value,
+                        department: document.getElementById('department').value,
+                        experience: experienceSelected ? experienceSelected.value : null,
+                        contentQuality: document.getElementById('content-quality').value,
+                        easeOfUse: document.getElementById('ease-of-use').value,
+                        simulationHelpful: document.getElementById('simulation-helpful').value,
+                        usefulSections: Array.from(document.querySelectorAll('input[name="useful-sections"]:checked')).map(cb => cb.value),
+                        timeSpent: document.getElementById('time-spent').value,
+                        suggestions: document.getElementById('suggestions').value,
+                        issues: document.getElementById('issues').value,
+                        recommend: document.getElementById('recommend').value,
+                        additionalComments: document.getElementById('additional-comments').value,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // Show success message
+                    const successMessage = `
+                        <div style="background: #d4edda; color: #155724; padding: 30px; border-radius: 10px; margin: 30px 0; border: 2px solid #c3e6cb;">
+                            <h3 style="margin-top: 0; color: #155724; font-size: 24px;"><i class="fas fa-check-circle"></i> Thank You for Your Feedback!</h3>
+                            <p style="font-size: 18px;">Your feedback has been successfully submitted. We appreciate you taking the time to help us improve the virtual lab experience.</p>
+                            <p style="font-size: 18px;">Your response ID: <strong>VL-${Date.now().toString().slice(-6)}</strong></p>
+                            <p style="font-size: 18px;">We will review your feedback and use it to enhance future versions of this virtual lab.</p>
+                        </div>
+                    `;
+                    
+                    // In a real application, this would send data to a server
+                    // For demonstration, we'll show a success message
+                    const formContainer = feedbackForm.parentElement;
+                    formContainer.innerHTML = successMessage;
+                    
+                    // Add return button
+                    const returnBtn = document.createElement('div');
+                    returnBtn.style.textAlign = 'center';
+                    returnBtn.style.marginTop = '40px';
+                    returnBtn.innerHTML = `
+                        <button class="submit-btn" onclick="closeFullscreenPage()">
+                            <i class="fas fa-home"></i> Return to Home
+                        </button>
+                    `;
+                    formContainer.appendChild(returnBtn);
                 });
-                
-                // Validate radio buttons
-                const experienceSelected = feedbackForm.querySelector('input[name="experience"]:checked');
-                if (!experienceSelected) {
-                    isValid = false;
-                    alert('Please select an Overall Learning Experience rating.');
-                }
-                
-                if (!isValid) {
-                    alert('Please fill in all required fields.');
-                    return;
-                }
-                
-                // Collect form data
-                const formData = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    rollno: document.getElementById('rollno').value,
-                    year: document.getElementById('year').value,
-                    department: document.getElementById('department').value,
-                    experience: experienceSelected ? experienceSelected.value : null,
-                    contentQuality: document.getElementById('content-quality').value,
-                    easeOfUse: document.getElementById('ease-of-use').value,
-                    simulationHelpful: document.getElementById('simulation-helpful').value,
-                    usefulSections: Array.from(document.querySelectorAll('input[name="useful-sections"]:checked')).map(cb => cb.value),
-                    timeSpent: document.getElementById('time-spent').value,
-                    suggestions: document.getElementById('suggestions').value,
-                    issues: document.getElementById('issues').value,
-                    recommend: document.getElementById('recommend').value,
-                    additionalComments: document.getElementById('additional-comments').value,
-                    timestamp: new Date().toISOString()
-                };
-                
-                // Show success message
-                const successMessage = `
-                    <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="margin-top: 0; color: #155724;">Thank You for Your Feedback!</h3>
-                        <p>Your feedback has been successfully submitted. We appreciate you taking the time to help us improve the virtual lab experience.</p>
-                        <p>Your response ID: <strong>VL-${Date.now().toString().slice(-6)}</strong></p>
-                        <p>We will review your feedback and use it to enhance future versions of this virtual lab.</p>
-                    </div>
-                `;
-                
-                // In a real application, this would send data to a server
-                // For demonstration, we'll show a success message
-                const feedbackContent = document.querySelector('.feedback-content');
-                feedbackContent.innerHTML = successMessage;
-                
-                // Add return button
-                const returnBtn = document.createElement('button');
-                returnBtn.className = 'return-home-btn';
-                returnBtn.innerHTML = '<i class="fas fa-home"></i> Return to Home';
-                returnBtn.onclick = closeBackendPage;
-                feedbackContent.appendChild(returnBtn);
-                
-                // Reset form (optional - since we're replacing the content)
-                // feedbackForm.reset();
-            });
+            }
         }
 
-        // Feedback button interaction
-        const feedbackButton = document.querySelector('.feedback-button');
-        feedbackButton.addEventListener('click', () => {
-            alert('Thank you for your willingness to provide feedback! Please use the feedback section to submit your detailed feedback.');
-        });
-
-        // Simulate active section
-        document.addEventListener('DOMContentLoaded', () => {
-            sectionCards[0].classList.add('active');
+        // Feedback button interaction in main content
+        document.addEventListener('DOMContentLoaded', function() {
+            const feedbackButton = document.querySelector('.feedback-button');
+            if (feedbackButton) {
+                feedbackButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openFullscreenPage('feedback');
+                });
+            }
+            
+            // Initialize first section card as active
+            const firstCard = document.querySelector('.section-card');
+            if (firstCard) {
+                firstCard.classList.add('active');
+            }
         });
     </script>
 </body>
