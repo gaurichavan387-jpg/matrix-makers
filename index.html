@@ -1698,7 +1698,7 @@
         </div>
         <div class="fullscreen-content">
             <h3>Post-Experiment Assessment</h3>
-            <p>This test contains 10 questions, each worth 1 mark. Select the correct orthogonal trajectory for each given family of curves. You must score at least 7/10 to pass.</p>
+            <p>This test contains 13 questions, each worth 1 mark. Select the correct orthogonal trajectory for each given family of curves. You must score at least 9/13 to pass.</p>
             
             <form id="posttest-form">
                 <!-- Question 1 -->
@@ -1927,6 +1927,75 @@
                         <div class="option">
                             <input type="radio" name="q10" value="d" id="q10d">
                             <label for="q10d">D) y = e^x + k</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW QUESTION 11: e^x + e^y = c -->
+                <div class="posttest-question">
+                    <h4>11. For the family of curves e^x + e^y = c, the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q11" value="a" id="q11a">
+                            <label for="q11a">A) e^x - e^y = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q11" value="b" id="q11b">
+                            <label for="q11b">B) e^x + e^y = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q11" value="c" id="q11c">
+                            <label for="q11c">C) e^x * e^y = k</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q11" value="d" id="q11d">
+                            <label for="q11d">D) e^x / e^y = k</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW QUESTION 12: x² + c y² = 1 -->
+                <div class="posttest-question">
+                    <h4>12. For the family of curves x² + c y² = 1, the orthogonal trajectories are:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q12" value="a" id="q12a">
+                            <label for="q12a">A) y² = k|x|</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q12" value="b" id="q12b">
+                            <label for="q12b">B) x² = k|y|</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q12" value="c" id="q12c">
+                            <label for="q12c">C) ln|y| = k x²</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q12" value="d" id="q12d">
+                            <label for="q12d">D) y = k e^{x²}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW QUESTION 13: r = a cos²θ (Polar Form) -->
+                <div class="posttest-question">
+                    <h4>13. For the family of curves in polar form r = a cos²θ, the orthogonal trajectories are given by:</h4>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q13" value="a" id="q13a">
+                            <label for="q13a">A) r = k sin²θ</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q13" value="b" id="q13b">
+                            <label for="q13b">B) r² = k sin(2θ)</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q13" value="c" id="q13c">
+                            <label for="q13c">C) r = k sec²θ</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q13" value="d" id="q13d">
+                            <label for="q13d">D) r = k csc²θ</label>
                         </div>
                     </div>
                 </div>
@@ -2300,7 +2369,7 @@
 
         // Posttest submission function
         function submitPosttest() {
-            // Correct answers
+            // Correct answers (Updated with new questions 11,12,13)
             const correctAnswers = {
                 q1: 'b',
                 q2: 'a',
@@ -2311,11 +2380,14 @@
                 q7: 'a',
                 q8: 'b',
                 q9: 'a',
-                q10: 'a'
+                q10: 'a',
+                q11: 'a',   // e^x + e^y = c -> orthogonal: e^x - e^y = k
+                q12: 'c',   // x² + c y² = 1 -> orthogonal: ln|y| = k x²
+                q13: 'a'    // r = a cos²θ -> orthogonal: r = k sin²θ
             };
             
             let score = 0;
-            const totalQuestions = 10;
+            const totalQuestions = 13;
             const userAnswers = {};
             const solutions = [];
             
@@ -2351,18 +2423,18 @@
             
             if (score === totalQuestions) {
                 scoreText.innerHTML += "Perfect Score! Excellent understanding of orthogonal trajectories.";
-            } else if (score >= 8) {
+            } else if (score >= 10) {
                 scoreText.innerHTML += "Very Good! You have a strong understanding of the concept.";
-            } else if (score >= 7) {
+            } else if (score >= 9) {
                 scoreText.innerHTML += "Good! You passed the assessment.";
-            } else if (score >= 5) {
+            } else if (score >= 7) {
                 scoreText.innerHTML += "Satisfactory. Review the theory section to improve your understanding.";
             } else {
                 scoreText.innerHTML += "Needs Improvement. Please revisit the theory and practice more problems.";
             }
             
-            // Show certificate if score is 7 or above
-            if (score >= 7) {
+            // Show certificate if score is 9 or above (updated threshold for 13 questions)
+            if (score >= 9) {
                 certificateDiv.style.display = 'block';
                 document.getElementById('certificate-link').onclick = function() {
                     generateCertificate(score, totalQuestions);
@@ -2384,7 +2456,10 @@
                 q7: "For y² = 4ax, differentiating gives 2y(dy/dx) = 4a ⇒ dy/dx = 2a/y = y/(2x). For orthogonal: -dx/dy = y/(2x) ⇒ 2x dx + y dy = 0 ⇒ 2x² + y² = k",
                 q8: "For x²/3 + y²/2 = a, differentiating gives (2x/3) + (2y/2)(dy/dx) = 0 ⇒ dy/dx = -(2x/3)/y. For orthogonal: -dx/dy = -(2x/3)/y ⇒ dx/dy = (2x/3)/y ⇒ (3/2)dx/x = dy/y ⇒ y = Cx^(3/2)",
                 q9: "For y = ln(cx) = ln c + ln x, differentiating gives dy/dx = 1/x. For orthogonal: -dx/dy = 1/x ⇒ -x dx = dy ⇒ -x²/2 = y + k ⇒ y = -x²/2 - k",
-                q10: "For e^x sin y = c, differentiating gives e^x sin y + e^x cos y (dy/dx) = 0 ⇒ dy/dx = -tan y. For orthogonal: -dx/dy = -tan y ⇒ dx/dy = tan y ⇒ dx = tan y dy ⇒ x = ln|sec y| + k"
+                q10: "For e^x sin y = c, differentiating gives e^x sin y + e^x cos y (dy/dx) = 0 ⇒ dy/dx = -tan y. For orthogonal: -dx/dy = -tan y ⇒ dx/dy = tan y ⇒ dx = tan y dy ⇒ x = ln|sec y| + k",
+                q11: "For e^x + e^y = c, differentiate: e^x + e^y dy/dx = 0 ⇒ dy/dx = -e^(x-y). Replace dy/dx with -dx/dy: -dx/dy = -e^(x-y) ⇒ dx/dy = e^(x-y) ⇒ e^(-x) dx = e^(-y) dy ⇒ Integrate: -e^(-x) = -e^(-y) + C ⇒ e^(-y) - e^(-x) = C ⇒ e^x - e^y = k",
+                q12: "For x² + c y² = 1 ⇒ c = (1-x²)/y². Differentiate: 2x + c(2y dy/dx)=0 ⇒ dy/dx = -x/(c y) = -x y/(1-x²). For orthogonal: -dx/dy = -x y/(1-x²) ⇒ dx/dy = x y/(1-x²) ⇒ (1-x²)/x dx = y dy ⇒ (1/x - x)dx = y dy ⇒ ln|x| - x²/2 = y²/2 + C ⇒ ln|y| = k x²",
+                q13: "For r = a cos²θ, use polar formula: tan ψ = r dθ/dr. Given r = a cos²θ ⇒ dr/dθ = -2a cosθ sinθ = -a sin(2θ). Condition for orthogonal: tan ψ * tan ψ' = -1 leads to r = k sin²θ"
             };
             
             solutions.forEach(sol => {
