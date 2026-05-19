@@ -161,10 +161,10 @@
             text-decoration: none;
         }
 
-        /* Aim Sections */
+        /* Aim Sections - FIXED 4x2 GRID LAYOUT */
         .aim-sections {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 25px;
             margin-bottom: 50px;
         }
@@ -179,7 +179,11 @@
             border: 2px solid transparent;
             text-decoration: none;
             color: inherit;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
         }
 
         .section-card:hover {
@@ -206,7 +210,7 @@
         }
 
         .section-card p {
-            font-size: 15px;
+            font-size: 14px;
             color: #7f8c8d;
         }
 
@@ -1245,6 +1249,7 @@
             .content-header h2 {
                 font-size: 28px;
             }
+            /* Tablet: 2 cards per row */
             .aim-sections {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
@@ -1254,6 +1259,10 @@
             }
             .section-card h3 {
                 font-size: 18px;
+            }
+            .section-card {
+                min-height: 160px;
+                padding: 20px;
             }
         }
         
@@ -1287,8 +1296,10 @@
             .team-container {
                 gap: 20px;
             }
+            /* Mobile: 1 card per row */
             .aim-sections {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
             .content {
                 padding: 20px;
@@ -1298,6 +1309,10 @@
             }
             .question-text {
                 font-size: 18px;
+            }
+            .section-card {
+                min-height: 140px;
+                padding: 18px;
             }
         }
 
@@ -1310,7 +1325,6 @@
             }
         }
         @media (max-width: 992px) {
-            .aim-sections { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
             .fullscreen-header { padding: 15px 20px; }
             .fullscreen-header h2 { font-size: 24px; }
             .fullscreen-content { padding: 25px; }
@@ -1374,6 +1388,7 @@
         <div class="container">
             <main class="content">
                 <div class="content-header"><h2>A Virtual Lab on Orthogonal Trajectory</h2><p>Engineering Mathematics Experiment</p></div>
+                <!-- FIXED: 4x2 Grid Layout - Exactly 4 cards in first row, 4 cards in second row -->
                 <div class="aim-sections">
                     <a href="javascript:void(0)" class="section-card active" onclick="openFullscreenPage('aim')"><i class="fas fa-bullseye"></i><h3>Aim</h3><p>Objective of the experiment</p></a>
                     <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('theory')"><i class="fas fa-book"></i><h3>Theory</h3><p>Background concepts</p></a>
