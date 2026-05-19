@@ -1019,12 +1019,12 @@
         }
 
         /* ============================================ */
-        /* CONTRIBUTORS SECTION - OPTIMIZED & RESPONSIVE */
+        /* CONTRIBUTORS SECTION - FULLY RESPONSIVE GRID  */
         /* ============================================ */
         .contributors-container {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 2.5rem;
             margin-top: 1.5rem;
         }
 
@@ -1052,16 +1052,29 @@
             font-size: 1.6rem;
         }
 
-        /* Modern responsive grid - auto-fit with minmax */
-        .contributors-grid {
+        /* RESPONSIVE GRID - NO EMPTY SPACES, CARDS AUTO-FILL */
+        .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
             justify-content: center;
             align-items: stretch;
+            width: 100%;
         }
 
-        /* Equal height cards using flex */
+        /* Faculty card centered with max-width */
+        .faculty-grid {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .faculty-grid .contributor-card {
+            max-width: 480px;
+            width: 100%;
+        }
+
+        /* Card styling - unchanged design */
         .contributor-card {
             background: white;
             border-radius: 1rem;
@@ -1074,7 +1087,8 @@
             padding: 1.2rem 1.5rem;
             gap: 1.2rem;
             border: 1px solid #eef2f7;
-            height: 100%;  /* Ensures equal height in grid */
+            height: 100%;
+            width: 100%;
         }
 
         .contributor-card:hover {
@@ -1083,7 +1097,6 @@
             border-color: #3498db;
         }
 
-        /* Consistent image size */
         .contributor-image {
             width: 90px;
             height: 90px;
@@ -1095,17 +1108,12 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: transform 0.2s ease;
         }
 
         .contributor-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .contributor-card:hover .contributor-image {
-            transform: scale(1.02);
         }
 
         .contributor-details {
@@ -1138,18 +1146,7 @@
             margin: 0;
         }
 
-        /* Center single card in Faculty Supervisor section */
-        .contributor-type:first-child .contributors-grid {
-            display: flex;
-            justify-content: center;
-        }
-
-        .contributor-type:first-child .contributors-grid .contributor-card {
-            max-width: 450px;
-            width: 100%;
-        }
-
-        /* Responsive media queries */
+        /* Responsive breakpoints */
         @media (max-width: 768px) {
             .contributor-type {
                 padding: 1.2rem;
@@ -1157,9 +1154,9 @@
             .contributor-type h4 {
                 font-size: 1.3rem;
             }
-            .contributors-grid {
+            .team-grid {
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 1.2rem;
+                gap: 20px;
             }
             .contributor-card {
                 flex-direction: row;
@@ -1176,12 +1173,13 @@
             .contributor-contribution {
                 font-size: 0.75rem;
             }
-            .contributor-type:first-child .contributors-grid .contributor-card {
-                max-width: 100%;
-            }
         }
 
         @media (max-width: 576px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
             .contributor-card {
                 flex-direction: column;
                 text-align: center;
@@ -1193,12 +1191,11 @@
             .contributor-image {
                 width: 85px;
                 height: 85px;
-            }
-            .contributors-grid {
-                grid-template-columns: 1fr;
+                margin: 0 auto;
             }
         }
 
+        /* Responsive Design for other sections (unchanged) */
         @media (max-width: 1200px) {
             .fullscreen-content { padding: 30px; }
             .calculator-container { gap: 30px; }
@@ -1304,7 +1301,7 @@
     <!-- References Page -->
     <div class="fullscreen-page" id="references-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-book-open"></i> References</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Recommended Books and Resources</h3><p>Here are some excellent references for learning more about orthogonal trajectories and differential equations:</p><div class="question-block"><h4>Textbooks:</h4><ul><li><strong>Advanced Engineering Mathematics</strong> by Erwin Kreyszig - Chapter 1 covers differential equations and orthogonal trajectories in detail</li><li><strong>Differential Equations with Applications and Historical Notes</strong> by George F. Simmons - Excellent theoretical foundation with practical applications</li><li><strong>A First Course in Differential Equations</strong> by Dennis G. Zill - Comprehensive coverage with many solved examples</li><li><strong>Elementary Differential Equations and Boundary Value Problems</strong> by William E. Boyce and Richard C. DiPrima - Standard textbook with clear explanations</li><li><strong>Mathematics for Engineers</strong> by Anthony Croft and Robert Davison - Practical approach with engineering applications</li></ul></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
-    <!-- Contributors Page (UPDATED: Clean, balanced, responsive, no empty spaces) -->
+    <!-- Contributors Page - FULLY RESPONSIVE GRID, NO EMPTY SPACES -->
     <div class="fullscreen-page" id="contributors-fullscreen">
         <div class="fullscreen-header">
             <h2><i class="fas fa-users"></i> Contributors</h2>
@@ -1314,11 +1311,11 @@
             <h3>Our Team</h3>
             <p>This virtual lab was developed by a dedicated team of students under the guidance of faculty members.</p>
             <div class="contributors-container">
-                <!-- Faculty Supervisor - Centered, Compact -->
+                <!-- Faculty Supervisor - Centered -->
                 <div class="contributor-type">
                     <h4><i class="fas fa-chalkboard-teacher"></i> Faculty Supervisor</h4>
-                    <div class="contributors-grid" style="display: flex; justify-content: center;">
-                        <div class="contributor-card" style="max-width: 480px; width: 100%;">
+                    <div class="faculty-grid">
+                        <div class="contributor-card">
                             <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/2b790903abd0b004c9b7b1d467ecd5807622e8a2/IMG_20251230_174854.jpg" alt="Prof. Dinesh Kute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/90/2c3e50/ffffff?text=Prof.+Kute';"></div>
                             <div class="contributor-details">
                                 <h5>Prof. Dinesh Kute</h5>
@@ -1328,10 +1325,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- Development Team - Responsive Grid, Equal Heights -->
+                <!-- Development Team - Responsive Grid with auto-fit, no empty space -->
                 <div class="contributor-type">
                     <h4><i class="fas fa-laptop-code"></i> Development Team</h4>
-                    <div class="contributors-grid">
+                    <div class="team-grid">
                         <div class="contributor-card">
                             <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251229_212934.jpg" alt="Gauri Chavan" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/90/3498db/ffffff?text=Gauri';"></div>
                             <div class="contributor-details">
