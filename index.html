@@ -1018,69 +1018,75 @@
             z-index: 1000;
         }
 
-        /* CONTRIBUTORS SECTION - CLEANED, NO EMPTY SPACES, COMPACT RECTANGLE CARDS */
+        /* ============================================ */
+        /* CONTRIBUTORS SECTION - OPTIMIZED & RESPONSIVE */
+        /* ============================================ */
         .contributors-container {
             display: flex;
             flex-direction: column;
-            gap: 35px;
-            margin-top: 30px;
+            gap: 2rem;
+            margin-top: 1.5rem;
         }
 
         .contributor-type {
             background: #f8f9fa;
-            padding: 28px;
-            border-radius: 16px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-            border: 1px solid #e9ecef;
+            padding: 1.8rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eef2f7;
         }
 
         .contributor-type h4 {
             color: #2c3e50;
-            font-size: 24px;
-            margin-bottom: 22px;
-            padding-bottom: 12px;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
             border-bottom: 3px solid #3498db;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 0.75rem;
         }
 
         .contributor-type h4 i {
             color: #3498db;
-            font-size: 26px;
+            font-size: 1.6rem;
         }
 
+        /* Modern responsive grid - auto-fit with minmax */
         .contributors-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            justify-content: center;
+            align-items: stretch;
         }
 
+        /* Equal height cards using flex */
         .contributor-card {
             background: white;
-            border-radius: 14px;
+            border-radius: 1rem;
             overflow: hidden;
-            box-shadow: 0 5px 14px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
             display: flex;
             flex-direction: row;
             align-items: center;
-            padding: 18px 22px;
-            gap: 18px;
+            padding: 1.2rem 1.5rem;
+            gap: 1.2rem;
             border: 1px solid #eef2f7;
-            min-height: 130px;
+            height: 100%;  /* Ensures equal height in grid */
         }
 
         .contributor-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.12);
             border-color: #3498db;
         }
 
+        /* Consistent image size */
         .contributor-image {
-            width: 85px;
-            height: 85px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #3498db;
@@ -1089,6 +1095,7 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: transform 0.2s ease;
         }
 
         .contributor-image img {
@@ -1097,8 +1104,8 @@
             object-fit: cover;
         }
 
-        .contributor-card:hover .contributor-image img {
-            transform: scale(1.05);
+        .contributor-card:hover .contributor-image {
+            transform: scale(1.02);
         }
 
         .contributor-details {
@@ -1108,30 +1115,90 @@
 
         .contributor-details h5 {
             color: #2c3e50;
-            font-size: 18px;
-            margin-bottom: 5px;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
             font-weight: 700;
         }
 
         .contributor-role {
             color: #3498db;
-            font-size: 13px;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 0.6rem;
             display: inline-block;
             background: #e8f4fc;
-            padding: 3px 10px;
+            padding: 0.2rem 0.8rem;
             border-radius: 20px;
         }
 
         .contributor-contribution {
             color: #555;
-            font-size: 13px;
+            font-size: 0.8rem;
             line-height: 1.45;
             margin: 0;
         }
 
-        /* Responsive Design */
+        /* Center single card in Faculty Supervisor section */
+        .contributor-type:first-child .contributors-grid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .contributor-type:first-child .contributors-grid .contributor-card {
+            max-width: 450px;
+            width: 100%;
+        }
+
+        /* Responsive media queries */
+        @media (max-width: 768px) {
+            .contributor-type {
+                padding: 1.2rem;
+            }
+            .contributor-type h4 {
+                font-size: 1.3rem;
+            }
+            .contributors-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.2rem;
+            }
+            .contributor-card {
+                flex-direction: row;
+                padding: 1rem 1.2rem;
+                gap: 1rem;
+            }
+            .contributor-image {
+                width: 75px;
+                height: 75px;
+            }
+            .contributor-details h5 {
+                font-size: 1rem;
+            }
+            .contributor-contribution {
+                font-size: 0.75rem;
+            }
+            .contributor-type:first-child .contributors-grid .contributor-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contributor-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.2rem;
+            }
+            .contributor-details {
+                text-align: center;
+            }
+            .contributor-image {
+                width: 85px;
+                height: 85px;
+            }
+            .contributors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 1200px) {
             .fullscreen-content { padding: 30px; }
             .calculator-container { gap: 30px; }
@@ -1147,7 +1214,6 @@
             .rating-container { justify-content: center; }
             .rating-label { width: 100px; }
             .google-form-container { height: 1200px; }
-            .contributors-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
         }
         @media (max-width: 768px) {
             .header-container { flex-direction: column; gap: 20px; text-align: center; }
@@ -1159,9 +1225,6 @@
             .fullscreen-header h2 { font-size: 22px; }
             .close-fullscreen-btn { align-self: flex-end; }
             .fullscreen-content h3 { font-size: 22px; }
-            .contributors-grid { grid-template-columns: 1fr; }
-            .contributor-card { flex-direction: row; padding: 15px 20px; }
-            .contributor-image { width: 75px; height: 75px; }
             #orthogonalGraph { height: 400px; }
         }
         @media (max-width: 576px) {
@@ -1178,10 +1241,6 @@
             .rating-label { width: 90px; padding: 12px; }
             .rating-container { gap: 15px; }
             .google-form-container { height: 1400px; }
-            .contributor-type { padding: 18px; }
-            .contributor-type h4 { font-size: 20px; }
-            .contributor-image { width: 65px; height: 65px; }
-            .contributor-details h5 { font-size: 16px; }
             #orthogonalGraph { height: 350px; }
         }
         @media (max-width: 400px) {
@@ -1189,8 +1248,6 @@
             .fullscreen-header h2 { font-size: 20px; }
             .close-fullscreen-btn { padding: 8px 15px; font-size: 14px; }
             .external-link-btn { font-size: 16px; padding: 12px 20px; }
-            .contributor-card { flex-direction: column; text-align: center; padding: 18px; }
-            .contributor-details { text-align: center; }
         }
     </style>
 </head>
@@ -1247,7 +1304,7 @@
     <!-- References Page -->
     <div class="fullscreen-page" id="references-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-book-open"></i> References</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Recommended Books and Resources</h3><p>Here are some excellent references for learning more about orthogonal trajectories and differential equations:</p><div class="question-block"><h4>Textbooks:</h4><ul><li><strong>Advanced Engineering Mathematics</strong> by Erwin Kreyszig - Chapter 1 covers differential equations and orthogonal trajectories in detail</li><li><strong>Differential Equations with Applications and Historical Notes</strong> by George F. Simmons - Excellent theoretical foundation with practical applications</li><li><strong>A First Course in Differential Equations</strong> by Dennis G. Zill - Comprehensive coverage with many solved examples</li><li><strong>Elementary Differential Equations and Boundary Value Problems</strong> by William E. Boyce and Richard C. DiPrima - Standard textbook with clear explanations</li><li><strong>Mathematics for Engineers</strong> by Anthony Croft and Robert Davison - Practical approach with engineering applications</li></ul></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
-    <!-- Contributors Page (CLEANED - No empty spaces, compact rectangular layout) -->
+    <!-- Contributors Page (UPDATED: Clean, balanced, responsive, no empty spaces) -->
     <div class="fullscreen-page" id="contributors-fullscreen">
         <div class="fullscreen-header">
             <h2><i class="fas fa-users"></i> Contributors</h2>
@@ -1257,35 +1314,55 @@
             <h3>Our Team</h3>
             <p>This virtual lab was developed by a dedicated team of students under the guidance of faculty members.</p>
             <div class="contributors-container">
-                <!-- Faculty Supervisor -->
+                <!-- Faculty Supervisor - Centered, Compact -->
                 <div class="contributor-type">
                     <h4><i class="fas fa-chalkboard-teacher"></i> Faculty Supervisor</h4>
-                    <div class="contributors-grid">
-                        <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/2b790903abd0b004c9b7b1d467ecd5807622e8a2/IMG_20251230_174854.jpg" alt="Prof. Dinesh Kute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/85/2c3e50/ffffff?text=DK';"></div>
-                            <div class="contributor-details"><h5>Prof. Dinesh Kute</h5><span class="contributor-role">Subject Matter Expert</span><p class="contributor-contribution">Professor of Mathematics, Applied Sciences & Humanities Department. Provided guidance and mathematical expertise.</p></div>
+                    <div class="contributors-grid" style="display: flex; justify-content: center;">
+                        <div class="contributor-card" style="max-width: 480px; width: 100%;">
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/2b790903abd0b004c9b7b1d467ecd5807622e8a2/IMG_20251230_174854.jpg" alt="Prof. Dinesh Kute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/90/2c3e50/ffffff?text=Prof.+Kute';"></div>
+                            <div class="contributor-details">
+                                <h5>Prof. Dinesh Kute</h5>
+                                <span class="contributor-role">Subject Matter Expert</span>
+                                <p class="contributor-contribution">Professor of Mathematics, Applied Sciences & Humanities Department. Provided guidance and mathematical expertise.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- Development Team -->
+                <!-- Development Team - Responsive Grid, Equal Heights -->
                 <div class="contributor-type">
                     <h4><i class="fas fa-laptop-code"></i> Development Team</h4>
                     <div class="contributors-grid">
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251229_212934.jpg" alt="Gauri Chavan" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/85/3498db/ffffff?text=GC';"></div>
-                            <div class="contributor-details"><h5>Gauri Chavan</h5><span class="contributor-role">Designer & Developer</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Led frontend development and implemented interactive features.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251229_212934.jpg" alt="Gauri Chavan" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/90/3498db/ffffff?text=Gauri';"></div>
+                            <div class="contributor-details">
+                                <h5>Gauri Chavan</h5>
+                                <span class="contributor-role">Designer & Developer</span>
+                                <p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Led frontend development and implemented interactive features.</p>
+                            </div>
                         </div>
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251230_112613.jpg" alt="Prachi Bute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/85/9b59b6/ffffff?text=PB';"></div>
-                            <div class="contributor-details"><h5>Prachi Bute</h5><span class="contributor-role">Content Designer</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Created presentation materials and designed educational content structure.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251230_112613.jpg" alt="Prachi Bute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/90/9b59b6/ffffff?text=Prachi';"></div>
+                            <div class="contributor-details">
+                                <h5>Prachi Bute</h5>
+                                <span class="contributor-role">Content Designer</span>
+                                <p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Created presentation materials and designed educational content structure.</p>
+                            </div>
                         </div>
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG-20251226-WA0005.jpg" alt="Prachi Pardeshi" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/85/2ecc71/ffffff?text=PP';"></div>
-                            <div class="contributor-details"><h5>Prachi Pardeshi</h5><span class="contributor-role">Theory Specialist</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Researched mathematical theories and developed problem sets.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG-20251226-WA0005.jpg" alt="Prachi Pardeshi" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/90/2ecc71/ffffff?text=Prachi';"></div>
+                            <div class="contributor-details">
+                                <h5>Prachi Pardeshi</h5>
+                                <span class="contributor-role">Theory Specialist</span>
+                                <p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Researched mathematical theories and developed problem sets.</p>
+                            </div>
                         </div>
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251226_145434.jpg" alt="Prachi Patil" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/85/e74c3c/ffffff?text=PP';"></div>
-                            <div class="contributor-details"><h5>Prachi Patil</h5><span class="contributor-role">Research Associate</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Gathered data and researched applications of orthogonal trajectories.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251226_145434.jpg" alt="Prachi Patil" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/90/e74c3c/ffffff?text=Prachi';"></div>
+                            <div class="contributor-details">
+                                <h5>Prachi Patil</h5>
+                                <span class="contributor-role">Research Associate</span>
+                                <p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Gathered data and researched applications of orthogonal trajectories.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
