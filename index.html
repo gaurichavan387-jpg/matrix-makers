@@ -26,7 +26,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
             transition: all 0.3s ease;
@@ -121,21 +121,33 @@
             color: #3498db;
         }
 
-        /* Content Area */
+        /* Content Area - Increased Size */
         .content {
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            min-height: 600px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            min-height: 700px;
             margin-top: 30px;
             transition: all 0.3s ease;
         }
 
         .content-header {
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .content-header h2 {
+            font-size: 36px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .content-header p {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-top: 8px;
         }
 
         .breadcrumb {
@@ -149,29 +161,18 @@
             text-decoration: none;
         }
 
-        .content-header h2 {
-            font-size: 28px;
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        .content-header p {
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-
         /* Aim Sections */
         .aim-sections {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .section-card {
             background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 25px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -183,7 +184,7 @@
 
         .section-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
             border-color: #3498db;
         }
 
@@ -193,19 +194,19 @@
         }
 
         .section-card i {
-            font-size: 32px;
+            font-size: 40px;
             color: #3498db;
             margin-bottom: 15px;
         }
 
         .section-card h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
+            font-size: 20px;
+            margin-bottom: 10px;
             color: #2c3e50;
         }
 
         .section-card p {
-            font-size: 14px;
+            font-size: 15px;
             color: #7f8c8d;
         }
 
@@ -775,39 +776,48 @@
             border-radius: 8px;
         }
 
-        /* Orthogonal Graph Visualization Container */
+        /* Orthogonal Graph Visualization Container - DECREASED SIZE */
         .orthogonal-graph-container {
             background: white;
             border-radius: 12px;
-            padding: 20px;
-            margin: 30px 0;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            border: 2px solid #e9ecef;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .orthogonal-graph-container h4 {
             color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 22px;
+            margin-bottom: 10px;
+            font-size: 18px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .orthogonal-graph-container h4 i {
             color: #3498db;
+            font-size: 20px;
+        }
+        
+        .orthogonal-graph-container p {
+            font-size: 14px;
+            margin-bottom: 12px;
         }
         
         #orthogonalGraph {
             width: 100%;
-            height: 500px;
+            height: 350px;
             border-radius: 8px;
         }
         
         .graph-controls {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 12px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -816,16 +826,16 @@
             background: linear-gradient(to right, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 6px 15px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 13px;
             transition: all 0.3s ease;
         }
         
         .graph-controls button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52,152,219,0.3);
+            box-shadow: 0 4px 10px rgba(52,152,219,0.3);
         }
 
         /* External Website Link Section */
@@ -902,11 +912,11 @@
             margin-bottom: 10px;
         }
 
-        /* Question Section */
+        /* Question Section - Increased Size */
         .question-section {
             background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 30px;
+            border-radius: 12px;
+            padding: 35px;
             margin-bottom: 30px;
             border-left: 6px solid #3498db;
         }
@@ -914,11 +924,11 @@
         .question-section h3 {
             color: #2c3e50;
             margin-bottom: 20px;
-            font-size: 24px;
+            font-size: 28px;
         }
 
         .question-text {
-            font-size: 19px;
+            font-size: 20px;
             color: #2c3e50;
             margin-bottom: 25px;
             line-height: 1.6;
@@ -1019,10 +1029,9 @@
         }
 
         /* ============================================ */
-        /* CONTRIBUTORS SECTION - FIXED LAYOUT (NO EMPTY SPACE, FULL WIDTH, LARGER CARDS) */
+        /* CONTRIBUTORS SECTION - FIXED LAYOUT */
         /* ============================================ */
         
-        /* Faculty Supervisor Section */
         .faculty-section {
             width: 100%;
             margin-bottom: 2rem;
@@ -1099,7 +1108,6 @@
             margin: 0;
         }
         
-        /* Development Team Section - FIXED GRID, LARGER CARDS, NO EMPTY SPACE */
         .team-section {
             width: 100%;
         }
@@ -1231,6 +1239,22 @@
                 width: 85px;
                 height: 85px;
             }
+            .content {
+                padding: 30px;
+            }
+            .content-header h2 {
+                font-size: 28px;
+            }
+            .aim-sections {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .section-card i {
+                font-size: 32px;
+            }
+            .section-card h3 {
+                font-size: 18px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1263,15 +1287,30 @@
             .team-container {
                 gap: 20px;
             }
+            .aim-sections {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 20px;
+            }
+            .content-header h2 {
+                font-size: 24px;
+            }
+            .question-text {
+                font-size: 18px;
+            }
         }
 
         /* Responsive Design for other sections */
         @media (max-width: 1200px) {
             .fullscreen-content { padding: 30px; }
             .calculator-container { gap: 30px; }
+            .container {
+                max-width: 1200px;
+            }
         }
         @media (max-width: 992px) {
-            .aim-sections { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+            .aim-sections { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
             .fullscreen-header { padding: 15px 20px; }
             .fullscreen-header h2 { font-size: 24px; }
             .fullscreen-content { padding: 25px; }
@@ -1287,16 +1326,13 @@
             .logo-section { flex-direction: column; gap: 20px; width: 100%; }
             .pcce-logo-container { border-right: none; padding-right: 0; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 20px; justify-content: center; width: 100%; }
             .virtual-labs-logo { justify-content: center; }
-            .aim-sections { grid-template-columns: repeat(2, 1fr); }
             .fullscreen-header { flex-direction: column; gap: 15px; align-items: flex-start; }
             .fullscreen-header h2 { font-size: 22px; }
             .close-fullscreen-btn { align-self: flex-end; }
             .fullscreen-content h3 { font-size: 22px; }
-            #orthogonalGraph { height: 400px; }
+            #orthogonalGraph { height: 300px; }
         }
         @media (max-width: 576px) {
-            .aim-sections { grid-template-columns: 1fr; }
-            .content { padding: 20px; }
             .pcce-logo-container { flex-direction: column; text-align: center; }
             .pcce-logo-img { width: 70px; height: 70px; }
             .fullscreen-content { padding: 20px; }
@@ -1308,13 +1344,14 @@
             .rating-label { width: 90px; padding: 12px; }
             .rating-container { gap: 15px; }
             .google-form-container { height: 1400px; }
-            #orthogonalGraph { height: 350px; }
+            #orthogonalGraph { height: 280px; }
         }
         @media (max-width: 400px) {
             .rating-label { width: 80px; padding: 10px; }
             .fullscreen-header h2 { font-size: 20px; }
             .close-fullscreen-btn { padding: 8px 15px; font-size: 14px; }
             .external-link-btn { font-size: 16px; padding: 12px 20px; }
+            #orthogonalGraph { height: 250px; }
         }
     </style>
 </head>
@@ -1357,7 +1394,7 @@
     <div class="fullscreen-page" id="aim-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-bullseye"></i> Aim of the Experiment</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Aim of the Virtual Lab Website</h3><p>This virtual laboratory aims to provide an immersive digital learning environment where students can explore the mathematical concept of orthogonal trajectories through interactive simulations, self-paced assessments, and comprehensive theoretical resources.</p><p>The primary goal is to bridge the gap between theoretical differential equations and practical visualization by allowing learners to experiment with various curve families and observe their orthogonal counterparts in real-time.</p><p>Furthermore, the platform seeks to enhance conceptual clarity and problem-solving skills in engineering mathematics by offering a structured, step-by-step approach from pre-test evaluation to post-test certification.</p><p>Through this integrated web-based tool, students will gain the ability to independently derive orthogonal trajectories for different families of curves and understand their significance in fields like electrostatics, fluid dynamics, and heat transfer.</p><p>Ultimately, this website aims to make advanced mathematical learning accessible, engaging, and effective for every student, fostering deeper analytical thinking and practical application skills.</p><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
     <!-- Theory Page -->
-    <div class="fullscreen-page" id="theory-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-book"></i> Theory: Orthogonal Trajectory</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>What are Orthogonal Trajectories?</h3><p>Orthogonal trajectories are families of curves that intersect another family of curves at right angles (90°). In mathematics, particularly in differential equations, finding orthogonal trajectories is an important application.</p><h3>Mathematical Definition</h3><p>Given a one-parameter family of curves F(x, y, c) = 0, an orthogonal trajectory is a curve that intersects each curve of the family at a right angle.</p><h3>Method to Find Orthogonal Trajectories</h3><ol><li>Find the differential equation of the given family by eliminating the parameter</li><li>Replace dy/dx with -dx/dy (or -1/(dy/dx)) to get the differential equation of orthogonal trajectories</li><li>Solve this new differential equation to obtain the family of orthogonal trajectories</li></ol><div class="orthogonal-graph-container"><h4><i class="fas fa-chart-line"></i> Visualizing Orthogonal Trajectories: Straight Lines & Circles</h4><p style="margin-bottom:15px;color:#2c3e50;">The graph below shows two families of curves that are orthogonal trajectories of each other. <strong>Blue curves</strong> represent straight lines through the origin: <strong>y = m x</strong> (family of lines). <strong>Red curves</strong> represent circles centered at origin: <strong>x² + y² = C</strong> (orthogonal trajectories). Notice how each red circle intersects every blue line at a <strong>90° angle</strong>. The slope of a line (m₁) and the slope of the circle at the intersection point (m₂) satisfy <strong>m₁ × m₂ = -1</strong>.</p><div id="orthogonalGraph"></div><div class="graph-controls"><button onclick="updateGraph(1)">Show Lines & Circles</button><button onclick="updateGraph(2)">Show Lines & Circles (More Curves)</button><button onclick="updateGraph(3)">Show Lines & Circles (Fewer Curves)</button></div><div class="solution" style="margin-top:20px;"><h4 style="margin-bottom:10px;">Slope Relation at Intersection Point:</h4><p>For a straight line y = mx, slope m₁ = m.</p><p>For a circle x² + y² = C, differentiate: 2x + 2y(dy/dx) = 0 ⇒ dy/dx = -x/y = m₂.</p><p>At the intersection point (x₀, y₀) on the circle and line, y₀ = m x₀, so m₂ = -x₀/(m x₀) = -1/m.</p><p><strong>Therefore, m₁ × m₂ = m × (-1/m) = -1</strong>, confirming the curves are orthogonal (intersect at 90°).</p></div></div><h3>Example: Orthogonal Trajectories of Straight Lines</h3><div class="question-block"><h4>Problem:</h4><p>Find the orthogonal trajectories of the family of straight lines through the origin: y = mx</p><h4>Solution:</h4><div class="solution"><p>1. Given family: y = mx</p><p>2. Differentiate: dy/dx = m</p><p>3. But from y = mx, m = y/x</p><p>4. So differential equation is: dy/dx = y/x</p><p>5. For orthogonal trajectories, replace dy/dx with -dx/dy</p><p>6. So: -dx/dy = y/x ⇒ x dx + y dy = 0</p><p>7. Integrate: x²/2 + y²/2 = c/2 ⇒ x² + y² = c</p><p>8. Orthogonal trajectories are circles centered at origin</p></div></div><h3>Applications of Orthogonal Trajectories</h3><ul><li><strong>Electrostatics:</strong> Electric field lines and equipotential surfaces are orthogonal</li><li><strong>Fluid Dynamics:</strong> Streamlines and equipotential lines in ideal fluid flow</li><li><strong>Heat Transfer:</strong> Isotherms and heat flow lines</li><li><strong>Cartography:</strong> Lines of longitude and latitude on Earth</li></ul><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
+    <div class="fullscreen-page" id="theory-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-book"></i> Theory: Orthogonal Trajectory</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>What are Orthogonal Trajectories?</h3><p>Orthogonal trajectories are families of curves that intersect another family of curves at right angles (90°). In mathematics, particularly in differential equations, finding orthogonal trajectories is an important application.</p><h3>Mathematical Definition</h3><p>Given a one-parameter family of curves F(x, y, c) = 0, an orthogonal trajectory is a curve that intersects each curve of the family at a right angle.</p><h3>Method to Find Orthogonal Trajectories</h3><ol><li>Find the differential equation of the given family by eliminating the parameter</li><li>Replace dy/dx with -dx/dy (or -1/(dy/dx)) to get the differential equation of orthogonal trajectories</li><li>Solve this new differential equation to obtain the family of orthogonal trajectories</li></ol><div class="orthogonal-graph-container"><h4><i class="fas fa-chart-line"></i> Visualizing Orthogonal Trajectories: Straight Lines & Circles</h4><p>The graph below shows two families of curves that are orthogonal trajectories of each other. <strong>Blue curves</strong> represent straight lines through the origin: <strong>y = m x</strong> (family of lines). <strong>Red curves</strong> represent circles centered at origin: <strong>x² + y² = C</strong> (orthogonal trajectories). Notice how each red circle intersects every blue line at a <strong>90° angle</strong>. The slope of a line (m₁) and the slope of the circle at the intersection point (m₂) satisfy <strong>m₁ × m₂ = -1</strong>.</p><div id="orthogonalGraph"></div><div class="graph-controls"><button onclick="updateGraph(1)">Show Lines & Circles</button><button onclick="updateGraph(2)">Show Lines & Circles (More Curves)</button><button onclick="updateGraph(3)">Show Lines & Circles (Fewer Curves)</button></div><div class="solution" style="margin-top:15px; padding:12px;"><h4 style="margin-bottom:8px;">Slope Relation at Intersection Point:</h4><p>For a straight line y = mx, slope m₁ = m.</p><p>For a circle x² + y² = C, differentiate: 2x + 2y(dy/dx) = 0 ⇒ dy/dx = -x/y = m₂.</p><p>At the intersection point (x₀, y₀) on the circle and line, y₀ = m x₀, so m₂ = -x₀/(m x₀) = -1/m.</p><p><strong>Therefore, m₁ × m₂ = m × (-1/m) = -1</strong>, confirming the curves are orthogonal (intersect at 90°).</p></div></div><h3>Example: Orthogonal Trajectories of Straight Lines</h3><div class="question-block"><h4>Problem:</h4><p>Find the orthogonal trajectories of the family of straight lines through the origin: y = mx</p><h4>Solution:</h4><div class="solution"><p>1. Given family: y = mx</p><p>2. Differentiate: dy/dx = m</p><p>3. But from y = mx, m = y/x</p><p>4. So differential equation is: dy/dx = y/x</p><p>5. For orthogonal trajectories, replace dy/dx with -dx/dy</p><p>6. So: -dx/dy = y/x ⇒ x dx + y dy = 0</p><p>7. Integrate: x²/2 + y²/2 = c/2 ⇒ x² + y² = c</p><p>8. Orthogonal trajectories are circles centered at origin</p></div></div><h3>Applications of Orthogonal Trajectories</h3><ul><li><strong>Electrostatics:</strong> Electric field lines and equipotential surfaces are orthogonal</li><li><strong>Fluid Dynamics:</strong> Streamlines and equipotential lines in ideal fluid flow</li><li><strong>Heat Transfer:</strong> Isotherms and heat flow lines</li><li><strong>Cartography:</strong> Lines of longitude and latitude on Earth</li></ul><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
     <!-- Pretest Page -->
     <div class="fullscreen-page" id="pretest-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-question-circle"></i> Pretest Questions</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Pre-experiment Assessment</h3><p>Answer the following 8 questions to test your preliminary knowledge about orthogonal trajectories. Select the correct option for each question and click submit to see your score and detailed solutions.</p><form id="pretest-form"><div class="pretest-question"><h4>Question 1: Find the orthogonal trajectories of the family of parabolas y = ax².</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q1" value="a" id="pre_q1_a"><label for="pre_q1_a">A) x² - y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q1" value="b" id="pre_q1_b"><label for="pre_q1_b">B) x²/2 + y² = C (ellipses)</label></div><div class="pretest-option"><input type="radio" name="pre_q1" value="c" id="pre_q1_c"><label for="pre_q1_c">C) y = Cx³</label></div><div class="pretest-option"><input type="radio" name="pre_q1" value="d" id="pre_q1_d"><label for="pre_q1_d">D) y = Ce^x</label></div></div></div><div class="pretest-question"><h4>Question 2: Find orthogonal trajectories of the family of curves y = cx³.</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q2" value="a" id="pre_q2_a"><label for="pre_q2_a">A) x² + y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q2" value="b" id="pre_q2_b"><label for="pre_q2_b">B) x² + 3y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q2" value="c" id="pre_q2_c"><label for="pre_q2_c">C) y = Cx</label></div><div class="pretest-option"><input type="radio" name="pre_q2" value="d" id="pre_q2_d"><label for="pre_q2_d">D) x² - y² = C</label></div></div></div><div class="pretest-question"><h4>Question 3: Find orthogonal trajectories of the family: y² = 4ax (parabolas opening right).</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q3" value="a" id="pre_q3_a"><label for="pre_q3_a">A) 2x² + y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q3" value="b" id="pre_q3_b"><label for="pre_q3_b">B) x² + 2y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q3" value="c" id="pre_q3_c"><label for="pre_q3_c">C) y² = -4ax</label></div><div class="pretest-option"><input type="radio" name="pre_q3" value="d" id="pre_q3_d"><label for="pre_q3_d">D) xy = C</label></div></div></div><div class="pretest-question"><h4>Question 4: Find the orthogonal trajectories of the family of straight lines through the origin: y = mx.</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q4" value="a" id="pre_q4_a"><label for="pre_q4_a">A) Parabolas y = ax²</label></div><div class="pretest-option"><input type="radio" name="pre_q4" value="b" id="pre_q4_b"><label for="pre_q4_b">B) Circles centered at origin: x² + y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q4" value="c" id="pre_q4_c"><label for="pre_q4_c">C) Hyperbolas xy = C</label></div><div class="pretest-option"><input type="radio" name="pre_q4" value="d" id="pre_q4_d"><label for="pre_q4_d">D) Exponential curves y = Ce^x</label></div></div></div><div class="pretest-question"><h4>Question 5: For the family of circles centered at origin: x² + y² = a², the orthogonal trajectories are:</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q5" value="a" id="pre_q5_a"><label for="pre_q5_a">A) Straight lines through origin: y = mx</label></div><div class="pretest-option"><input type="radio" name="pre_q5" value="b" id="pre_q5_b"><label for="pre_q5_b">B) Concentric circles: x² + y² = b²</label></div><div class="pretest-option"><input type="radio" name="pre_q5" value="c" id="pre_q5_c"><label for="pre_q5_c">C) Parabolas opening upward</label></div><div class="pretest-option"><input type="radio" name="pre_q5" value="d" id="pre_q5_d"><label for="pre_q5_d">D) Ellipses</label></div></div></div><div class="pretest-question"><h4>Question 6: Find the orthogonal trajectories of the family of rectangular hyperbolas xy = c.</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q6" value="a" id="pre_q6_a"><label for="pre_q6_a">A) x² - y² = k</label></div><div class="pretest-option"><input type="radio" name="pre_q6" value="b" id="pre_q6_b"><label for="pre_q6_b">B) y = kx</label></div><div class="pretest-option"><input type="radio" name="pre_q6" value="c" id="pre_q6_c"><label for="pre_q6_c">C) x² + y² = k</label></div><div class="pretest-option"><input type="radio" name="pre_q6" value="d" id="pre_q6_d"><label for="pre_q6_d">D) y = kx²</label></div></div></div><div class="pretest-question"><h4>Question 7: For the family of exponential curves y = ce^x, the orthogonal trajectories are:</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q7" value="a" id="pre_q7_a"><label for="pre_q7_a">A) y² = -2x + k</label></div><div class="pretest-option"><input type="radio" name="pre_q7" value="b" id="pre_q7_b"><label for="pre_q7_b">B) x² + y² = k</label></div><div class="pretest-option"><input type="radio" name="pre_q7" value="c" id="pre_q7_c"><label for="pre_q7_c">C) y = k/x</label></div><div class="pretest-option"><input type="radio" name="pre_q7" value="d" id="pre_q7_d"><label for="pre_q7_d">D) y = k ln x</label></div></div></div><div class="pretest-question"><h4>Question 8: For the family of curves y = c sin x, the orthogonal trajectories satisfy:</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q8" value="a" id="pre_q8_a"><label for="pre_q8_a">A) ln|cos x| = y²/2 + k</label></div><div class="pretest-option"><input type="radio" name="pre_q8" value="b" id="pre_q8_b"><label for="pre_q8_b">B) x = ln|sin y| + k</label></div><div class="pretest-option"><input type="radio" name="pre_q8" value="c" id="pre_q8_c"><label for="pre_q8_c">C) y = tan x + k</label></div><div class="pretest-option"><input type="radio" name="pre_q8" value="d" id="pre_q8_d"><label for="pre_q8_d">D) x² + sin y = k</label></div></div></div><div style="text-align:center;"><button type="button" class="pretest-submit-btn" onclick="submitPretest()"><i class="fas fa-paper-plane"></i> Submit Pretest</button></div></form><div class="result-section" id="pretest-result-section" style="display:none;"><h3>Pretest Results</h3><p id="pretest-score-text"></p><div id="pretest-solutions"></div></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
@@ -1371,7 +1408,7 @@
     <!-- References Page -->
     <div class="fullscreen-page" id="references-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-book-open"></i> References</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Recommended Books and Resources</h3><p>Here are some excellent references for learning more about orthogonal trajectories and differential equations:</p><div class="question-block"><h4>Textbooks:</h4><ul><li><strong>Advanced Engineering Mathematics</strong> by Erwin Kreyszig - Chapter 1 covers differential equations and orthogonal trajectories in detail</li><li><strong>Differential Equations with Applications and Historical Notes</strong> by George F. Simmons - Excellent theoretical foundation with practical applications</li><li><strong>A First Course in Differential Equations</strong> by Dennis G. Zill - Comprehensive coverage with many solved examples</li><li><strong>Elementary Differential Equations and Boundary Value Problems</strong> by William E. Boyce and Richard C. DiPrima - Standard textbook with clear explanations</li><li><strong>Mathematics for Engineers</strong> by Anthony Croft and Robert Davison - Practical approach with engineering applications</li></ul></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
-    <!-- Contributors Page (FIXED: Larger cards, full width, no empty space, responsive grid) -->
+    <!-- Contributors Page -->
     <div class="fullscreen-page" id="contributors-fullscreen">
         <div class="fullscreen-header">
             <h2><i class="fas fa-users"></i> Contributors</h2>
@@ -1381,7 +1418,6 @@
             <h3>Our Team</h3>
             <p>This virtual lab was developed by a dedicated team of students under the guidance of faculty members.</p>
             
-            <!-- Faculty Supervisor Section -->
             <div class="faculty-section">
                 <h4 style="color:#2c3e50; font-size:1.6rem; margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:3px solid #3498db; display:inline-flex; align-items:center; gap:0.75rem;">
                     <i class="fas fa-chalkboard-teacher" style="color:#3498db;"></i> Faculty Supervisor
@@ -1398,7 +1434,6 @@
                 </div>
             </div>
             
-            <!-- Development Team Section - FIXED: Larger cards, full width, proper grid -->
             <div class="team-section">
                 <h4 style="color:#2c3e50; font-size:1.6rem; margin-bottom:1.8rem; padding-bottom:0.75rem; border-bottom:3px solid #3498db; display:inline-flex; align-items:center; gap:0.75rem;">
                     <i class="fas fa-laptop-code" style="color:#3498db;"></i> Development Team
@@ -1455,7 +1490,7 @@
             let traces = [];
             for (let m of lineSlopes) { let x=[],y=[]; for(let xv=-4;xv<=4;xv+=0.1) if(Math.abs(m*xv)<=5) { x.push(xv); y.push(m*xv); } traces.push({x:x,y:y,mode:'lines',name:`y = ${m}x`,line:{color:'#3498db',width:1.5},opacity:0.7,showlegend:false}); }
             for (let r of circleRadii) { let x=[],y=[]; for(let t=0;t<=2*Math.PI;t+=0.05) { x.push(r*Math.cos(t)); y.push(r*Math.sin(t)); } traces.push({x:x,y:y,mode:'lines',name:`x²+y²=${r*r}`,line:{color:'#e74c3c',width:2},showlegend:false}); }
-            let layout = {title:{text:'Orthogonal Trajectories: Lines (Blue) and Circles (Red)',font:{size:18}},xaxis:{title:'x',range:[-5,5],zeroline:true,gridcolor:'#ddd'},yaxis:{title:'y',range:[-5,5],zeroline:true,gridcolor:'#ddd'},aspectratio:{x:1,y:1},hovermode:'closest',plot_bgcolor:'#f9f9f9',paper_bgcolor:'white',annotations:[{x:2.5,y:4.2,xref:'x',yref:'y',text:'Each circle intersects every line at 90°',showarrow:true,arrowhead:2,arrowsize:1,arrowwidth:1,arrowcolor:'#2c3e50',font:{size:12,color:'#2c3e50'}}]};
+            let layout = {title:{text:'Orthogonal Trajectories: Lines (Blue) and Circles (Red)',font:{size:16}},xaxis:{title:'x',range:[-5,5],zeroline:true,gridcolor:'#ddd'},yaxis:{title:'y',range:[-5,5],zeroline:true,gridcolor:'#ddd'},aspectratio:{x:1,y:1},hovermode:'closest',plot_bgcolor:'#f9f9f9',paper_bgcolor:'white',annotations:[{x:2.5,y:4.2,xref:'x',yref:'y',text:'Each circle intersects every line at 90°',showarrow:true,arrowhead:2,arrowsize:1,arrowwidth:1,arrowcolor:'#2c3e50',font:{size:10,color:'#2c3e50'}}]};
             Plotly.newPlot('orthogonalGraph', traces, layout, { responsive: true });
         }
         function updateGraph(type) { currentGraphType = type; drawOrthogonalGraph(type); }
