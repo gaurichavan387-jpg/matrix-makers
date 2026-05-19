@@ -1018,7 +1018,7 @@
             z-index: 1000;
         }
 
-        /* CONTRIBUTORS SECTION ENHANCEMENTS */
+        /* CONTRIBUTORS SECTION - RECTANGLE CARDS, NO EMPTY SPACES */
         .contributors-container {
             display: flex;
             flex-direction: column;
@@ -1028,66 +1028,66 @@
 
         .contributor-type {
             background: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
         }
 
         .contributor-type h4 {
             color: #2c3e50;
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 25px;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             border-bottom: 3px solid #3498db;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .contributor-type h4 i {
             color: #3498db;
+            font-size: 28px;
         }
 
         .contributors-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
         }
 
         .contributor-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            padding: 25px;
-            text-align: center;
-            border: 3px solid transparent;
+            padding: 20px;
+            gap: 20px;
+            border: 1px solid #e9ecef;
         }
 
         .contributor-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
             border-color: #3498db;
         }
 
         .contributor-image {
-            width: 140px;
-            height: 140px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             overflow: hidden;
-            border: 5px solid #3498db;
-            margin-bottom: 20px;
+            border: 4px solid #3498db;
             background: linear-gradient(135deg, #e8f4fc, #d6eaf8);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
-            color: #2c3e50;
+            flex-shrink: 0;
         }
 
         .contributor-image img {
@@ -1098,955 +1098,193 @@
         }
 
         .contributor-card:hover .contributor-image img {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .contributor-details {
-            width: 100%;
+            flex: 1;
+            text-align: left;
         }
 
         .contributor-details h5 {
             color: #2c3e50;
             font-size: 20px;
-            margin-bottom: 8px;
-            font-weight: 600;
+            margin-bottom: 6px;
+            font-weight: 700;
         }
 
         .contributor-role {
             color: #3498db;
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: #e8f4fc;
+            padding: 4px 12px;
+            border-radius: 20px;
         }
 
         .contributor-contribution {
-            color: #7f8c8d;
-            font-size: 15px;
+            color: #555;
+            font-size: 14px;
             line-height: 1.5;
-            margin-bottom: 15px;
-            padding: 0 10px;
-        }
-
-        .contributor-skills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .skill-tag {
-            background: #e8f4fc;
-            color: #3498db;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            border: 1px solid #b3e0ff;
+            margin: 0;
         }
 
         /* Responsive Design */
         @media (max-width: 1200px) {
-            .fullscreen-content {
-                padding: 30px;
-            }
-            
-            .calculator-container {
-                gap: 30px;
-            }
+            .fullscreen-content { padding: 30px; }
+            .calculator-container { gap: 30px; }
         }
-
         @media (max-width: 992px) {
-            .aim-sections {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            }
-
-            .fullscreen-header {
-                padding: 15px 20px;
-            }
-            
-            .fullscreen-header h2 {
-                font-size: 24px;
-            }
-            
-            .fullscreen-content {
-                padding: 25px;
-            }
-            
-            .calculator-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .external-link-container {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .external-link-btn {
-                text-align: center;
-                justify-content: center;
-            }
-            
-            .rating-container {
-                justify-content: center;
-            }
-            
-            .rating-label {
-                width: 100px;
-            }
-            
-            .google-form-container {
-                height: 1200px;
-            }
-            
-            .contributors-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
+            .aim-sections { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+            .fullscreen-header { padding: 15px 20px; }
+            .fullscreen-header h2 { font-size: 24px; }
+            .fullscreen-content { padding: 25px; }
+            .calculator-container { grid-template-columns: 1fr; }
+            .external-link-container { flex-direction: column; align-items: stretch; }
+            .external-link-btn { text-align: center; justify-content: center; }
+            .rating-container { justify-content: center; }
+            .rating-label { width: 100px; }
+            .google-form-container { height: 1200px; }
+            .contributors-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
         }
-
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-            
-            .logo-section {
-                flex-direction: column;
-                gap: 20px;
-                width: 100%;
-            }
-            
-            .pcce-logo-container {
-                border-right: none;
-                padding-right: 0;
-                border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-                padding-bottom: 20px;
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .virtual-labs-logo {
-                justify-content: center;
-            }
-            
-            .aim-sections {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .fullscreen-header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-            
-            .fullscreen-header h2 {
-                font-size: 22px;
-            }
-            
-            .close-fullscreen-btn {
-                align-self: flex-end;
-            }
-            
-            .fullscreen-content h3 {
-                font-size: 22px;
-            }
-            
-            .contributors-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contributor-card {
-                padding: 20px;
-            }
-            
-            .contributor-image {
-                width: 120px;
-                height: 120px;
-                font-size: 50px;
-            }
-            
-            #orthogonalGraph {
-                height: 400px;
-            }
+            .header-container { flex-direction: column; gap: 20px; text-align: center; }
+            .logo-section { flex-direction: column; gap: 20px; width: 100%; }
+            .pcce-logo-container { border-right: none; padding-right: 0; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 20px; justify-content: center; width: 100%; }
+            .virtual-labs-logo { justify-content: center; }
+            .aim-sections { grid-template-columns: repeat(2, 1fr); }
+            .fullscreen-header { flex-direction: column; gap: 15px; align-items: flex-start; }
+            .fullscreen-header h2 { font-size: 22px; }
+            .close-fullscreen-btn { align-self: flex-end; }
+            .fullscreen-content h3 { font-size: 22px; }
+            .contributors-grid { grid-template-columns: 1fr; }
+            .contributor-card { flex-direction: column; text-align: center; padding: 25px; }
+            .contributor-details { text-align: center; }
+            .contributor-image { width: 110px; height: 110px; }
+            #orthogonalGraph { height: 400px; }
         }
-
         @media (max-width: 576px) {
-            .aim-sections {
-                grid-template-columns: 1fr;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .pcce-logo-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .pcce-logo-img {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .fullscreen-content {
-                padding: 20px;
-            }
-            
-            .fullscreen-content h3 {
-                font-size: 20px;
-            }
-            
-            .fullscreen-content p, .fullscreen-content li {
-                font-size: 16px;
-            }
-            
-            .question-block {
-                padding: 20px;
-            }
-            
-            .calculator-container {
-                padding: 15px;
-            }
-            
-            .external-link-btn {
-                font-size: 18px;
-                padding: 15px 25px;
-            }
-            
-            .rating-label {
-                width: 90px;
-                padding: 12px;
-            }
-            
-            .rating-container {
-                gap: 15px;
-            }
-            
-            .google-form-container {
-                height: 1400px;
-            }
-            
-            .contributor-type {
-                padding: 20px;
-            }
-            
-            .contributor-type h4 {
-                font-size: 20px;
-            }
-            
-            .contributor-image {
-                width: 100px;
-                height: 100px;
-                font-size: 45px;
-            }
-            
-            .contributor-details h5 {
-                font-size: 18px;
-            }
-            
-            #orthogonalGraph {
-                height: 350px;
-            }
+            .aim-sections { grid-template-columns: 1fr; }
+            .content { padding: 20px; }
+            .pcce-logo-container { flex-direction: column; text-align: center; }
+            .pcce-logo-img { width: 70px; height: 70px; }
+            .fullscreen-content { padding: 20px; }
+            .fullscreen-content h3 { font-size: 20px; }
+            .fullscreen-content p, .fullscreen-content li { font-size: 16px; }
+            .question-block { padding: 20px; }
+            .calculator-container { padding: 15px; }
+            .external-link-btn { font-size: 18px; padding: 15px 25px; }
+            .rating-label { width: 90px; padding: 12px; }
+            .rating-container { gap: 15px; }
+            .google-form-container { height: 1400px; }
+            .contributor-type { padding: 20px; }
+            .contributor-type h4 { font-size: 20px; }
+            .contributor-image { width: 90px; height: 90px; }
+            .contributor-details h5 { font-size: 18px; }
+            #orthogonalGraph { height: 350px; }
         }
-
         @media (max-width: 400px) {
-            .rating-label {
-                width: 80px;
-                padding: 10px;
-            }
-            
-            .fullscreen-header h2 {
-                font-size: 20px;
-            }
-            
-            .close-fullscreen-btn {
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-            
-            .external-link-btn {
-                font-size: 16px;
-                padding: 12px 20px;
-            }
+            .rating-label { width: 80px; padding: 10px; }
+            .fullscreen-header h2 { font-size: 20px; }
+            .close-fullscreen-btn { padding: 8px 15px; font-size: 14px; }
+            .external-link-btn { font-size: 16px; padding: 12px 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Debug info - remove this in production -->
-    <div class="debug-info" id="debugInfo">
-        Checking image loading...
-    </div>
+    <div class="debug-info" id="debugInfo">Checking image loading...</div>
 
-    <!-- Main Content (Home Page) -->
     <div id="main-content">
-        <!-- Header -->
         <header>
             <div class="container header-container">
                 <div class="logo-section">
-                    <!-- PCOE Logo -->
                     <div class="pcce-logo-container">
-                        <img src="https://raw.githubusercontent.com/dineshkute90/virtual_lab_LAUC/main/pccoe.png" 
-                             alt="PCOE Logo" 
-                             class="pcce-logo-img"
-                             id="pcceLogo"
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/2c3e50/ffffff?text=PCOE';">
-                        <div class="pcce-logo-text">
-                            <div class="main">APPLIED SCIENCES & HUMANITIES</div>
-                            <div class="sub">Pimpri Chinchwad College of Engineering</div>
-                        </div>
+                        <img src="https://raw.githubusercontent.com/dineshkute90/virtual_lab_LAUC/main/pccoe.png" alt="PCOE Logo" class="pcce-logo-img" id="pcceLogo" onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/2c3e50/ffffff?text=PCOE';">
+                        <div class="pcce-logo-text"><div class="main">APPLIED SCIENCES & HUMANITIES</div><div class="sub">Pimpri Chinchwad College of Engineering</div></div>
                     </div>
-                    
-                    <!-- Virtual Labs Logo -->
-                    <div class="virtual-labs-logo">
-                        <i class="fas fa-flask"></i>
-                        <h1>Virtual <span>Labs</span></h1>
-                    </div>
+                    <div class="virtual-labs-logo"><i class="fas fa-flask"></i><h1>Virtual <span>Labs</span></h1></div>
                 </div>
-                
-                <div class="user-info">
-                    <i class="fas fa-user-circle"></i>
-                    <span>Welcome, Student</span>
-                </div>
+                <div class="user-info"><i class="fas fa-user-circle"></i><span>Welcome, Student</span></div>
             </div>
         </header>
-
-        <!-- Content Area -->
         <div class="container">
             <main class="content">
-                <div class="content-header">
-                    <h2>A Virtual Lab on Orthogonal Trajectory</h2>
-                    <p>Engineering Mathematics Experiment</p>
-                </div>
-
-                <!-- Navigation Cards -->
+                <div class="content-header"><h2>A Virtual Lab on Orthogonal Trajectory</h2><p>Engineering Mathematics Experiment</p></div>
                 <div class="aim-sections">
-                    <a href="javascript:void(0)" class="section-card active" onclick="openFullscreenPage('aim')">
-                        <i class="fas fa-bullseye"></i>
-                        <h3>Aim</h3>
-                        <p>Objective of the experiment</p>
-                    </a>
-                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('theory')">
-                        <i class="fas fa-book"></i>
-                        <h3>Theory</h3>
-                        <p>Background concepts</p>
-                    </a>
-                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('pretest')">
-                        <i class="fas fa-question-circle"></i>
-                        <h3>Pretest</h3>
-                        <p>Pre-experiment assessment</p>
-                    </a>
-                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('simulation')">
-                        <i class="fas fa-desktop"></i>
-                        <h3>Simulation</h3>
-                        <p>Interactive simulation</p>
-                    </a>
-                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('posttest')">
-                        <i class="fas fa-clipboard-check"></i>
-                        <h3>Posttest</h3>
-                        <p>Post-experiment assessment</p>
-                    </a>
-                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('references')">
-                        <i class="fas fa-book-open"></i>
-                        <h3>References</h3>
-                        <p>Further reading materials</p>
-                    </a>
-                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('contributors')">
-                        <i class="fas fa-users"></i>
-                        <h3>Contributors</h3>
-                        <p>People involved</p>
-                    </a>
-                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('feedback')">
-                        <i class="fas fa-comment-alt"></i>
-                        <h3>Feedback</h3>
-                        <p>Share your experience</p>
-                    </a>        
+                    <a href="javascript:void(0)" class="section-card active" onclick="openFullscreenPage('aim')"><i class="fas fa-bullseye"></i><h3>Aim</h3><p>Objective of the experiment</p></a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('theory')"><i class="fas fa-book"></i><h3>Theory</h3><p>Background concepts</p></a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('pretest')"><i class="fas fa-question-circle"></i><h3>Pretest</h3><p>Pre-experiment assessment</p></a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('simulation')"><i class="fas fa-desktop"></i><h3>Simulation</h3><p>Interactive simulation</p></a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('posttest')"><i class="fas fa-clipboard-check"></i><h3>Posttest</h3><p>Post-experiment assessment</p></a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('references')"><i class="fas fa-book-open"></i><h3>References</h3><p>Further reading materials</p></a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('contributors')"><i class="fas fa-users"></i><h3>Contributors</h3><p>People involved</p></a>
+                    <a href="javascript:void(0)" class="section-card" onclick="openFullscreenPage('feedback')"><i class="fas fa-comment-alt"></i><h3>Feedback</h3><p>Share your experience</p></a>
                 </div>
-
-                <!-- Welcome Section -->
-                <div class="question-section">
-                    <h3>About This Virtual Lab</h3>
-                    <p class="question-text">
-                        Welcome to the Virtual Lab on Orthogonal Trajectory. This lab is designed to help you understand the concept of orthogonal trajectories, which are families of curves that intersect another family of curves at right angles. Click on any of the sections above to explore different aspects of this experiment in full-screen view.
-                    </p>
-                    <p class="question-text">
-                        To get started, click on any section card above. Each section will open in a full-screen view for an immersive learning experience.
-                    </p>
-                </div>
+                <div class="question-section"><h3>About This Virtual Lab</h3><p class="question-text">Welcome to the Virtual Lab on Orthogonal Trajectory. This lab is designed to help you understand the concept of orthogonal trajectories, which are families of curves that intersect another family of curves at right angles. Click on any of the sections above to explore different aspects of this experiment in full-screen view.</p><p class="question-text">To get started, click on any section card above. Each section will open in a full-screen view for an immersive learning experience.</p></div>
             </main>
         </div>
-
-        <!-- Footer -->
-        <footer class="container">
-            <p>Virtual Labs &copy; 2025 | Applied Sciences & Humanities Department | 
-               <span class="footer-logo">Pimpri Chinchwad College of Engineering</span>
-            </p>
-        </footer>
+        <footer class="container"><p>Virtual Labs &copy; 2025 | Applied Sciences & Humanities Department | <span class="footer-logo">Pimpri Chinchwad College of Engineering</span></p></footer>
     </div>
-
-    <!-- Full Screen Pages -->
 
     <!-- Aim Page -->
-    <div class="fullscreen-page" id="aim-fullscreen">
-        <div class="fullscreen-header">
-            <h2><i class="fas fa-bullseye"></i> Aim of the Experiment</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="fullscreen-content">
-            <h3>Aim of the Virtual Lab Website</h3>
-            <p>This virtual laboratory aims to provide an immersive digital learning environment where students can explore the mathematical concept of orthogonal trajectories through interactive simulations, self-paced assessments, and comprehensive theoretical resources.</p>
-            <p>The primary goal is to bridge the gap between theoretical differential equations and practical visualization by allowing learners to experiment with various curve families and observe their orthogonal counterparts in real-time.</p>
-            <p>Furthermore, the platform seeks to enhance conceptual clarity and problem-solving skills in engineering mathematics by offering a structured, step-by-step approach from pre-test evaluation to post-test certification.</p>
-            <p>Through this integrated web-based tool, students will gain the ability to independently derive orthogonal trajectories for different families of curves and understand their significance in fields like electrostatics, fluid dynamics, and heat transfer.</p>
-            <p>Ultimately, this website aims to make advanced mathematical learning accessible, engaging, and effective for every student, fostering deeper analytical thinking and practical application skills.</p>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <button class="submit-btn" onclick="closeFullscreenPage()">
-                    <i class="fas fa-home"></i> Return to Home
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="fullscreen-page" id="aim-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-bullseye"></i> Aim of the Experiment</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Aim of the Virtual Lab Website</h3><p>This virtual laboratory aims to provide an immersive digital learning environment where students can explore the mathematical concept of orthogonal trajectories through interactive simulations, self-paced assessments, and comprehensive theoretical resources.</p><p>The primary goal is to bridge the gap between theoretical differential equations and practical visualization by allowing learners to experiment with various curve families and observe their orthogonal counterparts in real-time.</p><p>Furthermore, the platform seeks to enhance conceptual clarity and problem-solving skills in engineering mathematics by offering a structured, step-by-step approach from pre-test evaluation to post-test certification.</p><p>Through this integrated web-based tool, students will gain the ability to independently derive orthogonal trajectories for different families of curves and understand their significance in fields like electrostatics, fluid dynamics, and heat transfer.</p><p>Ultimately, this website aims to make advanced mathematical learning accessible, engaging, and effective for every student, fostering deeper analytical thinking and practical application skills.</p><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
     <!-- Theory Page -->
-    <div class="fullscreen-page" id="theory-fullscreen">
-        <div class="fullscreen-header">
-            <h2><i class="fas fa-book"></i> Theory: Orthogonal Trajectory</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="fullscreen-content">
-            <h3>What are Orthogonal Trajectories?</h3>
-            <p>Orthogonal trajectories are families of curves that intersect another family of curves at right angles (90°). In mathematics, particularly in differential equations, finding orthogonal trajectories is an important application.</p>
-            
-            <h3>Mathematical Definition</h3>
-            <p>Given a one-parameter family of curves F(x, y, c) = 0, an orthogonal trajectory is a curve that intersects each curve of the family at a right angle.</p>
-            
-            <h3>Method to Find Orthogonal Trajectories</h3>
-            <p>To find the orthogonal trajectories of a given family of curves:</p>
-            <ol>
-                <li>Find the differential equation of the given family by eliminating the parameter</li>
-                <li>Replace dy/dx with -dx/dy (or -1/(dy/dx)) to get the differential equation of orthogonal trajectories</li>
-                <li>Solve this new differential equation to obtain the family of orthogonal trajectories</li>
-            </ol>
-            
-            <!-- Interactive Graph Visualization of Orthogonal Trajectories -->
-            <div class="orthogonal-graph-container">
-                <h4><i class="fas fa-chart-line"></i> Visualizing Orthogonal Trajectories: Straight Lines & Circles</h4>
-                <p style="margin-bottom: 15px; color: #2c3e50;">
-                    The graph below shows two families of curves that are orthogonal trajectories of each other. 
-                    <strong>Blue curves</strong> represent straight lines through the origin: <strong>y = m x</strong> (family of lines). 
-                    <strong>Red curves</strong> represent circles centered at origin: <strong>x² + y² = C</strong> (orthogonal trajectories).
-                    Notice how each red circle intersects every blue line at a <strong>90° angle</strong>. 
-                    The slope of a line (m₁) and the slope of the circle at the intersection point (m₂) satisfy <strong>m₁ × m₂ = -1</strong>.
-                </p>
-                <div id="orthogonalGraph"></div>
-                <div class="graph-controls">
-                    <button onclick="updateGraph(1)">Show Lines & Circles</button>
-                    <button onclick="updateGraph(2)">Show Lines & Circles (More Curves)</button>
-                    <button onclick="updateGraph(3)">Show Lines & Circles (Fewer Curves)</button>
-                </div>
-                <div class="solution" style="margin-top: 20px;">
-                    <h4 style="margin-bottom: 10px;">Slope Relation at Intersection Point:</h4>
-                    <p>For a straight line y = mx, slope m₁ = m.</p>
-                    <p>For a circle x² + y² = C, differentiate: 2x + 2y(dy/dx) = 0 ⇒ dy/dx = -x/y = m₂.</p>
-                    <p>At the intersection point (x₀, y₀) on the circle and line, y₀ = m x₀, so m₂ = -x₀/(m x₀) = -1/m.</p>
-                    <p><strong>Therefore, m₁ × m₂ = m × (-1/m) = -1</strong>, confirming the curves are orthogonal (intersect at 90°).</p>
-                </div>
-            </div>
-            
-            <h3>Example: Orthogonal Trajectories of Straight Lines</h3>
-            <div class="question-block">
-                <h4>Problem:</h4>
-                <p>Find the orthogonal trajectories of the family of straight lines through the origin: y = mx</p>
-                
-                <h4>Solution:</h4>
-                <div class="solution">
-                    <p>1. Given family: y = mx</p>
-                    <p>2. Differentiate: dy/dx = m</p>
-                    <p>3. But from y = mx, m = y/x</p>
-                    <p>4. So differential equation is: dy/dx = y/x</p>
-                    <p>5. For orthogonal trajectories, replace dy/dx with -dx/dy</p>
-                    <p>6. So: -dx/dy = y/x ⇒ x dx + y dy = 0</p>
-                    <p>7. Integrate: x²/2 + y²/2 = c/2 ⇒ x² + y² = c</p>
-                    <p>8. Orthogonal trajectories are circles centered at origin</p>
-                </div>
-            </div>
-            
-            <h3>Applications of Orthogonal Trajectories</h3>
-            <ul>
-                <li><strong>Electrostatics:</strong> Electric field lines and equipotential surfaces are orthogonal</li>
-                <li><strong>Fluid Dynamics:</strong> Streamlines and equipotential lines in ideal fluid flow</li>
-                <li><strong>Heat Transfer:</strong> Isotherms and heat flow lines</li>
-                <li><strong>Cartography:</strong> Lines of longitude and latitude on Earth</li>
-            </ul>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <button class="submit-btn" onclick="closeFullscreenPage()">
-                    <i class="fas fa-home"></i> Return to Home
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="fullscreen-page" id="theory-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-book"></i> Theory: Orthogonal Trajectory</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>What are Orthogonal Trajectories?</h3><p>Orthogonal trajectories are families of curves that intersect another family of curves at right angles (90°). In mathematics, particularly in differential equations, finding orthogonal trajectories is an important application.</p><h3>Mathematical Definition</h3><p>Given a one-parameter family of curves F(x, y, c) = 0, an orthogonal trajectory is a curve that intersects each curve of the family at a right angle.</p><h3>Method to Find Orthogonal Trajectories</h3><ol><li>Find the differential equation of the given family by eliminating the parameter</li><li>Replace dy/dx with -dx/dy (or -1/(dy/dx)) to get the differential equation of orthogonal trajectories</li><li>Solve this new differential equation to obtain the family of orthogonal trajectories</li></ol><div class="orthogonal-graph-container"><h4><i class="fas fa-chart-line"></i> Visualizing Orthogonal Trajectories: Straight Lines & Circles</h4><p style="margin-bottom:15px;color:#2c3e50;">The graph below shows two families of curves that are orthogonal trajectories of each other. <strong>Blue curves</strong> represent straight lines through the origin: <strong>y = m x</strong> (family of lines). <strong>Red curves</strong> represent circles centered at origin: <strong>x² + y² = C</strong> (orthogonal trajectories). Notice how each red circle intersects every blue line at a <strong>90° angle</strong>. The slope of a line (m₁) and the slope of the circle at the intersection point (m₂) satisfy <strong>m₁ × m₂ = -1</strong>.</p><div id="orthogonalGraph"></div><div class="graph-controls"><button onclick="updateGraph(1)">Show Lines & Circles</button><button onclick="updateGraph(2)">Show Lines & Circles (More Curves)</button><button onclick="updateGraph(3)">Show Lines & Circles (Fewer Curves)</button></div><div class="solution" style="margin-top:20px;"><h4 style="margin-bottom:10px;">Slope Relation at Intersection Point:</h4><p>For a straight line y = mx, slope m₁ = m.</p><p>For a circle x² + y² = C, differentiate: 2x + 2y(dy/dx) = 0 ⇒ dy/dx = -x/y = m₂.</p><p>At the intersection point (x₀, y₀) on the circle and line, y₀ = m x₀, so m₂ = -x₀/(m x₀) = -1/m.</p><p><strong>Therefore, m₁ × m₂ = m × (-1/m) = -1</strong>, confirming the curves are orthogonal (intersect at 90°).</p></div></div><h3>Example: Orthogonal Trajectories of Straight Lines</h3><div class="question-block"><h4>Problem:</h4><p>Find the orthogonal trajectories of the family of straight lines through the origin: y = mx</p><h4>Solution:</h4><div class="solution"><p>1. Given family: y = mx</p><p>2. Differentiate: dy/dx = m</p><p>3. But from y = mx, m = y/x</p><p>4. So differential equation is: dy/dx = y/x</p><p>5. For orthogonal trajectories, replace dy/dx with -dx/dy</p><p>6. So: -dx/dy = y/x ⇒ x dx + y dy = 0</p><p>7. Integrate: x²/2 + y²/2 = c/2 ⇒ x² + y² = c</p><p>8. Orthogonal trajectories are circles centered at origin</p></div></div><h3>Applications of Orthogonal Trajectories</h3><ul><li><strong>Electrostatics:</strong> Electric field lines and equipotential surfaces are orthogonal</li><li><strong>Fluid Dynamics:</strong> Streamlines and equipotential lines in ideal fluid flow</li><li><strong>Heat Transfer:</strong> Isotherms and heat flow lines</li><li><strong>Cartography:</strong> Lines of longitude and latitude on Earth</li></ul><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
-    <!-- Pretest Page (UPDATED: Interactive with 8 questions, scoring, and solutions) -->
-    <div class="fullscreen-page" id="pretest-fullscreen">
-        <div class="fullscreen-header">
-            <h2><i class="fas fa-question-circle"></i> Pretest Questions</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="fullscreen-content">
-            <h3>Pre-experiment Assessment</h3>
-            <p>Answer the following 8 questions to test your preliminary knowledge about orthogonal trajectories. Select the correct option for each question and click submit to see your score and detailed solutions.</p>
-            
-            <form id="pretest-form">
-                <!-- Question 1 -->
-                <div class="pretest-question">
-                    <h4>Question 1: Find the orthogonal trajectories of the family of parabolas y = ax².</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q1" value="a" id="pre_q1_a"><label for="pre_q1_a">A) x² - y² = C</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q1" value="b" id="pre_q1_b"><label for="pre_q1_b">B) x²/2 + y² = C (ellipses)</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q1" value="c" id="pre_q1_c"><label for="pre_q1_c">C) y = Cx³</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q1" value="d" id="pre_q1_d"><label for="pre_q1_d">D) y = Ce^x</label></div>
-                    </div>
-                </div>
-                
-                <!-- Question 2 -->
-                <div class="pretest-question">
-                    <h4>Question 2: Find orthogonal trajectories of the family of curves y = cx³.</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q2" value="a" id="pre_q2_a"><label for="pre_q2_a">A) x² + y² = C</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q2" value="b" id="pre_q2_b"><label for="pre_q2_b">B) x² + 3y² = C</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q2" value="c" id="pre_q2_c"><label for="pre_q2_c">C) y = Cx</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q2" value="d" id="pre_q2_d"><label for="pre_q2_d">D) x² - y² = C</label></div>
-                    </div>
-                </div>
-                
-                <!-- Question 3 -->
-                <div class="pretest-question">
-                    <h4>Question 3: Find orthogonal trajectories of the family: y² = 4ax (parabolas opening right).</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q3" value="a" id="pre_q3_a"><label for="pre_q3_a">A) 2x² + y² = C</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q3" value="b" id="pre_q3_b"><label for="pre_q3_b">B) x² + 2y² = C</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q3" value="c" id="pre_q3_c"><label for="pre_q3_c">C) y² = -4ax</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q3" value="d" id="pre_q3_d"><label for="pre_q3_d">D) xy = C</label></div>
-                    </div>
-                </div>
-                
-                <!-- Question 4 -->
-                <div class="pretest-question">
-                    <h4>Question 4: Find the orthogonal trajectories of the family of straight lines through the origin: y = mx.</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q4" value="a" id="pre_q4_a"><label for="pre_q4_a">A) Parabolas y = ax²</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q4" value="b" id="pre_q4_b"><label for="pre_q4_b">B) Circles centered at origin: x² + y² = C</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q4" value="c" id="pre_q4_c"><label for="pre_q4_c">C) Hyperbolas xy = C</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q4" value="d" id="pre_q4_d"><label for="pre_q4_d">D) Exponential curves y = Ce^x</label></div>
-                    </div>
-                </div>
-                
-                <!-- Question 5 -->
-                <div class="pretest-question">
-                    <h4>Question 5: For the family of circles centered at origin: x² + y² = a², the orthogonal trajectories are:</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q5" value="a" id="pre_q5_a"><label for="pre_q5_a">A) Straight lines through origin: y = mx</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q5" value="b" id="pre_q5_b"><label for="pre_q5_b">B) Concentric circles: x² + y² = b²</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q5" value="c" id="pre_q5_c"><label for="pre_q5_c">C) Parabolas opening upward</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q5" value="d" id="pre_q5_d"><label for="pre_q5_d">D) Ellipses</label></div>
-                    </div>
-                </div>
-                
-                <!-- Question 6 -->
-                <div class="pretest-question">
-                    <h4>Question 6: Find the orthogonal trajectories of the family of rectangular hyperbolas xy = c.</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q6" value="a" id="pre_q6_a"><label for="pre_q6_a">A) x² - y² = k</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q6" value="b" id="pre_q6_b"><label for="pre_q6_b">B) y = kx</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q6" value="c" id="pre_q6_c"><label for="pre_q6_c">C) x² + y² = k</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q6" value="d" id="pre_q6_d"><label for="pre_q6_d">D) y = kx²</label></div>
-                    </div>
-                </div>
-                
-                <!-- Question 7 -->
-                <div class="pretest-question">
-                    <h4>Question 7: For the family of exponential curves y = ce^x, the orthogonal trajectories are:</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q7" value="a" id="pre_q7_a"><label for="pre_q7_a">A) y² = -2x + k</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q7" value="b" id="pre_q7_b"><label for="pre_q7_b">B) x² + y² = k</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q7" value="c" id="pre_q7_c"><label for="pre_q7_c">C) y = k/x</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q7" value="d" id="pre_q7_d"><label for="pre_q7_d">D) y = k ln x</label></div>
-                    </div>
-                </div>
-                
-                <!-- Question 8 -->
-                <div class="pretest-question">
-                    <h4>Question 8: For the family of curves y = c sin x, the orthogonal trajectories satisfy:</h4>
-                    <div class="pretest-options">
-                        <div class="pretest-option"><input type="radio" name="pre_q8" value="a" id="pre_q8_a"><label for="pre_q8_a">A) ln|cos x| = y²/2 + k</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q8" value="b" id="pre_q8_b"><label for="pre_q8_b">B) x = ln|sin y| + k</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q8" value="c" id="pre_q8_c"><label for="pre_q8_c">C) y = tan x + k</label></div>
-                        <div class="pretest-option"><input type="radio" name="pre_q8" value="d" id="pre_q8_d"><label for="pre_q8_d">D) x² + sin y = k</label></div>
-                    </div>
-                </div>
-                
-                <div style="text-align: center;">
-                    <button type="button" class="pretest-submit-btn" onclick="submitPretest()">
-                        <i class="fas fa-paper-plane"></i> Submit Pretest
-                    </button>
-                </div>
-            </form>
-            
-            <div class="result-section" id="pretest-result-section" style="display: none;">
-                <h3>Pretest Results</h3>
-                <p id="pretest-score-text"></p>
-                <div id="pretest-solutions"></div>
-            </div>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <button class="submit-btn" onclick="closeFullscreenPage()">
-                    <i class="fas fa-home"></i> Return to Home
-                </button>
-            </div>
-        </div>
-    </div>
+    <!-- Pretest Page -->
+    <div class="fullscreen-page" id="pretest-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-question-circle"></i> Pretest Questions</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Pre-experiment Assessment</h3><p>Answer the following 8 questions to test your preliminary knowledge about orthogonal trajectories. Select the correct option for each question and click submit to see your score and detailed solutions.</p><form id="pretest-form"><div class="pretest-question"><h4>Question 1: Find the orthogonal trajectories of the family of parabolas y = ax².</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q1" value="a" id="pre_q1_a"><label for="pre_q1_a">A) x² - y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q1" value="b" id="pre_q1_b"><label for="pre_q1_b">B) x²/2 + y² = C (ellipses)</label></div><div class="pretest-option"><input type="radio" name="pre_q1" value="c" id="pre_q1_c"><label for="pre_q1_c">C) y = Cx³</label></div><div class="pretest-option"><input type="radio" name="pre_q1" value="d" id="pre_q1_d"><label for="pre_q1_d">D) y = Ce^x</label></div></div></div><div class="pretest-question"><h4>Question 2: Find orthogonal trajectories of the family of curves y = cx³.</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q2" value="a" id="pre_q2_a"><label for="pre_q2_a">A) x² + y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q2" value="b" id="pre_q2_b"><label for="pre_q2_b">B) x² + 3y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q2" value="c" id="pre_q2_c"><label for="pre_q2_c">C) y = Cx</label></div><div class="pretest-option"><input type="radio" name="pre_q2" value="d" id="pre_q2_d"><label for="pre_q2_d">D) x² - y² = C</label></div></div></div><div class="pretest-question"><h4>Question 3: Find orthogonal trajectories of the family: y² = 4ax (parabolas opening right).</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q3" value="a" id="pre_q3_a"><label for="pre_q3_a">A) 2x² + y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q3" value="b" id="pre_q3_b"><label for="pre_q3_b">B) x² + 2y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q3" value="c" id="pre_q3_c"><label for="pre_q3_c">C) y² = -4ax</label></div><div class="pretest-option"><input type="radio" name="pre_q3" value="d" id="pre_q3_d"><label for="pre_q3_d">D) xy = C</label></div></div></div><div class="pretest-question"><h4>Question 4: Find the orthogonal trajectories of the family of straight lines through the origin: y = mx.</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q4" value="a" id="pre_q4_a"><label for="pre_q4_a">A) Parabolas y = ax²</label></div><div class="pretest-option"><input type="radio" name="pre_q4" value="b" id="pre_q4_b"><label for="pre_q4_b">B) Circles centered at origin: x² + y² = C</label></div><div class="pretest-option"><input type="radio" name="pre_q4" value="c" id="pre_q4_c"><label for="pre_q4_c">C) Hyperbolas xy = C</label></div><div class="pretest-option"><input type="radio" name="pre_q4" value="d" id="pre_q4_d"><label for="pre_q4_d">D) Exponential curves y = Ce^x</label></div></div></div><div class="pretest-question"><h4>Question 5: For the family of circles centered at origin: x² + y² = a², the orthogonal trajectories are:</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q5" value="a" id="pre_q5_a"><label for="pre_q5_a">A) Straight lines through origin: y = mx</label></div><div class="pretest-option"><input type="radio" name="pre_q5" value="b" id="pre_q5_b"><label for="pre_q5_b">B) Concentric circles: x² + y² = b²</label></div><div class="pretest-option"><input type="radio" name="pre_q5" value="c" id="pre_q5_c"><label for="pre_q5_c">C) Parabolas opening upward</label></div><div class="pretest-option"><input type="radio" name="pre_q5" value="d" id="pre_q5_d"><label for="pre_q5_d">D) Ellipses</label></div></div></div><div class="pretest-question"><h4>Question 6: Find the orthogonal trajectories of the family of rectangular hyperbolas xy = c.</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q6" value="a" id="pre_q6_a"><label for="pre_q6_a">A) x² - y² = k</label></div><div class="pretest-option"><input type="radio" name="pre_q6" value="b" id="pre_q6_b"><label for="pre_q6_b">B) y = kx</label></div><div class="pretest-option"><input type="radio" name="pre_q6" value="c" id="pre_q6_c"><label for="pre_q6_c">C) x² + y² = k</label></div><div class="pretest-option"><input type="radio" name="pre_q6" value="d" id="pre_q6_d"><label for="pre_q6_d">D) y = kx²</label></div></div></div><div class="pretest-question"><h4>Question 7: For the family of exponential curves y = ce^x, the orthogonal trajectories are:</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q7" value="a" id="pre_q7_a"><label for="pre_q7_a">A) y² = -2x + k</label></div><div class="pretest-option"><input type="radio" name="pre_q7" value="b" id="pre_q7_b"><label for="pre_q7_b">B) x² + y² = k</label></div><div class="pretest-option"><input type="radio" name="pre_q7" value="c" id="pre_q7_c"><label for="pre_q7_c">C) y = k/x</label></div><div class="pretest-option"><input type="radio" name="pre_q7" value="d" id="pre_q7_d"><label for="pre_q7_d">D) y = k ln x</label></div></div></div><div class="pretest-question"><h4>Question 8: For the family of curves y = c sin x, the orthogonal trajectories satisfy:</h4><div class="pretest-options"><div class="pretest-option"><input type="radio" name="pre_q8" value="a" id="pre_q8_a"><label for="pre_q8_a">A) ln|cos x| = y²/2 + k</label></div><div class="pretest-option"><input type="radio" name="pre_q8" value="b" id="pre_q8_b"><label for="pre_q8_b">B) x = ln|sin y| + k</label></div><div class="pretest-option"><input type="radio" name="pre_q8" value="c" id="pre_q8_c"><label for="pre_q8_c">C) y = tan x + k</label></div><div class="pretest-option"><input type="radio" name="pre_q8" value="d" id="pre_q8_d"><label for="pre_q8_d">D) x² + sin y = k</label></div></div></div><div style="text-align:center;"><button type="button" class="pretest-submit-btn" onclick="submitPretest()"><i class="fas fa-paper-plane"></i> Submit Pretest</button></div></form><div class="result-section" id="pretest-result-section" style="display:none;"><h3>Pretest Results</h3><p id="pretest-score-text"></p><div id="pretest-solutions"></div></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
     <!-- Simulation Page -->
-    <div class="fullscreen-page" id="simulation-fullscreen">
-        <div class="fullscreen-header">
-            <h2><i class="fas fa-desktop"></i> Simulation</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="fullscreen-content">
-            <h3>Orthogonal Trajectory Calculator</h3>
-            <p>This simulation section provides access to an advanced orthogonal trajectory calculator for interactive learning.</p>
-            
-            <div class="external-website-section">
-                <h3><i class="fas fa-external-link-alt"></i> Advanced Orthogonal Trajectory Calculator</h3>
-                <p>Click the button below to access an advanced interactive orthogonal trajectory calculator. This external tool provides enhanced visualization and computation capabilities for orthogonal trajectories.</p>
-                
-                <div class="external-link-container">
-                    <a href="https://gaurichavan387-jpg.github.io/pro-makers/" target="_blank" class="external-link-btn">
-                        <i class="fas fa-calculator"></i> Open Advanced Calculator
-                    </a>
-                    
-                    <div class="link-info">
-                        <h4>External Tool Information</h4>
-                        <p><strong>URL:</strong> https://gaurichavan387-jpg.github.io/pro-makers/</p>
-                        <p><strong>Features:</strong> Advanced graphing, multiple curve families, parameter adjustment, real-time visualization</p>
-                        <p><strong>Note:</strong> The external calculator has a "Return to Virtual Lab" button on its interface</p>
-                    </div>
-                </div>
-                
-                <div class="question-block" style="margin-top: 20px;">
-                    <h4>How to Use the External Calculator:</h4>
-                    <ol>
-                        <li>Click the "Open Advanced Calculator" button above</li>
-                        <li>The calculator will open in a new browser tab</li>
-                        <li>Use the input fields to enter your equations</li>
-                        <li>Adjust parameters using sliders and controls</li>
-                        <li>View real-time visualization of orthogonal trajectories</li>
-                        <li>Use the "Return to Virtual Lab" button on the calculator to come back to this page</li>
-                    </ol>
-                </div>
-                
-                <div class="question-block">
-                    <h4>Example Problems to Try:</h4>
-                    <ul>
-                        <li>Find orthogonal trajectories of circles: x² + y² = a²</li>
-                        <li>Find orthogonal trajectories of parabolas: y = ax²</li>
-                        <li>Find orthogonal trajectories of exponential curves: y = ae^x</li>
-                        <li>Find orthogonal trajectories of hyperbolas: xy = c</li>
-                        <li>Find orthogonal trajectories of: y = 2e^(3x²)</li>
-                        <li>Find orthogonal trajectories of: y = 9/(3x+1)</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="question-block" style="margin-top: 30px;">
-                <h4>Simple Built-in Calculator</h4>
-                <p>For quick calculations, you can also use this simple calculator:</p>
-                
-                <div class="calculator-inputs" style="margin-top: 15px;">
-                    <div class="form-group">
-                        <label for="simple-equation">Enter Equation:</label>
-                        <input type="text" id="simple-equation" class="form-control" placeholder="e.g., y = m*x" value="y = m*x">
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="calculateSimple()">
-                        <i class="fas fa-calculator"></i> Calculate
-                    </button>
-                    
-                    <div class="results" id="simple-results" style="margin-top: 15px; display: none;">
-                        <h4>Result:</h4>
-                        <p id="simple-result-text"></p>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <button class="submit-btn" onclick="closeFullscreenPage()">
-                    <i class="fas fa-home"></i> Return to Home
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="fullscreen-page" id="simulation-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-desktop"></i> Simulation</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Orthogonal Trajectory Calculator</h3><p>This simulation section provides access to an advanced orthogonal trajectory calculator for interactive learning.</p><div class="external-website-section"><h3><i class="fas fa-external-link-alt"></i> Advanced Orthogonal Trajectory Calculator</h3><p>Click the button below to access an advanced interactive orthogonal trajectory calculator. This external tool provides enhanced visualization and computation capabilities for orthogonal trajectories.</p><div class="external-link-container"><a href="https://gaurichavan387-jpg.github.io/pro-makers/" target="_blank" class="external-link-btn"><i class="fas fa-calculator"></i> Open Advanced Calculator</a><div class="link-info"><h4>External Tool Information</h4><p><strong>URL:</strong> https://gaurichavan387-jpg.github.io/pro-makers/</p><p><strong>Features:</strong> Advanced graphing, multiple curve families, parameter adjustment, real-time visualization</p><p><strong>Note:</strong> The external calculator has a "Return to Virtual Lab" button on its interface</p></div></div><div class="question-block" style="margin-top:20px;"><h4>How to Use the External Calculator:</h4><ol><li>Click the "Open Advanced Calculator" button above</li><li>The calculator will open in a new browser tab</li><li>Use the input fields to enter your equations</li><li>Adjust parameters using sliders and controls</li><li>View real-time visualization of orthogonal trajectories</li><li>Use the "Return to Virtual Lab" button on the calculator to come back to this page</li></ol></div><div class="question-block"><h4>Example Problems to Try:</h4><ul><li>Find orthogonal trajectories of circles: x² + y² = a²</li><li>Find orthogonal trajectories of parabolas: y = ax²</li><li>Find orthogonal trajectories of exponential curves: y = ae^x</li><li>Find orthogonal trajectories of hyperbolas: xy = c</li><li>Find orthogonal trajectories of: y = 2e^(3x²)</li><li>Find orthogonal trajectories of: y = 9/(3x+1)</li></ul></div></div><div class="question-block" style="margin-top:30px;"><h4>Simple Built-in Calculator</h4><p>For quick calculations, you can also use this simple calculator:</p><div class="calculator-inputs" style="margin-top:15px;"><div class="form-group"><label for="simple-equation">Enter Equation:</label><input type="text" id="simple-equation" class="form-control" placeholder="e.g., y = m*x" value="y = m*x"></div><button class="btn btn-primary" onclick="calculateSimple()"><i class="fas fa-calculator"></i> Calculate</button><div class="results" id="simple-results" style="margin-top:15px;display:none;"><h4>Result:</h4><p id="simple-result-text"></p></div></div></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
     <!-- Posttest Page -->
-    <div class="fullscreen-page" id="posttest-fullscreen">
-        <div class="fullscreen-header">
-            <h2><i class="fas fa-clipboard-check"></i> Post-Experiment Test</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="fullscreen-content">
-            <h3>Post-Experiment Assessment</h3>
-            <p>This test contains 13 questions, each worth 1 mark. Select the correct orthogonal trajectory for each given family of curves. You must score at least 9/13 to pass.</p>
-            
-            <form id="posttest-form">
-                <div class="posttest-question">
-                    <h4>1. For the family of straight lines through the origin: y = mx, the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q1" value="a" id="q1a"><label for="q1a">A) Parabolas y = ax²</label></div>
-                        <div class="option"><input type="radio" name="q1" value="b" id="q1b"><label for="q1b">B) Circles centered at origin: x² + y² = c</label></div>
-                        <div class="option"><input type="radio" name="q1" value="c" id="q1c"><label for="q1c">C) Hyperbolas xy = c</label></div>
-                        <div class="option"><input type="radio" name="q1" value="d" id="q1d"><label for="q1d">D) Exponential curves y = ce^x</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>2. For the family of circles centered at origin: x² + y² = a², the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q2" value="a" id="q2a"><label for="q2a">A) Straight lines through origin: y = mx</label></div>
-                        <div class="option"><input type="radio" name="q2" value="b" id="q2b"><label for="q2b">B) Concentric circles: x² + y² = b²</label></div>
-                        <div class="option"><input type="radio" name="q2" value="c" id="q2c"><label for="q2c">C) Parabolas opening upward</label></div>
-                        <div class="option"><input type="radio" name="q2" value="d" id="q2d"><label for="q2d">D) Ellipses</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>3. For the family of parabolas y = ax², the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q3" value="a" id="q3a"><label for="q3a">A) x²/2 + y² = c (ellipses)</label></div>
-                        <div class="option"><input type="radio" name="q3" value="b" id="q3b"><label for="q3b">B) y = cx³</label></div>
-                        <div class="option"><input type="radio" name="q3" value="c" id="q3c"><label for="q3c">C) x² - y² = c</label></div>
-                        <div class="option"><input type="radio" name="q3" value="d" id="q3d"><label for="q3d">D) y = ce^x</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>4. For the family of rectangular hyperbolas xy = c, the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q4" value="a" id="q4a"><label for="q4a">A) x² - y² = k</label></div>
-                        <div class="option"><input type="radio" name="q4" value="b" id="q4b"><label for="q4b">B) y = kx</label></div>
-                        <div class="option"><input type="radio" name="q4" value="c" id="q4c"><label for="q4c">C) x² + y² = k</label></div>
-                        <div class="option"><input type="radio" name="q4" value="d" id="q4d"><label for="q4d">D) y = kx²</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>5. For the family of exponential curves y = ce^x, the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q5" value="a" id="q5a"><label for="q5a">A) y² = -2x + k</label></div>
-                        <div class="option"><input type="radio" name="q5" value="b" id="q5b"><label for="q5b">B) x² + y² = k</label></div>
-                        <div class="option"><input type="radio" name="q5" value="c" id="q5c"><label for="q5c">C) y = k/x</label></div>
-                        <div class="option"><input type="radio" name="q5" value="d" id="q5d"><label for="q5d">D) y = k ln x</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>6. For the family of curves y = c sin x, the orthogonal trajectories satisfy:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q6" value="a" id="q6a"><label for="q6a">A) ln|cos x| = y²/2 + k</label></div>
-                        <div class="option"><input type="radio" name="q6" value="b" id="q6b"><label for="q6b">B) x = ln|sin y| + k</label></div>
-                        <div class="option"><input type="radio" name="q6" value="c" id="q6c"><label for="q6c">C) y = tan x + k</label></div>
-                        <div class="option"><input type="radio" name="q6" value="d" id="q6d"><label for="q6d">D) x² + sin y = k</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>7. For the family of parabolas y² = 4ax (opening to the right), the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q7" value="a" id="q7a"><label for="q7a">A) 2x² + y² = k</label></div>
-                        <div class="option"><input type="radio" name="q7" value="b" id="q7b"><label for="q7b">B) x² + 2y² = k</label></div>
-                        <div class="option"><input type="radio" name="q7" value="c" id="q7c"><label for="q7c">C) y² = -4ax</label></div>
-                        <div class="option"><input type="radio" name="q7" value="d" id="q7d"><label for="q7d">D) xy = k</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>8. For the family of curves x²/3 + y²/2 = a (ellipses), the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q8" value="a" id="q8a"><label for="q8a">A) x² - y² = k</label></div>
-                        <div class="option"><input type="radio" name="q8" value="b" id="q8b"><label for="q8b">B) y = kx^(3/2)</label></div>
-                        <div class="option"><input type="radio" name="q8" value="c" id="q8c"><label for="q8c">C) x²/2 - y²/3 = k</label></div>
-                        <div class="option"><input type="radio" name="q8" value="d" id="q8d"><label for="q8d">D) y = kx</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>9. For the family of logarithmic curves y = ln(cx), the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q9" value="a" id="q9a"><label for="q9a">A) y = -x²/2 - k</label></div>
-                        <div class="option"><input type="radio" name="q9" value="b" id="q9b"><label for="q9b">B) x² + y² = k</label></div>
-                        <div class="option"><input type="radio" name="q9" value="c" id="q9c"><label for="q9c">C) y = ke^x</label></div>
-                        <div class="option"><input type="radio" name="q9" value="d" id="q9d"><label for="q9d">D) xy = k</label></div>
-                    </div>
-                </div>
-                
-                <div class="posttest-question">
-                    <h4>10. For the family of curves e^x sin y = c, the orthogonal trajectories satisfy:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q10" value="a" id="q10a"><label for="q10a">A) x = ln|sec y| + k</label></div>
-                        <div class="option"><input type="radio" name="q10" value="b" id="q10b"><label for="q10b">B) y = ln|cos x| + k</label></div>
-                        <div class="option"><input type="radio" name="q10" value="c" id="q10c"><label for="q10c">C) x² + e^y = k</label></div>
-                        <div class="option"><input type="radio" name="q10" value="d" id="q10d"><label for="q10d">D) y = e^x + k</label></div>
-                    </div>
-                </div>
-
-                <div class="posttest-question">
-                    <h4>11. For the family of curves e^x + e^y = c, the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q11" value="a" id="q11a"><label for="q11a">A) e^x - e^y = k</label></div>
-                        <div class="option"><input type="radio" name="q11" value="b" id="q11b"><label for="q11b">B) e^x + e^y = k</label></div>
-                        <div class="option"><input type="radio" name="q11" value="c" id="q11c"><label for="q11c">C) e^x * e^y = k</label></div>
-                        <div class="option"><input type="radio" name="q11" value="d" id="q11d"><label for="q11d">D) e^x / e^y = k</label></div>
-                    </div>
-                </div>
-
-                <div class="posttest-question">
-                    <h4>12. For the family of curves x² + c y² = 1, the orthogonal trajectories are:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q12" value="a" id="q12a"><label for="q12a">A) y² = k|x|</label></div>
-                        <div class="option"><input type="radio" name="q12" value="b" id="q12b"><label for="q12b">B) x² = k|y|</label></div>
-                        <div class="option"><input type="radio" name="q12" value="c" id="q12c"><label for="q12c">C) ln|y| = k x²</label></div>
-                        <div class="option"><input type="radio" name="q12" value="d" id="q12d"><label for="q12d">D) y = k e^{x²}</label></div>
-                    </div>
-                </div>
-
-                <div class="posttest-question">
-                    <h4>13. For the family of curves in polar form r = a cos²θ, the orthogonal trajectories are given by:</h4>
-                    <div class="options">
-                        <div class="option"><input type="radio" name="q13" value="a" id="q13a"><label for="q13a">A) r = k sin²θ</label></div>
-                        <div class="option"><input type="radio" name="q13" value="b" id="q13b"><label for="q13b">B) r² = k sin(2θ)</label></div>
-                        <div class="option"><input type="radio" name="q13" value="c" id="q13c"><label for="q13c">C) r = k sec²θ</label></div>
-                        <div class="option"><input type="radio" name="q13" value="d" id="q13d"><label for="q13d">D) r = k csc²θ</label></div>
-                    </div>
-                </div>
-                
-                <div style="text-align: center;">
-                    <button type="button" class="submit-btn" onclick="submitPosttest()">
-                        <i class="fas fa-paper-plane"></i> Submit Test
-                    </button>
-                </div>
-            </form>
-            
-            <div class="result-section" id="result-section">
-                <h3>Test Results</h3>
-                <p id="score-text"></p>
-                <div id="solutions"></div>
-                <div id="certificate" style="display: none; margin-top: 20px;">
-                    <h4>Certificate of Completion</h4>
-                    <p>Congratulations! You have successfully completed the Post-Experiment Test.</p>
-                    <p>You can download your certificate <a href="#" id="certificate-link">here</a>.</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <button class="submit-btn" onclick="closeFullscreenPage()">
-                    <i class="fas fa-home"></i> Return to Home
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="fullscreen-page" id="posttest-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-clipboard-check"></i> Post-Experiment Test</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Post-Experiment Assessment</h3><p>This test contains 13 questions, each worth 1 mark. Select the correct orthogonal trajectory for each given family of curves. You must score at least 9/13 to pass.</p><form id="posttest-form"><div class="posttest-question"><h4>1. For the family of straight lines through the origin: y = mx, the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q1" value="a" id="q1a"><label for="q1a">A) Parabolas y = ax²</label></div><div class="option"><input type="radio" name="q1" value="b" id="q1b"><label for="q1b">B) Circles centered at origin: x² + y² = c</label></div><div class="option"><input type="radio" name="q1" value="c" id="q1c"><label for="q1c">C) Hyperbolas xy = c</label></div><div class="option"><input type="radio" name="q1" value="d" id="q1d"><label for="q1d">D) Exponential curves y = ce^x</label></div></div></div><div class="posttest-question"><h4>2. For the family of circles centered at origin: x² + y² = a², the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q2" value="a" id="q2a"><label for="q2a">A) Straight lines through origin: y = mx</label></div><div class="option"><input type="radio" name="q2" value="b" id="q2b"><label for="q2b">B) Concentric circles: x² + y² = b²</label></div><div class="option"><input type="radio" name="q2" value="c" id="q2c"><label for="q2c">C) Parabolas opening upward</label></div><div class="option"><input type="radio" name="q2" value="d" id="q2d"><label for="q2d">D) Ellipses</label></div></div></div><div class="posttest-question"><h4>3. For the family of parabolas y = ax², the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q3" value="a" id="q3a"><label for="q3a">A) x²/2 + y² = c (ellipses)</label></div><div class="option"><input type="radio" name="q3" value="b" id="q3b"><label for="q3b">B) y = cx³</label></div><div class="option"><input type="radio" name="q3" value="c" id="q3c"><label for="q3c">C) x² - y² = c</label></div><div class="option"><input type="radio" name="q3" value="d" id="q3d"><label for="q3d">D) y = ce^x</label></div></div></div><div class="posttest-question"><h4>4. For the family of rectangular hyperbolas xy = c, the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q4" value="a" id="q4a"><label for="q4a">A) x² - y² = k</label></div><div class="option"><input type="radio" name="q4" value="b" id="q4b"><label for="q4b">B) y = kx</label></div><div class="option"><input type="radio" name="q4" value="c" id="q4c"><label for="q4c">C) x² + y² = k</label></div><div class="option"><input type="radio" name="q4" value="d" id="q4d"><label for="q4d">D) y = kx²</label></div></div></div><div class="posttest-question"><h4>5. For the family of exponential curves y = ce^x, the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q5" value="a" id="q5a"><label for="q5a">A) y² = -2x + k</label></div><div class="option"><input type="radio" name="q5" value="b" id="q5b"><label for="q5b">B) x² + y² = k</label></div><div class="option"><input type="radio" name="q5" value="c" id="q5c"><label for="q5c">C) y = k/x</label></div><div class="option"><input type="radio" name="q5" value="d" id="q5d"><label for="q5d">D) y = k ln x</label></div></div></div><div class="posttest-question"><h4>6. For the family of curves y = c sin x, the orthogonal trajectories satisfy:</h4><div class="options"><div class="option"><input type="radio" name="q6" value="a" id="q6a"><label for="q6a">A) ln|cos x| = y²/2 + k</label></div><div class="option"><input type="radio" name="q6" value="b" id="q6b"><label for="q6b">B) x = ln|sin y| + k</label></div><div class="option"><input type="radio" name="q6" value="c" id="q6c"><label for="q6c">C) y = tan x + k</label></div><div class="option"><input type="radio" name="q6" value="d" id="q6d"><label for="q6d">D) x² + sin y = k</label></div></div></div><div class="posttest-question"><h4>7. For the family of parabolas y² = 4ax (opening to the right), the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q7" value="a" id="q7a"><label for="q7a">A) 2x² + y² = k</label></div><div class="option"><input type="radio" name="q7" value="b" id="q7b"><label for="q7b">B) x² + 2y² = k</label></div><div class="option"><input type="radio" name="q7" value="c" id="q7c"><label for="q7c">C) y² = -4ax</label></div><div class="option"><input type="radio" name="q7" value="d" id="q7d"><label for="q7d">D) xy = k</label></div></div></div><div class="posttest-question"><h4>8. For the family of curves x²/3 + y²/2 = a (ellipses), the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q8" value="a" id="q8a"><label for="q8a">A) x² - y² = k</label></div><div class="option"><input type="radio" name="q8" value="b" id="q8b"><label for="q8b">B) y = kx^(3/2)</label></div><div class="option"><input type="radio" name="q8" value="c" id="q8c"><label for="q8c">C) x²/2 - y²/3 = k</label></div><div class="option"><input type="radio" name="q8" value="d" id="q8d"><label for="q8d">D) y = kx</label></div></div></div><div class="posttest-question"><h4>9. For the family of logarithmic curves y = ln(cx), the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q9" value="a" id="q9a"><label for="q9a">A) y = -x²/2 - k</label></div><div class="option"><input type="radio" name="q9" value="b" id="q9b"><label for="q9b">B) x² + y² = k</label></div><div class="option"><input type="radio" name="q9" value="c" id="q9c"><label for="q9c">C) y = ke^x</label></div><div class="option"><input type="radio" name="q9" value="d" id="q9d"><label for="q9d">D) xy = k</label></div></div></div><div class="posttest-question"><h4>10. For the family of curves e^x sin y = c, the orthogonal trajectories satisfy:</h4><div class="options"><div class="option"><input type="radio" name="q10" value="a" id="q10a"><label for="q10a">A) x = ln|sec y| + k</label></div><div class="option"><input type="radio" name="q10" value="b" id="q10b"><label for="q10b">B) y = ln|cos x| + k</label></div><div class="option"><input type="radio" name="q10" value="c" id="q10c"><label for="q10c">C) x² + e^y = k</label></div><div class="option"><input type="radio" name="q10" value="d" id="q10d"><label for="q10d">D) y = e^x + k</label></div></div></div><div class="posttest-question"><h4>11. For the family of curves e^x + e^y = c, the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q11" value="a" id="q11a"><label for="q11a">A) e^x - e^y = k</label></div><div class="option"><input type="radio" name="q11" value="b" id="q11b"><label for="q11b">B) e^x + e^y = k</label></div><div class="option"><input type="radio" name="q11" value="c" id="q11c"><label for="q11c">C) e^x * e^y = k</label></div><div class="option"><input type="radio" name="q11" value="d" id="q11d"><label for="q11d">D) e^x / e^y = k</label></div></div></div><div class="posttest-question"><h4>12. For the family of curves x² + c y² = 1, the orthogonal trajectories are:</h4><div class="options"><div class="option"><input type="radio" name="q12" value="a" id="q12a"><label for="q12a">A) y² = k|x|</label></div><div class="option"><input type="radio" name="q12" value="b" id="q12b"><label for="q12b">B) x² = k|y|</label></div><div class="option"><input type="radio" name="q12" value="c" id="q12c"><label for="q12c">C) ln|y| = k x²</label></div><div class="option"><input type="radio" name="q12" value="d" id="q12d"><label for="q12d">D) y = k e^{x²}</label></div></div></div><div class="posttest-question"><h4>13. For the family of curves in polar form r = a cos²θ, the orthogonal trajectories are given by:</h4><div class="options"><div class="option"><input type="radio" name="q13" value="a" id="q13a"><label for="q13a">A) r = k sin²θ</label></div><div class="option"><input type="radio" name="q13" value="b" id="q13b"><label for="q13b">B) r² = k sin(2θ)</label></div><div class="option"><input type="radio" name="q13" value="c" id="q13c"><label for="q13c">C) r = k sec²θ</label></div><div class="option"><input type="radio" name="q13" value="d" id="q13d"><label for="q13d">D) r = k csc²θ</label></div></div></div><div style="text-align:center;"><button type="button" class="submit-btn" onclick="submitPosttest()"><i class="fas fa-paper-plane"></i> Submit Test</button></div></form><div class="result-section" id="result-section"><h3>Test Results</h3><p id="score-text"></p><div id="solutions"></div><div id="certificate" style="display:none;margin-top:20px;"><h4>Certificate of Completion</h4><p>Congratulations! You have successfully completed the Post-Experiment Test.</p><p>You can download your certificate <a href="#" id="certificate-link">here</a>.</p></div></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
     <!-- References Page -->
-    <div class="fullscreen-page" id="references-fullscreen">
-        <div class="fullscreen-header">
-            <h2><i class="fas fa-book-open"></i> References</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="fullscreen-content">
-            <h3>Recommended Books and Resources</h3>
-            <p>Here are some excellent references for learning more about orthogonal trajectories and differential equations:</p>
-            
-            <div class="question-block">
-                <h4>Textbooks:</h4>
-                <ul>
-                    <li><strong>Advanced Engineering Mathematics</strong> by Erwin Kreyszig - Chapter 1 covers differential equations and orthogonal trajectories in detail</li>
-                    <li><strong>Differential Equations with Applications and Historical Notes</strong> by George F. Simmons - Excellent theoretical foundation with practical applications</li>
-                    <li><strong>A First Course in Differential Equations</strong> by Dennis G. Zill - Comprehensive coverage with many solved examples</li>
-                    <li><strong>Elementary Differential Equations and Boundary Value Problems</strong> by William E. Boyce and Richard C. DiPrima - Standard textbook with clear explanations</li>
-                    <li><strong>Mathematics for Engineers</strong> by Anthony Croft and Robert Davison - Practical approach with engineering applications</li>
-                </ul>
-            </div>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <button class="submit-btn" onclick="closeFullscreenPage()">
-                    <i class="fas fa-home"></i> Return to Home
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="fullscreen-page" id="references-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-book-open"></i> References</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Recommended Books and Resources</h3><p>Here are some excellent references for learning more about orthogonal trajectories and differential equations:</p><div class="question-block"><h4>Textbooks:</h4><ul><li><strong>Advanced Engineering Mathematics</strong> by Erwin Kreyszig - Chapter 1 covers differential equations and orthogonal trajectories in detail</li><li><strong>Differential Equations with Applications and Historical Notes</strong> by George F. Simmons - Excellent theoretical foundation with practical applications</li><li><strong>A First Course in Differential Equations</strong> by Dennis G. Zill - Comprehensive coverage with many solved examples</li><li><strong>Elementary Differential Equations and Boundary Value Problems</strong> by William E. Boyce and Richard C. DiPrima - Standard textbook with clear explanations</li><li><strong>Mathematics for Engineers</strong> by Anthony Croft and Robert Davison - Practical approach with engineering applications</li></ul></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
-    <!-- Contributors Page -->
+    <!-- Contributors Page (UPDATED: Rectangle cards, no empty spaces) -->
     <div class="fullscreen-page" id="contributors-fullscreen">
         <div class="fullscreen-header">
             <h2><i class="fas fa-users"></i> Contributors</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
+            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button>
         </div>
         <div class="fullscreen-content">
             <h3>Our Team</h3>
             <p>This virtual lab was developed by a dedicated team of students under the guidance of faculty members.</p>
-            
             <div class="contributors-container">
+                <!-- Faculty Supervisor -->
                 <div class="contributor-type">
                     <h4><i class="fas fa-chalkboard-teacher"></i> Faculty Supervisor</h4>
                     <div class="contributors-grid">
                         <div class="contributor-card">
-                            <div class="contributor-image">
-                                <img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/2b790903abd0b004c9b7b1d467ecd5807622e8a2/IMG_20251230_174854.jpg" alt="Prof. Dinesh Kute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/140/2c3e50/ffffff?text=Prof.+Kute';">
-                            </div>
-                            <div class="contributor-details">
-                                <h5>Prof. Dinesh Kute</h5>
-                                <span class="contributor-role">Subject Matter Expert</span>
-                                <p class="contributor-contribution">Professor of Mathematics, Applied Sciences & Humanities Department. Provided guidance, mathematical expertise.</p>
-                            </div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/2b790903abd0b004c9b7b1d467ecd5807622e8a2/IMG_20251230_174854.jpg" alt="Prof. Dinesh Kute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/100/2c3e50/ffffff?text=Prof.+Kute';"></div>
+                            <div class="contributor-details"><h5>Prof. Dinesh Kute</h5><span class="contributor-role">Subject Matter Expert</span><p class="contributor-contribution">Professor of Mathematics, Applied Sciences & Humanities Department. Provided guidance and mathematical expertise.</p></div>
                         </div>
                     </div>
                 </div>
-                
+                <!-- Development Team -->
                 <div class="contributor-type">
                     <h4><i class="fas fa-laptop-code"></i> Development Team</h4>
-                    <p style="margin-bottom:20px;">The following students contributed to the development of this virtual lab:</p>
                     <div class="contributors-grid">
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251229_212934.jpg" alt="Gauri Chavan" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/140/3498db/ffffff?text=Gauri+Chavan';"></div>
-                            <div class="contributor-details"><h5>Gauri Chavan</h5><span class="contributor-role">Designer and Developer</span><p class="contributor-contribution">1st year B.Tech .IT.engineering student at PCCOE Pune. Led frontend development, implemented interactive features.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251229_212934.jpg" alt="Gauri Chavan" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/100/3498db/ffffff?text=Gauri';"></div>
+                            <div class="contributor-details"><h5>Gauri Chavan</h5><span class="contributor-role">Designer & Developer</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Led frontend development and implemented interactive features.</p></div>
                         </div>
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251230_112613.jpg" alt="Prachi Bute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/140/9b59b6/ffffff?text=Prachi+Bute';"></div>
-                            <div class="contributor-details"><h5>Prachi Bute</h5><span class="contributor-role">Content Designer</span><p class="contributor-contribution">1st year B.Tech .IT.engineering student at PCCOE Pune. Created comprehensive presentation materials, designed educational content structure.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251230_112613.jpg" alt="Prachi Bute" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/100/9b59b6/ffffff?text=Prachi';"></div>
+                            <div class="contributor-details"><h5>Prachi Bute</h5><span class="contributor-role">Content Designer</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Created presentation materials and designed educational content structure.</p></div>
                         </div>
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG-20251226-WA0005.jpg" alt="Prachi Pardeshi" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/140/2ecc71/ffffff?text=Prachi+Pardeshi';"></div>
-                            <div class="contributor-details"><h5>Prachi Pardeshi</h5><span class="contributor-role">Theory & Content Specialist</span><p class="contributor-contribution">1st year B.Tech .IT.engineering student at PCCOE Pune. Researched and compiled mathematical theories, developed problem sets.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG-20251226-WA0005.jpg" alt="Prachi Pardeshi" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/100/2ecc71/ffffff?text=Prachi';"></div>
+                            <div class="contributor-details"><h5>Prachi Pardeshi</h5><span class="contributor-role">Theory Specialist</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Researched mathematical theories and developed problem sets.</p></div>
                         </div>
                         <div class="contributor-card">
-                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251226_145434.jpg" alt="Prachi Patil" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/140/e74c3c/ffffff?text=Prachi+Patil';"></div>
-                            <div class="contributor-details"><h5>Prachi Patil</h5><span class="contributor-role">Data Collection & Research</span><p class="contributor-contribution">1st year B.Tech .IT.engineering student at PCCOE Pune. Gathered and organized mathematical data, researched applications of orthogonal trajectories.</p></div>
+                            <div class="contributor-image"><img src="https://raw.githubusercontent.com/gaurichavan387-jpg/matrix-makers/main/IMG_20251226_145434.jpg" alt="Prachi Patil" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://via.placeholder.com/100/e74c3c/ffffff?text=Prachi';"></div>
+                            <div class="contributor-details"><h5>Prachi Patil</h5><span class="contributor-role">Research Associate</span><p class="contributor-contribution">1st year B.Tech IT, PCCOE Pune. Gathered data and researched applications of orthogonal trajectories.</p></div>
                         </div>
                     </div>
                 </div>
@@ -2056,208 +1294,92 @@
     </div>
 
     <!-- Feedback Page -->
-    <div class="fullscreen-page" id="feedback-fullscreen">
-        <div class="fullscreen-header">
-            <h2><i class="fas fa-comment-alt"></i> Feedback Form</h2>
-            <button class="close-fullscreen-btn" onclick="closeFullscreenPage()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="fullscreen-content">
-            <h3>Share Your Experience</h3>
-            <p>Your feedback is valuable to us. Please use the official Google Form below to submit your feedback about this virtual lab experience.</p>
-            
-            <div class="form-instructions">
-                <h4><i class="fas fa-info-circle"></i> Instructions for Feedback Submission:</h4>
-                <ul>
-                    <li>Please fill out all required fields in the form</li>
-                    <li>Be honest and specific in your feedback</li>
-                    <li>Your responses will help us improve the virtual lab</li>
-                    <li>All feedback will be kept confidential</li>
-                    <li>After submission, you'll see a confirmation message from Google Forms</li>
-                </ul>
-            </div>
-            
-            <div class="google-form-container">
-                <iframe class="google-form-frame" src="https://docs.google.com/forms/d/e/1FAIpQLSfhwU0rVgb96zlhtkuLqUWtQEnbllR_pCPaaYJOLlFMnbVSXA/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading Google Form...</iframe>
-            </div>
-            
-            <div class="form-instructions">
-                <h4><i class="fas fa-check-circle"></i> Form Completion</h4>
-                <p>After submitting the Google Form, you can return to the virtual lab using the button below. Thank you for your valuable feedback!</p>
-            </div>
-            
-            <div style="text-align: center; margin-top: 30px;">
-                <button type="button" class="form-submit-btn" onclick="markFormCompleted()">
-                    <i class="fas fa-check"></i> I Have Submitted the Feedback Form
-                </button>
-            </div>
-            
-            <div class="form-completion-message" id="formCompletionMessage">
-                <h3><i class="fas fa-check-circle"></i> Thank You for Your Feedback!</h3>
-                <p>Your feedback has been successfully submitted through Google Forms.</p>
-                <p>We appreciate you taking the time to help us improve the virtual lab experience.</p>
-                <p>Your feedback ID: <strong>VL-FB-${Date.now().toString().slice(-6)}</strong></p>
-            </div>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <button class="submit-btn" onclick="closeFullscreenPage()">
-                    <i class="fas fa-home"></i> Return to Home
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="fullscreen-page" id="feedback-fullscreen"><div class="fullscreen-header"><h2><i class="fas fa-comment-alt"></i> Feedback Form</h2><button class="close-fullscreen-btn" onclick="closeFullscreenPage()"><i class="fas fa-times"></i> Close</button></div><div class="fullscreen-content"><h3>Share Your Experience</h3><p>Your feedback is valuable to us. Please use the official Google Form below to submit your feedback about this virtual lab experience.</p><div class="form-instructions"><h4><i class="fas fa-info-circle"></i> Instructions for Feedback Submission:</h4><ul><li>Please fill out all required fields in the form</li><li>Be honest and specific in your feedback</li><li>Your responses will help us improve the virtual lab</li><li>All feedback will be kept confidential</li><li>After submission, you'll see a confirmation message from Google Forms</li></ul></div><div class="google-form-container"><iframe class="google-form-frame" src="https://docs.google.com/forms/d/e/1FAIpQLSfhwU0rVgb96zlhtkuLqUWtQEnbllR_pCPaaYJOLlFMnbVSXA/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading Google Form...</iframe></div><div class="form-instructions"><h4><i class="fas fa-check-circle"></i> Form Completion</h4><p>After submitting the Google Form, you can return to the virtual lab using the button below. Thank you for your valuable feedback!</p></div><div style="text-align:center;margin-top:30px;"><button type="button" class="form-submit-btn" onclick="markFormCompleted()"><i class="fas fa-check"></i> I Have Submitted the Feedback Form</button></div><div class="form-completion-message" id="formCompletionMessage"><h3><i class="fas fa-check-circle"></i> Thank You for Your Feedback!</h3><p>Your feedback has been successfully submitted through Google Forms.</p><p>We appreciate you taking the time to help us improve the virtual lab experience.</p><p>Your feedback ID: <strong>VL-FB-${Date.now().toString().slice(-6)}</strong></p></div><div style="margin-top:40px;text-align:center;"><button class="submit-btn" onclick="closeFullscreenPage()"><i class="fas fa-home"></i> Return to Home</button></div></div></div>
 
     <script>
         let currentGraphType = 1;
-        
         function drawOrthogonalGraph(type) {
-            let lineSlopes = [];
-            let circleRadii = [];
-            if (type === 1) { lineSlopes = [0.5, 1, 2, -0.5, -1, -2]; circleRadii = [1, 2, 3]; }
-            else if (type === 2) { lineSlopes = [0.3, 0.6, 1, 1.5, 2, 3, -0.3, -0.6, -1, -1.5, -2, -3]; circleRadii = [1, 1.8, 2.5, 3.2, 4]; }
-            else { lineSlopes = [0.8, 1.2, -0.8, -1.2]; circleRadii = [1.5, 2.8]; }
+            let lineSlopes = [], circleRadii = [];
+            if (type === 1) { lineSlopes = [0.5,1,2,-0.5,-1,-2]; circleRadii = [1,2,3]; }
+            else if (type === 2) { lineSlopes = [0.3,0.6,1,1.5,2,3,-0.3,-0.6,-1,-1.5,-2,-3]; circleRadii = [1,1.8,2.5,3.2,4]; }
+            else { lineSlopes = [0.8,1.2,-0.8,-1.2]; circleRadii = [1.5,2.8]; }
             let traces = [];
-            for (let m of lineSlopes) {
-                let x_vals = [], y_vals = [];
-                for (let x = -4; x <= 4; x += 0.1) { if (Math.abs(m * x) <= 5) { x_vals.push(x); y_vals.push(m * x); } }
-                traces.push({ x: x_vals, y: y_vals, mode: 'lines', name: `y = ${m}x`, line: { color: '#3498db', width: 1.5 }, opacity: 0.7, showlegend: false });
-            }
-            for (let r of circleRadii) {
-                let x_vals = [], y_vals = [];
-                for (let t = 0; t <= 2 * Math.PI; t += 0.05) { x_vals.push(r * Math.cos(t)); y_vals.push(r * Math.sin(t)); }
-                traces.push({ x: x_vals, y: y_vals, mode: 'lines', name: `x² + y² = ${r*r}`, line: { color: '#e74c3c', width: 2 }, showlegend: false });
-            }
-            let layout = { title: { text: 'Orthogonal Trajectories: Lines (Blue) and Circles (Red)', font: { size: 18 } }, xaxis: { title: 'x', range: [-5, 5], zeroline: true, gridcolor: '#ddd' }, yaxis: { title: 'y', range: [-5, 5], zeroline: true, gridcolor: '#ddd' }, aspectratio: { x: 1, y: 1 }, hovermode: 'closest', plot_bgcolor: '#f9f9f9', paper_bgcolor: 'white', annotations: [{ x: 2.5, y: 4.2, xref: 'x', yref: 'y', text: 'Each circle intersects every line at 90°', showarrow: true, arrowhead: 2, arrowsize: 1, arrowwidth: 1, arrowcolor: '#2c3e50', font: { size: 12, color: '#2c3e50' } }] };
+            for (let m of lineSlopes) { let x=[],y=[]; for(let xv=-4;xv<=4;xv+=0.1) if(Math.abs(m*xv)<=5) { x.push(xv); y.push(m*xv); } traces.push({x:x,y:y,mode:'lines',name:`y = ${m}x`,line:{color:'#3498db',width:1.5},opacity:0.7,showlegend:false}); }
+            for (let r of circleRadii) { let x=[],y=[]; for(let t=0;t<=2*Math.PI;t+=0.05) { x.push(r*Math.cos(t)); y.push(r*Math.sin(t)); } traces.push({x:x,y:y,mode:'lines',name:`x²+y²=${r*r}`,line:{color:'#e74c3c',width:2},showlegend:false}); }
+            let layout = {title:{text:'Orthogonal Trajectories: Lines (Blue) and Circles (Red)',font:{size:18}},xaxis:{title:'x',range:[-5,5],zeroline:true,gridcolor:'#ddd'},yaxis:{title:'y',range:[-5,5],zeroline:true,gridcolor:'#ddd'},aspectratio:{x:1,y:1},hovermode:'closest',plot_bgcolor:'#f9f9f9',paper_bgcolor:'white',annotations:[{x:2.5,y:4.2,xref:'x',yref:'y',text:'Each circle intersects every line at 90°',showarrow:true,arrowhead:2,arrowsize:1,arrowwidth:1,arrowcolor:'#2c3e50',font:{size:12,color:'#2c3e50'}}]};
             Plotly.newPlot('orthogonalGraph', traces, layout, { responsive: true });
         }
-        
         function updateGraph(type) { currentGraphType = type; drawOrthogonalGraph(type); }
-        
         function submitPretest() {
-            const correct = { pre_q1: 'b', pre_q2: 'b', pre_q3: 'a', pre_q4: 'b', pre_q5: 'a', pre_q6: 'a', pre_q7: 'a', pre_q8: 'a' };
-            let score = 0;
-            let resultsHtml = '';
-            for (let i = 1; i <= 8; i++) {
-                let selected = document.querySelector(`input[name="pre_q${i}"]:checked`);
-                let userVal = selected ? selected.value : null;
-                let isCorrect = (userVal === correct[`pre_q${i}`]);
-                if (isCorrect) score++;
-                let correctLetter = correct[`pre_q${i}`].toUpperCase();
-                let answerText = '';
-                if (i === 1) answerText = 'Correct answer: B) x²/2 + y² = C (ellipses). Solution: dy/dx = 2y/x → replace → x dx + 2y dy = 0 → x²/2 + y² = C.';
-                else if (i === 2) answerText = 'Correct answer: B) x² + 3y² = C. Solution: dy/dx = 3y/x → x dx + 3y dy = 0 → x²/2 + 3y²/2 = C → x² + 3y² = C.';
-                else if (i === 3) answerText = 'Correct answer: A) 2x² + y² = C. Solution: dy/dx = y/(2x) → 2x dx + y dy = 0 → x² + y²/2 = C → 2x² + y² = C.';
-                else if (i === 4) answerText = 'Correct answer: B) Circles centered at origin: x² + y² = C. Solution: dy/dx = y/x → replace → x dx + y dy = 0 → x² + y² = C.';
-                else if (i === 5) answerText = 'Correct answer: A) Straight lines through origin: y = mx. Solution: dy/dx = -x/y → replace → dx/dy = x/y → dx/x = dy/y → y = Cx.';
-                else if (i === 6) answerText = 'Correct answer: A) x² - y² = k. Solution: dy/dx = -y/x → replace → dx/dy = y/x → x dx = y dy → x² - y² = k.';
-                else if (i === 7) answerText = 'Correct answer: A) y² = -2x + k. Solution: dy/dx = y → replace → -dx/dy = y → -dx = y dy → -x = y²/2 + k → y² = -2x + 2k.';
-                else answerText = 'Correct answer: A) ln|cos x| = y²/2 + k. Solution: dy/dx = y cot x → replace → -dx/dy = y cot x → -tan x dx = y dy → ln|cos x| = y²/2 + k.';
-                resultsHtml += `<div class="solution" style="margin-bottom:15px;"><p><strong>Question ${i}:</strong> ${isCorrect ? '<span style="color:#27ae60;">✓ Correct</span>' : '<span style="color:#e74c3c;">✗ Incorrect</span>'}</p><p>Your answer: ${userVal ? userVal.toUpperCase() : 'Not answered'}</p><p>Correct answer: ${correctLetter}</p><p><em>${answerText}</em></p></div>`;
+            const correct = { pre_q1:'b', pre_q2:'b', pre_q3:'a', pre_q4:'b', pre_q5:'a', pre_q6:'a', pre_q7:'a', pre_q8:'a' };
+            let score = 0, html = '';
+            for(let i=1;i<=8;i++) {
+                let sel = document.querySelector(`input[name="pre_q${i}"]:checked`);
+                let user = sel ? sel.value : null;
+                let isCorrect = (user === correct[`pre_q${i}`]);
+                if(isCorrect) score++;
+                let ansText = ['','x²/2+y²=C','x²+3y²=C','2x²+y²=C','x²+y²=C','y=Cx','x²-y²=C','y²=-2x+C','ln|cos x|=y²/2+C'][i];
+                html += `<div class="solution"><p><strong>Q${i}:</strong> ${isCorrect ? '✓ Correct' : '✗ Incorrect'}</p><p>Your: ${user?user.toUpperCase():'Not answered'} | Correct: ${correct[`pre_q${i}`].toUpperCase()}</p><p><em>${ansText}</em></p></div>`;
             }
-            document.getElementById('pretest-score-text').innerHTML = `<strong>Your Score: ${score}/8</strong><br>${score === 8 ? 'Excellent! Ready for the lab.' : (score >= 6 ? 'Good! Review the incorrect answers.' : 'Please review the theory section before proceeding.')}`;
-            document.getElementById('pretest-solutions').innerHTML = resultsHtml;
+            document.getElementById('pretest-score-text').innerHTML = `<strong>Score: ${score}/8</strong><br>${score===8?'Excellent!':(score>=6?'Good! Review incorrect.':'Please review theory.')}`;
+            document.getElementById('pretest-solutions').innerHTML = html;
             document.getElementById('pretest-result-section').style.display = 'block';
             document.getElementById('pretest-result-section').scrollIntoView({ behavior: 'smooth' });
         }
-        
         document.addEventListener('DOMContentLoaded', function() {
-            const logoImg = document.getElementById('pcceLogo');
-            const debugInfo = document.getElementById('debugInfo');
-            logoImg.onload = function() { debugInfo.innerHTML = '✓ PCOE logo loaded successfully'; debugInfo.style.background = 'rgba(46, 204, 113, 0.8)'; setTimeout(() => { debugInfo.style.display = 'none'; }, 3000); };
-            logoImg.onerror = function() { debugInfo.innerHTML = '✗ PCOE logo failed to load, using fallback'; debugInfo.style.background = 'rgba(231, 76, 60, 0.8)'; setTimeout(() => { debugInfo.style.display = 'none'; }, 5000); };
-            setTimeout(() => { if (!logoImg.complete || logoImg.naturalHeight === 0) debugInfo.innerHTML = '⚠️ PCOE logo loading slowly...'; }, 2000);
-            initializeRatingLabels();
-            const urlParams = new URLSearchParams(window.location.search);
-            const section = urlParams.get('section');
-            if (section) openFullscreenPage(section);
-            if (document.getElementById('orthogonalGraph')) drawOrthogonalGraph(1);
+            let logo = document.getElementById('pcceLogo');
+            let debug = document.getElementById('debugInfo');
+            logo.onload = () => { debug.innerHTML='✓ PCOE logo loaded'; debug.style.background='rgba(46,204,113,0.8)'; setTimeout(()=>debug.style.display='none',3000); };
+            logo.onerror = () => { debug.innerHTML='✗ PCOE logo failed'; debug.style.background='rgba(231,76,60,0.8)'; setTimeout(()=>debug.style.display='none',5000); };
+            setTimeout(()=>{ if(!logo.complete||logo.naturalHeight===0) debug.innerHTML='⚠️ PCOE logo loading slowly...'; },2000);
+            let section = new URLSearchParams(window.location.search).get('section');
+            if(section) openFullscreenPage(section);
+            if(document.getElementById('orthogonalGraph')) drawOrthogonalGraph(1);
         });
-
         function openFullscreenPage(section) {
             document.getElementById('main-content').style.display = 'none';
             document.querySelectorAll('.fullscreen-page').forEach(p => p.classList.remove('active'));
-            const pageToShow = document.getElementById(`${section}-fullscreen`);
-            if (pageToShow) {
-                pageToShow.classList.add('active');
-                document.body.classList.add('fullscreen');
-                document.body.style.overflow = 'hidden';
-                history.pushState({section: section}, '', `?section=${section}`);
-                window.scrollTo(0, 0);
-                if (section === 'feedback') document.getElementById('formCompletionMessage').style.display = 'none';
-                if (section === 'theory' && document.getElementById('orthogonalGraph')) drawOrthogonalGraph(currentGraphType);
-            }
+            let page = document.getElementById(`${section}-fullscreen`);
+            if(page) { page.classList.add('active'); document.body.classList.add('fullscreen'); document.body.style.overflow='hidden'; history.pushState({section:section},'',`?section=${section}`); window.scrollTo(0,0); if(section==='feedback') document.getElementById('formCompletionMessage').style.display='none'; if(section==='theory'&&document.getElementById('orthogonalGraph')) drawOrthogonalGraph(currentGraphType); }
         }
-
         function closeFullscreenPage() {
             document.getElementById('main-content').style.display = 'block';
             document.querySelectorAll('.fullscreen-page').forEach(p => p.classList.remove('active'));
-            document.body.classList.remove('fullscreen');
-            document.body.style.overflow = 'auto';
-            history.pushState({}, '', window.location.pathname);
-            window.scrollTo(0, 0);
+            document.body.classList.remove('fullscreen'); document.body.style.overflow='auto';
+            history.pushState({},'',window.location.pathname); window.scrollTo(0,0);
         }
-
-        window.addEventListener('popstate', function(event) {
-            const section = new URLSearchParams(window.location.search).get('section');
-            if (section) openFullscreenPage(section);
-            else closeFullscreenPage();
-        });
-
+        window.addEventListener('popstate',()=>{ let s=new URLSearchParams(window.location.search).get('section'); if(s) openFullscreenPage(s); else closeFullscreenPage(); });
         function calculateSimple() {
-            const eq = document.getElementById('simple-equation').value;
-            let result = '';
-            if (eq.includes('y = m*x') || eq.includes('y=m*x')) result = 'Orthogonal trajectories: x² + y² = C (circles)';
-            else if (eq.includes('x^2 + y^2 = a^2') || eq.includes('x²+y²=a²')) result = 'Orthogonal trajectories: y = C*x (lines)';
-            else if (eq.includes('y = a*x^2') || eq.includes('y=a*x²')) result = 'Orthogonal trajectories: x²/2 + y² = C (ellipses)';
-            else if (eq.includes('y = 2*e^(3*x^2)')) result = 'Orthogonal trajectories: 3y² + ln|x| = C';
-            else if (eq.includes('y = 9/(3*x+1)')) result = 'Orthogonal trajectories: y³ = 9(x - C)';
-            else if (eq.includes('y = 23*x^3')) result = 'Orthogonal trajectories: y = -23x³ + 2x² - x + C';
-            else if (eq.includes('y = e^(89*x)')) result = 'Orthogonal trajectories: (89/2)y² + x = C';
-            else if (eq.includes('y = sin(x) + cos(x)')) result = 'Orthogonal trajectories: y = C (horizontal lines)';
-            else result = 'Try: y = m*x, x² + y² = a², y = a*x², y = 2*e^(3*x^2), y = 9/(3*x+1), y = 23*x^3 - 2*x^2 + x - 1, y = e^(89*x), or y = sin(x) + cos(x)';
+            let eq = document.getElementById('simple-equation').value, result='';
+            if(eq.includes('y = m*x')||eq.includes('y=m*x')) result='Orthogonal trajectories: x²+y²=C (circles)';
+            else if(eq.includes('x^2 + y^2 = a^2')||eq.includes('x²+y²=a²')) result='Orthogonal trajectories: y=Cx (lines)';
+            else if(eq.includes('y = a*x^2')||eq.includes('y=a*x²')) result='Orthogonal trajectories: x²/2+y²=C (ellipses)';
+            else if(eq.includes('y = 2*e^(3*x^2)')) result='Orthogonal trajectories: 3y²+ln|x|=C';
+            else if(eq.includes('y = 9/(3*x+1)')) result='Orthogonal trajectories: y³=9(x-C)';
+            else if(eq.includes('y = 23*x^3')) result='Orthogonal trajectories: y=-23x³+2x²-x+C';
+            else if(eq.includes('y = e^(89*x)')) result='Orthogonal trajectories: (89/2)y²+x=C';
+            else if(eq.includes('y = sin(x) + cos(x)')) result='Orthogonal trajectories: y=C (horizontal lines)';
+            else result='Try: y=m*x, x²+y²=a², y=a*x², y=2e^(3x²), y=9/(3x+1), y=23x³-2x²+x-1, y=e^(89x), or y=sin(x)+cos(x)';
             document.getElementById('simple-result-text').innerHTML = result;
             document.getElementById('simple-results').style.display = 'block';
         }
-
         function submitPosttest() {
-            const correctAnswers = { q1:'b', q2:'a', q3:'a', q4:'a', q5:'a', q6:'a', q7:'a', q8:'b', q9:'a', q10:'a', q11:'a', q12:'c', q13:'a' };
+            const correct = { q1:'b',q2:'a',q3:'a',q4:'a',q5:'a',q6:'a',q7:'a',q8:'b',q9:'a',q10:'a',q11:'a',q12:'c',q13:'a' };
             let score = 0;
-            for (let i = 1; i <= 13; i++) {
-                let selected = document.querySelector(`input[name="q${i}"]:checked`);
-                if (selected && selected.value === correctAnswers[`q${i}`]) score++;
-            }
-            document.getElementById('score-text').innerHTML = `<strong>Your Score: ${score}/13</strong><br>${score === 13 ? 'Perfect!' : (score >= 9 ? 'Passed!' : 'Needs Improvement.')}`;
-            let solutionsHtml = "<h4>Solutions:</h4>";
-            const explanations = { q1:"Circles: x²+y²=C", q2:"Lines: y=Cx", q3:"Ellipses: x²/2+y²=C", q4:"x²-y²=k", q5:"y²=-2x+k", q6:"ln|cos x|=y²/2+k", q7:"2x²+y²=k", q8:"y=Cx^(3/2)", q9:"y=-x²/2-k", q10:"x=ln|sec y|+k", q11:"e^x-e^y=k", q12:"ln|y|=k x²", q13:"r=k sin²θ" };
-            for (let i = 1; i <= 13; i++) {
-                let selected = document.querySelector(`input[name="q${i}"]:checked`);
-                let userVal = selected ? selected.value.toUpperCase() : 'Not answered';
-                solutionsHtml += `<div class="solution"><p><strong>Q${i}:</strong> Your answer: ${userVal} | Correct: ${correctAnswers[`q${i}`].toUpperCase()} | ${explanations[`q${i}`]}</p></div>`;
-            }
-            document.getElementById('solutions').innerHTML = solutionsHtml;
+            for(let i=1;i<=13;i++) { let sel = document.querySelector(`input[name="q${i}"]:checked`); if(sel && sel.value === correct[`q${i}`]) score++; }
+            document.getElementById('score-text').innerHTML = `<strong>Score: ${score}/13</strong><br>${score===13?'Perfect!':(score>=9?'Passed!':'Needs Improvement.')}`;
+            let solHtml = "<h4>Solutions:</h4>";
+            const exp = { q1:"Circles: x²+y²=C", q2:"Lines: y=Cx", q3:"Ellipses: x²/2+y²=C", q4:"x²-y²=k", q5:"y²=-2x+k", q6:"ln|cos x|=y²/2+k", q7:"2x²+y²=k", q8:"y=Cx^(3/2)", q9:"y=-x²/2-k", q10:"x=ln|sec y|+k", q11:"e^x-e^y=k", q12:"ln|y|=k x²", q13:"r=k sin²θ" };
+            for(let i=1;i<=13;i++) { let sel = document.querySelector(`input[name="q${i}"]:checked`); let user = sel ? sel.value.toUpperCase() : 'Not answered'; solHtml += `<div class="solution"><p><strong>Q${i}:</strong> Your: ${user} | Correct: ${correct[`q${i}`].toUpperCase()} | ${exp[`q${i}`]}</p></div>`; }
+            document.getElementById('solutions').innerHTML = solHtml;
             document.getElementById('result-section').style.display = 'block';
-            document.getElementById('certificate').style.display = score >= 9 ? 'block' : 'none';
-            if (score >= 9) document.getElementById('certificate-link').onclick = () => { let name = prompt("Enter name for certificate:"); if(name) { let win = window.open(); win.document.write(`<html><head><title>Certificate</title><style>body{font-family:Arial;text-align:center;padding:40px}.certificate{border:20px solid #2c3e50;padding:50px;max-width:800px;margin:0 auto}</style></head><body><div class='certificate'><h1>Certificate of Completion</h1><p>This certifies that</p><h2>${name}</h2><p>has completed the Virtual Lab on Orthogonal Trajectory</p><p>Score: ${score}/13</p><p>Date: ${new Date().toLocaleDateString()}</p><div class='signature'><p>Prof. Dinesh Kute</p></div></div></body></html>`); win.document.close(); } };
+            let certDiv = document.getElementById('certificate');
+            if(score>=9) { certDiv.style.display = 'block'; document.getElementById('certificate-link').onclick = () => { let n = prompt("Enter name:"); if(n) { let w=window.open(); w.document.write(`<html><head><title>Certificate</title><style>body{font-family:Arial;text-align:center;padding:40px}.certificate{border:20px solid #2c3e50;padding:50px;max-width:800px;margin:0 auto}</style></head><body><div class='certificate'><h1>Certificate of Completion</h1><p>This certifies that</p><h2>${n}</h2><p>has completed the Virtual Lab on Orthogonal Trajectory</p><p>Score: ${score}/13</p><p>Date: ${new Date().toLocaleDateString()}</p><div><p>Prof. Dinesh Kute</p></div></div></body></html>`); w.document.close(); } }; }
+            else certDiv.style.display = 'none';
         }
-
-        function initializeRatingLabels() {
-            document.querySelectorAll('.rating-option input[type="radio"]').forEach(input => {
-                input.addEventListener('change', function() {
-                    document.querySelectorAll('.rating-label').forEach(l => l.classList.remove('selected'));
-                    if(this.checked) this.nextElementSibling.classList.add('selected');
-                });
-            });
-        }
-
-        function markFormCompleted() {
-            let msg = document.getElementById('formCompletionMessage');
-            msg.style.display = 'block';
-            msg.scrollIntoView({ behavior: 'smooth' });
-            localStorage.setItem('feedbackSubmitted', 'true');
-        }
-        checkFeedbackStatus();
+        function markFormCompleted() { let msg = document.getElementById('formCompletionMessage'); msg.style.display = 'block'; msg.scrollIntoView({ behavior: 'smooth' }); localStorage.setItem('feedbackSubmitted','true'); }
         function checkFeedbackStatus() { if(localStorage.getItem('feedbackSubmitted')) console.log('Feedback previously submitted'); }
+        checkFeedbackStatus();
     </script>
 </body>
 </html>
